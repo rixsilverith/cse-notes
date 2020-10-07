@@ -1,0 +1,258 @@
+\topic{Definición axiomática del \\ conjunto \R}{Definición axiomática del conjunto \R} 
+\subsection{Números naturales, enteros y racionales. Compatibilidad con las operaciones básicas}
+Empezando por los números naturales, con la necesidad de hacer operaciones, y sus respectivas inversas, a lo largo de la historia se han ido construyendo conjuntos de números cada vez más grandes, pasando por los enteros, $\Z$, y los racionales,
+\begin{equation}
+    \Q &:= \lbrace \frac{m}{n}\tq m, n\in\Z, n\neq 0 \rbrace
+\end{equation}
+\begin{observacion}
+    En algunos libros $\N$ no contiene el cero. En esta asignatura siempre incluiremos el cero en $\N$, de modo que indicaremos con $\N\textbackslash \{0\}:=\N^* $ el conjunto de los naturales, excluido el cero.
+\end{observacion}
+
+Que un conjunto de números \textit{esté cerrado} para cierta operación significa que al hacer dicha operación entre dos elementos del conjunto, el elemento resultante pertenece también al mismo conjunto. Dicho esto, analizamos para que operaciones están cerrados los distintos conjuntos de números.
+\begin{itemize}
+    \item Con los naturales, $\N$, es posible sumar, pero no restar.
+        \begin{equation}
+            3-2 = 1\in\N\quad\quad 2 - 3 = -1 \notin\N 
+        \end{equation}
+    \item Con los enteros, $\Z$, es posible sumar y restar. Además, es posible multiplicar, pero no dividir.
+        \begin{equation}
+            3\cdot 2 = 6\in\Z\quad\quad \left( -3 \right)\cdot 2 = -6\in\Z \quad\quad \frac{3}{4}\notin\Z 
+        \end{equation}
+    \item Finalmente, con los racionales, $\Q$, podemos realizar las cuatro operaciones básicas, podemos sumar, restar, multiplicar y dividir. 
+\end{itemize}
+
+Puesto que el conjunto $\Q$ está cerrado para las cuatro operaciones básicas, surge la pregunta: ¿Por qué necesitamos also más que los racionales? ¿Existen realmente números que no son fracciones o que no se pueden obtener a partir de ellas mediante las cuatro operaciones?
+
+\subsection{Insuficiencia de los números racionales}
+Para dar una explicación satisfactoria de los principales conceptos del análisis matemático como son la convergencia, la continuidad, la diferenciabilidad y la integrabilidad, es necesario que estos conceptos esten basados en un conjunto de números precisamente definido.
+
+El conjunto de los números racionales es inadecuado para muchos propósitos, como campo y como conjunto ordenado. Por ejemplo, no existe un número racional $\alpha$ tal que $\alpha^2 = 2$. Esto lleva a la introducción de los llamados \textit{números irracionales}, que suelen ser escritos como una sucesión "aproximada" de decimales. Así, la sucesión
+\begin{equation}
+    1,\ 1'4,\ 1'41,\ 1'414,\ 1'4142,\ \ldots
+\end{equation}
+podemos decir que "tiende a $\sqrt{2}$". Sin embargo, a no ser que el número irracional $\sqrt{2}$ haya sido claramente definido, debe surgirnos una pregunta: ¿Qué leches es a lo que "tiende" esta sucesión? Esta pregunta puede ser respondida tan pronto como el \textit{sistema de números reales}, \R,  sea construido.
+
+Consideremos un problema muy sencillo: calcular la longitud de la diagonal de un cuadrado de la lado $1$. Sabemos gracias al teorema de Pitágoras que $a^2 + b^2 = c^2$, en nuestro caso $1^2 + 1^2 = 2$. Por lo tanto, la longitud $c$ de la hipotenusa es tal que $c^2 = 2$, es decir, $c = \sqrt{2}$. Que no existe en $\Q$ ningún número que verifique dicha igualdad es lo que vamos a demostrar a continuación, y que $\sqrt{2}\notin\Q$, pero antes definimos el siguiente lema.
+\begin{lema}
+    Si $p^2$ es par $\quad\implies\quad p$ es par. 
+\end{lema}
+\begin{proof}
+    Probamos por contradicción que si $p$ es impar, entonces $p^2$ también resulta ser impar. Si $p$ es un número impar entonces podemos definirlo como 
+    \begin{equation}
+        \label{p_def}
+        p = 2n + 1, \quad n\in\Z
+    \end{equation}
+    entonces, si $p^2$ es también impar debería tener la forma 
+    \begin{equation}
+        p^2 = 2m + 1, \quad m\in\Z
+    \end{equation}
+    Elevando al cuadrado al expresión (\ref{p_def}) y desarrollando dicho cuadrado tenemos
+    \begin{equation}
+        p^2 = \left( 2n + 1 \right)^2 = 4n^2 + 4n + 1 = 4\left( n^2 + n \right) + 1 = 2m + 1
+    \end{equation}
+    con $m = 2\left( n^2 + n \right) $. En conclusión, si $p$ es impar, $p^2$ también lo es.
+    
+\end{proof}
+\begin{proof}
+    Supongamos por absurdo que $\sqrt{2} \in\Q$.
+
+    \begin{equation}
+        \exists\, \alpha\in\Q\tq\alpha^2 = 2, \quad \alpha = \frac{p}{q}
+    \end{equation}
+    \begin{equation}
+        \label{p_equal_q}
+        \textrm{entonces } \quad 2 = \alpha^2 = \frac{p^2}{q^2}\quad\rightarrow\quad p^2 = 2q^2 \quad\rightarrow\quad p^2\textrm{ es par }\quad\implies\quad p\textrm{ es par,}
+    \end{equation}
+    \begin{equation}
+        \textrm{entonces, con la expresión (\ref{p_equal_q}) se tiene } \quad p = 2n\quad\implies\quad 4n^2 = p^2 = 2q^2
+    \end{equation}
+    \begin{equation}
+        \textrm{simplificando, }\quad 2n^2 = p^2 = q^2, \textrm{entonces }\quad q^2 = 2n^2\textrm{ es par }\quad\implies\quad q\textrm{ es par.}
+    \end{equation}
+    Esto es absurdo, ya que implica que $p$ y $q$ tienen $2$ como divisor común.
+\end{proof}
+
+\subsection{Correspondencias y relaciones de orden}
+\begin{definicion}
+    Dados dos conjuntos $A$ y $B$ llamamos correspondencia entre $A$ y $B$ a un subconjunto $\mathcal{C}$ del producto cartesiano $A\times B$. Si $\left( a, b \right) \in\mathcal{C}\subset A\times B$ diremos que $a$ está en correspondencia con $b$.
+\end{definicion}
+\begin{definicion}
+    Cuando $A = B$, las correspondencias se llaman relaciones, $\mathcal{R}$. Si $\left( a, b \right)\in\mathcal{R} $ diremos que $a$ está relacionado (o en relación) con $b$, y se denota por $a\mathcal{R}b$.
+\end{definicion}
+\begin{definition}
+    Sea $A$ un conjunto dado no vacío y $\mathcal{R}$ una relación binaria definida en $A$, entonces se dice que $\mathcal{R}$ es una \textbf{relación de orden}.
+    \begin{itemize}
+        \item\textbf{Reflexiva:} Todo elemento de $A$ está relacionado consigo mismo. Es decir, $\forall a\in A$ tenemos que $a\mathcal{R} a$.
+        \item\textbf{Antisimétrica:} Si dos elementos de $A$ se relacionan entre sí, entonces ellos son iguales. Es deicr, $\forall x, y\in A,\ x\mathcal{R} y,\ y\mathcal{R} x \implies x = y$.
+        \item\textbf{Transitiva:} Si un elemento de $A$ está relacionado con otro, y este otro a su vez se relaciona con un tercero, entonces el primero estará relacionado también con este último. Es decir, $\forall x, y, z\in A,\ x\mathcal{R} y,\ y\mathcal{R}z\implies x\mathcal{R}z$.
+    \end{itemize}
+\end{definition}
+\begin{notacion}
+    Una relación de orden $\rela$ sobre un conjunto $A$ puede denotarse como el par ordenado $\left( A, \mathcal{R} \right) $.
+\end{notacion}
+\begin{definition}
+    Si $\forall a, b\in A$ o bien $a\mathcal{R} b$ o bien $b\mathcal{R} a$, $\mathcal{R}$ se llama \textbf{relación de orden total}.
+\end{definition}
+
+\subsection{Aplicaciones y funciones}
+\begin{definition}
+    Una \textbf{aplicación} o \textbf{función} $f:X\to Y$ es una correspondencia de $X$ en $Y$ tal que a cada elemento de $X$ le corresponde, como máximo, un elemento de $Y$.
+\end{definition}
+\begin{definition}
+    Si $f\left( a \right) = b$ decimos que $b$ es la imagen de $a$ y que $a$ es la pre-imagen de $b$.
+\end{definition}
+\begin{definition}
+    Llamamos Im$f = f\left( X \right) \subseteq Y$ a la imagen de $f$ y decimos que $f$ es
+    \begin{itemize}
+        \item\textbf{Injectiva.} Si cada elemento de $Y$ tiene a lo sumo una pre-imagen: $f\left( x_1 \right) = f\left( x_2 \right) \implies x_1 = x_2$.
+        \item\textbf{Sobreyectiva.} Si Im$f = f\left( X \right) = Y$, es decir, si cada elemento de $Y$ tiene por lo menos una pre-imagen. 
+    \end{itemize}
+\end{definition}
+
+\subsection{Desigualdades y valor absoluto}
+
+\subsection{Cotas superiores e inferiores. Supremo e ínfimo}
+\begin{definition}
+    Sea $\left( B, \leq \right) $ un conjunto ordenado y sea $A\subseteq B$.
+    \begin{itemize}
+        \item Un elemento $\overline{b}\in B$ es una \textbf{cota superior} de $A$ si $x\leq\overline{b},\ \forall x\in A$.
+        \item Un elemento $\underline{b}\in B$ es una \textbf{cota inferior} de $A$ si $\overline{b}\leq x,\ \forall x\in A$.
+        \item Si un conjunto $A$ tiene una cota superior (inferior) se dice que está \textbf{acotado superiormente} (\textbf{inferiormente}).
+        \item Un conjunto se dice que está acotado si posee una cota superior e inferior.
+        \item Si una cota superior $\overline{b}$ (inferior $\underline{b}$) pertenece a $A$ entonces $\overline{b}$ es un \textbf{máximo} para $A$ ($\underline{b}$ es un \textbf{mínimo} para $A$).
+        \item El \textbf{supremo} de $A$ es la más pequeña de las cotas superiores de $A$, y se denota por $\sup A$.
+        \item El \textbf{ínfimo} de $A$ es la más grande de las cotas inferiores de $A$, y se denota por $\inf A$.
+    \end{itemize}
+\end{definition}
+\hide{
+\begin{example}
+    Sea $\N = \left( B, \leq \right) $ y sea $A = \{n\in\N\tq n\leq 105\}$. $A$ es un conjunto acotado en \N, con cota inferior $0$ y cota superior $200$. 
+    \begin{equation}
+        \inf A
+    \end{equation}
+\end{example}
+
+\begin{example}
+    Sea $\Q = \left( B, \leq \right) $ y sea $A = \{9\in\Q\tq 9^2\leq 2\} $
+\end{example}
+}
+
+\subsection{Sucesiones de números racionales}
+\begin{definition}
+    \textbf{(Sucesión).} Llamamos \textbf{sucesión de números racionales} a una aplicación $a:\N\to\Q$, $n\mapsto a\left( n \right) = a_n$. Se denota el término general de la sucesión con $a_n = a\left( n \right) \in\Q$ (imagen de $n$), y la (imagen de la) sucesión con $\{a_n\}_{n\in\N}\subseteq\Q$.
+\end{definition}
+\hide{
+\begin{example}
+    \textbf{(Sucesión contante).} 
+\end{example}
+}
+
+\subsubsection{Sucesiones convergentes. Límite de una sucesión}
+\begin{definition}
+    \textbf{(Límite de una sucesión).} Decimos que la sucesión $\{a_n\}_{n\in\N}\subseteq\Q $ tiene \textbf{límite} $\ell\in\Q$ cuando $n$ tiende a infinito si y solo si
+    \begin{equation}
+        \forall\epsilon > 0,\ \exists\ n_0 = n_0\left( \epsilon \right)\in\N\tq \abs{a_n - \ell}\leq \epsilon,\ \forall n\geq n_0
+    \end{equation}
+\end{definition}
+\begin{definition}
+    \textbf{(Sucesión convegente).} Si el límite $\ell\in\Q$ de $\{a_n\}_{n\in\N}\subseteq\Q $ existe y es finito, decimos que la sucesión $\{a_n\}_{n\in\N} $ es \textbf{convergente} y escribimos
+    \begin{equation}
+        \lim_{n\to\infty} a_n = \ell = \lim_n a_n = \lim a_n
+    \end{equation}
+\end{definition}
+\begin{proof}
+    Demostrar que existe $\lim_{n\to\infty} \frac{1}{n} = 0$.
+    \begin{equation}
+        \forall\epsilon > 0,\ \exists\ n_0 = n_0\left( \epsilon \right) \in\N\tq \abs{a_n - \ell} < \epsilon,\ \forall n > n_0
+    \end{equation}
+    Fijamos el valor de $\epsilon = \frac{1}{2}$. $n_0$ depende de $\epsilon$ tal que $\abs{a_n - \ell} < \epsilon$, es decir, $\abs{\frac{1}{n} - 0} < \epsilon$. Tenemos que $\frac{1}{n}=\abs{\frac{1}{n}} < \frac{1}{2} = \epsilon$. Entonces $n > 2$. Si $n_0 = 2 = \frac{1}{\epsilon}, n_0 = 200$. Al ser $\frac{1}{n} < \epsilon\iff n > \frac{1}{3} = n_0$ entonces $n_0 = [\frac{1}{\epsilon}] + 100$.
+
+        Por tanto, tenemos que $\forall\epsilon$ encontramos $n_0 = [\frac{1}{\epsilon}] + 100 \tq \frac{1}{n} < \epsilon,\ \forall n > n_0$.
+\end{proof}
+
+\begin{proposition}
+    Sean $\{a_n\}_{n\in\N} $ y $\{b_n\}_{n\in\N} $ dos sucesiones racionales, y $\ell$ y $m$ sus límites, con $\ell, m\in\Q$.
+    \begin{itemize}
+        \item El límite de una suma es la suma de los límites.
+        \begin{equation}
+            \lim_{n\to\infty}\left( a_n + b_n \right) = \lim_{n\to\infty}a_n + \lim_{n\to\infty}b_n = \ell + m
+        \end{equation}
+        \item Multiplicación por un número $\lambda\in\Q$
+            \begin{equation}
+                \lim_{n\to\infty}\lambda  a_n = \lambda \lim_{n\to\infty}a_n = \lambda\ell
+            \end{equation}
+        \item Multiplicación de sucesiones
+            \begin{equation}
+                \lim_{n\to\infty}a_nb_n = \left( \lim_{n\to\infty} a_n\right) \left( \lim_{n\to\infty}b_n \right) = \ell m
+            \end{equation}
+            Esta tercera proposición implica la segunda si tomamos $b_n$ como una sucesión constante, $b_n = \lambda$.
+        \item División de sucesiones
+            \begin{equation}
+                \lim_{n\to\infty} \frac{a_n}{b_n} = \frac{\lim_{n\to\infty} a_n}{\lim_{n\to\infty}b_n} = \frac{\ell}{m},\quad m\neq 0
+            \end{equation}
+    \end{itemize}
+    Las propiedades 1 y 2 son llamadas \textbf{linealidad del límite}: $\forall\lambda, \mu\in\Q$ tenemos
+    \begin{equation}
+        \lim_{n\to\infty}\left( \lambda a_n + \mu b_n \right) = \lambda \lim_{n\to\infty}a_n + \mu\lim_{n\to\infty}b_n = \lambda\ell + \mu m
+    \end{equation}
+\end{proposition}
+
+\begin{proposition}
+    \textbf{(Unicidad del límite).} El límite de una sucesión, cuando existe, es único.
+\end{proposition}
+\begin{proposition}
+    \textbf{(Linealidad del límite).} El límite es lineal. Sean $\{a_n\}_{n\in\N} $ y $\{b_n\}_{n\in\N} $ dos sucesiones racionales, y $\ell, m\in\Q$ sus límites, $\forall\lambda, \mu\in\Q$ se tiene
+    \begin{equation}
+        \lim_{n\to\infty}\left( \lambda a_n + \mu b_n \right) = \lambda \lim_{n\to\infty}a_n + \mu\lim_{n\to\infty}b_n = \lambda\ell + \mu m
+    \end{equation}
+\end{proposition}
+\begin{proposition}
+    \textbf{(Multiplicidad del límite).} Sean $\{a_n\}_{n\in\N} $ y $\{b_n\}_{n\in\N} $ dos sucesiones racionales, y $\ell, m\in\Q$ sus límites, se tiene
+    \begin{equation}
+        \lim_{n\to\infty}a_nb_n = \left( \lim_{n\to\infty} a_n\right) \left( \lim_{n\to\infty}b_n \right) = \ell m
+    \end{equation}
+\end{proposition}
+\begin{proposition}
+    \textbf{(Divisibilidad del límite).} Sean $\{a_n\}_{n\in\N} $ y $\{b_n\}_{n\in\N} $ dos sucesiones racionales, y $\ell, m\in\Q$ sus límites, se tiene
+    \begin{equation}
+        \lim_{n\to\infty} \frac{a_n}{b_n} = \frac{\lim_{n\to\infty} a_n}{\lim_{n\to\infty}b_n} = \frac{\ell}{m},\quad m\neq 0
+    \end{equation}
+\end{proposition}
+
+\begin{theorem}
+    \textbf{(Principio de comparación / Teorema del Sandwich).} Sean $\{a_n\} $, $\{b_n\} $ y $c_n$ tres sucesiones con $n\in\N$. Si sabemos que a partir de un cierto $n_0\in\N$ las sucesiones están ordenadas
+    \begin{equation}
+        a_n\leq b_n\leq c_n,\quad\forall n\geq n_0,
+    \end{equation}
+    entonces también los límites, existan o no, estarán ordenados.
+    \begin{equation}
+        \lim_{n\to\infty}a_n \leq \lim_{n\to\infty} b_n \leq \lim_{n\to\infty} c_n
+    \end{equation}
+\end{theorem}
+
+\subsubsection{Sucesiones de Cauchy}
+\begin{lemma}
+    Una sucesión convergente es acotada, es decir, si $\lim_{n\to\infty} a_n = \ell$ entonces existe $M > 0 \tq \abs{a_n} \leq M$.
+\end{lemma}
+\begin{proof}
+    \begin{equation}
+        \forall\epsilon > 0,\ \exists n_0\tq \abs{a_n - \ell} < \epsilon,\ \forall n > n_0
+    \end{equation}
+    Sea $\epsilon = 1$, encontramos que $n_0\left( 1 \right)$, entonces $\ell - \epsilon \leq a_n\leq l + \epsilon$ resulta en $\ell - 1 \leq a_n \leq \ell + 1,\ \forall n > n_0\left( 1 \right) $. Finalmente, $-\max\abs{a_k}+ \ell - 1\leq \max\abs{a_k} + \ell + 1$, con $0\leq k\leq n_0$.
+\end{proof}
+\begin{lemma}
+    \textbf{(Sucesión de Cauchy).} Una sucesión convergente es \textit{de Cauchy}, si 
+    \begin{equation}
+        \forall\epsilon > 0,\ \exists n_0 = n_0\left( \epsilon \right) \in\N\tq \abs{a_n - a_m} < \epsilon,\ \forall m, n > n_0
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    Por la definición de límite de una sucesión, $\forall\epsilon > 0,\ \exists n_0 \tq \abs{a_n - \ell} < \frac{\epsilon}{2},\ \forall n > n_0$ y $\abs{a_m - \ell} < \frac{\epsilon}{2},\ \forall m > n_0$.
+    Entonces $\abs{a_n - a_m} = \abs{a_n - \ell - \left( a_m - \ell \right) }\leq \abs{a_n - \ell} + \abs{a_m - \ell} < \frac{\epsilon}{2} + \frac{\epsilon}{2} < \epsilon$.
+\end{proof}
+\begin{definition}
+    \textbf{(Sucesión de Cauchy).} Una sucesión $\{a_n\}_{n\in\N} $ es de Cauchy si y solo si
+    \begin{equation}
+        \forall\epsilon > 0,\ \exists n_0 = n_0\left( \epsilon \right) \in\N\tq \abs{a_n - a_m} < \epsilon,\ \forall m, n > n_0
+    \end{equation}
+\end{definition}
