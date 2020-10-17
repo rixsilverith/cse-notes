@@ -1,5 +1,5 @@
 \topic{Equivalence relations}{Equivalence relations}
-In mathematics sometimes there are situations in which it is convenient to establish relations among the elements of a set.
+%In mathematics sometimes there are situations in which it is convenient to establish relations among the elements of a set.
 \hide{
 \begin{example}[$\N= \{0, 1, 2\ldots\} $]
     \begin{equation}
@@ -12,8 +12,10 @@ Another example: Let $A = \{f:\R\to\R\} $. If the function $f$ is differentiable
 }
 
 \begin{definition}
-    \textbf{(Relation).} Let $A$ be a set. A \textbf{relation} on $A$ is a non-empty set $\rela$ of ordered pairs $\left( x, y \right) $ where $x, y\in A$. Therefore, $\rela\subset A\times A$.
+    \textbf{(Relation).} A \textbf{relation} on a set $A$ is a non-empty subset $\rela\subset A\times A$ of ordered pairs $\left( x, y \right) $ where $x, y\in A$. 
 \end{definition}
+
+So technically any subset of $A\times A$ is a relation on $A$, however it should posses certain characteristics in order to be kind of interesting. Relations are generally used to compare two elements in some way. That is, we use them to determine whether two elements are \textit{related} in the manner specified.
 
 \begin{example}[]
    Let the relation $x\rela y$ if $x\tq y$ with $x, y\in\N$. Then, that relation is defined by the following set
@@ -21,55 +23,60 @@ Another example: Let $A = \{f:\R\to\R\} $. If the function $f$ is differentiable
        \rela = \{n, m : n\tq m\} 
    \end{equation}
 \end{example}
+\begin{remark}
+    For any set $A$, both $\O$ and $A\times A$ are relations on $A$. The $\O$ relation doesn't relate elements to anything, not even themselves. On the other hand, the relation $A\times A$ relates every element to every element of $A$.
+\end{remark}
 
 \begin{definition}
-    \textbf{(Equivalence relation).} A relation $\rela$ on a non-empty set $A$ is an \textbf{equivalence relation} if the following conditions are satisfied.
+    \textbf{(Equivalence relation).} A relation $\sim$ on a non-empty set $A$ is an \textbf{equivalence relation} if all of the following conditions are satisfied.
     \begin{itemize}
-        \item\textbf{Reflexive.} $\forall x\in A$, we have that $x\rela x$.
-        \item\textbf{Symmetric.} If $x\rela y$, then $y\rela x$.
-        \item\textbf{Transitive.} If $x\rela y$ and $y\rela z$, then $x\rela z$.
+        \item\textbf{Reflexive.} If $x\sim x\, \forall x\in A$.
+        \item\textbf{Symmetric.} If $x\sim y$, then $y\sim x$.
+        \item\textbf{Transitive.} If $x\sim y$ and $y\sim z$, then $x\sim z$.
     \end{itemize}
 \end{definition}
 
 \begin{example}
-    Let $x\rela y$ be a relation between $x$ and $y$ if $x\leq y$ with $x, y\in\N$. In order to check if this is an equivalence relation we should check if it satisfies the reflexive, symmetric and transitive conditions.
+    Let $x\sim y$ be a relation between $x$ and $y$ if $x\leq y$ with $x, y\in\N$. In order to check if this is an equivalence relation we should check if it satisfies the reflexive, symmetric and transitive conditions.
 
     \begin{itemize}
-        \item[(a)] $x\rela x \iff x\leq x,\quad\forall x\in\N$, then the relation is reflexive.
-        \item[(b)] If $x\rela y$ then $y\rela x$ ? No. Just take $2\rela 4 \iff 2\leqslant 4$ but $4\rela 2 \iff 4\nleqslant 2$. Then, the relation is not symmetric, and therefore it is not an equivalence relation.
-        \item[(c)] If $x\rela y$ and $y\rela z \implies x\rela z$ ?
+        \item[(a)] $x\sim x \iff x\leq x,\ \forall x\in\N$, then the relation $\sim$ is reflexive.
+        \item[(b)] If $x\sim y$ then $y\sim x$? No. Just take $2\sim 4 \iff 2\leqslant 4$ but $4\sim 2 \iff 4\nleqslant 2$. Then, the relation is not symmetric, and therefore it is not an equivalence relation.
+        \item[(c)] If $x\sim y$ and $y\sim z \implies x\sim z$?
             \begin{equation}
                 \begin{rcases}
-                    x\rela y \quad\implies\quad x\leqslant y \\
-                    y\rela z \quad\implies\quad y\leqslant z
-                \end{rcases} \quad\implies\quad x\leqslant z \quad\iff\quad x\rela z
+                    x\sim y \quad\implies\quad x\leqslant y \\
+                    y\sim z \quad\implies\quad y\leqslant z
+                \end{rcases} \quad\implies\quad x\leqslant z \iff x\sim z\quad\implies\quad\sim\textrm{ is transitive.}
             \end{equation}
-            The relation is transitive.
     \end{itemize}
-    
+    Because the reflexive and the transitive conditions are met, but not the symmetric, the $\sim$ relation is not an equivalence relation.
+    \qed
 \end{example}
 
 Sometimes when working with elements in a set, it is convenient to consider that some of them are \textit{equal}, even though they are not. To declare two elements as equal we define a relation in the set and, to make sure that we don't get something ilogical, we need this relation to be an equivalence relation.
 
 \begin{definition}
-    \textbf{(Class of an element).} If $\rela$ is an equivalence relation on a set $A$ and $a\in A$, then we denote the \textbf{class of $a$} by
+\textbf{(Equivalence class).} Given an equivalence relation $\sim$ on a set $A$ and an element $a\in A$, the \textbf{equivalence class} of $a$ is the set
     \begin{equation}
-        \overline{a} := \{b\in A \tq a\rela b\} 
+        [a] = \overline{a} := \{x\in A \tq a\sim x\} 
     \end{equation}
 \end{definition}
-\newpage
+
+In other words, we can say that the equivalence class of the element $a$ of a set $A$ is the set of all elements$x$ in the set $A$ which are related to the element $a$.
+
 \begin{definition}
-    \textbf{(Quotient set).} The quotient set of $A$ by the equivalence relation $\rela$, denoted by $A / \rela$, is the set of all the classes.
+    \textbf{(Quotient set).} The quotient set of a set $A$ by the equivalence relation $\sim$, denoted by $A / \sim$, is the set of all the equivalence classes.
 \end{definition}
 \begin{example}
-    Let $x\rela y$ be an equivalence relation between $x$ and $y$ if $3\tq \left( x - y \right)$. Now, we can think about a new set where
+    Let $x\sim y$ be an equivalence relation between $x$ and $y$ if $3\tq \left( x - y \right)$. Now, we can think about a new set where
     \begin{align}
         0&\equiv 3\equiv -3\equiv 6\equiv 9\equiv\ldots\quad\rightarrow\quad\overline{0} \\
         1&\equiv 4\equiv 7\equiv 13\equiv\ldots\quad\rightarrow\quad\overline{1} \\
         2&\equiv 5\equiv 8\equiv\ldots\quad\rightarrow\quad\overline{2}
     \end{align}
     \begin{equation}
-        \Z / \rela = \{\overline{0}, \overline{1}, \overline{2}\} 
+        \Z / \sim = \{[0], [1], [2]\} 
     \end{equation}
     %This is known as  \textbf{quotient set}.
 \end{example}

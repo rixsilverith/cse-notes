@@ -1,24 +1,22 @@
 \topic{Introduction to set theory and \\ functions}{Introduction to set theory and functions}
 
 \subsection{Basic concepts of set theory}
+The axiomatic formulation of set theory is pretty complicated (maybe because the concept of set is one of the most basics), therefore in this course we are only considering the intuitive idea of what a set is.
+
 \begin{definition}
     \textbf{(Set).} A set is a collection of objects about which is possible to determine weather or not a particular object is a member of the set.
 \end{definition}
+\begin{note}
+    It's worth considering also the set with no elements, the \textbf{empty set}, which is denoted by $\O$.
+\end{note}
 
-Sets are usually denoted by capital letters, and the objects within them are referred to as \textbf{elements}. One way to describe a set is by giving a list of their elements, just as the example below.
+Sets are usually denoted by capital letters, and the objects within them are referred to as \textbf{elements}, which are denoted by lowercase letters. 
+
+A set can be described in two similar ways. On the one hand, the explicit way, by giving a list of their elements. One the other hand, the implicit way, by using the so called \textbf{set-builder notation}, which uses braces to enclose a property that is the qualification for membership in the set.
 \begin{example}
-    Let $A$, $B$ and $C$ be three sets such that
-    \begin{equation}
-        A = \lbrace 1, 2, 3, 4\rbrace \quad\quad\quad B = \lbrace 1, 2, 3, 4\ldots\rbrace \quad\quad\quad C = \lbrace 0, 2, 4, 6\ldots\rbrace
-    \end{equation}
-\end{example}
-
-Another way to describe a set is by the so called \textbf{set-builder notation}. This notation uses braces to enclose a property that is the qualification for membership in the set.
-
-\begin{example}
-    Let $A$ and $B$ be two sets described using the set-builder notation.
+    Let $A$ and $B$ be two sets such that
     \begin{align}
-        A &= \lbrace x\tq x \textrm{ is a natural number } \rbrace = \lbrace 0, 1, 2\ldots\rbrace \\
+        A &= \lbrace x\tq x \textrm{ is a natural number and } x^2 - 1 = 0 \rbrace = \lbrace -1, 1\rbrace \\
         B &= \lbrace x\tq x \textrm{ is an even natural number } \rbrace = \lbrace x : 2\tq x \textrm{ and $x$ is natural } \rbrace
     \end{align}
 \end{example}
@@ -27,17 +25,28 @@ Another way to describe a set is by the so called \textbf{set-builder notation}.
     In this previous example, both symbols $\tq$ and $ : $ are used to denote \textit{such as}.
 \end{notation}
 
-We write $a\in A$ if $a$ is an element in the set $A$. Otherwise, we write $a\notin A$ to mean that $a$ is not an element in the set $A$. For instance, 2/3 is a rational number, but not an integer one. Then
+We write $a\in A$ if $a$ is an element in the set $A$. Otherwise, we write $a\notin A$ to mean that $a$ is not an element in the set $A$. For instance, $2\in\N$ but $-2\not\in \N$.
+
+\hide{For instance, 2/3 is a rational number, but not an integer one. Then
 \begin{equation}
     \frac{2}{3}\in\Q,\quad\textrm{ but } \frac{2}{3}\notin\Z 
 \end{equation}
+}
 
+\hide{
 \begin{definition}
     \textbf{(Empty set).} We use $\O$ to refer to the set with no elements, denominated the \textbf{empty set}.
 \end{definition}
+}
+
 \begin{definition}
-    \textbf{(Subset).} Let $A$ and $B$ be sets. We say that $A$ is a subset of $B$ if every element in $A$ is an element in $B$. If $A$ is a subset of $B$ we write $A\subset B$ and we say \textit{$A$ is contained in $B$} or \textit{$B$ contains $A$}. Otherwise we write $A\notin B$.
+    \textbf{(Subset).} Let $A$ and $B$ be sets. We say that $A$ is a \textbf{subset} of $B$ if every element in $A$ is an element in $B$. If $A$ is a subset of $B$ we write $A\subset B$ and we say \textit{$A$ is contained in $B$} or \textit{$B$ contains $A$}. Otherwise we write $A\notin B$.
 \end{definition}
+\begin{remark}
+    Let $X$ be any set. Then, the empty set is a subset of $X$, $\O\subset X$.
+\end{remark}
+
+\hide{
 \begin{example}
     Some examples of subsets are
     \begin{align}
@@ -46,20 +55,30 @@ We write $a\in A$ if $a$ is an element in the set $A$. Otherwise, we write $a\no
         &A = \{1, 2, 3\} \subset B = \{1, 2, 3, 4, 5\} 
     \end{align}
 \end{example}
+}
 
 \begin{definition}
     \textbf{(Equal sets).} Two sets $A$ and $B$ are equal if $A \subset B$ and $B\subset A$; i.e. if they have the same elements.
 \end{definition}
 \begin{definition}
-    We say that $A$ is properly contained in $B$ if $A\subset B$ but $A\neq B$. For example, $\N$ is properly contained in $\Z$ because $\N\subset\Z$, but $\N\neq\Z$.
+    \textbf{(Properly contained sets).} We say that a set $A$ is \textbf{properly contained} in the set $B$ if $A\subset B$ but $A\neq B$.
 \end{definition}
+
+For example, $\N$ is properly contained in $\Z$ because $\N\subset\Z$, but $\N\neq\Z$.
 \begin{notation}
     We use $:=$ to mean \textit{by definition}. For example, $\N := \{0, 1, 2\ldots\} $.
 \end{notation}
 
-\subsection{Power set of a set}
+\begin{proposition}
+    Let $A$ and $B$ be two sets. If $A\subset B$ and $B\subset A\implies A = B$.
+\end{proposition}
+\begin{proof}
+    Definitions of $B\subset A$ and $A\subset B$ respectively indicate that $x\in B\implies x\in A$ and that $x\in A\implies x\in B$, thus $x\in A\iff x\in B$ and therefore $A = B$.
+\end{proof}
+
+%\subsection{Power set of a set}
 \begin{definition}
-    \textbf{(Power set).} Let $A$ be a set. The power set of $A$ is a set whose elements are all the subsets of $A$, and we denote it by $\SP\left( A \right) $
+    \textbf{(Power set).} Let $A$ be a set. The power set of $A$ is a set whose elements are all the subsets of $A$, and it's denoted by $\SP\left( A \right) $.
 \end{definition}
 \begin{example}
     Let $A = \{a, b, c\}$, then the power set of $A$ is
@@ -77,24 +96,35 @@ In this previous example, we must keep notice that $\O\in\SP\left( A \right)$ an
         A\cup B := \{x\tq x\in A\textrm{ or } x\in B\}
     \end{equation}
 \end{definition}
+
+\hide{
 \begin{example}
     Let $A = \{a, b, c\} $ and $B = \{b, h, f\} $, then
     \begin{equation}
         A\cup B = \{a, b, c, h, f\} 
     \end{equation}
 \end{example}
+}
+
 \begin{definition}
     \textbf{(Intersection of sets).} Let $A$ and $B$ be two sets. The intersection of $A$ and $B$ is another set whose elements are the elements that $A$ and $B$ have in common. We denote this set by $A\cap B$.
     \begin{equation}
         A\cap B := \{x\tq x\in A\textrm{ and } x\in B\}
     \end{equation}
 \end{definition}
+
+\hide{
 \begin{example}
     Let $A\cap B = \{b\} $ and $C = \{x, y, z\}$, then
     \begin{equation}
         A\cap C = \O \quad\rightarrow\quad\textrm{ we say that $A$ and $C$ are disjoint.}
     \end{equation}
 \end{example}
+}
+
+\begin{definition}
+    \textbf{(Disjoint sets).} Let $A$ and $B$ be two sets. If $A\cap B = \O$ it's said that $A$ and $B$ are disjoint.
+\end{definition}
 
 Let $A$, $B$ and $C$ be three non empty sets. The following properties are hold related to the union and intersection operations between those sets.
 \newpage
@@ -134,42 +164,54 @@ Let $A$, $B$ and $C$ be three non empty sets. The following properties are hold 
 \end{table}
 \egroup
 
-\subsection{Venn diagrams and universal sets}
-Sometimes it is convenient to draw a picture of the sets we are working with. When we do this we are assuming that the sets that we are considering are subsets of some universal set which we denote by $\mathcal{U}$.
+%\subsection{Venn diagrams and universal sets}
+\subsection{Universal and complementary sets}
+Sometimes it's convenient to assume that the sets that we are considering are subsets of a larger one, $\uset$, denominated the \textbf{universal set}.
+%Sometimes it is convenient to draw a picture of the sets we are working with. When we do this we are assuming that the sets that we are considering are subsets of some universal set which we denote by $\mathcal{U}$.
 
+\hide{
 Suppose we are considering sets $A$ and $B$. Then, we could draw the following picture, denominated \textbf{Venn diagram}.
 \begin{figure}[htbp]
     \centerline{\includegraphics[width=0.4\textwidth]{venn.png}}
     \caption{Example of a Venn diagram representing the intersection of two sets $A$ and $B$.}
 \end{figure}
+}
 
 \begin{remark}
-    For any set $A,\quad A\cap\mathcal{U} = A,\quad\mathcal{U}\cup A = \uset$.
+    For any set $A$ we have that $A\cap\uset = A$ and $\uset\cup A = \uset$.
 \end{remark}
 \begin{definition}
     \textbf{(Complement of a set).} The complement of a set $A$ is another set such that
     \begin{equation}
-        A^C:=\{a\in\uset\tq a\notin A\}
+        A^C = A' :=\{a\in\uset\tq a\notin A\}
     \end{equation}
 \end{definition}
+
+\hide{
 \begin{example}
     Let $\uset = \Z$, then
     \begin{equation}
         \N\subset\uset, \quad\quad\N^C = \{x\in\Z\tq x<0\}
     \end{equation}
 \end{example}
+}
 
 \begin{proposition}
 \textbf{(De Morgan's laws)}. Let $A$ and $B$ be two sets in $\uset$. Then, the following equalities are hold.
 \begin{equation}\label{demorgan:1}
-    \left( A\cup B \right)^C = A^C\cap B^C
+    1) \left( A\cup B \right)^C = A^C\cap B^C \quad\quad\quad 2) \left( A\cap B \right)^C = A^C\cup B^C
 \end{equation}
+\hide{
 \begin{equation}\label{demorgan:2}
     \left( A\cap B \right)^C = A^C\cup B^C 
-\end{equation}
+\end{equation}}
 \end{proposition}
+
 \begin{proof}
-    \textit{(First De Morgan's law)}. In order to proof the first De Morgan's law we need first to proof that $\left( A\cup B \right)^C\subset A^C\cap B^C \textrm{ and then } A^C\cap B^C \subset \left(  A\cup B\right)^C$. Only then we can say $\left( A\cup B \right)^C = A^C\cap B^C $. 
+    In order to prove the De Morgan's laws we need first to proof that one side of the equation is contained in the other and viceversa. Only then we can say that the equality holds.
+
+    1) Let $x\in\left( A\cup B \right)^C \iff x\not\in A\cup B \iff x\not\in A$ and $x\not\in B \iff x\in A^C$ and $x\in B^C \iff x\in A^C\cap B^C$. 
+\end{proof}
     %Let $a\in\left( A\cup B \right)^C,\ a\in A^C\cap B^C$ ? So we take
     \begin{align}
         \textrm{Let } a\in\left( A\cup B \right)^C &\implies a\in\uset\textrm{ and } a\notin A\cup B \implies \\
@@ -187,7 +229,7 @@ Suppose we are considering sets $A$ and $B$. Then, we could draw the following p
         \left( A\cup B \right)^C = A^C\cap B^C
     \end{equation}
 
-\end{proof}
+%\end{proof}
 
 \begin{proof}
     \textit{(Second De Morgan's law)}. In order to proof the second De Morgan's law we need first to proof that $\left( A\cap B \right)^C\subset A^C\cup B^C \textrm{ and then } A^C\cup B^C \subset \left(  A\cap B\right)^C$. Only then we can say $\left( A\cap B \right)^C = A^C\cup B^C $. 
@@ -212,8 +254,13 @@ Suppose we are considering sets $A$ and $B$. Then, we could draw the following p
 
 \subsection{Partitions of sets}
 \begin{definition}
-    \textbf{(Partition of a set).} Let $A$ be a non-empty set. A partition of $A$ is a separation of $A$ into mutually disjoint non-empty subsets.
+    \textbf{(Partition of a set).} A partition of a non-empty set $A$ is a separation of $A$ into mutually disjoint non-empty subsets, $A_{\alpha}$, such that $A_{\alpha}\neq A_{\beta}$ and $\cup A_{\alpha} = A$.
 \end{definition}
+\begin{remark}
+    Note that if $A$ is a finite set then to give a partition is equivalent to writting $A$ as $A_1\cup A_2\cup\ldots\cup A_{n} $ with $A_i\neq \O$ and disjoint two by two.
+\end{remark}
+
+\hide{
 \begin{example}
     Let $A = \{a, b, c, d, e\} $. A partition of $A$ could be
     \begin{equation}
@@ -223,6 +270,7 @@ Suppose we are considering sets $A$ and $B$. Then, we could draw the following p
         B_i\cap B_j = \O\quad\textrm{for}\quad i\neq j,\quad\quad B_i\neq\O\quad\textrm{for}\quad i = 1, 2, 3
     \end{equation}
 \end{example}
+}
 
 \subsection{Other operations with sets}
 \begin{definition}
@@ -240,7 +288,8 @@ Suppose we are considering sets $A$ and $B$. Then, we could draw the following p
 \begin{remark}
     $A\triangle B = A\cup B \textbackslash A\cap B$.
 \end{remark}
-\begin{example}[Let $A = \{1, 2, 3, 4\} $ and $B = \{3, 5, 7\} $.]
+\begin{example}
+    Let $A = \{1, 2, 3, 4\} $ and $B = \{3, 5, 7\} $.
     \begin{equation}
         A\textbackslash B = \{1, 2, 4\} 
     \end{equation}
@@ -249,6 +298,7 @@ Suppose we are considering sets $A$ and $B$. Then, we could draw the following p
     \end{equation}
 \end{example}
 
+\hide{
 \begin{proposition}
     $B\triangle A = \left( A\cap B \right)^C $.
 \end{proposition}
@@ -260,6 +310,7 @@ Suppose we are considering sets $A$ and $B$. Then, we could draw the following p
     \end{align}
     Therefore, the equality $B\triangle A = \left( A\cap B \right)^C $ is hold considering $\uset = A\cup B$.
 \end{proof}
+}
 
 \begin{definition}
     \textbf{(Cartesian product of sets).} Let $A$ and $B$ be two sets. The cartesian product of $A$ and $B$ is the set of the ordered pairs of the form $\left( a, b \right)$ where $a\in A$ and $b\in B$.
@@ -268,7 +319,8 @@ Suppose we are considering sets $A$ and $B$. Then, we could draw the following p
     \end{equation}
 \end{definition}
 
-\begin{example}[Let $A = \{a, b, c\} $ and $B = \{c, 3\} $.]
+\begin{example}
+Let $A = \{a, b, c\} $ and $B = \{c, 3\} $.
     \begin{equation}
         A\times B = \{\left( a, c \right), \left( a, 3 \right), \left( b, c \right), \left( b, 3 \right), \left( c, c \right), \left( c, 3 \right)\}
     \end{equation}
@@ -278,23 +330,28 @@ Suppose we are considering sets $A$ and $B$. Then, we could draw the following p
 \end{note}
 
 \begin{definition}
-    \textbf{(Cardinality of a set).} Let $A$ and $B$ be two sets. The cardinality of $A$, $\textrm{card}\left( A \right) $, is the number of elements in $A$.
+    \textbf{(Cardinality of a set).} Let $A$ and $B$ be two sets. The cardinality of $A$, $\textrm{card}\left( A \right) = \abs{A}$, is the number of elements in $A$.
     \begin{equation}
         \textrm{If card}\left( A \right) < \infty\textrm{ and } \textrm{card}\left( B \right) < \infty \implies \textrm{card}\left( A\times B \right) = \textrm{ card}\left( A \right)\cdot \textrm{ card}\left( B \right)   
     \end{equation}
 \end{definition}
 
-\subsection{Definition of a function}
+\subsection{Definition of function and related concepts}
 \begin{definition}
-    \textbf{(Function).} Let $X$ and $Y$ be two non-empty sets. The \textbf{function}, or \textbf{map}, from $X$ to $Y$ is a subset $f$ of $X\times Y$ such that for each $x\in X$ that appears as part of a pair in $f$, there is one, and only one $y\in Y$ such that $\left( x, y \right)\in f$, and we write $f:X\to Y$.
+    \textbf{(Function).} A \textbf{function}, or \textbf{map}, from a non-empty set $X$ to a non-empty set $Y$ is a subset $f$ of $X\times Y$ such that $\forall x\in X$ that appears as part of a pair in $f$, there is one, and only one $y\in Y$ such that $\left( x, y \right)\in f$, and we write $f:X\to Y$.
 \end{definition}
+
+In other terms, a function between two sets $X$ and $Y$ is just a way to assign an element of $X$ an element of $Y$.
+
+\hide{
 \begin{example}[An example of a function would be]
     \begin{align}
         f:\R&\to\R \quad\quad\quad\quad\quad f = \{( x, x^2 + 1)\tq x\in\R \}\subset\R\times\R = \R^2 \\ 
         x&\to x^2 + 1
     \end{align}
 \end{example}
-\begin{example}[A typical non-example of a function would be]
+\begin{example}
+A typical non-example of a function would be
     \begin{equation}
         h:=\{( x,\ \pm \sqrt{x})\tq x\in\R \}\subset\R\times\R = \R^2 
     \end{equation}
@@ -306,37 +363,49 @@ Suppose we are considering sets $A$ and $B$. Then, we could draw the following p
             \end{equation}
     \end{itemize}
 \end{example}
+}
+
+\begin{definition}
+    If $f:X\to Y$ and $C\subset X$, $D\subset Y$, the following sets are defined.
+    \begin{align}
+        f\left( C \right) &= \{y\in Y\tq y = f\left( x \right) \textrm{ for some } x\in C\} \\
+        f^{-1}\left( D \right) &= \{x\in X\tq f\left( x \right) \in D\} 
+    \end{align}
+\end{definition}
+
+\hide{
+\begin{definition}
+    If $f:X\to Y$, the set $X$ is called the \textbf{domain} of $f$, $Y$ is the \textbf{codomain} of $f$ and $f\left( X \right) $ is the \textbf{image} (or \textrm{range}) of $f$.
+\end{definition}
+}
+
 \begin{definition}
     Let $f:X\to Y$ and let $g:X\to Y$ be two functions. We say that $f = g$ if $\forall x\in X,\ f\left( x \right) = g\left( x \right)$.
 \end{definition}
 
-\subsection{Domain, codomain and range of a function}
+%\subsection{Domain, codomain and range of a function}
 \begin{definition}
-    Let $f:X\to Y$ be a function. Then, 
-    \begin{itemize}
-        \item $X$ is the \textbf{domain} of the function: the set containing all the input values of the function. Since a function is defined on its entire domain, its domain coincides with its domain of definition.
-        \item $Y$ is the \textbf{codomain} of the function: the set containing all of the output values of the function.
-        \item The \textbf{range} of the function is the subset of $Y$:
-            \begin{equation}
-                \textrm{Range }:=\{y\in Y\tq \exists\ x\in X \textrm{ with } f\left( x \right) = y\} 
-            \end{equation}
-    \end{itemize}
-
-    %\begin{itemize}
-    %    \item $A$ is the \textbf{domain} of the function.
-    %    \item $B$ is the \textbf{codomain} of the function.
-    %    \item The \textbf{range} of the function is the following subset of $B$:
-    %        \begin{equation}
-    %            \textrm{range }:=\{b\in B\tq \exists\ a\in A \textrm{ with } f\left( a \right) = b \} 
-    %        \end{equation}
-    %\end{itemize}
+    \textbf{(Domain).} If $f:X\to Y$, the set $X$ is the \textbf{domain} of the function, which contains all the input values of the function. 
 \end{definition}
+\begin{remark}
+    Since a function is defined on its entire domain, its domain coincides with its domain of definition.
+\end{remark}
+\begin{definition}
+    \textbf{(Codomain).} If $f:X\to Y$, the set $Y$ is the \textbf{codomain} of the function, which contains all of the output values of the function.
+\end{definition}
+\begin{definition}
+    \textbf{(Image).} If $f:X\to Y$, the \textbf{image} (or \textbf{range}) of $f$ is the subset range$\subset Y$ such that
+    \begin{equation}
+        \textrm{range }:= \{y\in Y\tq \exists,\ x\in X\textrm{ with } f\left( x \right) = y\} 
+    \end{equation}
+\end{definition}
+
 \begin{notation}
     The range of a function $f$ is often denoted by $f\left( A \right) $ or by Im$f$, which stands for \textit{image of $f$}.
 \end{notation}
 
-\subsection{Image and inverse image}
-The word \textit{image} is used in three related ways. In these definitions, $f:X\to Y$ is a function from the set $X$ to the set $Y$.
+%\subsection{Image and inverse image}
+%The word \textit{image} is used in three related ways. In these definitions, $f:X\to Y$ is a function from the set $X$ to the set $Y$.
 \begin{definition}
     \textbf{(Image of an element).} If $x\in X$, then the image of $x$ under $f$, denoted $f\left( x \right) $, is the value of $f$ when applied to $x$.
 \end{definition}
@@ -344,7 +413,7 @@ The word \textit{image} is used in three related ways. In these definitions, $f:
     $f\left( x \right) $ is alternatively known as the output of $f$ for argument $x$.
 \end{note}
 \begin{definition}
-    \textbf{(Image of a subset).} The image of a subset $S\subset X$ under $f$, denoted $f\left( S \right) $, is the subset of $Y$ which can be defined as follows:
+    \textbf{(Image of a subset).} The image of a subset $S\subset X$ under $f$, denoted $f\left( S \right) $, is the subset of $Y$ such that
     \begin{equation}
         f\left( S \right) := \{f\left( s \right) \tq x\in S\} 
     \end{equation}
@@ -417,7 +486,38 @@ The word \textit{image} is used in three related ways. In these definitions, $f:
 
 A bijective function from the set $X$ to the set $Y$ has an \textbf{inverse function} from $Y$ to $X$.
 
-\newpage
+Following these definitions, a function $f:X\to Y$ is surjective if and only if all the elements of $X$ are map to an element of $Y$, and it's injective if two different elements of $X$ are always applied on two different elements of $Y$; thus if we want to prove that certain $f$ is not surjective we should find an element of $Y$ that is not in the image of $f$, and if we want to prove that is not injective we should find two different elements of $X$ whose images by $f$ are the same.
+
+\subsection{Composition of functions}
+\begin{definition}
+    \textbf{(Composite function).} Let $f:X\to Y$ and $g:Y\to Z$, then we define the \textbf{composition} of $g$ and $f$ as the function $g\circ f:X\to Z$ such that $\left( g\circ f \right) \left( x \right) = g\left( f\left( x \right)  \right) $.
+\end{definition}
+\begin{definition}
+    \textbf{(Identity function).} The function $f:X\to X$ that leaves all of the elements invariant, this is $f\left( x \right) = x,\ \forall x\in X$, is called \textbf{identity function}, and is usually denoted by Id$_X$.
+\end{definition}
+\begin{definition}
+    \textrm{(Inverse function).} Given $f:X\to Y$, it's said that the function $g:Y\to X$ is the \textbf{inverse} of $f$, denoted by $g = f^{-1}$, if $g\circ f = \textrm{ Id}_X$ and $f\circ g = \textrm{ Id}_Y$.
+\end{definition}
+
+Note that in the previous definition it's not enough to prove one condition for the other to automatically hold. For instance, if $f:X\to\R$ and $g:\R\to X$ where $X = \{x\in\R\tq x \geq 0\} $ are given by $g\left( x \right) = x^2$ and $f\left( x \right) = +\sqrt{x}$, $\left( g\circ f \right) \left( x \right) = \left( +\sqrt{x}  \right)^2 = x$ holds $\forall x\in X$. However, $\left( f\circ g \right)\left( x \right) = x,\ \forall x\in X$ is not hold as negative numbers don't hold $+\sqrt{x^2} = x $.
+
+Intuitively, the inverse of a function from $X$ to $Y$ is simply considering it on the opposite way, from $Y$ to $X$. Thsi requires every element of $Y$ to have exactly one preimage; i.e. the function must be injective.
+
+\begin{proposition}
+    A function $f:X\to Y$ is invertible if and only if $f$ is bijective. In addition, $\left( f^{-1} \right)^{-1} = f $.
+\end{proposition}
+\begin{proposition}
+    If a function $f$ is invertible, then it's inverse, $f^{-1}$, is unique, which means that there's exactly one function $f^{-1}$ satisfying this property.
+\end{proposition}
+
+\begin{example}
+    Let $f:\Q\to\Q$, $f\left( x \right) = 2x$ be a bijective function. To compute it's inverse suppose $x = f^{-1}\left( y \right) $, then $f\left( f^{-1}\left( y \right)  \right) = 2f^{-1}\left( y \right) $, and therefore $f^{-1}\left( y \right) = \frac{y}{2}$.
+\end{example}
+\begin{remark}
+    It's easy to notice that the process to compute the inverse of $y = f\left( x \right) $ is reduced to solving for $y$ in $x = f\left( y \right) $, getting $y = f^{-1}\left( x \right) $.
+\end{remark}
+
+\hide{
 \begin{definition}
     \textbf{(Inverse function).} Let $f$ be a function whose domain is the set $X$, and whose codomain is the set $Y$. Then, $f$ is \textbf{invertible} if there exists a function $g$ with domain $Y$ and image $X$, with the property
     \begin{equation}
@@ -441,4 +541,5 @@ If $f$ is invertible, then the function $g$ is unique, which means that there is
         g^{-1}:\R&\to\R \\ x&\mapsto \frac{x - 1}{2}
     \end{align}
 \end{example}
+}
 
