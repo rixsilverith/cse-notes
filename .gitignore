@@ -1,0 +1,8 @@
+*/
+!courses/
+!scripts/
+!latex-stuff/
+!.gitignore
+!lnotes.sh
+!LICENSE
+!README.md

@@ -1,0 +1,46 @@
+#!/usr/bin/bash
+latex_dir=$(dirname $(kpsewhich article.cls))
+
+export TEXINPUTS="${LNOTES_DIR}/latex-stuff:"
+export max_print_line="1000"
+export error_line="254"
+export half_error_line="238"
+
+_w() {
+    local template=$1
+    shift
+    echo -e $(printf "$template" "$@")
+}
+
+_success() { _w "$(tput setaf 2)✔ %s$(tput sgr0)\n" "$@"; }
+_error()   { _w "$(tput setaf 1)✖ %s$(tput sgr0)\n" "$@"; }
+_warn()    { _w "$(tput setaf 3)➜ %s$(tput sgr0)\n" "$@"; }
+_info()    { _w "$(tput setaf 2)$(tput bold)>$(tput sgr0) %s\n" "$@"; }
+
+_abort() { _error "$1"; _w ; exit 1; }
+
+_w
+_info "Installing LaTeX stuff in $latex_dir"
+_info "Installing packages..."
+if ! cp *.sty $latex_dir &>/dev/null; then
+    _abort "An error ocurred while installing packages. Try running the command with sudo."
+else
+    _success "Packages installed!"
+fi
+
+_info "Installing document classes..."
+if ! cp *.cls $latex_dir &>/dev/null; then
+    _abort "An error ocurred while installing document classes. Try running the command with sudo."
+else
+    _success "Document classes installed!"
+fi
+
+_info "Copying assets directory..."
+if ! cp -r ./assets/ $latex_dir &>/dev/null; then
+    _abort "An error ocurred while copying the assets directory."
+else
+    _success "Assets copied!"
+fi
+
+_success "Custom LaTeX packages and classes installed successfully!"
+_w
