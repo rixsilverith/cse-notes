@@ -2,7 +2,8 @@
 set -euo pipefail
 IFS=$' \n\t'
 
-cd "$(dirname "${BASH_SOURCE[0]}")"
+cd "$(dirname "${BASH_SOURCE[0]}")"; cd ..
+
 export LNOTES_DIR="$(pwd)"
 
 source "${LNOTES_DIR}/scripts/util.sh"
