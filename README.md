@@ -2,29 +2,63 @@
 <p align="center"><img src="https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg?style=flat-square&color=green"/></p>
 
 <p align="center">
-  <a href="#-installation">Course structure</a>&nbsp;&nbsp;•&nbsp;
-  <a href="shell">Scripts</a>&nbsp;&nbsp;•&nbsp;
-  <a href="scripts">LaTeX stuff</a>&nbsp;&nbsp;•&nbsp;
-  <a href="git/.gitconfig">Note-taking environment</a>
+  <a href="courses">Lecture notes</a>&nbsp;&nbsp;•&nbsp;
+  <a href="scripts">Scripts</a>&nbsp;&nbsp;•&nbsp;
+  <a href="latex-stuff">LaTeX stuff</a>&nbsp;&nbsp;•&nbsp;
+  <a href="config.yaml">Configuration</a>
 </p>
 
 > This repository is a collection of all my lecture notes on computer science and maths together with some scripts for managing them and improve the note-taking experience using Vim and LaTeX.
 
-## Brief overview
-The main idea motivating this project is to have a centralized and efficient note-taking system for the different courses I take on both computer science and math. To achieve this, I'm using LaTeX along with the Vim editor for writing the notes and some Python scripts to perform repetitive tasks such as compiling or creating the necessary files for a new course. Furthermore, third-party software like Rofi and Sxhkd help in other tasks such as rapidly search and open the notes for a specific course or quickly opening the notes in Vim.
+## Overview
+The motivation for doing this project is to have a centralised and robust note-taking system for computer science and math courses. To achieve this, we're using LaTeX along with different technologies and scripts to make our lives easier at the time of taking notes.
 
 ## Getting started
-You can quickly begin tweaking the notes or whatever you want to do with them by running
 ```bash
 bash <curl -s https://raw.githubusercontent.com/rixsilverith/lecture-notes/master/setup>
 ```
-This will guide you through the installation process of the different dependencies of the project.
+This will guide you through the apassionating process of installing the necessary LaTeX custom packages and classes as well as other project dependencies.
 
-> Note: This note-taking environment has been designed to work on a Linux system and has only been tested on Arch Linux. Some software may not be available for your system or the configuration may vary. For this reason is recommended to build this setup step by step.
+> Disclaimer: This setup, including scripts and third-party software, is ment to work in Arch Linux with bspwm, and has not been tested on other environments. However, it should work anyways as long as all the dependencies are installed correctly.
 
 <!--
 A compiled version of these lecture notes can be found [here]().
 -->
+
+## Managing the notes with Python scripts
+In order to efficiently perform repetitive tasks, some Python scripts are included in the **scripts** folder. Furthermore, a `lnm` shell script is also provided in the **bin** folder, which is nothing more than a common entry point for the rest of the scripts. The syntax is as follows.
+```bash
+lnm <script> [<args>...]
+```
+A complete list of scripts is available by running `lnm -h` or just `lnm`. A table summarizing what all the scripts do is also available [here](doc/scripts.md).
+
+> Note: The **bin** folder should have automatically added to your PATH after getting this repo, so you can run the `lnm` tool globally. If that's not the case, then add the path to the folder manually.
+
+## Technical LaTeX stuff
+To improve the note-taking experience with LaTeX, in the **latex-stuff** folder there are some custom packages and document classes that are ment to make writing notes easier and to keep them nice formatted.
+
+These include the `exmath` package for math-related macros and environments, such as `theorem`; and the `lecturenotes` and `labreport` document classes. Each of them defined in their corresponding `.cls` or `.sty` files. If you are not familiar with the development of custom LaTeX packages and document classes, the [Overleaf documentation]() is a great place to start reading.
+
+<!--
+The documentation for all of these custom packages and classes is available in PDF format [here](docs/latex-stuff.pdf).
+-->
+
+#### Compiling the notes
+The lecture notes for the different courses need the files in the **latex-stuff** folder for them to be properly compiled. The LaTeX compiler used by default is `latexmk`, which is actually not a compiler but a Perl script that makes a call to `pdflatex`. If wanted, another compiler, such as `xelatex`, may be used at your own risk by changing the `latex.compiler` key in the `config.yaml` file. The different arguments passed to the compiler can also be modified there with the `latex.compiler_arguments` key.
+
+These lecture notes can be compiled by running
+```bash
+lnm compile [course] [<args>...]
+```
+where `course` is an optional argument corresponding to the name of the folder in which the `info.yaml` and `.tex` files of the course are located. If no `course` argument is passed all the courses will be compiled by default. The resulting `.pdf` file for each course can be found inside its corresponding folder.
+
+Moreover, a dark version of the notes can be compiled by adding the `--dark` flag to the compilation command or setting the `theme` key in `config.yaml` to `dark` to do it by default.
+
+Finally, if you're not using VimTeX, it's highly recommended to run
+```bash
+lnm watch <course> [<args>...]
+```
+to automatically recompile the notes when saving changes while editing the `.tex` files. This command runs the compilation command in the shadows every time the `.tex` is changed.
 
 ## Course structure
 In order to properly tweak the lecture notes or write your own ones using this setup you should first get familiar with how is a course structured. Each course has its own folder with a unique name in the **courses** folder, which is organized as follows.
@@ -60,36 +94,7 @@ group: 219
 
 `bibliography.bib` contains all the bibliography entries used in the notes using the BibTeX format. By default, bibliography is not included in the notes (see [lecturenotes class options]() for more info).
 
-
-## Custom LaTeX packages and document classes
-
-## Managing the notes with Python scripts
-First things first, begin by cloning this repo in your machine. The key here is `lnotes.sh`, which is the main entry point for most of the scripts located in the **scripts** folder and therefore the file which will act as our *lecture notes manager*.
-
-```bash
-./lnotes.sh <script> [<args>...]
-```
-
-A complete list of scripts is available by running `./lnotes.sh help` in your terminal.
-
-#### Compiling the notes
-The LaTeX compiler used by default is `latexmk`. If wanted, another compiler may be used by changing the `latex.compiler` key in the `config.yaml` file. The different arguments passed to the compiler can also be modified there with the `latex.compiler_arguments` key.
-
-These lecture notes can be compiled by running the `compile` script as follows.
-```bash
-./lnotes.sh compile [course]
-```
-where the `course` optional argument is the name of the folder in which the `info.yaml` and `.tex` files of the course are located. If no `course` argument is passed all the courses will be compiled by default. The resulting `.pdf` file for each course can be found inside its corresponding folder.
-
-An dark version of the lecture notes can be compiled by adding the `--dark` flag to this command or setting the `theme` key in `config.yaml` to `dark` to do it by default.
-
-*Tip: Use the `watch` script to automatically recompile the notes when saving changes while editing the `.tex` files.*
-```bash
-./lnotes.sh watch <course>
-```
-
-## Improving the note-taking environment
-
+<!--
 ## Commands
 Command | Description
 --- | ---
@@ -105,68 +110,31 @@ Command | Description
 <center>
 <small>Tip: Write <b>-h</b> or <b>--help</b> after each command to get some help. </small>
 </center>
-
-<!--
-## Configuration
-The behaviour of some scripts can be changed by modifying the `config.yaml` file in the root of this project. This is an example of how this file looks like:
-<!--
-```yaml
-pdf_viewer: zathura
-theme: light
-compiler:
-    compiler_name: latexmk
-    options: -shell-escape -synctex=1 -pdf -silent -interaction=nonstopmode -pvc
-```
-
-<center>
-<h5>General settings</h5>
-
-Key | Description
---- | ---
-`pdf_viewer` | Executable of the PDF viewer to open the compiled lecture notes. Zathura <br> is a strong recommendation and the default here, as it implements a *dark mode*, <br> Vim shortcuts and reloads the current PDF file if it is modified. The latter is specially <br> useful when editing the `.tex` files.
-`theme` | If set to `dark` a *dark version* of the notes will be compiled by default.
-
-<h5>LaTeX compiler settings</h5>
-
-This settings go under the `compiler` key.
-
-Key | Description
---- | ---
-`compiler_name` | The LaTeX compiler that will output the PDF files. Default: `latexmk`.
-`options` | List of compiler options.
-
-<h5>Google Drive settings</h5>
-
-This settings go under the `g_drive` key.
-
-Key | Description
---- | ---
-`compiler_name` | The LaTeX compiler that will output the PDF files. Default: `latexmk`.
-`options` | List of compiler options.
-
-</center>
-
 -->
 
+## Configuration and customisation
+The behaviour of some scripts can be changed by editing the `config.yaml` file located in the root of the project. Keys to be edited in this file are:
+- `pdf_viewer` This is the name of the executable of your PDF viewer of choice, the one that will open up when running commands such as `lnm notes linear-algebra`. Zathura is the default and the recommended option for Linux users, as it will automatically refresh the PDF view when changes are made to the `.pdf` file. Okular is another great option for Linux, as well as Skim for MacOS X and Sumatra for Windows.
+
+- `latex` This key contains configuration for compiling the notes.
+    - `latex.compiler` Compiler used to compile the notes.
+
+    - `latex.compiler_arguments` Options passed to the compiler.
+
 <!--
-In order to compile the corresponding LaTeX files for each course you can make use of the `compile.sh` script. By default, it will compile the lecture notes from all courses. However, you can compile the lecture notes from a specific course by passing the short for that course or the name of its folder as an argument, as well as the output directory (default: **lecture-notes/out**). A list of all courses and their shorts is available by running the `list_courses.sh` script. Example:
-```bash
-./compile.sh --course=CSTRUCT --out-dir=~/Uni/lecture-notes/
-```
+## Further configuration
+Software such as Rofi and Sxkhd can also improve the experience of taking notes and looking for them.
 
-It's also recommended to use `latexmk` to continuously compile the lecture notes while editing them.
-```bash
-latexmk -shell-escape -synctex=1 -pdf -silent -interaction=nonstopmode -pvc <file.tex>
-```
-About the arguments: `-shell-escape` let us create LaTeX subprocesses to compile auxiliary files; `-synctex=1` generates a `synctex.gz` file that let certain PDF viewers (Skim in macOS, Okular in Linux and Sumatra in Windows) to relate a position in the PDF with its corresponding part in the `.tex` file; `-silent` reduces the output of the compiler; `-interaction=nonstopmode` prevents the compiler from stopping when it spots an error; finally, `-pvc` enables continuous compilation when saving the `.tex` file.
-> If you're running Linux, you might find helpful my [university setup](https://github.com/rixsilverith/university-setup), which is just a collection of scripts intented to improve the workflow of taking lecture notes using LaTeX.
+For instance, with Sxkhd I can bind `Alt+5` to run `lnm rofi-notes`, which will open up a Rofi dialog to select a course and open it with the PDF viewer specified in the `config.yaml` file.
 -->
-
-
 
 ## Contributing
+If you find any mistake, have some suggestion or you want to contribute to the project in any way don't hesitate to open a pull request.
 
 ## Acknowledgements
+- Most of the ideas related to the custom LaTeX packages and document classes are taken from [apuntes-uam-infomat/apuntes]().
+
+- Some scripts, specially the ones for Rofi, as well as the course structure, are based on the ones that [Gilles Castel]() uses to manage his lecture notes.
 
 ## License
 This lecture notes are licensed under [Creative Commons Attribution - No Commercial - Share Alike 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode). They can be freely used and distributed as long as the original author is credited, they aren't used for commercial purposes and derived work is shared under this same license.
