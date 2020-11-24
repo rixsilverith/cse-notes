@@ -76,15 +76,15 @@
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{custombase}}
 
-\ExecuteOptions{en, noshowlastpage, showgithublink}
+\ExecuteOptions{en, noshowlastpage, showgithublink, nobibliography}
 \ProcessOptions\relax
 
 \LoadClass{custombase}
 
 
 
-%\RequirePackage{natbib}
-%\RequirePackage[nottoc]{tocbibind}
+\RequirePackage{natbib}
+\RequirePackage[nottoc]{tocbibind}
 %\RequirePackage{comment}
 %\RequirePackage[backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
 %\let\biblio\addbibresource
@@ -98,7 +98,6 @@
 \titleformat{\paragraph}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titleformat{\subparagraph}{\normalfont\normalize\bfseries}{\thesubparagraph}{1em}{}
 
-\hide{
 \if@usebibliography
 \AtEndDocument{%
     \newpage
@@ -107,7 +106,6 @@
     \bibliographystyle{apalike}
 }
 \fi
-}
 
 \renewcommand{\thepage}{\arabic{page}}
 
@@ -138,7 +136,7 @@
 }
 
 \fancyhf{}
-%\PrerenderUnicode{ÁáÉéÍíÓóÚúÑñ} % Para que salgan las tildes y demás mierdas en el título.
+\PrerenderUnicode{ÁáÉéÍíÓóÚúÑñ} % Para que salgan las tildes y demás mierdas en el título.
 \renewcommand{\chaptermark}[1]{\markright{#1}{}}
 \fancypagestyle{plain}{%
     \if@showorganizationheader

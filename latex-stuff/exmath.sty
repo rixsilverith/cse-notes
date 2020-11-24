@@ -60,11 +60,11 @@
 \RequirePackage{bm}
 %\RequirePackage{bbm}
 % Fixes stuff
-%\RequirePackage{mathpazo}
+\RequirePackage{mathpazo}
 \RequirePackage{mathtools}
 
 % Todo notes
-\RequirePackage[shadow]{todonotes}
+%\RequirePackage[shadow]{todonotes}
 % Frames for theorems, proofs, etc.
 \RequirePackage[framemethod=TikZ]{mdframed}
 \RequirePackage{xargs}
@@ -76,6 +76,9 @@
 \RequirePackage{etoolbox}
 %\RequirePackage{nameref}
 %\RequirePackage{scalerel, stackengine}
+
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
 
 % Put x\to\infty below \lim
 \let\svlim\lim\def\lim{\svlim\limits}
@@ -119,27 +122,30 @@
 \renewcommand{\abs}[1]{\left\vert #1 \right\vert}
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\gea}[1]{\underset{\longrightarrow}{#1}}
 
 \DeclareMathOperator{\rg}{Rg}
-\DeclareMathOperator{\rank}{Rank}
+\DeclareMathOperator{\rankm}{Rank}
 
 % Mathematical analysis
-\newcommand{\grad}{\nabla}
+%\newcommand{\grad}{\nabla}
 \newcommand{\bigzero}{\text{\Large O}}
 \newcommand{\invers}[1]{#1 ^{-1}}
 
 \newcommand{\liminft}[1]{\lim_{{#1}\rightarrow\infty}}
 
 \DeclareMathOperator{\rot}{rot}
-\DeclareMathOperator{\dv}{div}
+\DeclareMathOperator{\diver}{div}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
 
 % Set theory and relations
 \newcommand{\set}[1]{\{ #1 \}}
 \newcommand{\x}{\times} % Cool x
-\newcommand{\appl}[3]{#1 : #2\longmapsto #3} % Application
+\newcommand{\appl}[3]{#1 : #2\longrightarrow #3} % Application
 \newcommand{\stdf}{\ensuremath{\appl{f}{X}{Y}}} % Casual function
 \newcommand{\uexists}{\exists\, !\;} % Exists and it's unique
-\newcommand{\rel}{\mathcal{R}} % Relation
+\newcommand{\rela}{\mathcal{R}} % Relation
 \newcommand{\parts}[1]{\mathcal{P}\left( #1 \right)} % Partitions of a set / Power set
 \newcommand{\uset}{\mathcal{U}} % Universal set
 
@@ -178,16 +184,26 @@
   {5pt plus 1pt minus 1pt} % HEADSPACE
   {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}} % CUSTOM-HEAD-SPEC
 
+\newtheoremstyle{defi}
+  {15pt}   % ABOVESPACE
+  {2pt}   % BELOWSPACE
+  {\itshape}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt
+  {\bfseries} % HEADFONT
+  {.}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}} % CUSTOM-HEAD-SPEC
+
+\theoremstyle{defi}
+
+\newtheorem{defi}[thm]{\@definition@mark}
 
 \theoremstyle{highlight}
 
-% {defi} environment definition
-% Usage: \begin{defi}[Bézout's identity]{bezout-id} ... \end{defi}
 \newtheorem{theorem}[thm]{\@theorem@mark}
-\newtheorem{defi}[thm]{\@definition@mark}
 \newtheorem{prop}[thm]{\@proposition@mark}
 \newtheorem{lemma}[thm]{\@lemma@mark}
-\newtheorem*{coro}{\@corollary@mark}
+\newtheorem{coro}[thm]{\@corollary@mark}
 
 \theoremstyle{remark}
 
@@ -195,14 +211,6 @@
 \newtheorem*{notation}{\@notation@mark}
 \newtheorem*{remark}{\@remark@mark}
 \newtheorem*{claim}{\@claim@mark}
-
-
-\hide{
-\newenvironment{iidefi}[2][]{%
-    \begin{idefi}[#1]
-    \ifthenelse{\equal{#2}{}}{}{\label{def:#2}}
-}{\end{idefi}}
-}
 
 % This macro changes the equation numbering from (\theequation)
 % to (\thesection.\theequation). The equation counter is reseted
@@ -213,50 +221,6 @@
 % https://tex.stackexchange.com/questions/207532/reset-equation-numbering-after-each-section
 \counterwithin{equation}{chapter}
 
-\hide{
-\newenvironment{defi}[3][]{%
-    \refstepcounter{thm}%\label{thm:#2}
-    \ifthenelse{\equal{#1}{}}
-        {\medskip\noindent\textbf{\@definition@mark~\thethm.}}
-        {\medskip\noindent\textbf{\@definition@mark~\thethm~(#1).}}~#3
-}{\medskip}
-}
-
-
-\hide{
-\newcounter{def}[chapter]
-\renewcommand{\thedef}{\thechapter.\arabic{def}} % IGN
-
-\newtheorem{idef}[thm]{Definition}
-\newenvironmentx{defn}[2][1=, 2=None]{  % 1O: titulo; 2O: indice;
-	\vspace{15 pt}
-	%\set@labelname{#1}
-	%\renewcommand{\labelenumi}{\alph{enumi}. }
-	%\renewcommand{\theenumi}{\thedef\ - (\alph{enumi})}
-	\noindent\refstepcounter{def}\textbf{Definition~\thedef}
-	%\concept[#2]{#1}.\itshape}
-	{\vspace{2 pt}}
-
-
-\newenvironmentx{mtheorem}[2][1=, 2=None]{ % 1O: titulo; 2O: indice;
-	\vspace{2pt}
-	\toggle@IS@index %IGN
-	\ifthenelse{\equal{#2}{None}}
-		{\index{#1}}
-		{\index{#2}}
-	\set@labelname{#1}
-	\ifthenelse{\equal{#1}{}}
-		{}
-		{\ithm{#1}}
-	\toggle@IS@print %IGN
-	\@set@theorem@itemlabels
-	\begin{framed}
-	\begin{itheorem}[#1]}
-	{\end{itheorem}\end{framed}\@restore@itemlabels}
-
-}
-% And then we should do the rest of the definitions\ldots\ldots\ldots.
-
 \renewcommand{\(}[1][]{\begin{equation}\ifthenelse{\equal{#1}{}}{}{\label{#1}}}
 \renewcommand{\)}{\end{equation}}
 
@@ -264,7 +228,9 @@
     linewidth=2pt, skipabove=1em, skipbelow=0pt]}{\end{mdframed}}
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
-\renewenvironment{proof}{\begin{leftbar}\noindent\textit{\lproof}. }{\qed\end{leftbar}}
+\renewenvironment{proof}{\begin{leftbar}\noindent\textit{\@proof@mark}. }{\qed\end{leftbar}}
+
+\newenvironment{example}{\vspace{10pt}\par\noindent\textbf{\@example@mark}. }{}
 
 % Fix some weird spacing on boxes created by the mdframed package
 % http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm

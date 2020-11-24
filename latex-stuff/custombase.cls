@@ -39,9 +39,11 @@
     {\addto\captionsspanish{\renewcommand{\chaptername}{Tema}}}
     {\addto\captionsenglish{\renewcommand{\chaptername}{Topic}}}
 
-\RequirePackage{domitian} % Font
+%\RequirePackage{domitian} % Font
+\renewcommand{\rmdefault}{ppl}
 \renewcommand{\sfdefault}{fla}
 \renewcommand{\ttdefault}{lmtt}
+\renewcommand*{\familydefault}{\rmdefault}
 
 \RequirePackage{titling} % Reference \thetitle, \thedate, etc.
 \RequirePackage{titlesec} % Section, subsection, ... title formatting
@@ -57,8 +59,8 @@
 \RequirePackage{wrapfig} % Floating images
 
 \RequirePackage{subcaption} % Support for subcaptions
-\RequirePackage[format=plain, textfont=it]{caption} % Custom caption styles
-\RequirePackage[pdfencoding=auto, psdextra]{hyperref} % Links around the document
+\RequirePackage[format=plain, textfont=bf]{caption} % Custom caption styles
+\RequirePackage[pdfencoding=auto,psdextra]{hyperref} % Links around the document
 
 \RequirePackage{exmath} % Theorems, proofs, math macros and more
 \RequirePackage{listings} % Write code listings
@@ -87,6 +89,10 @@
 
 \let\oldstylenums\oldstyle
 
+\newcommand{\hide}[1]{}
+\newcommand{\hr}{\noindent\rule[0.5ex]{\linewidth}{0.5pt}}
+\newcommand{\smiley}{\ensuremath{\ddot\smile}}
+
 % Section, subsection, etc. title formatting
 \hide{
 \titleformat{\section}{\normalfont\Huge\bfseries}{\thesection}{1em}{}
@@ -95,10 +101,6 @@
 \titleformat{\paragraph}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titleformat{\subparagraph}{\normalfont\normalize\bfseries}{\thesubparagraph}{1em}{}
 }
-
-\newcommand{\hide}[1]{}
-\newcommand{\hr}{\noindent\rule[0.5ex]{\linewidth}{0.5pt}}
-\newcommand{\smiley}{\ensuremath{\ddot\smile}}
 
 \newcommand{\img}[4]{
 	\begin{figure}[ht]
