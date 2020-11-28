@@ -26,13 +26,15 @@ A compiled version of these lecture notes can be found [here]().
 -->
 
 ## Managing the notes with Python scripts
-In order to efficiently perform repetitive tasks, some Python scripts are included in the **scripts** folder. Furthermore, a `lnm` shell script is also provided in the **bin** folder, which is nothing more than a common entry point for the rest of the scripts. The syntax is as follows.
+In order to efficiently perform repetitive tasks, some Python scripts are included in the **scripts** folder. Furthermore, a `lecture-notes` shell script is also provided in the root folder, which is nothing more than a common entry point for the rest of the scripts. The syntax is as follows.
 ```bash
-lnm <script> [<args>...]
+lecture-notes <script> [<args>...]
 ```
-A complete list of scripts is available by running `lnm -h` or just `lnm`. A table summarizing what all the scripts do is also available [here](doc/scripts.md).
+A complete list of scripts is available by running `lecture-notes -h` or just `lecture-notes`. A table summarizing what all the scripts do is also available [here](doc/scripts.md).
 
+<!--
 > Note: The **bin** folder should have automatically added to your PATH after getting this repo, so you can run the `lnm` tool globally. If that's not the case, then add the path to the folder manually.
+-->
 
 ## Technical LaTeX stuff
 To improve the note-taking experience with LaTeX, in the **latex-stuff** folder there are some custom packages and document classes that are ment to make writing notes easier and to keep them nice formatted.
@@ -48,15 +50,15 @@ The lecture notes for the different courses need the files in the **latex-stuff*
 
 These lecture notes can be compiled by running
 ```bash
-lnm compile [course] [<args>...]
+lecture-notes compile [course] [<args>...]
 ```
-where `course` is an optional argument corresponding to the name of the folder in which the `info.yaml` and `.tex` files of the course are located. If no `course` argument is passed all the courses will be compiled by default. The resulting `.pdf` file for each course can be found inside its corresponding folder.
+where `course` is an optional argument corresponding to the name of the folder in which the `info.yaml` and `.tex` files of the course to be compiled are located. If no `course` argument is passed all the courses will be compiled by default. The resulting `.pdf` file for each course can be found inside its corresponding folder.
 
 Moreover, a dark version of the notes can be compiled by adding the `--dark` flag to the compilation command or setting the `theme` key in `config.yaml` to `dark` to do it by default.
 
 Finally, if you're not using VimTeX, it's highly recommended to run
 ```bash
-lnm watch <course> [<args>...]
+lecture-notes watch <course> [<args>...]
 ```
 to automatically recompile the notes when saving changes while editing the `.tex` files. This command runs the compilation command in the shadows every time the `.tex` is changed.
 

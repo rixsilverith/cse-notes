@@ -1,8 +1,9 @@
 */
-!bin/
 !courses/
+!docs/
 !scripts/
 !latex-stuff/
 !.gitignore
+!lecture-notes
 !LICENSE
 !README.md

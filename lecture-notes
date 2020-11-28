@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+set -euo pipefail
+IFS=$' \n\t'
+
+source "${LECTURE_NOTES_HOME}/scripts/util.sh"
+source "${LECTURE_NOTES_HOME}/scripts/help.sh"
+
+[[ $# -eq 0 ]] && doc::help && exit 1
+
+cmd="$1"
+case "$cmd" in
+    compile) python "$LECTURE_NOTES_HOME/scripts/compile.py" "$2" ;;
+    watch) python "$LECTURE_NOTES_HOME/scripts/compile.py" "$2" "-w" ;;
+    rofi-notes) python "$LECTURE_NOTES_HOME/scripts/rofi-notes.py" "$@" ;;
+    install) (
+        cd "$LECTURE_NOTES_HOME/latex-stuff"
+        chmod +x "$LECTURE_NOTES_HOME/latex-stuff/install"
+        "$LECTURE_NOTES_HOME/latex-stuff/install"
+    ) ;;
+    *) doc::help "$@" ;;
+ esac
