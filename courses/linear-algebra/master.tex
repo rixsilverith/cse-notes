@@ -1,0 +1,48 @@
+\documentclass{lecturenotes}
+\graphicspath{{./figures/}}
+
+\coursename{Linear Algebra, Set theory and Numbers}
+\courseshort{LALG}
+\coursegroup{119}
+\date{20/21 S1}
+
+\bibliographystyle{alpha}
+
+\begin{document}
+    \pagestyle{plain}
+    \lntitlepage
+    \clearpage
+    \tableofcontents
+    \newpage
+
+    % topics start here
+    \input{topic_01.tex}
+    \input{topic_02.tex}
+    \input{topic_03.tex}
+    \input{topic_04.tex}
+    \input{topic_05.tex}
+    % topics end here
+
+    \appendix
+    \chapter{Problem Sets}
+        \section{Problem Set 1: Set theory and functions}
+        \section{Problem Set 2: Equivalence relations}
+        \section{Problem Set 3: The $\Z$ and $\Z_n$ rings}
+        \section{Problem Set 4: Congruences}
+        \section{Problem Set 5: Polynomial rings}
+        \section{Problem Set 6: Elemental group theory}
+        \section{Problem Set 7: Matrices, vectors and linear systems of equations}
+        \section{Problem Set 8: Vector spaces}
+
+    %\addcontentsline{toc}{chapter}{List of Theorems}
+    %\addcontentsline{toc}{chapter}{List of Definitions}
+    \clearpage
+    \listoftheorems
+    \clearpage
+    \listofdefinitions
+
+    \nocite{*}
+    %\addcontentsline{toc}{chapter}{Bibliography}
+
+    \bibliography{linear-algebra}
+\end{document}

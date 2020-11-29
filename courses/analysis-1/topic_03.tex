@@ -1,0 +1,204 @@
+\chapter{Continuidad de funciones de variable real}
+
+\begin{defi}[Función]
+    Sean dos conjuntos $X$ y $Y$, una relación $f\subset X\times Y$ es función si $\forall x\in X,\ \uexists
+    y\in Y$, y se denota por $\appl{f}{X}{Y}$.
+\end{defi}
+
+\begin{defi}[Antiimagen]
+    Sea $\appl{f}{X}{Y}$, la antiimagen de un conjunto $B\subset Y$ es $\invers{f}\left( B \right) = \{
+    x\in X\st f\left( x \right) \in B\} $.
+\end{defi}
+
+\begin{remark}
+    No se debe confundir la antiimagen con la función inversa. La antiimagen es solo con conjuntos, la
+    inversa con elementos. Por ejemplo, si $x$ es un elemento y $X$ es un conjunto, $\invers{f}\left( f\left( 
+    x\right)  \right) = x$, pero $\invers{f}\left( f\left( X \right)  \right)$ no tiene por qué ser igual
+    a $X$.
+
+    Por ejemplo, sea $X = [0, 2]$ y $f\left( x \right) = x^2$. La imagen de $X$ es $[0, 4]$, mientras que
+    la antiimagen de $[0, 4]$ es $[-2, 2]\neq X$.
+\end{remark}
+
+\begin{defi}[Función inyectiva]
+    Una función $\appl{f}{X}{Y}$ es inyectiva si elementos distintos tienen imágenes distintas, es decir,
+    $f\left( x \right) = f\left( y \right) \implies x = y$.
+\end{defi}
+
+\begin{defi}[Función sobreyectiva]
+    Una función $\appl{f}{X}{Y}$ es sobreyectiva si $f\left( X \right) = Y$, es decir, si $\forall y\in Y,\
+    \exists x\in X\st f\left( x \right) = y$.
+\end{defi}
+
+\begin{defi}[Función biyectiva]
+    Una función es biyectiva si es inyectiva y sobreyectiva.
+\end{defi}
+
+\begin{defi}[Función inversa]
+    Sea $\appl{f}{X}{Y}$ una función. La inversa es $\appl{\invers{f}}{Y}{X}$, y si es función, se dice que
+    $\invers{f}$ es la inversa de $f$.
+\end{defi}
+
+\begin{prop}
+    Una función $f$ es invertible $\iff$ es inyectiva.
+\end{prop}
+
+\begin{proof}
+    Para que $\appl{f}{X}{Y}$ sea invertible, $\appl{\invers{f}}{Y}{X}$ tiene que ser una función, es decir,
+    que $\forall y\in Y,\ \uexists x\in X$. Comprobamos primero la existencia de imagen para cualquier 
+    elemento de $Y$. Si $f$ es sobreyectiva, entonces se tiene que $Y = f\left( X \right) $. Por tanto,
+    cualquier elemento de $Y$ tiene una imagen en $X$. Si no fuese sobreyectiva existiría algún elemento en
+    $Y$ que no fuese imagen de un elemento de $X$, asi que $\invers{f}$ no sería función.
+
+    Ahora demostramos la unicidad de la imagen para cualquier elemento de $Y$. Si $f$ es inyectiva, tenemos
+    que $\forall x, x'\in X, f\left( x \right) = f\left( x' \right) \iff x = x'$. Cada elemento de $X$ está
+    relacionado con un sólo elemento de $Y$, por lo que cada elemento de $Y$ tiene solo una imagen. Si no
+    fuera inyectiva, algún elemento de $Y$ tendría dos imágenes en $X$ y la relación inversa no sería 
+    función.
+\end{proof}
+
+\begin{defi}[Composición]
+    Sean $\appl{f}{X}{Y}$ y $\appl{g}{W}{Z}$ con $f\left( X \right) \subset W$, se define la composición
+    $f$ compuesto con $g$ como $\appl{g\circ f}{X}{Z}$, tal que $\left( g\circ f \right) = g\left( f\left( x \right)  \right), x\in X$.
+    \begin{itemize}[itemsep = -2pt]
+        \item La composición de funciones cumple la propiedad asociativa $\left( f\circ g \right) \circ h = 
+        f\circ\left( g\circ h \right) $.
+    \item Si $f$ y $g$ son sobreyectivas, entonces $g\circ f$ también lo es.
+    \end{itemize}
+\end{defi}
+
+\begin{defi}[Límite]
+    Sea una función $\appl{f}{X\subseteq{\R}}{\R}$, se dice que $f$ tiene límite $L$ cuando $x$ tiende a $x_0
+    \iff \forall\epsilon > 0,\ \exists\delta = \delta\left( \epsilon, x_0 \right) > 0\st \forall\vnorm{x - x_0}
+        < \delta\implies \vnorm{f\left( x - L \right) } < L$, y se denota por
+        \begin{equation}
+            \mylim{x}{x_0}{f\left( x \right) } = L.
+        \end{equation}
+\end{defi}
+
+\begin{remark}
+    No es necesario que $x_0\in X$.
+\end{remark}
+
+\begin{defi}[Límite lateral]
+    Se define el límite lateral por la derecha, $L_d$, de una función $\appl{f}{X\subseteq\R}{\R}$ como el
+    que $\forall\epsilon > 0,\ \exists\delta = \delta\left( \epsilon, x_0 \right) > 0\st \forall\vnorm{x - 
+    x_0} < \delta\land x > x_0\implies\vnorm{f\left( x \right) - L_d} < \epsilon$.
+
+    La definición de límite por la izquierda es análoga, salvo que $x < x_0$. Los límites por la derecha
+    e izquierda se denotan, respectivamente, por
+    \begin{equation}
+        \mylim{x}{x_0^+}{f\left( x \right) } = L_d\quad\quad\quad \mylim{x}{x_0^-}{f\left( x \right) } = L_i
+    \end{equation}
+\end{defi}
+
+\begin{defi}[Límite en el infinito]
+    Se dice que la función $\appl{f}{X\subseteq\R}{\R}$ tiene límite $L$ para $x\longrightarrow +\infty \iff
+        \forall\epsilon > 0,\ \exists M > 0\st \left( x > M\land x\in X \right) \implies \vnorm{f\left( x \right) - L} < \epsilon$.
+
+        La definición es análoga cuando $x\longrightarrow -\infty$, salvo que $x < -M$.
+\end{defi}
+
+\begin{theorem}
+    Una función $f\left( x \right) $ tiene límite $L$ cuando $x$ tiende a $x_0\iff$ toda sucesión $\seq{x_n}\subset\mop{Dom}\left( f \right)$
+        con $\liminft{n}x_n = x_{0}$ cumple que $\seq{f\left( x_n \right) }$ forma una sucesión convergente
+        a $L$, es decir,
+        \begin{equation}
+            \liminft{n}f\left( x_n \right) = L \iff x_n\underset{n\to\infty}{\longrightarrow} x_0 \implies f\left( x_n \right) \underset{n\to\infty}{\longrightarrow} L.
+        \end{equation}
+\end{theorem}
+
+\begin{prop}[Propiedades fundamentales de los límites]
+    Sean $f$, $\appl{g}{\R}{\R}$ dos funciones, con límites finitos $L$, $M\in \R$ cuando $x\longrightarrow x_0$.
+    \begin{enumerate}[itemsep = -2pt]
+        \item El límite, cuando existe, es único.
+        \item El límite es lineal, es decir, $\forall \lambda, \mu\in\R$ se tiene
+            \begin{equation}
+                \mylim{x}{x_0}{\left( \lambda f\left( x \right) + \mu g\left( x \right)  \right) } =
+                \lambda\mylim{x}{x_0}{f\left( x \right) } + \mu\mylim{x}{x_0}{g\left( x \right) } =
+                \lambda L + \mu M.
+            \end{equation}
+        \item El límite es compatible con el producto y con la división.
+            \begin{equation}
+                \lim_{x\to x_0} f\left( x \right) g\left( x \right) = \left( \mylim{x}{x_0}{f\left( x \right) } \right) \left( \mylim{x}{x_0}{g\left( x \right) } \right) = LM.
+            \end{equation}
+            \begin{equation}
+                \mylim{x}{x_0}{\frac{f\left( x \right) }{g\left( x \right) }} = \frac{\mylim{x}{x_0}{f\left( x \right) }{\mylim{x}{x_0}{g\left( x \right) }}} = \frac{L}{M},\quad M\neq 0.
+            \end{equation}
+    \end{enumerate}
+\end{prop}
+
+\begin{theorem}[Principio de comparación / Teorema del sandwich]
+    Sean tres funciones $f\left( x \right) $, $g\left( x \right) $ y $h\left( x \right) $ tal que $f\left( x \right) \leq g\left( x \right) \leq h\left( x \right),\ \forall x\in \left( x_0 - \delta_0, x_0 + \delta_0 \right) \land x\neq x_0\land \exists\mylim{x}{x_0}{f\left( x \right) } = \mylim{x}{x_0}{h\left( x \right)} = L \implies \exists \mylim{x}{x_0}{g\left( x \right) } = L$.
+\end{theorem}
+
+\begin{proof}
+    Sea $\seq{x_n}$ una sucesión tal que $\conj{x_0}\in\seq{x_n}$ y $\liminft{n} x_n = x_0$. Entonces, se tiene que
+    $\liminft{n} f\left( x_n \right) = \liminft{n} h\left( x_n \right) = L$. Por el principio de comparación
+    para las sucesiones, se llega a $f\left( x_n \right) \leq g\left( x_n \right) \leq h\left( x_n \right) 
+    \implies \exists\liminft{n} g\left( x_n \right) = L\implies \exists \mylim{x}{x_0} g\left( x_n \right) = L.$
+\end{proof}
+
+\begin{defi}[Continuidad en un punto]
+    Una función $\appl{f}{X\subseteq\R}{\R}$ es continua en un punto $x_0\in X \iff x_0\in X \land \exists\mylim{x}{x_0}{f\left( x \right)} \land \mylim{x}{x_0}{f\left( x \right) } = f\left( x_0 \right) $.
+\end{defi}
+
+\begin{defi}[Función continua]
+    Una función es continua si lo es en todos los puntos de su dominio.
+\end{defi}
+
+\begin{defi}[Función de Dirichlet]
+    Sea $\mathbb{D}$ una función discontinua en cada punto definida por
+    \begin{equation}
+        \mathbb{D}\left( x \right) = \begin{cases}
+            0\quad\textrm{si } x\in\R\setminus\Q \\
+            1\quad\textrm{si } x\in\Q
+        \end{cases}.
+    \end{equation}
+    $\mathbb{D}$ es llamada función de Dirichlet.
+\end{defi}
+
+\begin{note}
+    Se puede demostrar que la función de Dirichlet es discontinua en cada punto usando el teorema de densidad
+    de $\Q$.
+\end{note}
+
+\begin{defi}[Acotación]
+    Se dice que una función $\appl{f}{X}{\R}$ está acotada superiormente si $\exists M\st f\left( x \right) \leq M,\ \forall x\in X$. La definición es análoga cuando está acotada inferiormente.
+\end{defi}
+
+\begin{theorem}[Teorema de Weierstrass de los máximos y mínimos]
+    Sea $\appl{f}{[a, b]}{\R}$ una función continua en el intervalo cerrado $[a, b]$, entonces $f$ está 
+    acotada y tiene máximo y mínimo, es decir, $\exists M, m\in\R, x_M, x_m\in[a, b]\st \forall x\in [a, b]$
+    \begin{equation}
+        m = f\left( x_m \right) = \underset{z\in[a, b]}{\min} f\left( z \right) \leq f\left( x \right) \leq \underset{z\in[a, b]}{\max} f\left( z \right) = f\left( x_M \right) = M.
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}[Teorema de los ceros de Bolzano] \label{thm:zeros-bolzano}
+    Sea $\appl{f}{[a, b]}{\R}$ una función continua en el intervalo cerrado $[a, b]$ y tal que $f\left( a \right) f\left( b \right) \leq 0$. Entonces existe, al menos, un $x_0\in[a, b] \st f\left( x_0 \right) = 0$. 
+\end{theorem}
+
+\begin{lemma}[Lema del signo]
+    Sea $\appl{f}{\left( a, b \right) }{\R}$ es una función continua en el intervalo abierto $\left( a, b \right) $. Si $f\left( x_0 \right) \neq 0$, existe un entorno de $x_0$ en $\left( a, b \right) $ tal que $f$ tiene
+    signo constante.
+\end{lemma}
+
+\begin{proof}
+    Ejercicio.
+\end{proof}
+
+\begin{theorem}[Teorema de los valores intermedios de Bolzano] \label{thm:tvi-bolzano}
+    Si $\appl{f}{[a, b]}{\R}$ es continua en el cerrado $[a, b]$, entonces es sobreyectiva, es decir, $\forall y\in \mop{Im}\left( f \right),\ \exists$, al menos, un $x\in[a, b]\st f\left( x \right) = y$.
+\end{theorem}
+
+\begin{note}
+    Este último teorema \ref{thm:tvi-bolzano} puede considerarse un corolario del teorema \ref{thm:zeros-bolzano}.
+\end{note}
+
+\begin{theorem}[Teorema de los valores intermedios de Bolzano-Weierstrass]
+    Si $\appl{f}{[a, b]}{\R}$ es una función continua en el cerrado $[a, b]$, entonces toma todos los valores
+    entre su máximo $M = f\left( x_M \right) $ y su mínimo $m = f\left( x_m \right) $, es decir, $\forall y\in[m, M],\ \exists$, al menos, un $x\in[a, b]\st f\left( x \right) = y$.
+\end{theorem}
+
+Con el teorema \ref{thm:zeros-bolzano} podemos resolver todas las ecuaciones $f\left( x \right) = g\left( x \right) $ con $f$ y $g$ continuas.

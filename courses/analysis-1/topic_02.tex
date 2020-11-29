@@ -1,0 +1,559 @@
+\chapter{Sucesiones y series reales}
+En esta sección volveremos a dar la definición de una sucesión y de su convergencia en pero en $\R$ en vez de en $\Q$, aunque realmente sea la misma.
+
+\section{Sucesiones de números reales}
+\begin{defi}[Sucesión]
+    Se llama sucesión de números reales a una aplicación $a : \N\longrightarrow\R$ tal que
+    $n\longmapsto a\left( n \right) = a_n$. Se denota el término general de la sucesión con $a_n = a\left( n \right) \in\R$ y a la sucesión con $\seq{a_n}_{n\in\N}\subseteq\R$.
+\end{defi}
+
+\begin{defi}[Límite de una sucesión]
+    Se dice que la sucesión real $\seq{a_n}$ tiene límite $L\in\R$ cuando $n$ tiende a infinito si y solo si
+    \begin{equation}
+        \forall\epsilon > 0, \exists\ n_0 = n_0\left( \epsilon \right) \in\N\tq \forall n \geq n_0,\ \abs{a_n - L} \leq \epsilon.
+    \end{equation}
+\end{defi}
+
+\begin{defi}[Sucesión convergente]
+    Si el límite $L\in\R$ de la sucesión real $\seq{a_n}$ existe y es finito, se dice que $\seq{a_n}$ es convergente y se denota por
+    \begin{equation}
+        \lim_{n\to\infty}\seq{a_n} = \lim_{n}\seq{a_n} = \lim \seq{a_n} = L.
+    \end{equation}
+\end{defi}
+
+\begin{note}
+    Las propiedades de estos límites en $\R$ son las mismas que en $\Q$.
+\end{note}
+
+\begin{theorem}[Principio de comparación / Teorema del sandwich]
+    Sean $\seq{a_n}$, $\seq{b_n}$ y $\seq{c_n}$ tres sucesiones reales. Si se sabe que a partir de un cierto $n_0\in\N$ las sucesiones están ordenadas tal que
+    \begin{equation}
+        \seq{a_n}\leq \seq{b_n}\leq \seq{c_n},\quad \forall n \geq n_0,
+    \end{equation}
+    entonces también sus límites, existan o no, estarán ordenados de la misma forma
+    \begin{equation}
+        \lim_{n\to\infty}\seq{a_n}\leq \lim_{n\to\infty} \seq{b_n} \leq \lim_{n\to\infty}\seq{c_n}.
+    \end{equation}
+\end{theorem}
+
+\begin{lemma}
+    Una sucesión real convegente $\seq{a_n}$ es acotada, es decir, si $\lim_{n\to\infty}\seq{a_n} = L$, entonces existe $M > 0$ tal que $\abs{a_n}\leq M$.
+\end{lemma}
+
+\begin{proof}
+    Para todo $\epsilon > 0$, existe $n_0 = n_0\left( \epsilon \right) $ tal que para todo $n > n_0$, $\abs{a_n - L} < \epsilon$. Sea $\epsilon = 1$, encontramos $n_0\left( 1 \right) $, entonces $L - \epsilon \leq a_n\leq L + \epsilon$ resulta en $L - 1\leq a_n \leq L + 1,\ \forall n>n_0\left( 1 \right) $. Finalmente, $-\max\abs{a_k} + L - 1\leq \max\abs{a_k} + L + 1$, con $0\leq k\leq n_0$.
+\end{proof}
+
+\begin{lemma}[Sucesión de Cauchy]
+    Una sucesión convergente es de Cauchy, es decir,
+    \begin{equation}
+        \forall\epsilon > 0, \exists\ n_0 = n_0\left( \epsilon \right) \in\N\tq \forall m, n > n_0,\ \abs{a_n - a_m} < \epsilon.
+    \end{equation}
+\end{lemma}
+
+\begin{proof}
+    Por la definición de límite de una sucesión tenemos que $\forall \epsilon > 0, \exists\ n_0 = n_0\left( \epsilon \right) \tq \forall n > n_0,\ \abs{a_n - L} < \frac{\epsilon}{2}$ y $\forall m > n_0,\ \abs{a_m - L} < \frac{\epsilon}{2}$. Entonces $\abs{a_n - a_m} = \abs{a_n - L - \left( a_m - L \right) }\leq \abs{a_n - L} + \abs{a_m - L} < \frac{\epsilon}{2} + \frac{\epsilon}{2} < \epsilon$.
+\end{proof}
+
+\section{Subsucesiones. Teorema de Bolzano-Weierstrass}
+\begin{defi}[Subsucesión]
+    Consideramos una sucesión $\{a_n\}_{n\in\N}\subseteq\R $ y una sucesión creciente
+    de índices $n_1 < n_2 < \ldots < n_k < n_{k+1} < \ldots, n_k\in\N$. La sucesión obtenida seleccionando
+    los elementos $\{a_k\}_{k\in\N} $ se llama \textit{subsucesión}, o \textit{sucesión parcial}, de
+    $\{a_n\}_{n\in\N} $.
+\end{defi}
+
+\begin{example}
+    Subsucesión de índices impares: $a_{2k + 1}: a_1, a_3, a_5, \ldots$
+\end{example}
+
+\begin{prop}
+    Si la sucesión $\seq{a_n}\subseteq\R$ tiene límite $\ell\in\R$, entonces cualquier subsucesión $\seq{a_{n_k}}$ de $\seq{a_n}$
+    converge al mismo límite, es decir
+    \begin{equation}
+        \lim_{k\to\infty} \seq{a_{n_k}} = \ell.
+    \end{equation}
+\end{prop}
+
+\begin{theorem}[Teorema de Bolzano-Weierstrass]
+    Toda sucesión real acotada tiene, al menos, una subsucesión convergente.
+\end{theorem}
+
+\begin{coro}
+    Toda sucesión de Cauchy es convergente en $\R$.
+\end{coro}
+
+\section{Límites superiores e inferiores}
+\begin{defi}[Límite superior]
+    Existe una subsucesión $\{\overline{a}_{n_k}\} $ con límite
+    $\overline{L}\in\R$ tal que para toda subsucesión que tiene límite $L$, se tiene $L\leq
+    \overline{L}$. Se dice que $\overline{L}$ es el \textit{límite superior}:
+    \begin{equation}
+        \overline{L} := \lim_{n\to\infty}\sup a_n = \lim_{k\to\infty}\overline{a}_{n_k}.
+    \end{equation}
+\end{defi}
+
+\begin{defi}[Límite inferior]
+    Existe una subsucesión $\seq{\underline{a}_{n_k}} $ con límite $\underline{\ell}$ tal que para toda subsucesión que tiene límite $\ell$, se tiene que $\ell \geq\underline{\ell}$. A este
+    número se le llama \textit{límite inferior}:
+    \begin{equation}
+        \underline{\lim}_{n\to\infty} \seq{a_n} = \lim_{n\to\infty}\inf \seq{a_n} \overset{\mathrm{def}}{=}
+        \underline{\ell} = \lim_{k\to\infty}\seq{\underline{a}_{n_k}}.
+    \end{equation}
+\end{defi}
+
+\begin{remark}
+    Una sucesión $\seq{a_n}\subseteq\R$ acotada siempre tiene límites superiores e inferiores finitos, y además
+    \begin{equation}
+        -\infty < \lim_{n\to\infty}\inf\ \seq{a_n} \leq \underbrace{\lim_{n\to\infty}\seq{a_n}}_{\textrm{Puede no existir!}} \leq \lim_{n\to\infty}\sup\ \seq{a_n} < \infty.
+    \end{equation}
+\end{remark}
+
+\begin{prop}
+    El límite superior e inferior coinciden si y solo si el límite existe.
+    \begin{equation}
+        \lim_{n\to\infty}\inf\ \seq{a_n} = \lim_{n\to\infty}\seq{a_n} = \lim_{n\to\infty}\sup\ \seq{a_n}.
+    \end{equation}
+\end{prop}
+
+\section{Series de números reales}
+\begin{defi}[Serie]
+    Sea una sucesión de infinitos términos reales, $\seq{a_n}$, se define una serie infinita (o simplemente serie) de razón o término general $a_n$ como la suma de los infinitos términos $a_i$ de la sucesión $\seq{a_n}$.
+    \begin{equation}
+        a_0 + a_1 + a_2 + \ldots + a_i + a_{i + 1} + \ldots = \sum_{n=0}^{+\infty}a_n.
+    \end{equation}
+\end{defi}
+
+Dicho de una manera más precisa, dada una sucesión $\seq{a_n}$, se puede formar a partir de ella otra sucesión, $\seq{A_n}$, cuyos términos se obtienen sumando consecutivamente los términos de la sucesión $\seq{a_n}$, es decir,
+\begin{equation}
+    A_1 = a_1,\ A_2 = a_1 + a_2,\ \ldots, A_n = a_1 + a_2 + a_3 + \ldots + a_n, \ldots
+\end{equation}
+En otras palabras, partimos de $A_1 = a_1$ y, para todo $n\in\N$, $A_{n + 1} = A_n + a_{n + 1}$. El número
+\begin{equation}
+    A_n = a_0 + a_1 + a_2 + \ldots + a_n = \sum_{k=0}^n a_k
+\end{equation}
+se llama suma parcial de orden $n$ de la serie $\sum a_n$, o la suma de los $n$ primeros términos.
+
+%\cite{jperez}
+
+\begin{remark}
+    Puesto que, por definición, una serie es una sucesión cuyos términos se obtienen sumando consecutivamente los términos de otra sucesión, los conceptos y resultados vistos para sucesiones son los mismos aplicados a series.
+\end{remark}
+
+\subsection{Propiedades básicas de las series convergentes}
+A rellenar con los apuntes de Javier Pérez.
+
+\begin{defi}[Serie convergente]
+    Se dice que la serie de término general $a_n$  es convergente si y solo si
+    lo es la sucesión $\seq{S_k}$ de sumas parciales, es decir, si las sumas parciales se acercan cada vez más a un número cuando se incrementa el número de términos de la sucesión. Además, llamamos suma de la serie, $S$, al límite finito de la sucesión de sumas parciales $S_k$
+    \begin{equation}
+        S \overset{\mathrm{def}}{=} \lim_{k\to\infty}\seq{S_k} = \lim_{k\to\infty}\sum_{n = 0}^k a_n = \sum_{n = 0}^{+\infty}a_n.
+    \end{equation}
+    Si por el contrario, el límite de la sucesión de sumas parciales no existe, se dice que la serie diverge, o es divergente.
+\end{defi}
+
+Cabe destacar que la naturaleza de convergencia de una serie no es alterada si se modifica una cantidad finita de términos de la serie.
+
+\begin{example}
+    Son ejemplos de series convergentes:
+    \begin{itemize}
+        \item La suma de los $k$ primeros números naturales:
+            \begin{equation}
+                S_k = 0 + 1 + 2 + 3 + 4 + \ldots + k = \sum_{n=0}^k n = \frac{k\left( k + 1 \right) }{2} \longrightarrow_{k\to +\infty} +\infty.
+            \end{equation}
+        \item El número $e$:
+            \begin{equation}
+                e = 1 + 1 + \frac{1}{2!} + \frac{1}{3!} + \ldots + \frac{1}{k!} + \ldots = \sum_{n=0}^{+\infty}\frac{1}{n!}.
+            \end{equation}
+
+    \end{itemize}
+
+    \hide{
+    Todos los números reales son series expresados en base 10 con los digitos $r_k\in \{0, 1, \ldots, 9\}$.
+    \begin{equation}
+        r = [r], r_1\ r_2\ r_3\ \ldots r_k \ldots = [0] + \frac{r_1}{10} + \frac{r_2}{100} + \ldots + \frac{r_k}{10^k} + \ldots = \sum_{k=0}^{+\infty} \frac{r_k}{10^k}.
+    \end{equation}
+}
+\end{example}
+
+
+
+\begin{defi}[Convergencia absoluta]
+    Se dice que una serie con término general $a_n$ es absolutamente convergente si la serie de término general $\abs{a_n}$ es convergente.
+    \begin{equation}
+        \sum_{n=0}^{\infty}a_n < +\infty\quad\iff\quad\sum_{n=0}^{\infty} \abs{a_n} < + \infty.
+    \end{equation}
+    Además, se tiene que
+    \begin{equation}
+        -\sum_{n=0}^\infty\abs{a_n} < \sum_{n=0}^\infty a_n \leq \sum_{n=0}^\infty\abs{a_n}.
+    \end{equation}
+\end{defi}
+
+\begin{defi}[Convergencia condicional]
+    Se dice que una serie con término general $a_n$ es condicionalmente convergente si la serie de término general $\abs{a_n}$ es divergente.
+\end{defi}
+
+\begin{theorem}[Teoría de Riemann]
+    Sea una serie convergente de término $a_n$ pero no absolutamente convergente, entonces para todo $L\in\R\cup \{\pm\infty\} $ es posible reordenar los términos de la serie de manera que converga a $L$.
+\end{theorem}
+
+En las dos siguientes secciones se muestran varios criterios por los que demostrar la convergencia o divergencia de una serie.
+
+\section{Criterios de convergencia de series}
+\begin{lemma}[Condición necesaria de convergencia / Criterio del límite]
+    Sea una serie de término general $a_n$. Si el límite del término general $a_n$ es distinto de cero o si no existe dicho límite, la serie no será convergente.
+    \begin{equation}
+        \sum_{n=0}^\infty a_n < +\infty \quad\implies\quad \lim_{n\to\infty}\seq{a_n} = 0.
+    \end{equation}
+\end{lemma}
+
+\begin{proof}
+    No es restrictivo suponer que el límite de $\seq{a_n}$ es positivo: $\lim_{n\to\infty}\seq{a_n} = L > 0$. Entonces, fijando $\epsilon = L / 2$ existe un $n_0$ tal que $\abs{a_n - L} < \epsilon = L / 2$, para todo $n\geq n_0$. Por lo tanto tenemos que
+    \begin{equation}
+        a_n \geq \frac{L}{2},\ \forall n\geq n_0.
+    \end{equation}
+    Entonces, por comparación,
+    \begin{equation}
+        a_{n_0} + a_{n_0 + 1} + \ldots + a_{n_k} = \sum_{n=n_0}^k a_n \geq \sum_{n=n_0}^k \frac{L}{2} = \frac{L}{2}\left( k - n_0 \right) \longrightarrow +\infty.
+    \end{equation}
+    Por lo tanto la serie no es convergente. (La demostración se realiza análogamente cuando $L < 0$, de ahí que suponer que el límite sea positivo no es restrictivo).
+\end{proof}
+
+\begin{remark}
+    Remarcar que esta condición es necesaria para la convergencia de series, pero no es suficiente. Por lo tanto, que el término general de la sucesión que conforma la serie sea cero no implica directamente que dicha serie vaya a ser convergente.
+\end{remark}
+
+\begin{theorem}[Criterio de condensación de Cauchy]
+    Sea una serie monótona de término general $a_n\geq 0$ y decreciente, $a_{n + 1}\leq a_n$, tal que
+    \begin{equation}
+        0\leq \sum_{n=0}^\infty a_n \leq \sum_{n=0}^\infty 2^n a_{2^n} \leq 2\sum_{n=0}^\infty a_n.
+    \end{equation}
+    Entonces,
+    \begin{equation}
+        \sum_{n=0}^\infty a_n < +\infty \quad\Longleftrightarrow \quad \sum_{n=0}^\infty 2^n a_{2^n}.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    To be done.
+\end{proof}
+
+\begin{theorem}[Criterio de Leibniz]
+    Sea una serie alternada
+    \begin{equation}
+        \sum_{n=n_0}^\infty \left( -1 \right) ^n a_n
+    \end{equation}
+    con $a_n \leq 0$. Esta serie converge si se cumplen las siguientes condiciones:
+    \begin{itemize}[itemsep = -2pt]
+        \item $\lim_{n\to\infty} \left( -1 \right) ^n a_n = 0$.
+        \item La serie es absolutamente decreciente, es decir, $\abs{a_n} \geq \abs{a_{n + 1}}$.
+    \end{itemize}
+    Si esto se cumple, la serie $\sum_{n=0}^\infty a_n$ es condicionalmente convergente, de lo contrario la serie diverge.
+\end{theorem}
+
+\begin{note}
+    Antes de utilizar el criterio de Liebniz se debe descartar primero la convergencia absoluta de $\sum_{n=0}^\infty \abs{a_n}$ usando los criterios para series positivas.
+\end{note}
+
+\section{Criterios de convergencia comparativos}
+Estos son aplicables en caso de disponer de otra serie de término general $b_n$ tal que se conozca su condición de convergencia o divergencia.
+
+\begin{prop}[Criterio de comparación directa]
+    Sean $\seq{a_n}$ y $\seq{b_n}$ dos sucesiones reales tales que
+    $0 < a_n \leq b_n$,\ $\forall n\geq n_0$. Entonces,
+    \begin{equation}
+        \textrm{si } \sum_{n=0}^{+\infty} b_n < +\infty \quad\implies\quad \sum_{n=0}^{+\infty} a_n < +\infty,
+    \end{equation}
+    es decir, las sumas parciales series de $\seq{a_n}$ y $\seq{b_n}$ se encuentran ordenadas,
+    \begin{equation}
+        0 \leq \sum_{n=0}^k a_n \leq \sum_{n=0}^k b_n < +\infty.
+    \end{equation}
+    Además, se tiene que
+    \begin{equation}
+        \textrm{si } \sum_{n=0}^{+\infty} a_n = +\infty \quad\implies\quad \sum_{n=0}^{+\infty} b_n = +\infty.
+    \end{equation}
+\end{prop}
+
+A partir del criterio de comparación directa se puede concluir que el comportamiento de una serie de términos positivos tiene solo dos casos por ser esta monótona creciente: o bien la serie es convergente a un número estrictamente positivo, o bien es divergente a $+\infty$.
+
+\begin{note}
+    Este criterio es básicamente una versión para series del Principio de comparación o teorema del sandwich para sucesiones.
+\end{note}
+
+\begin{defi}[Sucesiones asintóticas]
+    Dos sucesiones reales $\seq{a_n}$ y $\seq{b_n}$ son asintóticamente equivalentes (o simplemente asintóticas), y se escribe $\seq{a_n}\sim\seq{b_n}$, si y solo si
+    \begin{equation}
+        \lim_{n\to\infty} \frac{\seq{a_n}}{\seq{b_n}} = 1.
+    \end{equation}
+    Si el límite $L$ del cociente entre ambas sucesiones converge a $L\neq 0$, se dice que $\seq{a_n}\sim L\seq{b_n}$.
+\end{defi}
+
+\begin{prop}[Criterio de comparación asintótica]
+    Sean dos series de términos generales positivos asintóticos, $a_n\sim b_n$. Entonces,
+    \begin{equation}
+        \sum_{n=0}^\infty a_n < +\infty \quad\Longleftrightarrow \quad \sum_{n=0}^\infty b_n < +\infty.
+    \end{equation}
+\end{prop}
+
+\begin{prop}[Criterio de comparación por paso al límite del cociente]
+    Sean dos series de términos generales positivos. Si existe
+    \begin{equation}
+        \lim_{n\to\infty}\seq{\frac{a_n}{b_n}} = L\in[0, +\infty),
+    \end{equation}
+    entonces se tiene que:
+    \begin{itemize}
+        \item Si $L = 0$ y la serie $\sum b_n$ converge entonces $\sum a_n$ converge.
+        \item Si $L = +\infty$ y $\sum b_n$ diverge entonces $\sum a_n$ diverge.
+        \item Si $0 < L < +\infty$ entonces las series $\sum a_n$ y $\sum b_n$ comparten la misma condición de convergencia (ambas convergen o ambas divergen).
+    \end{itemize}
+\end{prop}
+
+\section{Otros criterios de convergencia}
+Realmente estos criterios no lo son en sí, sino que resultan de aplicar el criterio de comparación con la serie geométrica (descrita en la siguiente sección).
+
+\begin{theorem}[Criterio de Cauchy o de la raíz]
+    Consideramos una serie de términos positivos y término general $a_n \geq 0$ tal que
+    \begin{equation}
+        \lim_{n\to+\infty} \sqrt{n}{a_n} = \lim_{n\to+\infty} a^{\frac{1}{n}}_{n} = L.
+    \end{equation}
+    Entonces la serie
+    \begin{equation}
+        \sum_{n=1}^\infty a_n \begin{cases}
+            < +\infty\quad\textrm{si } L < 1. \\
+            = +\infty\quad\textrm{si } L > 1.
+        \end{cases}
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}[Criterio del cociente o de D'Alembert]
+    Sea una serie decreciente de términos estrictamente positivos y término general $a_n\geq 0$, tal que
+    \begin{equation}
+        \lim_{n\to+\infty}\frac{a_{n + 1}}{a_n} = L\in[0, +\infty],
+    \end{equation}
+    entonces el criterio de D'Alembert establece que
+    \begin{itemize}
+        \item si $L < 1$, la serie converge,
+        \item si $L > 1$, la serie diverge,
+        \item si $L = \infty$, la serie diverge,
+        \item si $L = 1$, el criterio no establece nada respecto a su convergencia.
+    \end{itemize}
+\end{theorem}
+
+\section{Serie geométrica}
+\begin{defi}[Serie geométrica]
+    Dado un número $r\in[0, \infty)$, la sucesión $\{1 + r + r^2 + \ldots + r^n\} $ recibe el nombre de serie geométrica de razón $r$,
+    \begin{equation}
+        \sum_{n=0}^{+\infty} r^n = 1 + r + r^2 + r^3 + \ldots + r^k + \ldots
+    \end{equation}
+\end{defi}
+
+Esta serie converge si, y solo si, $\abs{r} < 1$, en cuyo caso se verifica que
+\begin{equation}
+    \sum_{n=0}^{+\infty}r^n = \frac{1}{1 - r}.
+\end{equation}
+Este hecho se deduce de que si $r\neq 1$, las sumas parciales de la serie geométrica tienen la expresión
+\begin{equation}
+    \sum_{k=0}^n r^n = 1 + r + r^2 + \ldots + r^n = \frac{1 - r^{n + 1}}{1 - r} = \frac{r^{n + 1} - 1}{r - 1},
+\end{equation}
+que se demuestra fácilmente por inducción. Si $\abs{r} < 1$ entonces $\lim_{n\to\infty}\frac{r^{n + 1}}{1 - r} = 0$ y obtenemos que
+\begin{equation}
+    \sum_{n=0}^{+\infty} r^n = \lim_{n\to\infty}\sum_{k=0}^n r^k = \frac{1}{1 - r}.
+\end{equation}
+Por contra, si $\abs{r} > 1$ o $r\in \{-1, 1\} $ la serie es divergente.
+
+A modo de resumen,
+
+\hide{
+
+Esta expresión para la serie geométrica
+
+Ante esta serie podemos considerar unos casos particulares y preguntarnos: ¿puede ser finita la siguiente suma de infinitos términos?
+\begin{itemize}
+    \item Caso $r = 1$. Contamos:
+        \begin{equation}
+            S_k = 1 + 1 + 1^2 + 1^3 + \ldots + 1^k = k + 1 \longrightarrow_{k\to+\infty} +\infty.
+        \end{equation}
+    \item Caso $r\geq 1$: Si con $r = 1$ la serie es divergente, entonces con $r\geq 1$, al tratarse de una
+        serie mayor también diverge.
+    \item Caso $r = \frac{1}{2}:$ (Pizza): En este caso la serie geométrica es convergente:
+        \begin{equation}
+            1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16} + \frac{1}{32} + \ldots + \frac{1}{2^k} + \ldots = 2
+        \end{equation}
+\end{itemize}
+
+Si $r\neq 1$, las sumas parciales de una serie geométrica tienen una fórmula especial:
+\begin{equation}
+    S_k = 1 + r + r^2 + r^3 + \ldots + r^k = \sum_{n=0}^k r^n = \frac{r^{k + 1} - 1}{r - 1} = \frac{1 - r^{k + 1}}{1 - r}.
+\end{equation}
+Esta fórmula se debería demostrar fácil y sencillo por inducción. Usando esta fórmula es fácil ver que
+}
+
+
+\begin{equation}
+    \sum_{n=0}^{+\infty} r^n = \lim_{k\to\infty} \sum_{n\to\infty}^k r^k = \lim_{k\to\infty} \frac{1 - r^{k + 1}}{1 - r} =
+    \begin{cases}
+        +\infty \quad \textrm{ si } r \geq 1 \\
+        \frac{1}{1 - r} < +\infty \quad \textrm{ si } 0 < r < 1.
+    \end{cases}
+\end{equation}
+
+
+\section{La serie armónica}
+\begin{equation}
+    1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \ldots + \frac{1}{k} + \frac{1}{k + 1} + \ldots = \sum_{n=1}^{+\infty}\frac{1}{n}.
+\end{equation}
+Esta serie armónica, es convergente? Como el término general $\frac{1}{n}\rightarrow 0$ podría ser convergente.Analicemos las sumas parciales:
+\begin{equation}
+    S_{2^k} = 1 + \frac{1}{2} + \underbrace{\frac{1}{3} + \frac{1}{4}}_{\frac{2}{4} = \frac{1}{2}} + \underbrace{\frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8}}_{\frac{4}{8} = \frac{1}{2}} + \underbrace{\frac{1}{9} + \ldots + \frac{1}{16}}_{\frac{8}{16} = \frac{1}{2}} + \ldots + \frac{1}{2^{k - 1}} + \underbrace{\frac{1}{2^{k - 1} + 1} + \ldots + \frac{1}{2^k}}_{\frac{1}{2^k} + \ldots + \frac{1}{2^k} = \frac{2^{k - 1}}{2^k} = \frac{1}{2}}
+\end{equation}
+Agrupando (Principio de condensación) tenemos
+\begin{equation}
+    S_{2^k} \geq 1 + \frac{1}{2} + \frac{2}{4} + \frac{4}{8} + \ldots + \frac{2^{k - 1}}{2^k} = 1 + \frac{k}{2}\longrightarrow +\infty.
+\end{equation}
+Resulta que, a pesar que de la serie armónica cumple la condición necesaria de convergencia, diverge a $+\infty$.
+
+%\subsection{La serie armónica logarítmica}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+\section{Series de términos positivos (STP)}
+Comenzaremos estudiando las series de términos positivos (en adelante STP), es decir, las series monótonas crecientes cuyo término general $a_n \geq 0$.
+
+\begin{prop}\label{prop:series:sandwich}
+    \textbf{(Principio de comparación / Sandwich).} Sean $\seq{a_n}$ y $\seq{b_n}$ dos sucesiones reales tales que $0 \leq a_n \leq b_n$. Entonces,
+
+\end{prop}
+
+
+
+\begin{theorem}
+    \textbf{(Criterio de condensación de Cauchy).} Consideramos una STP con término general $a_n \geq 0$ y
+    decreciente, $a_{n + 1}\leq a_n$. Entonces
+    \begin{equation}
+        0 \leq \sum_{n=0}^{\infty} a_n \leq \sum_{n=0}^{\infty} 2^n a_{2^n} \leq 2\sum_{n=0}^{\infty} a_n.
+    \end{equation}
+    Por lo tanto,
+    \begin{equation}
+        \sum_{n=0}^{\infty} a_n \textrm{ es convergente si y solo si lo es } \sum_{n=0}^{\infty} 2^n a_{2^n}.
+    \end{equation}
+\end{theorem}
+
+Como aplicación, podemos ver otra vez que la serie armónica diverge a $+\infty$ usando el criterio de condesación: $\frac{1}{n} = a_n \geq 0$, y obviamente es decreciente.
+\begin{equation}
+    \sum_{n\geq 1}\frac{1}{n}\quad\mathrm{es convergente si y solo si lo es}\quad \sum_{n\geq 1}2^n \frac{1}{2^n}.
+\end{equation}
+
+\subsection{Serie armónica generalizada}
+
+\subsection{Serie armónica logarítmica generalizada}
+
+
+\begin{defi}
+    \textbf{(Sucesiones asintóticas).} Dos sucesiones $\seq{a_n}$, $\seq{b_n}\subseteq\R$ son asintóticas (o asintóticamente equivalentes) si y solo si
+    \begin{equation}
+        \lim_{n\to\infty} \frac{a_n}{b_n} = 1
+    \end{equation}
+    y se escribe $a_n\sim b_n$ cuando $n\longrightarrow +\infty$.
+\end{defi}
+
+\begin{note}
+    Si el cociente converge a $\ell\neq 0$, decimos que $a_n\sim \ell b_n$.
+\end{note}
+
+\begin{example}
+    \begin{equation}
+        \left( 1 + \frac{1}{n} \right) ^n \sim e.
+    \end{equation}
+\end{example}
+
+\begin{theorem}
+    \textbf{(Criterio de comparación asintótica).} Consideramos dos series de términos generales positivos asintóticos,
+    $a_n\sim b_n$. Entonces
+    \begin{equation}
+        \sum_{n=0}^\infty a_n \quad\mathrm{es convergente si y solo si lo es}\quad \sum_{n=0}^\infty b_n.
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}
+    \textbf{(Criterio de la raíz o de Cauchy).} Consideramos una STP de término general $a_n \geq 0$ tal que
+    \begin{equation}
+        \lim_{n\to+\infty} \sqrt{a_n}^n = \lim_{n\to+\infty} a_n^{\frac{1}{n}} = \ell.
+    \end{equation}
+    Entonces la serie
+    \begin{equation}
+        \sum_{n=1}^\infty a_n = \begin{cases}
+            < +\infty \textrm{ si } \ell < 1 \\
+            = +\infty \textrm{ si } \ell > 1
+        \end{cases}
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}
+    \textbf{(Criterio del cociente o de D'Alembert).} Consideramos una SDP (serie decreciente positiva) de término general $a_n \geq 0$ tal que
+    \begin{equation}
+        \lim_{n\to+\infty} \frac{a_{n + 1}}{a_n} = \ell.
+    \end{equation}
+    Entonces la serie
+    \begin{equation}
+        \sum_{n=1}^\infty \begin{cases}
+            < +\infty \textrm{ es convergente si } \ell < 1 \\
+            = +\infty \textrm{ es divergente si } \ell > 1
+        \end{cases}
+    \end{equation}
+\end{theorem}
+
+Estos dos últimos criterios no son nada menos que (comparación y geométrica).
+
+Nota: Para demostrar el criterio del cociente o algo así se puede usar la fórmula de Stirling:
+\begin{equation}
+    \frac{n!}{n^n}\sim \left( \frac{n}{e} \right)^n \sqrt{2\pi n}\frac{1}{n^n} = \sqrt{2\pi n}/e^n
+\end{equation}
+
+\section{Series no positivas o algo así}
+Si $a_n$ no es positiva todo es más complicado. Convergencia condicional o incondicional
+
+1) Si $\sum\abs{a_n} < +\infty$ entonces decimos que la serie es absolutamente convergente.
+\begin{equation}
+    -\sum\abs{a_n} < \sum a_n < \sum \abs{a_n}
+\end{equation}
+y no impide el orden de sumación
+
+Convergencia incondicional
+
+2) Si no es absolutamente convergente pueden pasar dos cosas:
+
+\begin{theorem}
+    Teoría de Riemann. Sea $\sum a_n$ una serie convergente pero no absolutamente convergente, entonces
+    para todo $\ell\in\R\cup \{\pm \infty\} $ es posible reordenar los términos de la serie de manera que ''converge'' a $\ell$.
+\end{theorem}
+
+\begin{defi}
+    Series alternadas.
+    \begin{equation}
+        \sum_{n\geq n_0} \left( -1 \right) ^n a_n,\ a_n \geq 0.
+    \end{equation}
+\end{defi}
+
+\begin{theorem}
+    Criterio de Leibniz. (PAra series alternadas). Sea $a_n \geq 0$. Consideramos $\sum \left( -1 \right) ^n a_n$. Si
+    \begin{itemize}
+        \item $\lim_{n}\left( -1 \right) ^n a_n = 0$ (Condición necesaria) $\iff \lim a_n = 0$.
+    \item Absolutamente decreciente.
+        \begin{equation}
+            a_n \leq a_{n - 1} \leq a_{n - 2} \leq \ldots \leq a_{n_0}.
+        \end{equation}
+    \end{itemize}
+\end{theorem}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Serie armónica alternada}
+Sabemos que $\sum_{n\geq 1} \frac{1}{n} =+\infty$. Si queremos estudiar
+\begin{equation}
+    \log\left( 2 \right) = \sum_{n\geq 1} \frac{\left( -1 \right) ^{n + 1}}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \ldots
+\end{equation}
+es absolutamente divergente. Sin embargo, por el criterio de Leibniz, es convergente, ya que $\frac{1}{n} = a_n \to 0$ y $a_n$ es decreciente.

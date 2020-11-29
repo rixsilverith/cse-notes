@@ -1,0 +1,873 @@
+\chapter{The $\Z$ and $\Z_n$ rings}
+
+\section{Elemental algebraic structures}
+In this section we are defining some structures that frequently appear in mathematics. Although they can
+seen unnecessary generalizations, they are pretty useful for us to not to prove the same result in different
+contexts.
+
+\begin{defi}[Operation]
+    Let $A\subset\uset$, an operation in $A$ is a function from $A\times A$ to $\uset$. When its
+    image is in $A$ it is said that it is an \textbf{internal composition law}, or that is \textbf{closed}.
+\end{defi}
+
+\hide{
+For the next four propositions let $*$ be a closed operation on a set $A\subset\uset$, and let $x, y, z\in A$.
+
+\begin{proposition}
+    \textbf{(Associative property).} $x*\left( y*z \right) = \left( x*y \right) *z$.
+\end{proposition}
+
+\begin{proposition}
+    \textbf{(Identity element).} There exists an \textit{identity element} $e\in A\tq e*x = x*e = x,\ \forall
+    x\in A$.
+\end{proposition}
+
+\begin{proposition}
+    \textbf{(Inverse element).} $\forall x\in A$, there exists an \textit{inverse element} $y$ such that
+    $x*y = y*x = e$. We write $y = x^{-1}$.
+\end{proposition}
+
+\begin{proposition}
+    \textbf{(Commutative property).} $x*y = y*x$.
+\end{proposition}
+}
+
+\begin{defi}[Group]
+    A \textit{group}, $G$, is a set in which it is defined a closed operation, let's
+    denote it by $*$, such that the \textbf{associative property},
+    \begin{equation}
+        g * \left( h * f \right) = \left( g * h \right) * f,
+    \end{equation}
+    is satisfied, there exists an \textbf{identity element},
+    \begin{equation}
+        \exists\ e\in G\tq \forall g\in G, e * g = g * e = g,
+    \end{equation}
+    and there exists an \textbf{inverse element},
+    \begin{equation}
+        \forall g\in G, \exists\ h\in G \tq h * g = g * h = e. \left( h = g^{-1}\right).
+    \end{equation}
+    Moreover, if $*$ is a \textbf{commutative operation} $\left( g*h = h*g \right)$ it is said that $G$ is
+    an \textbf{abelian}, or \textbf{commutative group}.
+
+    \hide{
+    that the following properties are satisfied.
+    \begin{itemize}
+        \item $*$ is associative: $g * \left( h * f \right) = \left( g * h \right) * f$.
+        \item There exists an identity element: $\exists\ e\in G\tq \forall g\in G, e * g = g * e = g$.
+        \item There exists an inverse element: $\forall g\in G, \exists\ h\in G \tq h * g = g * h = e. \left(
+            h = g^{-1}\right) $.
+    \end{itemize}
+    }
+\end{defi}
+
+\begin{defi}[Ring]
+    A \textit{ring}, $X$, is a set in which there are defined two closed operations, $\oplus$
+    and $\otimes$ (addition and product), that satisfy the following properties:
+    \begin{itemize}[itemsep = -2pt]
+        \item $X$ is an abelian group with respect to $\oplus$.
+        \item $\otimes$ is an associative operation on $X$.
+        \item The distributive laws are hold (from the left) $\left( a\oplus b \right) \otimes c = \left( a\otimes c \right) \oplus \left( b\otimes c \right) $ and (from the right) $c\otimes\left( a\otimes b \right) =
+            \left( c\otimes a \right) \oplus \left( c\otimes b \right) $.
+    \end{itemize}
+\end{defi}
+
+\begin{note}
+    If $\otimes$ is commutative, it is said that $X$ is a \textit{commutative ring}, and if $\otimes$ has an
+    identity element (multiplicative identity) it is said that the ring is \textit{unitary}, or \textit{with
+    identity}.
+\end{note}
+
+\begin{defi}[Field]
+    A \textit{field}, $F$, is a commutative ring with identity such that $F - \{0\}$ is an
+    abelian group with respect to the product, $\otimes$.
+\end{defi}
+
+In a not so formal way, an abelian group is a set in which we can add or substract (add the inverse),
+while in a commutative ring we can also multiply; and in a field, divide (except for $0$); i.e. every
+element in a field has a multiplicative inverse.
+
+When it is not clear what operations are being considered in a set, they are usually indicated explicitly
+next to set, all inside parenthesis. Thus, for instance $\left( \Z, + \right) $, which is an abelian group
+is the set of integers with the addition operation.
+
+\begin{example}
+    $\left( \Z, \cdot \right) $ and $\left( \N, + \right) $ are not abelian groups because, for example,
+    3 does not have an inverse in any of the two sets.
+\end{example}
+
+\hide{
+There are two main operations between integer numbers. These are addition and product.
+
+Now, we look at the integers paying attention to the addition operation, $\left( \Z, + \right) $.
+\begin{remark}
+    Addition is a binary operation: for all $a, b\in\Z\rightarrow\ a + b\in\Z$. We operate two by two elements.
+\end{remark}
+
+Because $a + b\in\Z$ we say that this binary operation is \textbf{closed in \Z}.
+
+\begin{proposition}
+    \textbf{(Associative property).} $\left( a + b \right) + c = a + \left( b + c \right) ,\ \forall a, b, c\in\Z$
+\end{proposition}
+\begin{proposition}
+    \textbf{(Existence of an indentity element).} There's an integer $\varphi\in\Z \tq a + \varphi = \varphi + a = a,\ \forall a\in\Z$, and that integer is $\varphi = 0$.
+\end{proposition}
+\begin{proposition}
+    \textbf{(Inverse element).} Every element $a\in\Z$ has an additive inverse, meaning that for every $a\in\Z$ there's $a'\in\Z\tq a + a' = a' + a = 0$, and in this case $a' = -a$.
+\end{proposition}
+\begin{proposition}
+    \textbf{(Abelian or conmutative property).} $a + b = b + a,\ \forall a, b\in\Z$
+\end{proposition}
+
+Because the addition satisfies the first three properties we say that $\left( \Z, + \right) $ form a \textbf{group}. An because $\left( \Z, + \right) $ also satisfies the commutative property we say that $\left( \Z, + \right) $ form an \textbf{abelian group}.
+
+\begin{definition}
+    \textbf{(Group).} In general, if we have a set $X$ with some binary close operation $*$, satisfying the first three properties we say that $\left( X, * \right) $ is a \textbf{group}. In addition, if $\left( X, * \right) $ also satisfies the commutative property we say that $\left( X, * \right) $ is an \textbf{abelian group}.
+\end{definition}
+
+\begin{example}
+    Let $\R^* = \R\setminus \{0\} $, we have that $\left( \R^*, \cdot \right) $ is an abelian group with identity $1$, multiplicative inverse $r^{-1} = \frac{1}{r}, r\in\R^*$.
+
+    Another example of an abelian group is $\left( \R, + \right) $.
+\end{example}
+
+The product on $\Z$ is another binary closed operation as $a\cdot b\in\Z,\ \forall a, b\in\Z$.
+
+\begin{proposition}
+    \textbf{(Associative property).} $\left( a \cdot b \right) \cdot c = a \cdot \left( b \cdot c \right) ,\ \forall a, b, c\in\Z$
+\end{proposition}
+
+What do we do if we find the two operations in the same line?
+
+\begin{proposition}
+    \textbf{(Distributive property).} $a\cdot\left( b + c \right) = ab + ac$ and $\left( b + c \right)\cdot a = ba + ca,\ \forall a, b, c\in\Z $.
+\end{proposition}
+
+Because $\left( \Z, +, \cdot \right) $ satisfies the four properties for the addition and the associative for the product as well as the distibutive we say that $\left( \Z, +, \cdot \right) $ is a \textbf{ring}.
+}
+
+\begin{example}
+    $\left( \N, +, \cdot \right) $ is not a ring. $\left( \N, + \right) $ is a binary closed operation that satisfies the associative property, has $0$ as an indentity element, but it doesn't have an additive inverse for each $n\in\N$. Therefore, $\left( \N, + \right) $ does not form a group.
+
+    However, $\left( \Q, +, \cdot \right), \left( \R, +, \cdot \right) $ and $\left( \C, +, \cdot \right)$
+    are all commutative rings with identity.
+\end{example}
+
+\hide{
+Suppose that we have a set $X$ with two binary closed operations, $*$ and $\circ$. $\left(X, *, \circ  \right) $ is a ring if $\left( X, * \right) $ is an abelian group and if $\left( X, \circ \right) $ satisfies the associative property and $\left( X, *, \circ \right) $ satisfies the distributive property.
+
+If in a ring $\left( X, *, \circ \right) $ we have that there's a multiplicative identity,
+and $\forall a, b\in X, ab = ba$, then we say that the ring is commutative with identity.
+}
+
+\hide{
+In general, a given integer $n\in\Z$ doesn't have a multiplicative inverse. In other words, there's no $m\in\Z$ such that $nm = 1$ for a given $n\in\Z$. Then, what are the integers $n$ for which there's an $m\in\Z$ such that $nm = 1$? Only $1$ and $-1$. The elements having this property are called \textbf{units}.
+
+$\left( \Q, +, \cdot \right) $ is a commutative ring with identity. Any $r\in\Q\setminus \{0\} $ is a unit as if $r\in\Z, \frac{1}{r}\in\Q \implies r\cdot \frac{1}{r} = 1$. Because all non-zero elements in $\Q$ are units we say that $\left( \Q, +, \cdot \right) $ is a \textbf{field}.
+}
+
+\begin{example}
+    $\left( \R, +, \cdot \right) $ and $\left( \C, +, \cdot \right) $ are examples of fields.
+\end{example}
+
+
+\section{Greatest common divisor. Euclid's algorithm}
+
+\begin{theorem}[Division algorithm on $\Z$] \label{3:division-algo}
+    Let $a, b\in\Z$ with $b > 0$. Then, there exists unique
+    integers $q, r$ (called quotient and remainder) such that
+    \begin{equation}
+        a = bq + r\quad\textrm{ with } 0\leq r < \abs{b}.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    Let $r$ be least positive value that $a - bq$ takes when $q\in\Z$, then $r < \abs{b}$ ya que si $r \geq
+    \abs{b}$, aumentando o disminuyendo (si $b$ es negativo) $q$ en una unidad obtendríamos un valor de $r$
+    menor, el cociente y el resto son únicos porque $a = q_1 + r_1, a = bq_2 + r_2$ implica $b\left( q_2 - q_1
+    \right) = r_1 - r_2$ lo que contradice que $0 \leq r_1, r_2 < \abs{b}$ excepto en el caso trivial $q_2 - q_1
+    = r_1 - r_2 = 0$.
+\end{proof}
+
+If in theorem \ref{3:division-algo} $r = 0$, then $b$ divides $a$.
+
+\begin{defi}[Divisibility] \label{3:divisibility}
+    Given two integers $a$ and $b$ with $b\neq 0$, we say that $b$ \textit{divides}
+    $a$, written $b\mid a$, if there is some $q\in\Z$ such that $a = bq$.
+    \begin{equation}
+        b\mid a\iff \exists\ q\tq a = bq.
+    \end{equation}
+    Moreover, we also say that $b$ is a \textit{divisor} of $a$, or that $a$ is a \textit{multiple} of $b$.
+    Otherwise, if $b$ does not divide $a$ we write $b \nmid a$.
+
+    \hide{Let $a, b\in\Z$. We say that $a$ \textbf{divides} $b$, if there is some $c\in\Z$ such that $b = ac$.
+    Moreover, if $a$ divides $b$, then we also say that $b$ is a multiple of $a$.}
+\end{defi}
+
+\hide{
+\begin{notation}
+    If $a$ divides $b$, then we write $a\mid b$. Otherwise, if $a$ does not divide $b$, then we write
+    $a\mid b$.
+\end{notation}}
+
+\begin{remark}
+    $1$ and $-1$ divide all the integers. In other words, all integers are multiple of both $1$ and $-1$
+    (including $0$). If $0$ divides an integer $b$ that means by definition that $b = c\cdot 0$ for some
+    $c\in\Z$, and that would imply that $b = 0$. Therefore, $0$ only divides $0$. Now, $0$ is a multiple
+    of all the integers as if $a\in\Z\implies a\mid 0$ because $0 = 0\cdot a$.
+\end{remark}
+
+Now let's take a look to some properties on divisibility.
+
+\begin{prop}
+    If an integer $c$ divides another two integers $a$ and $b$, then $c$ also divides any linear combination
+    of $a$ and $b$. In other words,
+    \begin{equation}
+        \textrm{if } c\mid a\textrm{ and } c\mid b\implies c\mid \alpha a + \beta b,\quad\forall\alpha, \beta
+        \in\Z.
+    \end{equation}
+
+    \hide{Let $a, b, c\in\Z$, then if $c\mid a$ and $c\mid b\implies c\mid \alpha a + \beta b, \forall\alpha,
+    \beta\in\Z$. In other words, if an integer $c$ divides two integers $a$ and $b$, then $c$ also divides
+any linear combination of $a$ and $b$.}
+\end{prop}
+
+\begin{proof}
+    Since $c\mid a\implies\exists\ c'\in\Z\tq a = cc'$, and since $c\mid b\implies\exists\ c"\in\Z\tq
+    b = cc"$. If we consider $\alpha, \beta\in\Z, \alpha a + \beta b = \alpha\left(cc'\right) + \beta\left(
+    cc"\right) = c\left(\alpha c' + \beta c" \right)\implies c\mid \alpha a + \beta b$.
+\end{proof}
+
+\begin{prop}
+    Let $a, b, c\in\Z$. If $a\mid b$ and $b\mid c$ then $a\mid c$.
+\end{prop}
+
+\begin{proof}
+    If $a\mid b\implies b = a\alpha, \alpha\in\Z$ and if $b\mid c\implies c = b\beta, \beta\in\Z$, then
+    $c = b\beta = a\alpha\beta\implies a\mid c$.
+\end{proof}
+
+\begin{prop}
+    Let $a, b\in\Z$. If $a\mid b$ and $b\mid a\implies\abs{a} = \abs{b}$.
+\end{prop}
+
+\begin{proof}
+    Since $a\mid b\implies b = a\alpha$ for some $\alpha\in\Z$, and since $b\mid a\implies a = b\beta$
+    for some $\beta\in\Z$. Then, $b = a\alpha = \left( b\beta \right) \alpha = b\left(\alpha\beta\right)
+    \implies b = b\left( \beta\alpha \right)\implies b - b\left( \beta\alpha \right) = 0\implies b\left(
+    1 - \left( \beta\alpha \right) \right) = 0$.
+    \begin{itemize}[itemsep = -2pt]
+        \item If $b = 0\implies a = 0$.
+        \item If $b\neq 0\implies 1 - \beta\alpha = 0\implies 1 = \beta\alpha\implies \beta = \alpha = 1$
+            or $\beta = \alpha = -1$.
+        \item If $\beta = \alpha = 1\implies a = b$.
+        \item If $\alpha = \beta = -1\implies a = -b$.
+    \end{itemize}
+\end{proof}
+
+The most remarkable consequence of (\ref{3:divisibility}) is that we can define the greatest common divisor
+and that there's a method to compute it called \textit{Euclid's algorithm}. For this reason, when a ring holds
+an analogue property to Theorem (\ref{3:division-algo}) it's said that is an Euclidian domain.
+
+\begin{defi}[Greatest common divisor]
+    An integer $d$ is said to be the greatest common divisor of two
+    integers $a$ and $b$ if $d > 0$, $d$ divides both numbers and if any other integer $c$ divides $a$
+    and $b\implies c\mid d$.
+\end{defi}
+
+\begin{prop}[Bézout's identity] \label{bezout-id}
+    If $d = \gcd\left( a, b \right) $, then exists $n, m\in\Z$ such that $d = an + bm$. In fact, all the solutions $x, y\in\Z$ to the equation $d = ax + by$ are of the form
+    \begin{equation}
+        \begin{cases}
+            x = n - bt/d \\
+            y = m + at/d
+        \end{cases}
+        \quad\quad\textrm{with } t\in\Z.
+    \end{equation}
+\end{prop}
+
+\begin{theorem}[Well ordering principle]
+    Any non-empty subset of $\N$ has a minimum on $\N$.
+\end{theorem}
+
+Now, how do we find the $\gcd\left( a, b \right) $? We can use the following theorem.
+
+\begin{theorem}
+    Let $a, b\in\Z$ where at least one of them is non-zero. Then, exists a greatest common divisor $d$
+    of $a$ and $b$. Moreover, $d$ can be written as $d = a\alpha + b\beta$ for some $\alpha, \beta\in\Z$.
+    In fact, $d$ is the smallest positive number that can be written as a linear combination of $a$ and $b$.
+\end{theorem}
+
+\begin{proof}
+    If we have two numbers $a$ and $b$, the theorem says that we can find $\gcd\left( a, b \right) $ by
+    writting all the possible linear combinations of $a$ and $b$.
+    \begin{itemize}
+        \item If $b = 0$ then $a\neq 0\implies d = \gcd\left( a, b \right) = \abs{a}$
+        \item If $a, b\neq 0$, consider the set $S:= \{a\alpha + b\beta\tq\alpha, \beta\in\Z\} $. Consider
+            now $S':=\{a\alpha + b\beta\tq\alpha, \beta\in\Z: a\alpha + b\beta > 0\}\subseteq S$.
+
+            Claim: $S'\neq\O$. By construction, $a, b\in S$ if $a > 0\implies a\in S'$, otherwise $-a > 0$
+            and $-a\in S'$. Then, $S'\subseteq\N, S'\neq\O$. Making use of the well ordered principle we
+            can ensure that $S'$ has a minimum.
+
+            Suppose we call $d = \min S'$. In particular, there exists $\alpha, \beta\in\Z\tq d = a\alpha
+            + b\beta$ (by definition, $d$ is the smallest positive number that can be written in this form).
+
+            Claim: $d = \gcd\left( a, b \right) $. By construction we have that $d > 0$. Now, we divide
+            $a$ by $b$ using the division algorithm on $\Z\implies\exists\ q, r\in\Z\tq a = qd + r$ where
+            $0\leq r < d$. From this we can solve for $r$.
+            \begin{equation}
+                r = qd - a = q\left( a\alpha + b\beta \right) - a = b\beta + a\left( q\alpha - 1 \right)
+            \end{equation}
+            Therefore, $r$ can be written as a linear combination of $a$ and $b$. If $r > 0\implies r\in S'
+            \implies d\leq r$. Here we reach a contradiction unless $r = 0$.
+
+            In the same way, using the same argument we get that $d\mid b$.
+
+            Now let $c\in\Z: c\mid a$. Since $c\mid a\implies a = ca'$ for some $a'\in\Z$, and since
+            $c\mid b\implies b = cb'$ for some $b'\in\Z$, we know that $d = a\alpha + b\beta = \left(
+            ca'\right)\alpha + \left( cb'\right)\beta = c\left( a'\alpha + b'\beta \right) = d\implies
+            c\mid d$. Therefore, $d = \gcd\left( a, b \right)$.
+    \end{itemize}
+\end{proof}
+
+\begin{example}
+    Let $a = 2$ and $b = 3$, then $\gcd\left( 2, 3 \right) = 1$. The previous theorem basically tells us
+    that we can write the $\gcd\left( 2, 3 \right) $ as the linear combination $1 = \left( -1 \right)2 +
+    3\cdot 1$. Because of the properties previously seen we know that the linear combination $2\alpha +
+    3\beta$ is always divisible by 2.
+\end{example}
+
+In order to find the linear expression $d = an + bm$ for given $a, b$ we use the euclidean algorithm.
+
+\hide{
+\begin{example}
+    We wanna find $d = \gcd\left( 802, 384 \right) $.
+\end{example}
+}
+
+\begin{prop}
+    If $c\mid a$ and $c\mid b\implies c\mid\gcd\left( a, b \right) $. In other words, $\gcd\left( a, b \right)$
+    is a multiple of any other common divisor of $a$ and $b$.
+\end{prop}
+
+\begin{proof}
+    Let $d = \gcd\left( a, b \right)$. Suppose that $c\mid a, b$. Because $d = \gcd\left( a, b \right)\implies
+    \exists\ \alpha, \beta\in\Z\tq d = \alpha a + \beta b$. Since $c\mid a\implies a = a'c$ for some $a'\in\Z$,
+    and since $c\mid b \implies b = b'c$ for some $b'\in\Z$, then $d = \alpha a + \beta b = \alpha a'c +
+    \beta b'c = c\left( \alpha a' + \beta b' \right) $.
+\end{proof}
+
+\begin{remark}
+    This is just a property of the $\gcd\left( a, b \right)$.
+\end{remark}
+
+\begin{example}
+    Let $a = 12$ and $b = 30$, then $\gcd\left( a, b \right) = 6\implies $ any common divisor of 12 and 30
+    divides 6. Common divisors of 12 and 30 are 1, 2, 3 and 6. In this case, $1, 2, 3\mid 6$ but, for instance,
+    2 does not divide 3.
+\end{example}
+
+\begin{prop}
+    If $\gcd\left( a, b \right) = d$ and if we write $a = da', b = db'$ for some $a', b'\in\Z$, then
+    $\gcd\left( a', b' \right) = 1$.
+\end{prop}
+
+\begin{proof}
+    Since $d = \gcd\left( a, b \right) \implies d = a\alpha + b\beta = \left( a'd \right) \alpha + \left(
+    b'd\right)\beta = \left( a'\alpha + b'\beta \right) d$. Now, dividing $d = \left( a'\alpha + b'\beta
+    \right)d$ by $d$ we have $1 = a'\alpha + b'\beta\implies \gcd\left( a', b' \right) = 1$.
+\end{proof}
+
+\begin{prop}
+    Let $a, b, n\in\Z$. Then, $\gcd\left( na, nb \right) = n\gcd\left( a, b \right) $.
+\end{prop}
+
+\begin{proof}
+    Let $d = \gcd\left( a, b \right) $. Since $d\mid a, b\implies nd\mid na$ and $nd\mid nb\implies
+    nd$ is a common divisor of $na$ and $nb$, but is $nd = \gcd\left( na, nb \right)$?
+
+    Again, since $d = \gcd\left( a, b \right) \implies d = a\alpha + b\beta$ for some $\alpha, \beta\in\Z$.
+    If we multiply by $n$ we have $nd = na\alpha + nb\beta = \gcd\left( na, nb \right) $.
+\end{proof}
+
+\begin{remark}
+    Two numbers $a$ and $b$ can have many common divisors, but among them the only one that can be
+    written as a linear combination of $a$ and $b$ is the $\gcd\left( a, b \right) $.
+\end{remark}
+
+\begin{theorem}[Euclid's theorem]
+    Let $a, b\in\Z$. If $a\mid bc$ and $\gcd\left( a, b \right) = 1\implies
+    a\mid c$.
+\end{theorem}
+
+\begin{proof}
+    Since $\gcd\left( a, b, c \right) = 1\implies\gcd\left( ca, cb \right) = c\implies$ since $a\mid ca$ and
+    $a\mid bc\implies a\mid c$.
+\end{proof}
+
+\begin{example}
+    Let $a = 3, b = 4, c = 6$. Then $3\mid bc = 24$. Since $a = 3$ does not divide $b = 4$, then $ a = 3\mid
+    c = 6$.
+\end{example}
+
+\section{Prime and coprime numbers. Factorization theorem}
+\begin{defi}[Coprimes]
+    Let $a, b\in\Z$If $\gcd\left( a, b \right) = 1$ we say that $a$ and $b$ are
+    \textbf{relatively prime} or \textbf{coprime}.
+\end{defi}
+
+\begin{defi}[Prime number]
+    An integer $p$ is said to be \textbf{prime} if $p > 0$ and the only divisors
+    of $p$ are $\pm 1$ and $\pm p$.
+\end{defi}
+
+\begin{prop}
+    Every positive integer greater than 1 is divisible by a prime number.
+\end{prop}
+
+\begin{proof}
+    Let $a\in\Z_{>1}$.
+    \begin{itemize}[itemsep = -2pt]
+        \item If $a$ is a prime number then the proof is done.
+        \item If $a$ is not a prime number, then there exists by definition a $c\in\Z_{>1} < a$ such
+        that $c\mid a$.
+
+        Let $S:=\{c\in\Z_{>1} : c\mid a \textrm{ and } c < a\}, S\subseteq\N, S\neq\O$. By the wll order
+        principle we know that there is a minimum element in $S$. So, let $d:=\min \{c\tq c\in S\} $. Then,
+        $d > 1, d < a$ and $d\mid a$. If $d$ is the smallest integer in $S$ satisfying these three properties
+        it has to be a prime number.
+
+        If $d$ was not a prime $\implies\exists b > 1, b < d, b\mid d$, but since $d\mid a\implies b\mid a
+        \implies b\in S$, and this is a contradiction. Therefore, $d$ is prime and $d\mid a$.
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}[Euclid's theorem]
+    There are infinitely many primes.
+\end{theorem}
+
+\begin{proof}
+    Suppose, to get a contradiction, that there is a finite number of primes. Let $a:= 1 + p_1 + \ldots +
+    p_n\in\Z_{>1}$. By the claim, $a$ is divisible by some prime. Hence, $\exists\ i\in \{1\ldots n\} :
+    p_i\mid a\implies p_i\mid\left( 1 + p_1 + \ldots + p_n \right)\implies 1 = a - p_1\cdot\ldots\cdot p_n
+    \implies p_i\mid 1$, which is a contradiction.
+\end{proof}
+
+\begin{theorem}[Fundamental theorem of arithmetic]
+    Every positive integer $n\in\Z_{>1}$ can be written as
+    a product of prime numbers, and this factorization is unique except for the order of the factors.
+\end{theorem}
+
+\begin{proof}
+    To prove this theorem will are using mathematical induction. Then, the first case that makes sense
+    for the statement of the theorem is $n = 2$, which is a prime. That means this is already the
+    factorization in product of primes.
+
+    Induction hypothesis: Assume that the theorem holds for positive integers $< n$, for $n > 2$. Using
+    the induction hypothesis we'll prove that the theorem also holds for $n \left( n > 2 \right) $. Now,
+    \begin{itemize}[itemsep = -2pt]
+        \item If $n$ is a prime there's nothing to prove.
+        \item Suppose $n$ is not a prime. We have proven that any integer greater than 1 is always
+            divisible by a prime. Therefore, there is some prime $p$ that divides $n$: $n = pn_1$,
+            with $p > 1$. We know that $n_1 < n$. We can apply the induction hypothesis to $n_1$:
+            \begin{equation}
+                n_1 = p_1\ldots p_s\implies n = p\cdot p_1\ldots p_s
+            \end{equation}
+            is a factorization of $n$ into primes.
+
+            So we have proven that any positive number $n > 1$ can be written as a product of primes.
+            Now we want to show that this factorization is unique. We will prove this by contradiction.
+
+            Suppose that for a given $n > 1$ we have two factorizations into primes:
+            \begin{equation}
+                n = p_1\cdot p_2\ldots p_s = q_1\cdot q_2\ldots q_\ell
+            \end{equation}
+            where $p_i, q_j$ are primes from $i = \ell\ldots s, j = 1\ldots\ell$. Since $p_1$ is a prime
+            and since $p_1\mid n\implies p_1\mid q_1\cdot \ldots\cdot q_\ell\implies p_1\mid q_j$ for some
+            $j\in \{1\ldots\ell\} $ (Whenever a prime divides a product it has to divide one of the factors).
+            So we can cancel $p_1$ and $q_j$ in the expression for $n$ and repeat to conclude that $s = \ell$
+            and $\{p_1\ldots p_s\} = \{q_1\ldots q_\ell\} $.
+    \end{itemize}
+\end{proof}
+
+%\newpage
+\section{Linear Diophantine equations}
+\begin{defi}[Diophantine equation]
+    A \textit{Diophantine equation} is a polynomial equation whose solutions
+    are restricted to integers.
+\end{defi}
+
+\begin{defi}[Linear Diophantine equation]
+    A \textit{linear Diophantine equation} is a first-degree
+    Diophantine equation.
+\end{defi}
+
+    These type of equations are named after the ancient Greek mathematician Diophantus, and they are
+    important when a problem requires a solution in whole amounts.
+
+The study of problems that require integer solutions is often referred to as \textit{Diophantine analysis}.
+Although the practical applications of Diophantine analysis have been somewhat limited in the past, this
+kind of analysis has become much more important in the digital age, as it is very important in the study
+of public-key cryptography, for example.
+
+\begin{prop} \label{3:diophantine-solutions-condition}
+    A Diophantine equation of the form $ax + by = c$ with $a, b, c\in\Z$ has integer solutions if and only
+    if $\gcd\left( a, b \right) \mid c$. In other words, there's no integer solutions if $\gcd\left( a, b
+    \right)$ does not divide $c$.
+\end{prop}
+
+\begin{remark}
+    The previous proposition is just a consequence of the Bézout's identity.
+\end{remark}
+
+\begin{example}
+    For instance, the Diophantine equation $6x + 20y = 7$ has no integer solutions as $\gcd\left( 6, 20
+    \right) = 2$ but 2 does not divide 7.
+\end{example}
+
+\subsection{Initial solution to a linear Diophantine equation}
+Finding solutions to linear Diophantine equations involves finding an initial solution, and then altering
+that solution is some way to find the remaining solutions. When finding this initial solution is important
+to recognize first if the equation we are dealing with has or not solutions in $\Z$. As it is stated in
+proposition \ref{3:diophantine-solutions-condition}, one can determine if solutions exist or not by
+computing the GCD of the coefficients of the variables, and then determining if the constant term can be
+divided by that GCD.
+
+If solutions do exist, then there is an efficient method to find an initial solution. The extended version
+of the Euclidean algorithm seen previously will give us both the GCD of the coefficients and an initial
+solution.
+
+So, given an equation $ax + by = n$, we will use the Euclidean algorithm to compute $\gcd\left( a, b \right)
+= d$ and determine if there are any solutions. The extended version of this algorithm consists on solving
+the equations used to compute the GCD for the remainders, and using substitution, go through the steps of
+the Euclidean algorithm to find a solution to the equation $ax_i + by_i = d$. Then, the initial solution
+to the equation $ax + by = n$ is the ordered pair
+\begin{equation}
+    \left( x_i\cdot \frac{n}{d}, y_i\cdot \frac{n}{d} \right).
+\end{equation}
+
+\begin{example}
+    \textbf{Find a solution to the Diophantine equation $6x + 10y = 20$.}
+
+    Since $\gcd\left( 6, 10 \right) = 2$ and $2$ divides $20\implies$ the equation $6x + 10y = 20$ has a
+    solution in $\Z$. To make the problem easier we can simplify the equation by dividing by the $\gcd\left( 6,
+    10\right) $, which yields
+    \begin{equation}\label{3:dio:ex-one:sequation}
+        3x + 5y = 10,
+    \end{equation}
+    which has the exact same solutions as the initial equation. Now, let the equation
+    \begin{equation}\label{3:dio:ex-one:one-equation}
+        3x_i + 5y_i = 1.
+    \end{equation}
+    Since $\gcd\left( 3, 5 \right) = 1$, all solutions to (\ref{3:dio:ex-one:one-equation}) multiplied by
+    $10$ are solutions to (\ref{3:dio:ex-one:sequation}). In this case, there is no need to use the Euclidean
+    algorithm as it is pretty easy to see that $x_i = 2$ and $y_i = -1$ verifies (\ref{3:dio:ex-one:one-equation})
+    and therefore, the ordered pair $\left( 20, -10 \right) $ is an initial solution to the equation $6x + 5y
+    = 20$.
+\end{example}
+
+\subsection{General solution to linear Diophantine equations}
+
+\hide{
+\begin{example}
+    Find all the integer solutions to $6x + 10y = 20$. We have that $\gcd\left( 6, 10 \right) = 2$ and
+    $2\mid 20\implies$ there are solutions. Dividing the equation by 2 we get $3x + 5y = 10$. Both
+    equations have the same solutions.
+
+    Now, $\gcd\left( 3, 5 \right) = 1\implies$ there's a linear combination of 3 and 5 that is equal to 1,
+    so we can write a new equation $3n + 5n = 1$, which does not have the same solutions as the previous
+    but it will help us to find all the solutions. First, we solve our new equation using Euclid's
+    algorithm:
+    \begin{align}
+        5 &= 1\cdot 3 + 2 \\
+        3 &= 1\cdot 2 + 1 \\
+        1 &= 3 + \left( -1 \right) \cdot 2 = \\
+          &= 3 + \left( -1 \right) \left( 5 + \left( -1 \right) \cdot 3 \right) = \\
+          &= 2\cdot 3 + \left( -1 \right) \cdot 5
+    \end{align}
+    Multiplying by 10 we get $10 = \left( 20 \right) \cdot 3 + \left( -10 \right) \cdot 5$. Then, a
+    solution to $3x + 5y = 10$ is $x = 20$ and $y = -10$. However, how do we find all the solutions to
+    this equation?
+
+    Suppose $\left( x_0, y_0 \right)$ is an integer solution to $3x + 5y = 10$, and suppose that $\left(
+    x_1, y_1\right) $ is another solution. Subtracting both equations we get
+    \begin{equation}
+        3\left( x_0 - x_1 \right) + 5\left( y_0 - y_1 \right) = 0 \iff 3\left( x_0 - x_1 \right) =
+        5\left( y_1 - y_0 \right)
+    \end{equation}
+    Since $3\mid 5\left( y_1 - y_0 \right)$ and knowing $\gcd\left( 3, 5 \right) = 1, 3\mid \left( y_1
+    - y_0 \right) \implies y_1 - y_0 = 3\ell$ for some $\ell\in\Z$. Substituting, $3\left( x_0 - x_1
+    \right) = 5\cdot 3\ell\implies 5\mid\left( x_0 - x_1 \right) $, in fact we get that $x_0 -  x_1 = 5\ell$.
+    Once a solution to the equation is found, $\left( x_0, y_0 \right) $, the other solutions are as follows:
+    $\left( x_1, y_1 \right) $ where $x_1 = x_0 - 5\ell$ and $y_1 = y_0 + 3\ell$ for some $\ell\in\Z$.
+\end{example}
+}
+
+\section{Congruences}
+\hide{
+\begin{definition}
+    \textbf{(Congruence).} Given $n\in\N$ and $a, b\in\Z$ we say $a$ is \textit{congruent} to $b$ modulo $n$
+    and we write $a\equiv b \left( \mod n \right) $ if $n\mid a - b$.
+\end{definition}
+
+\begin{example}
+    For instance, $8\equiv 3 \left( \mod 5 \right) $ as $5\mid 8 - 3$.
+\end{example}
+
+\begin{lemma}
+    Two numbers are congruent modulo $n$ if and only if when divided by $n$ they leave the same remainder.
+\end{lemma}
+
+\begin{proposition}
+    A congruence $\equiv \left(\mod n \right) $ is an equivalence relation on $\Z$.
+\end{proposition}
+}
+
+If we fix an integer $n\in\Z$ then we can define an equivalence relation $\sim$ on $\Z$ by saying that
+$x\sim y \iff x - y$ is a multiple of $n$; i.e. if $n\mid x - y$.
+
+\begin{defi}[Congruence]
+    Let $n\in\N$, $a$, $b\in\Z$ and let $\sim_n$ be an equivalence relation on $\Z$
+    such that $a\sim_n b \iff n\mid a - b$. If $a\sim_n b$ it's said that $a$ and $b$ are \textit{congruent
+    modulo $n$}, denoted by $a\equiv b \mod n$.
+\end{defi}
+
+\hide{
+\begin{example}
+    $2\equiv 7\mod 5$, $-13\equiv 21\mod 17$, $90\equiv 126\mod 6$.
+\end{example}
+}
+
+\begin{lemma}
+    Two numbers are congruent modulo $n$ if and only if when divided by $n$ they leave the same remainder.
+\end{lemma}
+
+\begin{proof}
+    Suppose
+    \begin{equation}
+        a = nq_1 + r_1\quad\quad b = nq_2 + r_2
+    \end{equation}
+    Then, $a\equiv b\mod n\implies \left( a - nq_1 \right)  - \left( b - nq_2 \right) \implies n\mid r_1 - r_2$,
+    and as $0 < r_1, r_2 < \abs{n}$, this implies $r_1 = r_2$.
+\end{proof}
+
+\begin{defi}
+    For $x\in\Z$ it is defined the equivalence class of $x$ with respect to the congruece equivalence
+    relation $\equiv \mod n$ by
+    \begin{equation}
+        [x] \bydef \{a\in\Z\tq a\equiv x\mod n\}
+    \end{equation}
+\end{defi}
+
+\begin{example}
+    Take $n = 3$ and $x = 0$, $1$, $2$. So this yields the equivalence classes
+    \begin{align}
+        [0] &= \{a\in\Z\tq a\equiv 0\mod 3\} = \{ 0, \pm 3, \pm 6, \ldots\} \\
+        [1] &= \{a\in\Z\tq a\equiv 1\mod 3\} = \{\ldots, -5, -2, 1, 4, 7, 10, \ldots\} \\
+        [2] &= \{a\in\Z\tq a\equiv 2\mod 3\} = \{\ldots, -4, -1, 2, 8, 11, \ldots\}
+    \end{align}
+\end{example}
+
+From the previous example we work out that $\equiv\mod n$ divides $\Z$ in $n$ equivalence classes or partitions that correspond to the $n$ possible values of the remainder ($r = 0, 1, 2,\ldots,\abs{n} - 1$).
+
+\begin{defi}
+    Fixed $n$, the set of least residues is given by $\{0, 1, \ldots, n - 1\} $.
+\end{defi}
+
+Therefore, for all $a\in\Z$, $a$ is congruent to exactly one of the least residues modulo $n$.
+
+\begin{proof}
+    Use the division algorithm with $a$ and $n$. This led us to
+    \begin{equation}
+        a = nq + r\quad\textrm{ with } 0\leq r \leq n - 1.
+    \end{equation}
+    From this it follows that $a - r = nq\implies a\equiv r\mod n$.
+\end{proof}
+
+\begin{prop}
+    If $a\equiv b\mod n$ and $c\equiv d\mod n$ then $a + c\equiv \left( b + d \right) \mod n$ and $ac\equiv
+    bd\mod n$.
+\end{prop}
+% This proof can be found here: youtu.be/33p04rolbHA
+
+\begin{prop}
+    If $a\equiv b\mod m$ and $n\mid m$ then $a\equiv b\mod n$.
+\end{prop}
+% Proof can also be found in the previous video
+
+\hide{
+\begin{example}
+    Si $n = 5$ the equivalence classes are
+    \begin{align}
+        [0] = \{\ldots, -5, 0, 5, 10, 15, \ldots\} \\
+        [1] = \{\ldots, -4, 1, 6, 11, 16, \ldots\} \\
+        [2] = \{\ldots, -3, 2, 7, 12, 17, \ldots\} \\
+        [3] = \{\ldots, -2, 3, 8, 13, 18, \ldots\} \\
+        [4] = \{\ldots, -1, 4, 9, 14, 19, \ldots\}
+    \end{align}
+\end{example}
+}
+
+\begin{defi}
+    We say that $\Z_n$ is the quotient set of the relation of congruence modulo $n$ by $\Z$.
+\end{defi}
+
+\begin{prop}
+    If we define in $\Z_n$ the sum and multiplication operations
+    \begin{equation}
+        [a] + [b] = [a + b]\quad\textrm{ and }\quad[a]\cdot[b] = [a\cdot b]
+    \end{equation}
+    then, in general, $\left( \Z, +, \cdot \right)$ is a commutative ring, as both operations have same properties they
+    have on $\Z$.
+\end{prop}
+
+\hide{
+Note that, at first sight, these operations are not clearly well defined, as we can choose different
+representatives of the same equivalence class. For instance, in $\Z_5$ we have that $[2] = [7]$ and $[4] =
+[19]$
+}
+
+\begin{prop} \label{3:zn-field-condition}
+    $\left( \Z_n, +, \cdot \right) $ is a field $\iff n$ is prime.
+\end{prop}
+
+\begin{proof}
+    If $n$ is not prime, $n = ab$ with $0 < \abs{a}, \abs{b} < \abs{m}$, then $[a], [b]\neq [0]$ and
+    $[a]\cdot[b] = [m] = [0]$. Therefore, $[b]$ can't have a multiplicative inverse because
+    \begin{equation}
+        [b]\cdot[c] = [1] \implies [a]\cdot[b]\cdot[c] = [0]
+    \end{equation}
+    and this contradicts our hypothesis about $a$. Then, $\Z_n$ is not a field.
+
+    On the other hand, if $n$ is prime, then any $a$ with $1 \leq a < p$ holds that $\mcm\left( a, p \right)
+    = \pm 1$, and this implies that exists some integers $x$ amd $y$ such that $ax + py = 1$. Once we know
+    this integers we have
+    \begin{equation}
+        [ax + py] = [1]\implies [ax] + [py] = [1]\implies [ax] = [1].
+    \end{equation}
+    Therefore, the class $[a]$ has an inverse (which is $[x]$).
+\end{proof}
+
+\begin{prop} \label{3:class-inverse-condition}
+    In general, an equivalence class $[a]$ has a multiplicative inverse in $\Z_n \iff a$ and $n$ are coprimes; i.e. $\gcd\left( a, n \right) = 1$.
+\end{prop}
+
+\begin{proof}
+    Since $\gcd\left( a, n \right) = 1$, and applying the Bezout's identity (\ref{bezout-id}), we have that
+    $\exists m, \ell\in\Z\tq am + b\ell = 1\iff am\equiv 1\mod n$.
+\end{proof}
+
+\begin{notation}
+    Usually we write $\Z^*_n$ to design the set of equivalence classes of $\Z_n$ that have a multiplicative
+    inverse.
+\end{notation}
+
+\noindent Proposition (\ref{3:class-inverse-condition}) has several consequences:
+\begin{itemize}
+    \item Let $p$ be a prime number. Then, we can define the set
+        \begin{equation}
+            \Z^*_p := \{[1], \ldots, [p - 1]\}
+        \end{equation}
+        in which all elements but zero have a multiplicative inverse; i.e. they are units. Therefore, by
+        (\ref{3:zn-field-condition}) $\left( \Z_p, +, \cdot \right) $ is always a field.
+    \item Let $n\in\Z_{> 0}$, which is not a prime number. Then, we can define the set
+        \begin{equation}\label{3:zns-def}
+            \Z^*_n := \{[a]\in\Z_n\tq \gcd\left( a, n \right) = 1\}
+        \end{equation}
+        which contains the equivalence classes that have a multiplicative inverse in $\Z_n$. Now, we will
+        use the \textit{Euler's $\varphi$ function} to represent the cardinality of (\ref{3:zns-def}).
+        \begin{equation}
+            \varphi\left( n \right) := \abs{\Z^*_n} = \card \left( \Z^*_n \right)
+        \end{equation}
+        A question arise here. What are the values of $\varphi\left( n \right) $? If $n = p$, where $p$ is
+        a prime, we have that $\varphi\left( n \right) = \abs{\Z^*_p} = p - 1$.
+
+        However, if $n = p^k$, where $p$ is prime and $k\in\Z_{\geq 1}$, to find a value of $\varphi
+        \left( p^k \right) $ we should write a list of the elements in $\Z_{p^k}$ and remove the classes
+        that come from multiples of $p$. In this case, there are $p^{k-1}$ elements that come from multiples
+        of $p$. Thus, we get $\varphi\left( p^k \right) = p^k - p^{k-1}$.
+
+        This result let us know how many elements in a ring with $n = p$ have a multiplicative inverse.
+        Together with the following lemma we can determine, for instance, $\abs{\Z^*_{12}}$.
+\end{itemize}
+
+\begin{lemma}\label{3:divide-euler-phi}
+    Suppose $n$ and $m$ in $\Z$ are coprime. Then $\varphi\left( nm \right) = \varphi\left( n \right) \cdot
+    \varphi\left( m \right) $.
+\end{lemma}
+
+\begin{example}
+    To compute $\abs{\Z^*_{12}}$ we know that $12 = 3\cdot 4$ and $\gcd\left( 3, 4 \right) = 1$. Then,
+    by lemma \ref{3:divide-euler-phi} we get
+    \begin{equation}
+        \varphi\left( 12 \right) = \varphi\left( 3 \right) \cdot \varphi\left( 4 \right) = 2\cdot \left(
+        2^2 - 2\right) = 4.
+    \end{equation}
+\end{example}
+
+\begin{prop}[Cancelation law]
+    For $a$, $b$, $c\in\Z$ we have $ca\equiv cb \mod n \iff a\equiv b\mod \frac{n}{\gcd\left( n, c \right) }$.
+\end{prop}
+
+\begin{proof}
+    Let us prove $\implies$ first. Suppose $ca\equiv cb\mod n\implies n\mid c\left( a - b \right) \implies c\left( a - b \right) = nk, k\in\Z$. Let $d = \gcd\left( c, n \right) $. Note that $\frac{c}{d}\left( a - b \right) = \frac{n}{d}k$, then $\gcd\left( \frac{c}{d}, \frac{n}{d} \right) = 1\implies a - b = \frac{n}{d}k', k'\in\Z$.
+    Finally, $a\equiv b\mod \frac{n}{d}$. The proof for the other direction is pretty easy.
+\end{proof}
+
+\hide{
+\begin{proposition}
+    \textbf{(Cancelation law).} In an expression of the form $[a][x]\equiv[a][y]\mod n$, we can conclude
+    that $[x]\equiv[y]\mod n \iff [a]$ has a multiplicative inverse in $\Z$.
+\end{proposition}
+}
+
+\begin{theorem}[Euler's theorem]
+    Let $a, n\in\Z$. If $\gcd\left( a, n \right) = 1$, then $[a]^{\varphi\left(
+    n\right) }\equiv[1]\mod n$.
+\end{theorem}
+
+\begin{proof}
+    To be done.
+\end{proof}
+
+\hide{
+\begin{example}
+    Take $\Z^*_{10} = \{[1], [3], [7], [9]\}, \varphi\left( n \right) = 4$.
+
+    Then $[3]^4\equiv [1]\mod 10$ as $[3][3][3][3] = [9][9] = [1]\mod 10$.
+
+    Now take $[2]\not\in \Z^*_{10}$, then $[2]^4\equiv[6] \notequiv [1]$.
+\end{example}
+}
+
+\subsection{Linear congruences}
+%Consider an equation of the form $[a]$
+
+\begin{theorem}
+    Consider an equation of the form $[a][x]\equiv[b]\mod n$. Then,
+    \begin{itemize}[itemsep = -2pt]
+        \item if $\gcd\left( a, n \right) = d \nmid b\implies$ the equation has no solutions.
+        \item if $\gcd\left( a, n \right) = d\mid b\implies$ the equation has $d$ different solutions in
+            $\Z^*_n$.
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    The equation $[a][x]\equiv[b]\mod n$ has a solution if and only if $ax + ny = b$ has integer solutions,
+    and this happens when $\gcd\left( a, n \right) \mid b$. This proves the first statement of the theorem.
+
+    Now, let's prove the second statement. If $\gcd\left( a, n \right) = d\mid b$, then to solve $[a][x]
+    \equiv[b]\mod n$ in $\Z_n$ we look for the integer solutions to $ax + ny = b$, which are of the form
+    \begin{equation}
+        \begin{cases}
+            x = x_0 + \frac{n}{d}\ell \\
+            y = y_0 - \frac{a}{d}\ell
+        \end{cases}\quad\textrm{ with } \ell\in\Z,
+    \end{equation}
+    where $\left( x_0, y_0 \right) $ is a particular solution. This gives us that the solutions to $[a][x]
+    \equiv[b]\mod n$ are of the form
+    \begin{equation}
+        [x] = [x_0] + \frac{[n]}{d}[\ell]\mod n.
+    \end{equation}
+    Taking $\ell = 0, 1, 2, \ldots, d - 1$ gives us $d$ different solutions in $\Z_n$.
+\end{proof}

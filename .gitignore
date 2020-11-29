@@ -1,5 +1,9 @@
 */
-!courses/
+!courses/**/*.tex
+!courses/**/*.yaml
+!courses/**/*.bib
+!courses/**/*.pdf
+!courses/**/figures/
 !docs/
 !scripts/
 !latex-stuff/
