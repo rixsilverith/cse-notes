@@ -94,12 +94,10 @@ From any field $F$, a new vector space can be defined over $F$ in the same manne
 To check if some subset $W$ of a vector space $V$ is a subspace of $V$ it's enough to see if $W$ accomplish
 definition \ref{def:vector-subspace}. However, in many cases is easier to check that the following properties
 are verified:
-\begin{equation}
-    \vec{w_1}, \vec{w_2}\in W \quad\implies\quad \vec{w_1} + \vec{w_2}\in W,
-\end{equation}
-\begin{equation} \label{prop:vector-subspace-2}
-    \vec{w}\in W,\ \lambda\in F\quad\implies\quad \lambda\vec{w}\in W.
-\end{equation}
+\begin{align} \label{prop:vector-subspace-2}
+    \vec{w_1}, \vec{w_2}\in W &\quad\implies\quad \vec{w_1} + \vec{w_2}\in W, \\
+    \vec{w}\in W,\ \lambda\in F&\quad\implies\quad \lambda\vec{w}\in W.
+\end{align}
 
 \begin{example}
     $W = \{\left( x, y, 0 \right)\in \R^3\st x, y\in\R\} $ is a vector subspace of $\R^3$, while $U = \{\left( x, y, 1 \right) \in\R^3\st x, y\in\R\} $ is not. Note that, for instance, $\left( 1, 1, 1 \right)\in U$ but
@@ -115,9 +113,9 @@ In conclusion, whenever we set linear and homogeneous conditions in $\Rtn$, a su
 closely related to the description of a vector space as the solutions of an homogeneous system.
 
 \begin{defi}[Linear combination]
-    Let $\vec{v_1}$, $\ldots$, $\vec{v_n}\in V$ be vectors. A linear combination of $\vec{v_1}$, $\ldots$,
-    $\vec{v_n}$ is an expression of the form $\alpha_1\vec{v_1} + \ldots + \alpha_n\vec{v_n}$, where
-    $\alpha_1$, $\ldots$, $\alpha_n\in F$.
+    Let $\vec{v_1}$, $\ldots$, $\vec{v_n}\in V$ be vectors within a vector space $V$ over some field $F$. 
+    A linear combination of $\vec{v_1}$, $\ldots$, $\vec{v_n}$ is an expression of the form $\alpha_1
+    \vec{v_1} + \ldots + \alpha_n\vec{v_n}$, where  $\alpha_1$, $\ldots$, $\alpha_n\in F$.
 \end{defi}
 
 \begin{example}
@@ -197,27 +195,6 @@ The previous example suggest defining the concept of some dependence between vec
     and since solutions to this system depends on a parameter there are infinite solutions. Therefore, the
     vectors are linearly dependent.
 \end{example}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN TRASH
-
-\hide{
-\begin{defi}[Linearly independent vectors]
-    A set of vectors $\vec{v_1}$, $\ldots$, $\vec{v_i}\in\R^n$ are \textbf{linearly independent} if the
-    only way to write the null vector $\vec{0} = \left( 0, \ldots, 0 \right) $ as a linear combination of
-    $\vec{v_1}$, $\ldots$, $\vec{v_i}$ is by writing $0\cdot\vec{v_1} + \ldots + 0\cdot\vec{v_i} = \vec{0}$.
-    Otherwise, the vectors are \textbf{linearly dependent}.
-\end{defi}
-
-\newpage
-
-\begin{defi}[Linearly independent vectors]
-    Let $\vec{v_1}$, $\ldots$, $\vec{v_i}\in\R^n$ be vectors. $\vec{v_1}$, $\ldots$, $\vec{v_i}$ are linearly
-    independent $\iff$ any of the vectors cannot be written as a linear combination of the others. Otherwise,
-    vectors $\vec{v_1}$, $\ldots$, $\vec{v_i}$ are linearly dependent.
-\end{defi}
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END TRASH
 
 \begin{prop}
     Any set of vectors containing the null vector, $\vec{0} = \left( 0, \ldots, 0 \right) $ is always
@@ -341,20 +318,198 @@ vector subspace of $\R^2$?
 
 %%%%%%%%%%%%%%%%%%%%%% end another hide
 
-\section{Operations with vector subspaces}
+
+
+\section{Basis and dimension of a vector space}
+Taking about vector spaces it's covenient considering subsets that generate all the space and that have 
+the minimum possible number of vectors as, in some way, the \textit{size} of these sets determines the size 
+of the vector space.
+
+\begin{defi}[Basis]
+    A set $B$ of vectors is a basis of a vector space $V\iff B$ is both linearly independent and a system of
+    generators, this is, the set $B$ generates the vector space; i.e. $\gen{B} = V$.
+\end{defi}
+
+\begin{remark}
+    For a given vector space there are multiple choices of basis, but all of them have the same cardinality.
+\end{remark}
+
+\begin{example}
+    \textbf{Prove that $B = \{\left( 1, 1 \right), \left( 1, -1 \right) \} $ is a basis of $\R^2$.}
+    \begin{enumerate}
+        \item To see if $B$ is system of generators one should study if
+    \begin{equation}
+        \left( x, y \right) = \lambda\left( 1, 1 \right) + \mu\left( 1, -1 \right)
+    \end{equation}
+    always has solutions $\lambda$, $\mu$, for any $\left( x, y \right) \in\R^2$. This lead us to
+
+    \begin{equation}
+        \sysdelim.\}\systeme{\lambda + \mu = x,\lambda - \mu = y} \quad\iff\quad \lambda = \frac{x + y}{2},\ \mu =
+            \frac{x - y}{2}.
+    \end{equation}
+
+    Since there is always a solution, $B$ is a system of generators; i.e. $B$ generates $\R^2$. 
+
+    \item For checking if $B$ is linearly independent we consider
+    \begin{equation}
+        \left( 0, 0 \right) = \lambda\left( 1, 1 \right) + \mu\left( 1, -1 \right),
+    \end{equation}
+    that can only be solved with $\lambda = \mu = 0$.
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Is $B = \{1, \sin x, x\}\subset \{\appl{f}{\R}{\R}\}$ a basis of $\gen{B}$? Note that, by definition,
+    $B$ is a system of generators, therefore it's only necessary to prove that it is linearly independent.
+    This is equivalent to prove that if $\lambda$, $\mu$, $\nu$ verifies
+    \begin{equation}
+        \lambda + \mu\sin x + \nu x = 0
+    \end{equation}
+    for all $x$, then $\lambda = \mu = \nu = 0$. Differentiating several times we obtain
+    \begin{align}
+        \lambda + \mu\sin x + \nu x &= 0, \\
+        \mu\cos x + \mu &= 0, \\
+        -\mu\sin x &= 0.
+    \end{align}
+    The last equation implies $\mu = 0$ and from the others we get $\lambda = \nu = 0$.
+\end{example}
+
+\begin{defi}[Dimension]
+    A vector space has a \textbf{finite dimension} if it has a basis with a finite number of elements, and
+    it corresponds to the cardinality of any of its basis.
+    Otherwise, it has \textbf{infinite dimension}.
+\end{defi}
+
+\begin{remark}
+    If $S$ is finite, then $V = \gen{S}\implies V$ has finite dimension.
+\end{remark}
+
+\begin{example}
+    $B = \{\left( 1, 0, 0, \ldots, 0 \right) , \left( 0, 1, 0, \ldots, 0 \right) , \left( 0, 0, 1, \ldots, 0
+    \right), \ldots, \left( 0, 0, 0, \ldots, 1 \right) \} $ is a basis of $\Rtn$, usually called the
+    canonical basis.
+\end{example}
+
+\begin{example}
+    The space of all real functions, $\mathcal{F} = \{\appl{f}{\R}{\R}\}$ has infinite dimension.
+\end{example}
+
+Let's see now how to compute the basis of a vector space.
+
+\begin{example}
+    \textbf{Find a basis for $V = \{\left( x, y, z \right) \in\R^3\st x + y + z = 0\} $.}
+
+    In this kind of problems it is better to express the conditions that define the subspace in terms of
+    some variable that can take arbitrary values. In this case, note that
+    \begin{equation}
+        \vec{v}\in V\quad\iff\quad \vec{v} = \left( -y - z, y, z \right) 
+    \end{equation}
+    where $y$ and $z$ can take any real value. Therefore,
+    \begin{align}
+        \vec{v}\in V &\quad\implies\quad \vec{v} = y\left( -1, 1, 0 \right) + z\left( -1, 0, 1 \right) \\
+                     &\quad\implies\quad \vec{v}\in\gen{\left( -1, 1, 0 \right), \left( -1, 0, 1 \right) }
+    \end{align}
+    which proves that $B = \{\left( -1, 1, 0 \right) , \left( -1, 0, 1 \right) \} $ is a system of generators.
+    It is easy to see that $B$ is also linearly independent, then, $B$ is a basis of $V$.
+\end{example}
+
+\begin{theorem}[Steinitz's theorem] \label{thm:steinitz}
+    Let $B = \{\vec{u_1}, \ldots, \vec{u_n}\} $ a basis of a vector space $V$, and let $\vec{v_1}, \ldots,
+    \vec{v_m}$ be $m$ linearly independent vectors with $m \leq n$, then there exists $m$ vectors of $B$
+    that can be replaced by $\vec{v_1}, \ldots, \vec{v_m}$, obtaining a new basis.
+\end{theorem}
+
+\begin{example}
+    Consider the canonical basis of $\R^3$ $B = \{\left( 1, 0, 0 \right), \left( 0, 1, 0 \right), \left( 
+    0, 0, 1\right) \} $ and the set of linearly independent vectors $S = \{\left( 0, 1, 0 \right), \left( 
+    1, 2, 1\right) \} $. Following theorem \ref{thm:steinitz} we have $n = 3$, $m = 2$ and vectors
+    \begin{equation}
+        \vec{u_1} = \left( 1, 0, 0 \right), \quad\quad \vec{u_2} = \left( 0, 1, 0 \right),\quad\quad\vec{u_3}
+        = \left( 0, 0, 1 \right)
+    \end{equation}
+    \begin{equation}
+        \vec{v_1} = \left( 0, 1, 0 \right),\quad\quad \vec{v_2} = \left( 1, 2, 1 \right).
+    \end{equation}
+    Note that $\vec{u_2}$ and $\vec{u_3}$ can be replaced by $\vec{v_1}$ and $\vec{v_2}$ obtaining the basis
+    of $\R^3$ given by $\hat{B} = \{\left( 1, 0, 0 \right), \left( 0, 1, 0 \right), \left( 1, 2, 1 \right)\}$,
+    but if we replace $\vec{u_1}$ and $\vec{u_3}$ by $\vec{v_1}$ and $\vec{v_2}$ we don't get a new basis.
+\end{example}
+
+\begin{coro}
+    In a vector space of finite dimension all basis have the same number of vectors.
+\end{coro}
+
+\begin{proof}
+    If $B$ and $B'$ are basis with $m = \abs{B} < \abs{B'} = n$, then, following Steinitz's theorem 
+    \ref{thm:steinitz} we could get a new basis $B''$ such that $B''\superset B$ with $B''\neq B$, but 
+    since $\gen{B}$ is the whole space, this would imply that vectors in $B'' - B$ linearly dependent on 
+    the ones in $B$ and therefore $B''$ is not linearly independent.
+\end{proof}
+
+\begin{defi}[Dimension]
+    The dimension of a given vector space with finite dimension corresponds to the cardinality of any of
+    its basis.
+\end{defi}
+
+\begin{note}
+    Usually, this definition for dimension is completed by stating that the trivial vector space $V = \{\vec{0}\} $ has dimension zero.
+\end{note}
+
+The following corollary prevents us from checking if a possible basis is a system of generators if we know
+beforehand the dimension of the vector space.
+
+\begin{coro}
+    In a vector space of dimension $n$, whatever $n$ linearly independent vectors form a basis.
+\end{coro}
+
+\begin{example}
+    \textbf{Prove that $B = \{\left( 1, 2, 1 \right) , \left( 1, 2, 0 \right), \left( 0, 1, 1 \right)\} $ is
+    a basis of $\R^3$.}
+
+    Using the previous corollary is enough to see that the vectors in $B$ are linearly independent, since 
+    $\dim \R^3 = 3$.
+\end{example}
+
+Knowing that any vector can be written as a linear combination of the elements of a basis, it is worth 
+defining the numbers that appear as coefficients, which characterises the vector.
+
+\begin{defi}[Coordinates]
+    Let $V$ be a vector space of finite dimension and $B = \{\vec{u_1}, \ldots, \vec{u_n}\} $ one of its
+    basis. Then, the coordinates of certain vector $\vec{v}\in V$ in basis $B$ are $\left( \lambda_1, \ldots,
+    \lambda_n\right) $, if $\vec{v} = \lambda_1\vec{u_1} + \ldots + \lambda_n\vec{u_n}$.
+\end{defi}
+
+\begin{note}
+    Many times it is written $\vec{v} = \left( \lambda_1, \ldots, \lambda_n \right) $. When using this
+    notation it must be clear which is the basis we are considering. Also, it is worth noting that coordinates
+    depend on the order of the elements which form the basis. Therefore, more consisely, coordinates are not
+    only associated to the basis, but also to the way its elements are ordered.
+\end{note}
+
+\section{Operations with vector subspaces. Grassman's formula}
 \begin{prop}
-    If $W$, $Z\subsetV$ are vector subspaces of a vector space $V$, the sum of $W$ and $Z$, denoted by
-    $W + Z$, is the smallest vector subspace of $V$ that contains both $W$ and $Z$.
+    If $W$, $Z\subsetV$ are two vector subspaces of a vector space $V$, the sum of $W$ and $Z$, denoted by
+    $W + Z$, is the smallest vector subspace of $V$ that contains both $W$ and $Z$. In other words,
+    \begin{equation}
+        W + Z \bydef \{\vec{x}\st \vec{x} = \vec{w} + \vec{z},\ \vec{w}\in W,\ \vec{z}\in Z\}. 
+    \end{equation}
 \end{prop}
 
 \begin{prop}
     If $W$, $Z\subseteq V$ are vector subspaces of a vector space $V$, the intersection of both subspaces,
     denoted by $W\cap Z$, is
     \begin{equation}
-        \underbrace{W\cap Z}_{\textrm{This is also a vector subspace}} \bydef \{x\in \R\st x\in W\land x\in
-        Z\}.
+        W\cap Z \bydef \{x\in \R\st x\in W\land x\in Z\}.
     \end{equation}
 \end{prop}
+
+\begin{remark}
+    Note that the two subspace are never disjoint since the zero vector $\vec{0}$ is within every subspace.
+\end{remark}
+
+\begin{lemma}
+    If $W$ and $Z$ are subspaces of a vector space $V$, then $W + Z$ and $W\cap Z$ are also vector spaces.
+\end{lemma}
 
 \begin{proof}
     To prove that the intersection $W\cap Z$ is a vector subspace of $\Rtn$, we check the following subspace
@@ -380,77 +535,9 @@ vector subspace of $\R^2$?
     \end{enumerate}
 \end{proof}
 
-\section{Basis and dimension of a vector space}
-In vector spaces it's covenient considering subsets that generate all the space and that have the minimum
-possible number of vectors. In some way, the \textit{size} of these sets determines the size of the vector
-space.
-
-\begin{defi}[Basis]
-    A set $B$ of vectors is a basis of a vector space $V$ if $B$ is both linearly independent and a system of
-    generators, $\gen{B} = V$.
-\end{defi}
-
-\begin{remark}
-    For a given vector space there are multiple choices of basis, but all of them have the same cardinality.
-\end{remark}
-
-\begin{example}
-    $B = \{\left( 1, 1 \right), \left( 1, -1 \right) \} $ is a basis of $\R^2$. To see if $B$ is system of
-    generators one should study if
+\begin{prop}[Grassman's formula]
+    If $W$ and $Z$ are two subspaces of a vector space with finite dimension, then
     \begin{equation}
-        \left( x, y \right) = \lambda\left( 1, 1 \right) + \mu\left( 1, -1 \right)
+        \dim\left( W + Z \right) = \dim W + \dim Z - \dim\left( W\cap Z \right). 
     \end{equation}
-    always has solutions $\lambda$, $\mu$, for any $\left( x, y \right) \in\R^2$. This lead us to
-
-    \begin{equation}
-        \sysdelim.\}\systeme{\lambda + \mu = x,\lambda - \mu = y} \quad\iff\quad \lambda = \frac{x + y}{2},\ \mu =
-            \frac{x - y}{2}.
-    \end{equation}
-
-    Since there is always a solution, $B$ is a system of generators; i.e. $B$ generates $\R^2$. For checking
-    if $B$ is linearly independent we consider
-    \begin{equation}
-        \left( 0, 0 \right) = \lambda\left( 1, 1 \right) + \mu\left( 1, -1 \right),
-    \end{equation}
-    that can only be solved with $\lambda = \mu = 0$.
-\end{example}
-
-\begin{example}
-    Is $B = \{1, \sin x, x\}\subset \{\appl{f}{\R}{\R}\}$ a basis of $\gen{B}$? Note that, by definition,
-    $B$ is a system of generators, therefore it's only necessary to prove that it is linearly independent.
-    This is equivalent to prove that if $\lambda$, $\mu$, $\nu$ verifies
-    \begin{equation}
-        \lambda + \mu\sin x + \nu x = 0
-    \end{equation}
-    for all $x$, then $\lambda = \mu = \nu = 0$. Differentiating several times we obtain
-    \begin{align}
-        \lambda + \mu\sin x + \nu x &= 0, \\
-        \mu\cos x + \mu &= 0, \\
-        -\mu\sin x &= 0.
-    \end{align}
-    The last equation implies $\mu = 0$ and from the others we get $\lambda = \nu = 0$.
-\end{example}
-
-\begin{defi}[Dimension]
-    A vector space has a \textbf{finite dimension} if it has a basis with a finite number of elements, and
-    it corresponds to the cardinality of the basis.
-    Otherwise, it has \textbf{infinite dimension}.
-\end{defi}
-
-\begin{remark}
-    If $S$ is finite, then $V = \gen{S}\implies V$ has finite dimension.
-\end{remark}
-
-Some vector spaces of finite dimension are the following.
-
-\begin{example}
-    $B = \{\left( 1, 0, 0, \ldots, 0 \right) , \left( 0, 1, 0, \ldots, 0 \right) , \left( 0, 0, 1, \ldots, 0
-    \right), \ldots, \left( 0, 0, 0, \ldots, 1 \right) \} $ is a basis of $\Rtn$, that is usually called
-    canonical basis.
-\end{example}
-
-\begin{example}
-    The space of all real functions, $\mathcal{F} = \{\appl{f}{\R}{\R}\}$ has infinite dimension.
-\end{example}
-
-Let's see now how to compute the basis of a vector space.
+\end{prop}
