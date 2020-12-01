@@ -3,17 +3,20 @@
 \ProvidesPackage{exmath}[2020/11/12 Extended math commands]
 
 % Multilingual support
-\def\@theorem@mark{Theorem}
-\def\@definition@mark{Definition}
-\def\@proposition@mark{Proposition}
-\def\@lemma@mark{Lemma}
-\def\@corollary@mark{Corollary}
-\def\@proof@mark{Proof}
+\def\@theorem@mark{}
+\def\@definition@mark{}
+\def\@proposition@mark{}
+\def\@lemma@mark{}
+\def\@corollary@mark{}
+\def\@proof@mark{}
+\def\@example@mark{}
 
-\def\@note@mark{Note}
-\def\@notation@mark{Notation}
-\def\@remark@mark{Remark}
-\def\@claim@mark{Claim}
+\def\@note@mark{}
+\def\@notation@mark{}
+\def\@remark@mark{}
+\def\@claim@mark{}
+
+\newif\if@removechapters
 
 \DeclareOption{en}{%
     \def\@theorem@mark{Theorem}
@@ -22,6 +25,7 @@
     \def\@lemma@mark{Lemma}
     \def\@corollary@mark{Corollary}
     \def\@proof@mark{Proof}
+    \def\@example@mark{Example}
 
     \def\@note@mark{Note}
     \def\@notation@mark{Notation}
@@ -36,6 +40,7 @@
     \def\@lemma@mark{Lema}
     \def\@corollary@mark{Corolario}
     \def\@proof@mark{Demostración}
+    \def\@example@mark{Ejemplo}
 
     \def\@note@mark{Nota}
     \def\@notation@mark{Notación}
@@ -43,65 +48,56 @@
     \def\@claim@mark{Claim}
 }
 
-\ExecuteOptions{en}
+\DeclareOption{chapters}{\@removechaptersfalse}
+\DeclareOption{nochapters}{\@removechapterstrue}
+
+\ExecuteOptions{en, chapters}
 \ProcessOptions\relax
 
-% Meth stuff
-\RequirePackage{amsmath, amssymb, amsthm, amsfonts}
-% Systems of equations
-\RequirePackage{systeme}
-% Cool derivatives
-\RequirePackage{physics}
-% Cancel an expression with an arrow
-\RequirePackage{cancel}
-% Units
-\RequirePackage{siunitx}
-% Bold math
-\RequirePackage{bm}
-%\RequirePackage{bbm}
-% Fixes stuff
-\RequirePackage{mathpazo}
-\RequirePackage{mathtools}
+\RequirePackage{amsmath, amssymb, amsthm, amsfonts} % Meth stuff
+\RequirePackage{systeme} % Systems of equations
+\RequirePackage{cancel} % Cancel an expression with an arrow
+\RequirePackage{siunitx} % Units
+\RequirePackage{bm} % Bold math
+\RequirePackage{bbm} % More bold math
+\RequirePackage{mathpazo} % Fixes stuff
+\RequirePackage{mathtools} % Fixes more stuff
 
-% Todo notes
-%\RequirePackage[shadow]{todonotes}
-% Frames for theorems, proofs, etc.
-\RequirePackage[framemethod=TikZ]{mdframed}
+\RequirePackage[framemethod=TikZ]{mdframed} % Frames for theorems, proofs, etc.
 \RequirePackage{xargs}
-% If then else structure
-\RequirePackage{ifthen}
-% Fix space after some commands
-\RequirePackage{xspace}
-% Fix stuff
-\RequirePackage{etoolbox}
-%\RequirePackage{nameref}
-%\RequirePackage{scalerel, stackengine}
+\RequirePackage{imakeidx} % Create indexes
+\RequirePackage{tocloft} % Tables of content
+\RequirePackage{ifthen} % If then else structure
+\RequirePackage{xspace} % Fix space after some commands
+\RequirePackage{etoolbox} % Fix stuff
+
+\if@removechapters
+    \numberwithin{equation}{section}
+\fi
 
 \DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
 \DeclareSymbolFontAlphabet{\mathbbold}{bbold}
 
-% Put x\to\infty below \lim
-\let\svlim\lim\def\lim{\svlim\limits}
+\let\svlim\lim\def\lim{\svlim\limits} % Put x\to\infty below \lim
 
-% Logical relations
-\let\implies\Longrightarrow
-\let\nimplies\nLongrightarrow
-\let\impliedby\Longleftarrow
-\let\iff\Longleftrightarrow
+\let\implies\Longrightarrow % Implies
+\let\nimplies\nLongrightarrow % Not implies
+\let\impliedby\Longleftarrow % Implied by
+\let\nimpliedby\nLongleftarrow % Not implied by
+\let\iff\Longleftrightarrow % If and only if
 
-% Actual epsilon
-\let\epsilon\varepsilon
+\let\epsilon\varepsilon % Actual epsilon
 
 % Cooler greater (lower) or equal to symbols
-% plus negations
-\let\leq\neqslant
+\let\leq\leqslant
 \let\nleq\nleqslant
 \let\geq\geqslant
 \let\ngeq\ngeqslant
 
-% Logical AND and OR symbols
-%\lor\vee
-%\land\wedge
+\let\lor\vee % Logical AND
+\let\land\wedge % Logical OR
+
+\newcommand{\mop}[1]{\mathrm{#1}\xspace} % Operation
 
 % Define number sets
 \newcommand{\N}{\ensuremath{\mathbb{N}}\xspace}
@@ -111,7 +107,7 @@
 \newcommand{\C}{\ensuremath{\mathbb{C}}\xspace}
 \renewcommand{\O}{\ensuremath{\emptyset}\xspace}
 
-\newcommand{\st}{\;\diagup\;}
+\newcommand{\st}{\; | \;}
 \newcommand{\wtf}{(?)}
 
 % Special characters
@@ -132,12 +128,16 @@
 \newcommand{\bigzero}{\text{\Large O}}
 \newcommand{\invers}[1]{#1 ^{-1}}
 
+\newcommand{\deriv}[2]{\frac{\dif #1}{\dif #2}} % 1: f; 2: var
 \newcommand{\liminft}[1]{\lim_{{#1}\rightarrow\infty}}
+\newcommand{\mylim}[3]{\lim_{#1 \rightarrow #2} #3} % 1: vec; 2: to; 3: var;
 
 \DeclareMathOperator{\rot}{rot}
 \DeclareMathOperator{\diver}{div}
 
 \renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\vect}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+\newcommand{\vectt}[1]{\left( #1 \right)^t}
 
 % Set theory and relations
 \newcommand{\set}[1]{\{ #1 \}}
@@ -148,15 +148,32 @@
 \newcommand{\rela}{\mathcal{R}} % Relation
 \newcommand{\parts}[1]{\mathcal{P}\left( #1 \right)} % Partitions of a set / Power set
 \newcommand{\uset}{\mathcal{U}} % Universal set
+\newcommand{\SP}{\ensuremath{\mathcal{P}}}
 
+\newcommand{\Rtn}{\R^n}
 \newcommand{\field}{\ensuremath{\mathbb{F}}\xspace}
 
 \newcommand{\mtrans}[1]{{#1}^{T}}
+
+\newcommand{\eqreason}[2][=]{\underset{%
+	\substack{
+		\vspace{6pt} \uparrow  \\
+		\mathrlap{\wrapreasontext{#2}}
+	}
+}{#1}}
+
+\newcommand{\eqreasonup}[2][=]{\overset{%
+	\substack{
+		\mathrlap{\wrapreasontext{#2}} \\
+		\vspace{4pt} \downarrow
+	}
+}{#1}}
 
 % VECTORS AND GEOMETRY
 % Dot product
 \newcommand{\dotp}[1]{\langle #1 \rangle}
 \newcommand{\dotpm}[2]{\dotp{#1, #2}}
+\newcommand{\gen}[1]{\mathopen{<} #1 \mathclose{>}} % Generated by
 % Norm of a vector
 \newcommand{\vnorm}[1]{||#1||}
 
@@ -165,13 +182,27 @@
 \newcommand{\bydef}{\overset{\mathrm{def}}{=}}
 \newcommand{\iffdef}{\overset{\mathrm{def}}{\iff}}
 
-% Theorems and stuff
-\newcounter{thm}[chapter]\setcounter{thm}{0}
-\renewcommand{\thethm}{\arabic{chapter}.\arabic{thm}}
-\numberwithin{thm}{chapter}
+\newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
+\newenvironment{lcases}{\left\lbrace\begin{aligned}}{\end{aligned}\right.}
+\newenvironment{lrcases}{\left\lbrace\begin{aligned}}{\end{aligned}\right\rbrace}
 
-\newcounter{axiom}\setcounter{axiom}{0}
-\renewcommand{\theaxiom}{\arabic{axiom}}
+% Theorem, lemmas, etc. environment definitions.
+
+\if@removechapters
+    \newcounter{thm}[section] \setcounter{thm}{0}
+    \newcounter{def}[section] \setcounter{def}{0}
+    \renewcommand{\thethm}{\thesection.\arabic{thm}}
+    \renewcommand{\thedef}{\thesection.\arabic{def}}
+    \numberwithin{thm}{section}
+    \message{Using section numbering for theorems and definitions}
+\else
+    \newcounter{thm}[chapter] \setcounter{thm}{0}
+    \newcounter{def}[chapter] \setcounter{def}{0}
+    \renewcommand{\thethm}{\thechapter.\arabic{thm}}
+    \renewcommand{\thedef}{\thechapter.\arabic{def}}
+    \numberwithin{thm}{chapter}
+    \message{Using chapter numbering for theorems and definitions}
+\fi
 
 % https://tex.stackexchange.com/a/17551
 \newtheoremstyle{highlight}
@@ -194,23 +225,78 @@
   {5pt plus 1pt minus 1pt} % HEADSPACE
   {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}} % CUSTOM-HEAD-SPEC
 
-\theoremstyle{defi}
-
-\newtheorem{defi}[thm]{\@definition@mark}
-
-\theoremstyle{highlight}
-
-\newtheorem{theorem}[thm]{\@theorem@mark}
-\newtheorem{prop}[thm]{\@proposition@mark}
-\newtheorem{lemma}[thm]{\@lemma@mark}
-\newtheorem{coro}[thm]{\@corollary@mark}
-
 \theoremstyle{remark}
 
 \newtheorem*{note}{\@note@mark}
 \newtheorem*{notation}{\@notation@mark}
-\newtheorem*{remark}{\@remark@mark}
 \newtheorem*{claim}{\@claim@mark}
+
+% Define a List of Theorems. ithm is a special counter which
+% is incremented when a new item is added to this list, that
+% is saved in the master.ithmc file. To this list is only added
+% the theorems, lemmas and propositions that have a special name.
+\newcommand{\listtheoremname}{List of Theorems}
+\newlistof[chapter]{ithm}{ithmc}{\listtheoremname}
+\newcommand{\listoftheorems}{\listofithm}
+
+% Helper macro to increment the ithm counter and add the entry to the list.
+\newcommand{\ithm}[1]{%
+	\refstepcounter{ithm}
+	\addcontentsline{ithmc}{ithm}{\protect\numberline{\theithm}#1}\par
+}
+
+% Define a List of Definitions. idef is a special counter which
+% is incremented when a new item is added to this list, that
+% is saved in the master.idefc file. To this list is only added
+% the definitions that have a special name.
+\newcommand{\listdefinitionname}{List of Definitions}
+\newlistof[chapter]{idef}{idefc}{\listdefinitionname}
+\newcommand{\listofdefinitions}{\listofidef}
+
+% Helper macro to increment the idef counter and add the entry to the list.
+\newcommand{\idef}[1]{%
+	\refstepcounter{idef}
+	\addcontentsline{idefc}{idef}{\protect\numberline{\theidef}#1}\par
+}
+
+\theoremstyle{defi}
+
+% {defi} environment definition.
+\newtheorem{idefi}[def]{\@definition@mark}
+\newenvironment{defi}[1][]{%
+    \vspace{2pt}
+    \ifthenelse{\equal{#1}{}}{}{\idef{#1}}
+    \begin{idefi}[#1]
+}{\end{idefi}}
+
+\theoremstyle{defi}
+
+% {theorem} environment definition.
+\newtheorem{itheorem}[thm]{\@theorem@mark}
+\newenvironment{theorem}[1][]{%
+    \vspace{2pt}
+    \ifthenelse{\equal{#1}{}}{}{\ithm{#1}}
+    \begin{itheorem}[#1]
+}{\end{itheorem}}
+
+% {lemma} environment definition.
+\newtheorem{ilemma}[def]{\@lemma@mark}
+\newenvironment{lemma}[1][]{%
+    \vspace{2pt}
+    \ifthenelse{\equal{#1}{}}{}{\ithm{#1}}
+    \begin{ilemma}[#1]
+}{\end{ilemma}}
+
+% {prop} environment definition.
+\newtheorem{iprop}[def]{\@proposition@mark}
+\newenvironment{prop}[1][]{%
+    \vspace{2pt}
+    \ifthenelse{\equal{#1}{}}{}{\ithm{#1}}
+    \begin{iprop}[#1]
+}{\end{iprop}}
+
+% {coro} environment definition.
+\newtheorem{coro}[def]{\@corollary@mark}
 
 % This macro changes the equation numbering from (\theequation)
 % to (\thesection.\theequation). The equation counter is reseted
@@ -228,9 +314,10 @@
     linewidth=2pt, skipabove=1em, skipbelow=0pt]}{\end{mdframed}}
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
-\renewenvironment{proof}{\begin{leftbar}\noindent\textit{\@proof@mark}. }{\qed\end{leftbar}}
+\renewenvironment{proof}{\begin{leftbar}\noindent\textit{\underline{\@proof@mark}}.\itshape }{\qed\end{leftbar}} % Proofs
 
-\newenvironment{example}{\vspace{10pt}\par\noindent\textbf{\@example@mark}. }{}
+\newenvironment{example}{\vspace{10pt}\par\noindent\textbf{\@example@mark}.\itshape~}{} % Examples
+\newenvironment{remark}{\vspace{10pt}\par\noindent\textit{\@remark@mark}.~}{}  % Remarks
 
 % Fix some weird spacing on boxes created by the mdframed package
 % http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
