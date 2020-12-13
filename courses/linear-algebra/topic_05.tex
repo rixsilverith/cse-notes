@@ -1,4 +1,5 @@
 \chapter{Vector spaces}
+\thispagestyle{noheaders}
 
 \begin{defi}[Vector space]
     A vector space over a field $F$ is a set $V$ together with two operations, $\appl{+}{V\times V}{V}$
@@ -10,37 +11,7 @@
         \vec{v_1}, \quad\quad\quad\quad &  \alpha_1\cdot\left( \vec{v_1 + v_2} \right) = \alpha_1\vec{v_1} + \alpha_1\vec{v_2}.
     \end{align*}
 
-    \hide{
-    \begin{itemize}
-        \item[] $1\cdot \vec{v_1} = \vec{v_1}$,
-        \item[] $\alpha_1\cdot\left( \alpha_2\cdot \vec{v_1} \right) = \left( \alpha_1\alpha_2 \right) \cdot
-            \vec{v_1}$,
-        \hide{
-        \item $\left( \alpha_1 + \alpha_2 \right) \cdot \vec{v_1} = \alpha_1\vec{v_1} + \alpha_2\vec{v_1}$,
-        \item $\alpha_1\cdot\left( \vec{v_1 + v_2} \right) = \alpha_1\vec{v_1} + \alpha_1\vec{v_2}$.
-        }
-    }
-    \end{itemize}
-    \hide{
-    A vector space over a field $F$ is a set $V$ together with two operations that satisfy the eight axioms
-    listed below.
-    \begin{itemize}
-        \item The first operation, called \textbf{vector addition} $\appl{+}{V\times V}{V}$, takes any two
-            vectors $\vec{v}$ and $\vec{w}$ and assigns to them a third vector written $\vec{v} + \vec{w}$,
-            and called the sum of these two vectors. In this case, the resultant vector is also an element
-            of the set $V$.
-        \item The second operation, called \textbf{scalar multiplication} $\appl{\cdot}{F\times V}{V}$ takes
-            any scalar $a$ and any vector $\vec{v}$ and gives another vector $a\vec{v}$. Similarly, the
-            vector $a\vec{v}$ is an element of the set $V$.
-    \end{itemize}
-    }
 \end{defi}
-
-\hide{
-\begin{remark}
-    Scalar multiplication is not to be confused with the scalar product between two vectors.
-\end{remark}
-}
 
 \begin{notation}
 Elements in $F$ are usually called \textit{scalars} to differentiate them from the ones in $V$, that are
@@ -113,7 +84,7 @@ In conclusion, whenever we set linear and homogeneous conditions in $\Rtn$, a su
 closely related to the description of a vector space as the solutions of an homogeneous system.
 
 \begin{defi}[Linear combination]
-    Let $\vec{v_1}$, $\ldots$, $\vec{v_n}\in V$ be vectors within a vector space $V$ over some field $F$. 
+    Let $\vec{v_1}$, $\ldots$, $\vec{v_n}\in V$ be vectors within a vector space $V$ over some field $F$.
     A linear combination of $\vec{v_1}$, $\ldots$, $\vec{v_n}$ is an expression of the form $\alpha_1
     \vec{v_1} + \ldots + \alpha_n\vec{v_n}$, where  $\alpha_1$, $\ldots$, $\alpha_n\in F$.
 \end{defi}
@@ -320,9 +291,9 @@ vector subspace of $\R^2$?
 
 
 
-\section{Basis and dimension of a vector space}
-Taking about vector spaces it's covenient considering subsets that generate all the space and that have 
-the minimum possible number of vectors as, in some way, the \textit{size} of these sets determines the size 
+\section{Basis and dimension}
+Taking about vector spaces it's covenient considering subsets that generate all the space and that have
+the minimum possible number of vectors as, in some way, the \textit{size} of these sets determines the size
 of the vector space.
 
 \begin{defi}[Basis]
@@ -348,7 +319,7 @@ of the vector space.
             \frac{x - y}{2}.
     \end{equation}
 
-    Since there is always a solution, $B$ is a system of generators; i.e. $B$ generates $\R^2$. 
+    Since there is always a solution, $B$ is a system of generators; i.e. $B$ generates $\R^2$.
 
     \item For checking if $B$ is linearly independent we consider
     \begin{equation}
@@ -402,7 +373,7 @@ Let's see now how to compute the basis of a vector space.
     In this kind of problems it is better to express the conditions that define the subspace in terms of
     some variable that can take arbitrary values. In this case, note that
     \begin{equation}
-        \vec{v}\in V\quad\iff\quad \vec{v} = \left( -y - z, y, z \right) 
+        \vec{v}\in V\quad\iff\quad \vec{v} = \left( -y - z, y, z \right)
     \end{equation}
     where $y$ and $z$ can take any real value. Therefore,
     \begin{align}
@@ -420,8 +391,8 @@ Let's see now how to compute the basis of a vector space.
 \end{theorem}
 
 \begin{example}
-    Consider the canonical basis of $\R^3$ $B = \{\left( 1, 0, 0 \right), \left( 0, 1, 0 \right), \left( 
-    0, 0, 1\right) \} $ and the set of linearly independent vectors $S = \{\left( 0, 1, 0 \right), \left( 
+    Consider the canonical basis of $\R^3$ $B = \{\left( 1, 0, 0 \right), \left( 0, 1, 0 \right), \left(
+    0, 0, 1\right) \} $ and the set of linearly independent vectors $S = \{\left( 0, 1, 0 \right), \left(
     1, 2, 1\right) \} $. Following theorem \ref{thm:steinitz} we have $n = 3$, $m = 2$ and vectors
     \begin{equation}
         \vec{u_1} = \left( 1, 0, 0 \right), \quad\quad \vec{u_2} = \left( 0, 1, 0 \right),\quad\quad\vec{u_3}
@@ -440,9 +411,9 @@ Let's see now how to compute the basis of a vector space.
 \end{coro}
 
 \begin{proof}
-    If $B$ and $B'$ are basis with $m = \abs{B} < \abs{B'} = n$, then, following Steinitz's theorem 
-    \ref{thm:steinitz} we could get a new basis $B''$ such that $B''\superset B$ with $B''\neq B$, but 
-    since $\gen{B}$ is the whole space, this would imply that vectors in $B'' - B$ linearly dependent on 
+    If $B$ and $B'$ are basis with $m = \abs{B} < \abs{B'} = n$, then, following Steinitz's theorem
+    \ref{thm:steinitz} we could get a new basis $B''$ such that $B''\superset B$ with $B''\neq B$, but
+    since $\gen{B}$ is the whole space, this would imply that vectors in $B'' - B$ linearly dependent on
     the ones in $B$ and therefore $B''$ is not linearly independent.
 \end{proof}
 
@@ -466,11 +437,11 @@ beforehand the dimension of the vector space.
     \textbf{Prove that $B = \{\left( 1, 2, 1 \right) , \left( 1, 2, 0 \right), \left( 0, 1, 1 \right)\} $ is
     a basis of $\R^3$.}
 
-    Using the previous corollary is enough to see that the vectors in $B$ are linearly independent, since 
+    Using the previous corollary is enough to see that the vectors in $B$ are linearly independent, since
     $\dim \R^3 = 3$.
 \end{example}
 
-Knowing that any vector can be written as a linear combination of the elements of a basis, it is worth 
+Knowing that any vector can be written as a linear combination of the elements of a basis, it is worth
 defining the numbers that appear as coefficients, which characterises the vector.
 
 \begin{defi}[Coordinates]
@@ -486,12 +457,12 @@ defining the numbers that appear as coefficients, which characterises the vector
     only associated to the basis, but also to the way its elements are ordered.
 \end{note}
 
-\section{Operations with vector subspaces. Grassman's formula}
+\section{Operations with vector subspaces}
 \begin{prop}
     If $W$, $Z\subsetV$ are two vector subspaces of a vector space $V$, the sum of $W$ and $Z$, denoted by
     $W + Z$, is the smallest vector subspace of $V$ that contains both $W$ and $Z$. In other words,
     \begin{equation}
-        W + Z \bydef \{\vec{x}\st \vec{x} = \vec{w} + \vec{z},\ \vec{w}\in W,\ \vec{z}\in Z\}. 
+        W + Z \bydef \{\vec{x}\st \vec{x} = \vec{w} + \vec{z},\ \vec{w}\in W,\ \vec{z}\in Z\}.
     \end{equation}
 \end{prop}
 
@@ -538,6 +509,6 @@ defining the numbers that appear as coefficients, which characterises the vector
 \begin{prop}[Grassman's formula]
     If $W$ and $Z$ are two subspaces of a vector space with finite dimension, then
     \begin{equation}
-        \dim\left( W + Z \right) = \dim W + \dim Z - \dim\left( W\cap Z \right). 
+        \dim\left( W + Z \right) = \dim W + \dim Z - \dim\left( W\cap Z \right).
     \end{equation}
 \end{prop}
