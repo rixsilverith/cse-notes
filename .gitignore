@@ -1,4 +1,5 @@
 */
+!courses/
 !courses/**/*.tex
 !courses/**/*.yaml
 !courses/**/*.bib
@@ -8,6 +9,6 @@
 !scripts/
 !latex-stuff/
 !.gitignore
-!lecture-notes
+!cse-notes
 !LICENSE
 !README.md
