@@ -53,6 +53,9 @@
 \DeclareOption{githublink}{\def\notes@github{true}}
 \DeclareOption{nogithublink}{\def\notes@github{false}}
 
+\DeclareOption{notation}{\def\notes@notation{true}}
+\DeclareOption{nonotation}{\def\notes@notation{false}}
+
 % Number styles [oldnums, stdnums]
 %     - oldnums: use old number styles.
 %     - stdnums (default): use normal number styles.
@@ -68,7 +71,7 @@
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 
-\ExecuteOptions{english, lastpageref, bibliography, githublink, stdnums, noauxlabels}
+\ExecuteOptions{english, titlepagefull, lastpageref, bibliography, githublink, notation, stdnums, noauxlabels}
 \ProcessOptions\relax
 
 \LoadClass[a4paper, 11pt]{report}
@@ -95,17 +98,107 @@
 \RequirePackage{wrapfig} % Floating images
 \RequirePackage{pdfpages} % Insert PDF documents
 \RequirePackage{booktabs} % Better tables
+\RequirePackage{longtable} % Better tables
 \RequirePackage{multirow} % Multiple rows in tables
 \RequirePackage{enumitem} % Change stuff in items within enumerate or itemize
 \RequirePackage{subcaption} % Subcaption support
 \RequirePackage[format=plain, labelfont=bf, textfont=it]{caption} % Custom caption styles
-\RequirePackage[colorlinks=true, allcolors=\notes@colorlinks]{hyperref} % Links around the document
+\RequirePackage[colorlinks=true, allcolors=\notes@colorlinks, urlcolor=cyan]{hyperref} % Links around the document
 \RequirePackage{blindtext} % Next level lorem ipsum
 \RequirePackage{ifthen} % If-then-else conditions
 \RequirePackage{listings} % Write code listings
 \RequirePackage{exmath} % Theorems, proofs, math macros and more
 \RequirePackage{natbib} % Bibliography
 \RequirePackage[nottoc]{tocbibind} % Append bibliography to table of contents
+%\RequirePackage{exfrefs} % Extended, cooler references
+
+\RequirePackage[plain]{fancyref}
+
+\hide{
+\makeatletter
+% Infierno para poder añadir fácilmente nuevos prefijos a fancyref.
+% Sintaxis: \mkfancyprefix{prefijo}{Nombre}.
+\def\mkfancyprefix#1#2{%
+  \@namedef{fancyref#1labelprefix}{#1}%
+  \begingroup\def\x{\endgroup\frefformat{vario}}%
+    \expandafter\x\csname fancyref#1labelprefix\endcsname
+      {\MakeLowercase{#2}\fancyrefdefaultspacing##1##3}%
+  \begingroup\def\x{\endgroup\Frefformat{vario}}%
+    \expandafter\x\csname fancyref#1labelprefix\endcsname
+      {#2\fancyrefdefaultspacing##1##3}%
+       \begingroup\def\x{\endgroup\frefformat{plain}}%
+    \expandafter\x\csname fancyref#1labelprefix\endcsname
+      {\MakeLowercase{#2}\fancyrefdefaultspacing##1}%
+  \begingroup\def\x{\endgroup\Frefformat{plain}}%
+    \expandafter\x\csname fancyref#1labelprefix\endcsname
+      {#2\fancyrefdefaultspacing##1}%
+}
+\makeatother
+}
+
+%\mkfancyprefix{def}{Definition}
+%\mkfancyprefix{thm}{Theorem}
+
+\providecommand*{\namerefl}[1]{%
+\refused{#1}%
+\hyperref[#1]{\getrefbykeydefault{#1}{name}{??}}%
+}
+
+\newcommand{\nref}[1]{\nameref{#1}~(\ref{#1})}
+\newcommand{\nlref}[1]{\namerefl{#1}~(\ref{#1})}
+
+\newcommand{\exref}[1]{\refused{#1}\hyperref[#1]{\getrefbykeydefault{#1}{name}{??}}~(\ref{#1})}
+
+%\renewcommand{\fancyrefdefaultformat}{plain}
+
+\newcommand*{\fancyrefdeflabelprefix}{def}
+\newcommand*{\fancyrefdeflabelprefix}{thm}
+\newcommand*{\fancyrefproplabelprefix}{prop}
+\newcommand*{\fancyreflemlabelprefix}{lem}
+\newcommand*{\fancyrefcorolabelprefix}{coro}
+
+\fancyrefaddcaptions{english}{%
+\newcommand*{\Frefdefname}{Definition}%
+\newcommand*{\frefdefname}{\MakeLowercase{\Frefdefname}}%
+\newcommand*{\Frefthmname}{Theorem}%
+\newcommand*{\frefthmname}{\MakeLowercase{\Frefthmname}}%
+\newcommand*{\Frefpropname}{Proposition}%
+\newcommand*{\frefpropname}{\MakeLowercase{\Frefpropname}}%
+\newcommand*{\Freflemname}{Lemma}%
+\newcommand*{\freflemname}{\MakeLowercase{\Freflemname}}%
+\newcommand*{\Frefcoroname}{Corollary}%
+\newcommand*{\frefcoroname}{\MakeLowercase{\Frefcoroname}}%
+}
+
+%\renewcommand{\fancyrefhook}[1]{{\huge #1}}
+
+%\RequirePackage{cleveref}
+%\crefformat{defi}{#2definition~#1#3}
+%\Crefformat{defi}{#2Definition~#1#3}
+
+%\newcommand{\eref}[1]{\cref{#1}}
+\RequirePackage{xstring}
+
+\newcommand{\instring}[4]{%
+\ifnum\pdfmatch{#1}{#2}=1
+    #3%
+\else
+    #4%
+\fi
+}
+
+\newcommand{\eref}[1]{%
+    %\instring{def:}{#1}{\hyperref[#1]{definition}~\ref{#1}}{}
+    \instring{lem:}{#1}{\hyperref[#1]{lemma}~\ref{#1}}{}%
+    \instring{prop:}{#1}{\hyperref[#1]{proposition}~\ref{#1}}{}%
+    \IfSubStr{#1}{def:}{\hyperref[#1]{Definition}~\ref{#1}}{}%
+}
+
+% Random idea: use \fulleref to fully reference the name eg
+% Definition 4.1 (Derivative)
+
+
+
 
 \pretolerance=7000
 \tolerance=500
@@ -131,6 +224,9 @@
 \newcommand{\hr}{\noindent\rule[0.5ex]{\linewidth}{0.5pt}}
 \newcommand{\smiley}{\ensuremath{\ddot\smile}}
 
+\def\notes@title{}
+\renewcommand{\title}[1]{\def\notes@title{#1}}
+
 \def\notes@course{}
 \newcommand{\course}[1]{\def\notes@course{#1}}
 
@@ -143,7 +239,7 @@
 \def\notes@degree{Bachelor in Computer Science and Engineering}
 \newcommand{\degree}[1]{\def\notes@degree{#1}}
 
-\def\notes@author{Rix Silverith}
+\def\notes@author{Rix Silverith $\gen{\textrm{\textcolor{\notes@colorlinks}{rixsilverith(at)outlook(dot)com}}}$}
 \renewcommand{\author}[1]{\def\notes@author{#1}}
 
 \def\notes@date{20/21 B1 S1}
@@ -170,15 +266,22 @@
     \renewcommand{\headrulewidth}{0pt}
     \fancyhead{}
     \ifthenelse{\equal{\notes@pagenumbering}{lastpageref}}
-        {\cfoot{\thepage\ \@of\ \pageref{LastPage}}}
+        {\rfoot{\thepage\ / \pageref{LastPage}}}
+        {\cfoot{\thepage}}}
+
+\fancypagestyle{pnlp}{%
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead{}
+    \ifthenelse{\equal{\notes@pagenumbering}{lastpageref}}
+        {\rfoot{\thepage\ / \pageref{LastPage}}}
         {\cfoot{\thepage}}}
 
 \fancyhf{}
 \fancypagestyle{plain}{%
-	\lhead{\small \itshape \notes@course\, -\, \notes@date}
+	\lhead{\small \bfseries \notes@course\, -\, \notes@date}
 	\rhead{\small \nouppercase\leftmark}
     \ifthenelse{\equal{\notes@pagenumbering}{lastpageref}}
-        {\cfoot{\thepage\ \@of\ \pageref{LastPage}}}
+        {\rfoot{\thepage\ / \pageref{LastPage}}}
         {\cfoot{\thepage}}}
 
 \renewcommand{\tableofcontents}{%
@@ -187,13 +290,35 @@
   \@starttoc{toc}\vskip 7ex%
 }
 
+\newcommand{\notation}{%
+    \phantomsection
+    \addcontentsline{toc}{chapter}{Notation}
+    \clearpage
+    \chapter*{Notation}
+    \thispagestyle{noheaders}
+    \input{notation.tex}
+}
+
 \AtBeginDocument{%
+\ifthenelse{\equal{\notes@titlepagestyle}{compact}}{%
+\pagestyle{pnlp}
+\notes@titlepagecompact
+}{}
+
+\ifthenelse{\equal{\notes@titlepagestyle}{fullpage}}{
 \pagestyle{plain}
+\thispagestyle{noheaders}
 \notes@titlepage
 \thispagestyle{noheaders}
+%\ifthenelse{\equal{\notes@notation}{true}}{\notation}{}
+%\notation
 \clearpage
 \tableofcontents
 \newpage
+}{}
+
+%\notes@titlepage
+
 }
 
 \hide{
@@ -236,3 +361,17 @@
 \end{figure}
 \vskip0.5cm
 \noindent\textrm{These notes are licensed under \href{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}{Creative Commons Attribution - No Commercial - Share Alike 4.0}. They can be freely used and distributed as long as the original author is credited, they aren't used for commercial purposes and derived work is shared under this same license.}}
+
+\newcommand{\notes@titlepagecompact}{%
+\begin{center}
+    %\thispagestyle{noheaders}
+    %\vspace*{2cm}
+    \Huge\textbf{\notes@title}\vskip0.5cm
+
+    \LARGE\textbf{\notes@course\ -\ \notes@group}\vskip0.5cm
+    \Large\notes@degree\vskip0.5cm
+    \large\notes@date\vskip0.5cm
+    \large\notes@author\vskip1.5cm
+    \vskip.5cm
+\end{center}
+}

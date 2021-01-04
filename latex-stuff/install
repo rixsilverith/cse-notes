@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 latex_dir=$(dirname $(kpsewhich article.cls))
 
-export TEXINPUTS="${LNOTES_DIR}/latex-stuff:"
+export TEXINPUTS="${LECTURE_NOTES_HOME}/latex-stuff:"
 export max_print_line="1000"
 export error_line="254"
 export half_error_line="238"
