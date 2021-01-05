@@ -1,0 +1,80 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{exrefs}[2015/05/21 Extended cross-references]
+
+\RequirePackage{xstring}
+
+\def\ref@prefix@definition{def:}
+\def\ref@name@definition{Definition}
+\def\ref@lname@definition{\MakeLowercase{\ref@name@definition}}
+\newcommand{\exrefdefname}[1]{\def\ref@name@definition{#1}}
+\newcommand{\exrefdefprefix}[1]{\def\ref@prefix@definition{#1}}
+
+\def\ref@prefix@theorem{thm:}
+\def\ref@name@theorem{Theorem}
+\def\ref@lname@theorem{\MakeLowercase{\ref@name@theorem}}
+\newcommand{\exrefthmname}[1]{\def\ref@name@theorem{#1}}
+\newcommand{\exrefthmprefix}[1]{\def\ref@prefix@theorem{#1}}
+
+\def\ref@prefix@proposition{prop:}
+\def\ref@name@proposition{Proposition}
+\def\ref@lname@proposition{\MakeLowercase{\ref@name@proposition}}
+\newcommand{\exrefpropname}[1]{\def\ref@name@proposition{#1}}
+\newcommand{\exrefpropprefix}[1]{\def\ref@prefix@proposition{#1}}
+
+\def\ref@prefix@lemma{lem:}
+\def\ref@name@lemma{Lemma}
+\def\ref@lname@lemma{\MakeLowercase{\ref@name@lemma}}
+\newcommand{\exreflemname}[1]{\def\ref@name@lemma{#1}}
+\newcommand{\exreflemprefix}[1]{\def\ref@prefix@lemma{#1}}
+
+\def\ref@prefix@corollary{coro:}
+\def\ref@name@corollary{Corollary}
+\def\ref@lname@corollary{\MakeLowercase{\ref@name@corollary}}
+\newcommand{\exrefcoroname}[1]{\def\ref@name@corollary{#1}}
+\newcommand{\exrefcoroprefix}[1]{\def\ref@prefix@corollary{#1}}
+
+\newcommand{\getrefname}[1]{\getrefbykeydefault{#1}{name}{??}}
+
+\newcommand{\eref}[1]{%
+\IfSubStr{#1}{\ref@prefix@definition}{\hyperref[#1]{\ref@lname@definition}~\ref{#1}}{}%
+\IfSubStr{#1}{\ref@prefix@theorem}{\hyperref[#1]{\ref@lname@theorem}~\ref{#1}}{}%
+\IfSubStr{#1}{\ref@prefix@proposition}{\hyperref[#1]{\ref@lname@proposition}~\ref{#1}}{}%
+\IfSubStr{#1}{\ref@prefix@lemma}{\hyperref[#1]{\ref@lname@lemma}~\ref{#1}}{}%
+\IfSubStr{#1}{\ref@prefix@corollary}{\hyperref[#1]{\ref@lname@corollary}~\ref{#1}}{}%
+}
+
+\newcommand{\Eref}[1]{%
+\IfSubStr{#1}{\ref@prefix@definition}{\hyperref[#1]{\ref@name@definition}~\ref{#1}}{}%
+\IfSubStr{#1}{\ref@prefix@theorem}{\hyperref[#1]{\ref@name@theorem}~\ref{#1}}{}%
+\IfSubStr{#1}{\ref@prefix@proposition}{\hyperref[#1]{\ref@name@proposition}~\ref{#1}}{}%
+\IfSubStr{#1}{\ref@prefix@lemma}{\hyperref[#1]{\ref@name@lemma}~\ref{#1}}{}%
+\IfSubStr{#1}{\ref@prefix@corollary}{\hyperref[#1]{\ref@name@corollary}~\ref{#1}}{}%
+}
+
+\newcommand{\fulleref}[1]{%
+\IfSubStr{#1}{\ref@prefix@definition}{%
+    \hyperref[#1]{\ref@lname@definition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+\IfSubStr{#1}{\ref@prefix@theorem}{%
+    \hyperref[#1]{\ref@lname@theorem}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+\IfSubStr{#1}{\ref@prefix@proposition}{%
+    \hyperref[#1]{\ref@lname@proposition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+\IfSubStr{#1}{\ref@prefix@lemma}{%
+    \hyperref[#1]{\ref@lname@lemma}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+\IfSubStr{#1}{\ref@prefix@corollary}{%
+    \hyperref[#1]{\ref@lname@corollary}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+}
+
+\newcommand{\Fulleref}[1]{%
+\IfSubStr{#1}{\ref@prefix@definition}{%
+    \hyperref[#1]{\ref@name@definition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+\IfSubStr{#1}{\ref@prefix@theorem}{%
+    \hyperref[#1]{\ref@name@theorem}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+\IfSubStr{#1}{\ref@prefix@proposition}{%
+    \hyperref[#1]{\ref@name@proposition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+\IfSubStr{#1}{\ref@prefix@lemma}{%
+    \hyperref[#1]{\ref@name@lemma}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+\IfSubStr{#1}{\ref@prefix@corollary}{%
+    \hyperref[#1]{\ref@name@corollary}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+}
+
+\newcommand{\nref}[1]{\refused{#1}\hyperref[#1]{\getrefname{#1}}~(\ref{#1})}
