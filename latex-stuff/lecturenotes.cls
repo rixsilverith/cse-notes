@@ -102,7 +102,7 @@
 \RequirePackage{multirow} % Multiple rows in tables
 \RequirePackage{enumitem} % Change stuff in items within enumerate or itemize
 \RequirePackage{subcaption} % Subcaption support
-\RequirePackage[format=plain, labelfont=bf, textfont=it]{caption} % Custom caption styles
+\RequirePackage[format=plain, labelfont=bf]{caption} % Custom caption styles
 \RequirePackage[colorlinks=true, allcolors=\notes@colorlinks, urlcolor=cyan]{hyperref} % Links around the document
 \RequirePackage{blindtext} % Next level lorem ipsum
 \RequirePackage{ifthen} % If-then-else conditions
@@ -190,7 +190,7 @@
 
 \fancyhf{}
 \fancypagestyle{plain}{%
-	\lhead{\small \bfseries \notes@course\, -\, \notes@date}
+	\lhead{\small \notes@course\, -\, \notes@date}
 	\rhead{\small \nouppercase\leftmark}
     \ifthenelse{\equal{\notes@pagenumbering}{lastpageref}}
         {\rfoot{\thepage\ / \pageref{LastPage}}}
@@ -217,7 +217,7 @@
 \notes@titlepagecompact
 }{}
 
-\ifthenelse{\equal{\notes@titlepagestyle}{fullpage}}{
+\ifthenelse{\equal{\notes@titlepagestyle}{fullpage}}{%
 \pagestyle{plain}
 \thispagestyle{noheaders}
 \notes@titlepage
@@ -228,9 +228,6 @@
 \tableofcontents
 \newpage
 }{}
-
-%\notes@titlepage
-
 }
 
 \hide{
@@ -255,13 +252,14 @@
 
     \Large\notes@degree\vskip0.5cm
     \large\notes@date\vskip0.5cm
-    \large\notes@author\vskip1.5cm
+    \large\notes@author\vskip1cm
 
     \ifthenelse{\equal{\notes@github}{true}}{%
-        \href{https://github.com/rixsilverith/cse-notes/courses/}{Source code on GitHub}}
+        \href{https://github.com/rixsilverith/cse-notes/courses/}{Source code available on GitHub}}{}
 
+    \vskip2cm
     \begin{figure}[ht]
-        \centering\includegraphics[width=.55\textwidth]{assets/uam.png}
+        \centering\includegraphics[width=.65\textwidth]{assets/uam.png}
     \end{figure}
     \vskip5cm
 \end{center}
