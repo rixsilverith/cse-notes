@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{lecturenotes}[Document class for writing lecture notes and handouts]
+\ProvidesClass{csenotes}[Document class for writing lecture notes and handouts]
 
 % Language of the document [english, spanish]
 %     - english (default).
