@@ -82,6 +82,27 @@
 
 \LoadClass[a4paper, 11pt]{report}
 
+\def\notes@course@default{Course title}
+\def\notes@short@default{CSHORT}
+\def\notes@group@default{1191}
+\def\notes@degree@default{Bachelor in whatever}
+\def\notes@author@default{Author}
+\def\notes@email@default{author(at)gmail(dot)com}
+\def\notes@date@default{20/21 B1 S1}
+\def\notes@githubrepo@default{https://github.com}
+
+\def\notes@title{}
+\renewcommand{\title}[1]{\def\notes@title{#1}}
+
+\def\notes@course{\notes@course@default}\newcommand{\course}[1]{\def\notes@course{#1}}
+\def\notes@short{\notes@short@default}\newcommand{\short}[1]{\def\notes@short{#1}}
+\def\notes@group{\notes@group@default}\newcommand{\group}[1]{\def\notes@group{#1}}
+\def\notes@degree{\notes@degree@default}\newcommand{\degree}[1]{\def\notes@degree{#1}}
+\def\notes@author{\notes@author@default}\renewcommand{\author}[1]{\def\notes@author{#1}}
+\def\notes@email{\notes@email@default}\newcommand{\email}[1]{\def\notes@email{#1}}
+\def\notes@date{\notes@date@default}\renewcommand{\date}[1]{\def\notes@date{#1}}
+\def\notes@githubrepo{\notes@githubrepo@default}\newcommand{\githubrepo}[1]{\def\notes@githubrepo{#1}}
+
 \def\notes@colorlinks{blue!60!black}
 \newcommand{\colorlinks}[1]{\def\notes@colorlinks{#1}}
 
@@ -144,30 +165,6 @@
 \newcommand{\hide}[1]{}
 \newcommand{\hr}{\noindent\rule[0.5ex]{\linewidth}{0.5pt}}
 \newcommand{\smiley}{\ensuremath{\ddot\smile}}
-
-\def\notes@title{}
-\renewcommand{\title}[1]{\def\notes@title{#1}}
-
-\def\notes@course{}
-\newcommand{\course}[1]{\def\notes@course{#1}}
-
-\def\notes@short{}
-\newcommand{\short}[1]{\def\notes@short{#1}}
-
-\def\notes@group{}
-\newcommand{\group}[1]{\def\notes@group{#1}}
-
-\def\notes@degree{Bachelor in Computer Science and Engineering}
-\newcommand{\degree}[1]{\def\notes@degree{#1}}
-
-\def\notes@author{Rix Silverith $\gen{\textrm{\textcolor{\notes@colorlinks}{rixsilverith(at)outlook(dot)com}}}$}
-\renewcommand{\author}[1]{\def\notes@author{#1}}
-
-\def\notes@date{20/21 B1 S1}
-\renewcommand{\date}[1]{\def\notes@date{#1}}
-
-\def\notes@bibliodb{bibliography}
-\renewcommand{\biblio}[1]{\def\notes@bibliodb{#1}}
 
 \titleformat{\chapter}[display]{\Huge\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\Huge}
 \titlespacing*{\chapter}{0pt}{-50pt}{15pt}
@@ -261,10 +258,10 @@
 
     \Large\notes@degree\vskip0.5cm
     \large\notes@date\vskip0.5cm
-    \large\notes@author\vskip1cm
+    \large\notes@author\ $\langle$\textcolor{\notes@colorlinks}{\notes@email}$\rangle$\vskip1cm
 
     \ifthenelse{\equal{\notes@github}{true}}{%
-        \href{https://github.com/rixsilverith/cse-notes/courses/}{Source code available on GitHub}}{}
+        \href{\notes@githubrepo}{Source code available on GitHub}}{}
 
     \vskip2cm
     \begin{figure}[ht]
