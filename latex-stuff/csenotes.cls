@@ -53,6 +53,12 @@
 \DeclareOption{githublink}{\def\notes@github{true}}
 \DeclareOption{nogithublink}{\def\notes@github{false}}
 
+% Font typefaces [palatino, fourier]
+%     - palatino (default): use the Palatino font typeface.
+%     - fourier: use the Utopia/Fourier font typeface.
+\DeclareOption{fontpalatino}{\def\notes@fonttypeface{ppl}}
+\DeclareOption{fontfourier}{\def\notes@fonttypeface{put}}
+
 \DeclareOption{notation}{\def\notes@notation{true}}
 \DeclareOption{nonotation}{\def\notes@notation{false}}
 
@@ -71,7 +77,7 @@
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 
-\ExecuteOptions{english, titlepagefull, lastpageref, bibliography, githublink, notation, stdnums, noauxlabels}
+\ExecuteOptions{english, titlepagefull, lastpageref, fontpalatino, bibliography, githublink, notation, stdnums, noauxlabels}
 \ProcessOptions\relax
 
 \LoadClass[a4paper, 11pt]{report}
@@ -79,9 +85,12 @@
 \def\notes@colorlinks{blue!60!black}
 \newcommand{\colorlinks}[1]{\def\notes@colorlinks{#1}}
 
+\def\notes@urlcolor{cyan}
+\newcommand{\urlcolor}[1]{\def\notes@urlcolor{#1}}
+
 % Use the Palatino font family
-\renewcommand{\rmdefault}{ppl}
-\renewcommand{\sfdefault}{fla}
+\renewcommand{\rmdefault}{\def\notes@fonttypeface}
+\renewcommand{\sfdefault}{lmss}
 \renewcommand{\ttdefault}{lmtt}
 \renewcommand*{\familydefault}{\rmdefault}
 
@@ -103,7 +112,7 @@
 \RequirePackage{enumitem} % Change stuff in items within enumerate or itemize
 \RequirePackage{subcaption} % Subcaption support
 \RequirePackage[format=plain, labelfont=bf]{caption} % Custom caption styles
-\RequirePackage[colorlinks=true, allcolors=\notes@colorlinks, urlcolor=cyan]{hyperref} % Links around the document
+\RequirePackage[colorlinks=true, allcolors=\notes@colorlinks, urlcolor=\notes@urlcolor]{hyperref} % Links around the document
 \RequirePackage{blindtext} % Next level lorem ipsum
 \RequirePackage{ifthen} % If-then-else conditions
 \RequirePackage{listings} % Write code listings
