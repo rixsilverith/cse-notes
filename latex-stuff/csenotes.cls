@@ -25,9 +25,10 @@
 %     - titlepagecompact: more compact, not fullpage, titlepage, with the title of
 %            the document, author and date.
 %     - notitlepage: no titlepage at all.
-\DeclareOption{titlepagefull}{\def\notes@titlepagestyle{fullpage}}
-\DeclareOption{titlepagecompact}{\def\notes@titlepagestyle{compact}}
-\DeclareOption{notitlepage}{\def\notes@titlepagestyle{notitlepage}}
+%\DeclareOption{titlepagefull}{\def\notes@titlepagestyle{fullpage}}
+\DeclareOption{titlepagefull}{\newcommand{\notes@titlepage}{fullpage}}
+\DeclareOption{titlepagecompact}{\def\notes@titlepage{compact}}
+\DeclareOption{notitlepage}{\def\notes@titlepage{notitlepage}}
 
 % Page number formatting [lastpageref, currentpageref, nopagenumber]
 %     - lastpageref (default): print the number of both the current and the last
@@ -80,36 +81,31 @@
 \ExecuteOptions{english, titlepagefull, lastpageref, fontpalatino, bibliography, githublink, notation, stdnums, noauxlabels}
 \ProcessOptions\relax
 
-\LoadClass[a4paper, 11pt]{report}
+\def\notes@fontsize{11pt}\newcommand\fontsize[1]{\def\notes@fontsize{#1}}
 
-\def\notes@course@default{Course title}
-\def\notes@short@default{CSHORT}
-\def\notes@group@default{1191}
-\def\notes@degree@default{Bachelor in whatever}
-\def\notes@author@default{Author}
-\def\notes@email@default{author(at)gmail(dot)com}
-\def\notes@date@default{20/21 B1 S1}
-\def\notes@githubrepo@default{https://github.com}
+\LoadClass[a4paper, \notes@fontsize]{report}
 
-\def\notes@title{}
-\renewcommand{\title}[1]{\def\notes@title{#1}}
+\newcommand\course[1]{\def\notes@course{#1}}
+\newcommand\short[1]{\def\notes@short{#1}}
+\newcommand\group[1]{\def\notes@group{#1}}
+\newcommand\degree[1]{\def\notes@degree{#1}}
+\newcommand\date[1]{\def\notes@date{#1}}
+\newcommand\authorinfo[2][]{\def\notes@author{#2}\def\notes@email{#1}}
+\newcommand\repo[1]{\def\notes@repo{#1}}
 
-\def\notes@course{\notes@course@default}\newcommand{\course}[1]{\def\notes@course{#1}}
-\def\notes@short{\notes@short@default}\newcommand{\short}[1]{\def\notes@short{#1}}
-\def\notes@group{\notes@group@default}\newcommand{\group}[1]{\def\notes@group{#1}}
-\def\notes@degree{\notes@degree@default}\newcommand{\degree}[1]{\def\notes@degree{#1}}
-\def\notes@author{\notes@author@default}\renewcommand{\author}[1]{\def\notes@author{#1}}
-\def\notes@email{\notes@email@default}\newcommand{\email}[1]{\def\notes@email{#1}}
-\def\notes@date{\notes@date@default}\renewcommand{\date}[1]{\def\notes@date{#1}}
-\def\notes@githubrepo{\notes@githubrepo@default}\newcommand{\githubrepo}[1]{\def\notes@githubrepo{#1}}
+\RequirePackage{ifthen} % If-then-else conditions
 
-\def\notes@colorlinks{blue!60!black}
-\newcommand{\colorlinks}[1]{\def\notes@colorlinks{#1}}
+\ifthenelse{\isundefined{\notes@course}}{\course{Course title}}{}
+\ifthenelse{\isundefined{\notes@short}}{\short{CS}}{}
+\ifthenelse{\isundefined{\notes@group}}{\group{1191}}{}
+\ifthenelse{\isundefined{\notes@degree}}{\degree{Bachelor in whatever}}{}
+\ifthenelse{\isundefined{\notes@date}}{\date{20/21 B1 S1}}{}
+\ifthenelse{\isundefined{\notes@authorinfo}}{\authorinfo[author(at)gmail(dot)com]{Author}}{}
+\ifthenelse{\isundefined{\notes@repo}}{\repo{}}{}
 
-\def\notes@urlcolor{cyan}
-\newcommand{\urlcolor}[1]{\def\notes@urlcolor{#1}}
+\def\notes@refcolor{blue!60!black}\newcommand\refcolor[1]{\def\notes@refcolor{#1}}
+\def\notes@urlcolor{cyan}\newcommand\urlcolor[1]{\def\notes@urlcolor{#1}}
 
-% Use the Palatino font family
 \renewcommand{\rmdefault}{\def\notes@fonttypeface}
 \renewcommand{\sfdefault}{lmss}
 \renewcommand{\ttdefault}{lmtt}
@@ -133,9 +129,8 @@
 \RequirePackage{enumitem} % Change stuff in items within enumerate or itemize
 \RequirePackage{subcaption} % Subcaption support
 \RequirePackage[format=plain, labelfont=bf]{caption} % Custom caption styles
-\RequirePackage[colorlinks=true, allcolors=\notes@colorlinks, urlcolor=\notes@urlcolor]{hyperref} % Links around the document
+\RequirePackage{hyperref} % Links around the document
 \RequirePackage{blindtext} % Next level lorem ipsum
-\RequirePackage{ifthen} % If-then-else conditions
 \RequirePackage{listings} % Write code listings
 \RequirePackage{exmath} % Theorems, proofs, math macros and more
 \RequirePackage{natbib} % Bibliography
@@ -145,6 +140,9 @@
 \pretolerance=7000
 \tolerance=500
 \emergencystretch=3pt
+
+\hypersetup{colorlinks=true, allcolors=\notes@refcolor, urlcolor=\notes@urlcolor}
+\urlstyle{same}
 
 \setcounter{secnumdepth}{3}
 \counterwithin{table}{chapter}
@@ -177,17 +175,7 @@
 \titleformat{\paragraph}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titleformat{\subparagraph}{\normalfont\normalize\bfseries}{\thesubparagraph}{1em}{}
 
-\ifthenelse{\equal{\notes@lang}{english}}{\def\@of{of}}{}
-\ifthenelse{\equal{\notes@lang}{spanish}}{\def\@of{de}}{}
-
 \fancypagestyle{noheaders}{%
-    \renewcommand{\headrulewidth}{0pt}
-    \fancyhead{}
-    \ifthenelse{\equal{\notes@pagenumbering}{lastpageref}}
-        {\rfoot{\thepage\ / \pageref{LastPage}}}
-        {\cfoot{\thepage}}}
-
-\fancypagestyle{pnlp}{%
     \renewcommand{\headrulewidth}{0pt}
     \fancyhead{}
     \ifthenelse{\equal{\notes@pagenumbering}{lastpageref}}
@@ -202,66 +190,50 @@
         {\rfoot{\thepage\ / \pageref{LastPage}}}
         {\cfoot{\thepage}}}
 
+% Hide headers at the beginning of a new chapter
+\newcommand{\bchapter}[1]{\chapter{#1}\thispagestyle{noheaders}}
+
+% Hide headers at the beginning of the table of contents
 \renewcommand{\tableofcontents}{%
   \chapter*{\contentsname}
   \thispagestyle{noheaders}
-  \@starttoc{toc}\vskip 7ex%
-}
-
-\newcommand{\notation}{%
-    \phantomsection
-    \addcontentsline{toc}{chapter}{Notation}
-    \clearpage
-    \chapter*{Notation}
-    \thispagestyle{noheaders}
-    \input{notation.tex}
-}
+  \@starttoc{toc}\vskip 7ex}
 
 \AtBeginDocument{%
-\ifthenelse{\equal{\notes@titlepagestyle}{compact}}{%
-\pagestyle{pnlp}
-\notes@titlepagecompact
-}{}
+    \ifthenelse{\equal{\notes@titlepage}{compact}}%
+        {\pagestyle{noheaders}\notes@titlepagecompact}{}%
 
-\ifthenelse{\equal{\notes@titlepagestyle}{fullpage}}{%
-\pagestyle{plain}
-\thispagestyle{noheaders}
-\notes@titlepage
-\thispagestyle{noheaders}
-%\ifthenelse{\equal{\notes@notation}{true}}{\notation}{}
-%\notation
-\clearpage
-\tableofcontents
-\newpage
-}{}
+    \ifthenelse{\equal{\notes@titlepage}{fullpage}}{%
+        \pagestyle{plain}
+        \thispagestyle{noheaders}
+        \notes@printtitlepage
+        \thispagestyle{noheaders}
+        \clearpage
+        \tableofcontents
+        \newpage
+    }{}%
 }
 
-\hide{
-\AtEndDocument{%
-\ifthenelse{\equal{\notes@biblio}{true}}{%
-    \nocite{*}
-    \bibliography{\notes@bibliodb}
-    \thispagestyle{noheaders}
-}{}}}
+\newcommand\biblio[1]{\nocite{*}\bibliography{#1}\thispagestyle{noheaders}}
 
 % Print the full title page, including titles, relevant
 % information about the document, a brief abstract if given
 % and the corresponding logos
-\newcommand{\notes@titlepage}{%
-\begin{titlepage}
-\begin{center}
-    \thispagestyle{empty}
-    \vspace*{2cm}
+\newcommand{\notes@printtitlepage}{%
+\begin{titlepage}%
+\begin{center}%
+    \thispagestyle{empty}%
+    \vspace*{2cm}%
     \ifthenelse{\equal{\notes@lang}{english}}
         {\Huge\textbf{\notes@course \, (\notes@short \, \notes@group) \\ course notes}\vskip0.5cm}
         {\Huge\textbf{\notes@course\,(\notes@short\,\notes@group)}\vskip0.5cm}
 
     \Large\notes@degree\vskip0.5cm
     \large\notes@date\vskip0.5cm
-    \large\notes@author\ $\langle$\textcolor{\notes@colorlinks}{\notes@email}$\rangle$\vskip1cm
+    \large\notes@author\ $\langle$\textcolor{\notes@refcolor}{\notes@email}$\rangle$\vskip1cm
 
     \ifthenelse{\equal{\notes@github}{true}}{%
-        \href{\notes@githubrepo}{Source code available on GitHub}}{}
+        \href{\notes@repo}{Source code available on GitHub}}{}
 
     \vskip2cm
     \begin{figure}[ht]
@@ -276,12 +248,11 @@
     \centering\includegraphics[width=.2\textwidth]{assets/cc.png}
 \end{figure}
 \vskip0.5cm
-\noindent\textrm{These notes are licensed under \href{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}{Creative Commons Attribution - No Commercial - Share Alike 4.0}. They can be freely used and distributed as long as the original author is credited, they aren't used for commercial purposes and derived work is shared under this same license.}}
+\noindent\textrm{These notes are licensed under \href{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}{Creative Commons Attribution - No Commercial - Share Alike 4.0}. They can be freely used and distributed as long as the original author is credited, they aren't used for commercial purposes and derived work is shared under this same license.}
+}
 
 \newcommand{\notes@titlepagecompact}{%
 \begin{center}
-    %\thispagestyle{noheaders}
-    %\vspace*{2cm}
     \Huge\textbf{\notes@title}\vskip0.5cm
 
     \LARGE\textbf{\notes@course\ -\ \notes@group}\vskip0.5cm
