@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{exrefs}[2015/05/21 Extended cross-references]
+\ProvidesPackage{exrefs}[2021/01/10 Extended cross-references]
 
 \RequirePackage{xstring}
 
@@ -52,29 +52,29 @@
 }
 
 \newcommand{\fulleref}[1]{%
-\IfSubStr{#1}{\ref@prefix@definition}{%
-    \hyperref[#1]{\ref@lname@definition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
-\IfSubStr{#1}{\ref@prefix@theorem}{%
-    \hyperref[#1]{\ref@lname@theorem}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
-\IfSubStr{#1}{\ref@prefix@proposition}{%
-    \hyperref[#1]{\ref@lname@proposition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
-\IfSubStr{#1}{\ref@prefix@lemma}{%
-    \hyperref[#1]{\ref@lname@lemma}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
-\IfSubStr{#1}{\ref@prefix@corollary}{%
-    \hyperref[#1]{\ref@lname@corollary}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+\IfSubStr{#1}{\ref@prefix@definition}
+    {\hyperref[#1]{\ref@lname@definition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}~}}{}%
+\IfSubStr{#1}{\ref@prefix@theorem}
+    {\hyperref[#1]{\ref@lname@theorem}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}~}}{}%
+\IfSubStr{#1}{\ref@prefix@proposition}
+    {\hyperref[#1]{\ref@lname@proposition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}~}}{}%
+\IfSubStr{#1}{\ref@prefix@lemma}
+    {\hyperref[#1]{\ref@lname@lemma}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}~}}{}%
+\IfSubStr{#1}{\ref@prefix@corollary}
+    {\hyperref[#1]{\ref@lname@corollary}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}~}}{}%
 }
 
 \newcommand{\Fulleref}[1]{%
-\IfSubStr{#1}{\ref@prefix@definition}{%
-    \hyperref[#1]{\ref@name@definition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
-\IfSubStr{#1}{\ref@prefix@theorem}{%
-    \hyperref[#1]{\ref@name@theorem}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
-\IfSubStr{#1}{\ref@prefix@proposition}{%
-    \hyperref[#1]{\ref@name@proposition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
-\IfSubStr{#1}{\ref@prefix@lemma}{%
-    \hyperref[#1]{\ref@name@lemma}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
-\IfSubStr{#1}{\ref@prefix@corollary}{%
-    \hyperref[#1]{\ref@name@corollary}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}}~}{}%
+\IfSubStr{#1}{\ref@prefix@definition}
+    {\hyperref[#1]{\ref@name@definition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}~}}{}%
+\IfSubStr{#1}{\ref@prefix@theorem}
+    {\hyperref[#1]{\ref@name@theorem}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}~}}{}%
+\IfSubStr{#1}{\ref@prefix@proposition}
+    {\hyperref[#1]{\ref@name@proposition}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}~}}{}%
+\IfSubStr{#1}{\ref@prefix@lemma}
+    {\hyperref[#1]{\ref@name@lemma}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}~}}{}%
+\IfSubStr{#1}{\ref@prefix@corollary}
+    {\hyperref[#1]{\ref@name@corollary}~\ref{#1}~\hyperref[#1]{(\getrefname{#1})}~}}{}%
 }
 
 \newcommand{\nref}[1]{\refused{#1}\hyperref[#1]{\getrefname{#1}}~(\ref{#1})}
