@@ -1,4 +1,62 @@
-\chapter{Definición axiomática del conjunto \R}
+\bchapter{Axiomatic definition of \R}
+
+\section{Algebraic axioms of the real numbers}
+
+\section{Order axioms and ordered sets}
+
+\section{Inequalities and absolute value}
+
+\section{Mathematical induction}
+Mathematical induction is a mathematical proof technique used to prove that a statement $P\left( n \right)$
+holds for every $n\in\N$. A proof by induction consists of two cases.
+\begin{itemize}[itemsep = -2pt]
+    \item The \textbf{base case} proves that the statement holds for $n = 1$.
+    \item The \textbf{induction step} proves that if the statement holds for any given case $n = k$, then
+        it must also hold for the next case $n = k + 1$.
+\end{itemize}
+It is not necessary for the base case to begin with $n = 1$. We could use any fixed natural number $n = N$
+for the base case by establishing the truth of the statement for all natural numbers $n\geq N$.
+
+\begin{proof}
+    Let $I = \{n\in\N\st P\left( n \right) \textrm{ holds}\} $. By hypothesis, $1\in I$. If $P\left( n \right) $ holds $\implies P\left( n + 1 \right) \in I\implies I = \N\implies P\left( n \right) $ holds $\forall\ n\in
+    \N$.
+\end{proof}
+
+Note that in the induction step there is no need to prove that $P\left( n \right) $ holds for some $n\in\N$,
+but one must prove that $P\left( n \right) \longrightarrow P\left( n + 1 \right) $. In order to do that, we
+assume that $P\left( n \right) $ is true.
+
+\begin{note}
+    The statement $P\left( n \right) $ is usually called the \textbf{induction hypothesis}.
+\end{note}
+
+\begin{example}
+    For every number $n\in\N$ the following statement is true:
+    \begin{equation}\label{eq:induction-1}
+        1^2 + 2^2 + 3^2 + \ldots + n^2 = \frac{1}{6}n\left( n + 1 \right)\left( 2n+ 1 \right) .
+    \end{equation}
+    \begin{proof}
+        It's easy to see that (\ref{eq:induction-1}) holds for the base case $n = 1$. Suppose that
+        (\ref{eq:induction-1}) holds for some $n = k\in\N$. To prove that the statement holds for $n = k + 1$
+        we must prove that from (\ref{eq:induction-1}) we can get
+        \begin{equation}\label{eq:induction-2}
+            1^2 + 2^2 + 3^2 + \ldots + k^2 + \left( k + 1 \right)^2  = \frac{1}{6}\left( k + 1 \right)\left( k + 2 \right) \left( 2\left( k + 1 \right) + 1 \right).
+        \end{equation}
+        So, using our induction hypothesis $P\left( n \right) $, we have
+        \begin{align}
+            1^2 + 2^2 + 3^2 + \ldots + k^2 + \left( k + 1 \right)^2 &= \frac{1}{6}k\left( k + 1 \right)
+            \left( 2k + 1 \right) + \left( k + 1 \right)^2 = \\
+                                                                    &= \frac{1}{6}\left( k + 1 \right)
+                                                                    \left(k\left( 2k + 1 \right) + 6\left( k + 1 \right) \right) = \\
+                                                                    &= \frac{1}{6}\left( k + 1 \right) \left( 2k^2 + 7k + 6 \right) = \\
+                                                                    &= \frac{1}{6}\left( k + 1 \right)\left( k + 2 \right) \left( 2k + 3 \right),
+        \end{align}
+        which is (\ref{eq:induction-2}). Therefore, we conclude that, by induction, (\ref{eq:induction-1})
+        holds $\forall\ n\in\N$.
+    \end{proof}
+\end{example}
+
+\hide{
 \section{Números naturales, enteros y racionales. Compatibilidad con las operaciones básicas}
 Empezando por los números naturales, con la necesidad de hacer operaciones, y sus respectivas inversas, a lo largo de la historia se han ido construyendo conjuntos de números cada vez más grandes, pasando por los enteros, $\Z$, y los racionales,
 \begin{equation}
@@ -361,3 +419,4 @@ Por tanto, $\forall\epsilon > 0, \exists\ n_0\left( \epsilon \right) \tq \abs{a_
 \begin{theorem}
     \textbf{(Teorema de la densidad de los racionales).} Entre dos números reales distintos existe siempre un racional y un irracional.
 \end{theorem}
+}
