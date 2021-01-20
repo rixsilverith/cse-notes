@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from termcolor import colored
 from pathlib import Path
 from os import path, environ
