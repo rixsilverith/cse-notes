@@ -1,14 +1,16 @@
-from cli import Command
+from cli import Script
 
-class PullCourses(Command):
+class PullCourses(Script):
+    """
+    Pull the latests changes from the assigned repo.
+    """
     name = 'pull'
-    arguments = ['get_info']
+    arguments = []
     usage = f'{name}'
     description = 'Pulls the latest changes from the repo'
-    long_description = '''
-        Compiles a given course. If no course is provided, all courses will be
-        compiled by default, which may take a while.
-    '''
 
-    def get_info(self, course):
-        print(f'Info {course}!')
+    def action(self, args):
+        self.pull_changes()
+
+    def pull_changes(self):
+        print('\nWork in progress\n')

@@ -1,18 +1,18 @@
-from cli import Command
+from cli import Script
 
-class Configuration(Command):
+class Configuration(Script):
+    """
+    Updates the CLI configuration, such as the PDF viewer or the
+    compiler options, without the need to directly modify the
+    config.yaml file.
+    """
     name = 'configure'
     arguments = []
     usage = f'{name} <[options]...>'
     description = 'Updates CLI configuration'
-    long_description = '''
-        Compiles a given course. If no course is provided, all courses will be
-        compiled by default, which may take a while.
-    '''
 
-    def __init__(self):
-        #super().__init__(self, name, usage, description, long_description)
-        self.init()
+    def action(self, args):
+        self.set_config()
 
-    def init(self):
-        print('Coming soon: Config')
+    def set_config(self):
+        print('\nWork in progress\n')

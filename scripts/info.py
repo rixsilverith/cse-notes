@@ -1,14 +1,16 @@
-from cli import Command
+from cli import Script
 
-class GetCourseInfo(Command):
+class GetCourseInfo(Script):
+    """
+    Gets detailed information about a course.
+    """
     name = 'info'
-    arguments = ['get_info']
+    arguments = ['course']
     usage = f'{name} <course>'
     description = 'Gets information about a course'
-    long_description = '''
-        Compiles a given course. If no course is provided, all courses will be
-        compiled by default, which may take a while.
-    '''
 
-    def get_info(self, course):
-        print(f'Info {course}!')
+    def action(self, args):
+        self.get_info()
+
+    def get_info(self):
+        print('\nWork in progress\n')

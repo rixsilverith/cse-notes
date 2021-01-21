@@ -1,18 +1,16 @@
-from cli import Command
+from cli import Script
 
-class ListCourses(Command):
+class ListCourses(Script):
+    """
+    Gets a list including some information about the courses.
+    """
     name = 'list'
     arguments = []
     usage = f'{name}'
     description = 'Lists all courses'
-    long_description = '''
-        Compiles a given course. If no course is provided, all courses will be
-        compiled by default, which may take a while.
-    '''
 
-    def __init__(self):
-        #super().__init__(self, name, usage, description, long_description)
-        self.init()
+    def action(self, args):
+        self.list()
 
-    def init(self):
-        print('Coming soon: List course')
+    def list(self):
+        print('\nWork in progress\n')

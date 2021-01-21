@@ -1,4 +1,4 @@
-from cli import Command
+from cli import Script
 from util import get_config
 from pathlib import Path
 from os import path, environ
@@ -9,25 +9,31 @@ import sys
 
 start_time = time.time()
 root       = path.join(environ.get('LECTURE_NOTES_HOME'), 'courses')
-s_course   = sys.argv[1]
+#s_course   = sys.argv[1]
 
 # Fetch LaTeX compiler configuration
 latex_config       = get_config('latex')
 latex_compiler     = latex_config['compiler']
 compiler_arguments = latex_config['compiler_arguments']
 
-class CompileCourse(Command):
+class CompileCourse(Script):
+    """
+    Compiles the notes for course given the name of the directory
+    where it is located.
+
+    If no course is provided, all the courses will be compiled by
+    default, which may take a while.
+    """
     name = 'compile'
-    arguments = ['compile_course']
+    actions = ['compile_course']
+    arguments = ['course']
     usage = f'{name} [course]'
     description = 'Compiles (a) course(s)'
-    long_description = '''
-        Compiles a given course. If no course is provided, all courses will be
-        compiled by default, which may take a while.
-    '''
 
-    def __init__(self):
-        super().__init__(self.name, self.arguments, self.usage, self.description, self.long_description)
+    def action(self, args):
+        course = args[0]
+        if course:
+            self.compile_course(course)
 
     def compile_course(self, course):
         course      = str(course)

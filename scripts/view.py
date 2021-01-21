@@ -1,18 +1,17 @@
-from cli import Command
+from cli import Script
 
-class ViewCourse(Command):
+class ViewCourseNotes(Script):
+    """
+    Opens the compiled notes of the specified course in a PDF viewer
+    of choice.
+    """
     name = 'view'
-    arguments = []
+    arguments = ['pdf_viewer', 'picker']
     usage = f'{name} <course> [options]'
     description = 'Opens the compiled notes for a course'
-    long_description = '''
-        Compiles a given course. If no course is provided, all courses will be
-        compiled by default, which may take a while.
-    '''
 
-    def __init__(self):
-        #super().__init__(self, name, usage, description, long_description)
-        self.init()
+    def action(self, args):
+        self.open_notes()
 
-    def init(self):
-        print('Coming soon: View course notes')
+    def open_notes(self):
+        print('\nWork in progress\n')

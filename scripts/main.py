@@ -1,41 +1,35 @@
 import logging as log
 from cli import CLI
 
-from compile import CompileCourse
-from info import GetCourseInfo
-from init import InitializeCourse
-from edit import EditCourse
-from view import ViewCourse
-from pull import PullCourses
-from list import ListCourses
-from configure import Configuration
+from init import InitializeCourse as init
+from list import ListCourses as list
+from pull import PullCourses as pull
+from info import GetCourseInfo as info
+from compile import CompileCourse as compile
+from edit import EditCourse as edit
+from view import ViewCourseNotes as view
+from configure import Configuration as configure
 
 cli = CLI(name='cse-notes',
-    description='Computer Science and Engineering course notes manager',
+    description='Scripts for managing CSE notes',
     usage='[script] [<args>...]'
 )
 
-cli.command(InitializeCourse)
-cli.command(ListCourses)
-cli.command(PullCourses)
-cli.command(GetCourseInfo)
-cli.command(CompileCourse)
-cli.command(EditCourse)
-cli.command(ViewCourse)
-cli.command(Configuration)
+cli.add_script(init)
+cli.add_script(list)
+cli.add_script(pull)
+cli.add_script(info)
+cli.add_script(compile)
+cli.add_script(edit)
+cli.add_script(view)
+cli.add_script(configure)
 
 def main():
-    # Entry point of the CLI. This function will look for the different
-    # scripts (subcommands) and execute the correspoding with its
-    # arguments.
-    # This will print help if no arguments are supplied to cse-notes
     args = vars(cli.parse_args())
-
-    subcommand = cli.subcommands[args['subcommand']]
-    args.pop('subcommand')
+    script = cli.scripts[args['script']]
 
     try:
-        subcommand().execute(args)
+        script().run(args['arguments'])
     except Exception as e:
         log.err(e)
         exit(1)
