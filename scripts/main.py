@@ -1,32 +1,33 @@
 import logging as log
-from cli import CLI
+from cli import cli, Script
+from typing import List
 
-from init import InitializeCourse as init
-from list import ListCourses as list
-from pull import PullCourses as pull
-from info import GetCourseInfo as info
-from compile import CompileCourse as compile
-from edit import EditCourse as edit
-from view import ViewCourseNotes as view
-from configure import Configuration as configure
+from init import InitializeCourse
+from list import ListCourses
+from pull import PullCourses
+from info import GetCourseInfo
+from compile import CompileCourse
+from edit import EditCourse
+from view import ViewCourseNotes
+from configure import Configuration
 
-cli = CLI(name='cse-notes',
-    description='Scripts for managing CSE notes',
-    usage='[script] [<args>...]'
-)
+scripts: List[Script] = [
+    InitializeCourse,
+    ListCourses,
+    PullCourses,
+    GetCourseInfo,
+    CompileCourse,
+    EditCourse,
+    ViewCourseNotes,
+    Configuration
+]
 
-cli.add_script(init)
-cli.add_script(list)
-cli.add_script(pull)
-cli.add_script(info)
-cli.add_script(compile)
-cli.add_script(edit)
-cli.add_script(view)
-cli.add_script(configure)
+for script in scripts:
+    cli.add_script(script)
 
 def main():
     args = vars(cli.parse_args())
-    script = cli.scripts[args['script']]
+    script: Script = cli.scripts[args['script']]
 
     try:
         script().run(args['arguments'])

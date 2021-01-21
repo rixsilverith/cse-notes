@@ -6,6 +6,7 @@ class GetCourseInfo(Script):
     """
     name = 'info'
     arguments = ['course']
+    requires_args = True
     usage = f'{name} <course>'
     description = 'Gets information about a course'
 

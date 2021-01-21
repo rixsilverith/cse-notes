@@ -7,6 +7,7 @@ class ViewCourseNotes(Script):
     """
     name = 'view'
     arguments = ['pdf_viewer', 'picker']
+    requires_args = True
     usage = f'{name} <course> [options]'
     description = 'Opens the compiled notes for a course'
 

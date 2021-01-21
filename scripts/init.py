@@ -13,5 +13,5 @@ class InitializeCourse(Script):
     def action(self, args):
         self.init_course()
 
-    def init_course():
+    def init_course(self):
         print('\nWork in progress\n')

@@ -30,7 +30,7 @@ This script will guide you through the apassionating process of installing the n
 A compiled version of these lecture notes can be found [here]().
 -->
 
-## Managing the notes with Python scripts (currently broken af :v)
+## Managing the notes with Python scripts
 In order to efficiently perform repetitive tasks, some Python scripts are included in the **scripts** folder. Furthermore, the `cse-notes` shell script is also provided in the root folder, which is nothing more than a common entry point for the rest of the scripts. The syntax is as follows.
 ```bash
 cse-notes <script> [<args>...]

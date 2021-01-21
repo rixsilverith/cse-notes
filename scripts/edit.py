@@ -5,6 +5,7 @@ class EditCourse(Script):
     Opens the notes for the specified course in an editor of choice.
     """
     name = 'edit'
+    requires_args = True
     arguments = []
     usage = f'{name} <course> [topic]'
     description = 'Edits the notes for a course'
@@ -12,5 +13,5 @@ class EditCourse(Script):
     def action(self, args):
         self.edit()
 
-    def edit():
+    def edit(self):
         print('\nWork in progress\n')

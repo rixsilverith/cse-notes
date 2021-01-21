@@ -1,4 +1,5 @@
 from cli import Script
+from typing import List
 from util import get_config
 from pathlib import Path
 from os import path, environ
@@ -24,18 +25,20 @@ class CompileCourse(Script):
     If no course is provided, all the courses will be compiled by
     default, which may take a while.
     """
-    name = 'compile'
-    actions = ['compile_course']
-    arguments = ['course']
-    usage = f'{name} [course]'
-    description = 'Compiles (a) course(s)'
+    name: str = 'compile'
+    actions: List[str] = ['compile_course']
+    arguments: List[str] = ['course']
+    usage: str = f'{name} [course]'
+    description: str = 'Compiles (a) course(s)'
 
-    def action(self, args):
-        course = args[0]
-        if course:
+    def action(self, args: List[str]):
+        if len(args) > 0:
+            course = args[0]
             self.compile_course(course)
+        else:
+            print('\nWork in progress\n')
 
-    def compile_course(self, course):
+    def compile_course(self, course: str):
         course      = str(course)
         course_dir  = path.join(root, course)
         course_path = Path(course_dir).expanduser()
