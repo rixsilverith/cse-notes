@@ -6,12 +6,12 @@
 </p>
 
 <p align="center">
-  <a href="courses">Lecture notes</a>&nbsp;&nbsp;•&nbsp;
+  <a href="courses">Course notes</a>&nbsp;&nbsp;•&nbsp;
   <a href="scripts">Scripts</a>&nbsp;&nbsp;•&nbsp;
   <a href="latex-stuff">LaTeX stuff</a>
 </p>
 
-> A collection of lecture notes for different courses taken at UAM during my Computer Science and Engineering Degree together with some scripts for managing them and improve the note-taking experience using LaTeX.
+> A collection of notes for different courses taken at UAM during my Computer Science degree together with some scripts for managing them and improve the note-taking experience using LaTeX.
 
 ## Overview
 The motivation for doing this project is to have a centralised and robust note-taking system for computer science and math courses. To achieve this, we're using LaTeX along with different technologies and scripts to make our lives easier at the time of taking notes.
@@ -47,7 +47,7 @@ A table summarizing what all the scripts do is also available [here](doc/scripts
 ## Technical LaTeX stuff
 To improve the note-taking experience with LaTeX, in the **latex-stuff** folder there are some custom packages and document classes that are ment to make writing notes easier and to keep them nice formatted.
 
-These include the `exmath` package for math-related macros and environments, the `exrefs` package for improved cross-references along the document and the `csenotes` and `labreport` document classes, each of them defined in their corresponding `.cls` or `.sty` files. If you are not familiar with the development of custom LaTeX packages and document classes, the [Overleaf documentation](https://es.overleaf.com/learn/latex/Understanding_packages_and_class_files) is a great place to start reading.
+These include the `exmath` package for math-related macros and environments along with the document the `csenotes` and `cselab` document classes, each of them defined in their corresponding `.cls` or `.sty` files. If you are not familiar with the development of custom LaTeX packages and document classes, the [Overleaf documentation](https://es.overleaf.com/learn/latex/Understanding_packages_and_class_files) is a great place to start reading.
 
 The documentation for all of these custom packages and classes is available [here](docs).
 

@@ -2,23 +2,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{exmath}[2020/11/12 Extended math commands]
 
-% Multilingual support
-\def\@theorem@mark{}
-\def\@definition@mark{}
-\def\@proposition@mark{}
-\def\@lemma@mark{}
-\def\@corollary@mark{}
-\def\@proof@mark{}
-\def\@example@mark{}
-
-\def\@note@mark{}
-\def\@notation@mark{}
-\def\@remark@mark{}
-\def\@claim@mark{}
-
-\newif\if@removechapters
-
-\DeclareOption{en}{%
+\DeclareOption{english}{%
     \def\@theorem@mark{Theorem}
     \def\@definition@mark{Definition}
     \def\@proposition@mark{Proposition}
@@ -26,14 +10,13 @@
     \def\@corollary@mark{Corollary}
     \def\@proof@mark{Proof}
     \def\@example@mark{Example}
-
     \def\@note@mark{Note}
     \def\@notation@mark{Notation}
     \def\@remark@mark{Remark}
     \def\@claim@mark{Afirmación}
 }
 
-\DeclareOption{es}{%
+\DeclareOption{spanish}{%
     \def\@theorem@mark{Teorema}
     \def\@definition@mark{Definición}
     \def\@proposition@mark{Proposición}
@@ -41,28 +24,36 @@
     \def\@corollary@mark{Corolario}
     \def\@proof@mark{Demostración}
     \def\@example@mark{Ejemplo}
-
     \def\@note@mark{Nota}
     \def\@notation@mark{Notación}
     \def\@remark@mark{Observación}
     \def\@claim@mark{Claim}
 }
 
-\DeclareOption{chapters}{\@removechaptersfalse}
-\DeclareOption{nochapters}{\@removechapterstrue}
+\DeclareOption{usechapters}{\def\@usechapters{true}}
+\DeclareOption{nochapters}{\def\@usechapters{false}}
 
-\ExecuteOptions{en, chapters}
+\DeclareOption{theoremnoframe}{\def\@theoremstyle{noframe}}
+\DeclareOption{theoremframed}{\def\@theoremstyle{framed}}
+\DeclareOption{theoremhighlight}{\def\@theoremstyle{highlight}}
+
+\DeclareOption{boldvec}{\def\@vectorstyle{bold}}
+\DeclareOption{arrowvec}{\def\@vectorstyle{arrow}}
+\DeclareOption{boldarrowvec}{\def\@vectorstyle{boldarrow}}
+
+\ExecuteOptions{english, usechapters, theoremframed}
 \ProcessOptions\relax
 
 \RequirePackage{amsmath, amssymb, amsthm, amsfonts} % Meth stuff
 \RequirePackage{systeme} % Systems of equations
 \RequirePackage{cancel} % Cancel an expression with an arrow
+\RequirePackage{physics} % Cool things used in physics
 \RequirePackage{siunitx} % Units
 \RequirePackage{bm} % Bold math
 \RequirePackage{bbm} % More bold math
-\RequirePackage{mathpazo} % Fixes stuff
+%\RequirePackage{mathpazo} % Fixes stuff
+%\RequirePackage[osf, sc]{mathpazo} % Fixes stuff
 \RequirePackage{mathtools} % Fixes more stuff
-
 \RequirePackage[framemethod=TikZ]{mdframed} % Frames for theorems, proofs, etc.
 \RequirePackage{xargs}
 \RequirePackage{imakeidx} % Create indexes
@@ -70,164 +61,188 @@
 \RequirePackage{ifthen} % If then else structure
 \RequirePackage{xspace} % Fix space after some commands
 \RequirePackage{etoolbox} % Fix stuff
+\RequirePackage{xstring} % Macros to work with strings
 
-\if@removechapters
-    \numberwithin{equation}{section}
-\fi
-
+% ----- General corrections and redefinitions
 \DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
 \DeclareSymbolFontAlphabet{\mathbbold}{bbold}
 
 \let\svlim\lim\def\lim{\svlim\limits} % Put x\to\infty below \lim
+\let\epsilon\varepsilon
+\let\oldstylenums\oldstyle
+\let\oldensuremath\ensuremath
+\renewcommand{\ensuremath}[1]{\oldensuremath{#1}\xspace}
 
-\let\implies\Longrightarrow % Implies
-\let\nimplies\nLongrightarrow % Not implies
-\let\impliedby\Longleftarrow % Implied by
-\let\nimpliedby\nLongleftarrow % Not implied by
-\let\iff\Longleftrightarrow % If and only if
+\newcommand{\dm}[1]{\(#1\xspace\)}
 
-\let\epsilon\varepsilon % Actual epsilon
+% Easily define new math operators
+\newcommand\argp[1]{\argopen(#1\argclose)}
+\newcommand\mop[2]{\operatorname{#1}\argp{#2}}
 
+\let\oldexists\exists\renewcommand\exists{\oldexists\,}
+%\let\oldforall\forall\renewcommand\forall{\oldforall\,}
+
+
+% ----- Operators and quantifiers
+\newcommand{\bydef}{\triangleq} % By definition
+\newcommand{\qeq}{\overset{?}{=}} % Equal?
+\newcommand{\st}{\; | \;} % Such that
+%\newcommand{\st*}{\; : \;} % Alternative such that
+\newcommand{\uexists}{\exists\, !\;} % Exists and it's unique
+\newcommand{\conj}[1]{\overline{#1}} % Conjugate
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} % Floor
+\newcommand{\rela}{\mathcal{R}} % Relation
+%\renewcommand{\abs}[1]{\left\vert #1 \right\vert} % Absolute value
+\newcommand{\invers}[1]{#1 ^{-1}} % Inverse
 % Cooler greater (lower) or equal to symbols
 \let\leq\leqslant
 \let\nleq\nleqslant
 \let\geq\geqslant
 \let\ngeq\ngeqslant
 
-\let\lor\vee % Logical AND
-\let\land\wedge % Logical OR
+% ----- Logical operators
+\renewcommand\implies{\Longrightarrow} % Implies
+\newcommand\impliesdef{\overset{\textrm{def}}{\implies}} % Implies by definition
+\newcommand\nimplies{\not\implies} % Not implies
+\newcommand\qimplies{\quad\implies\quad} % Implies, but with extra space
+\renewcommand\impliedby{\Longleftarrow} % Implied by
+\newcommand\impliedbydef{\overset{\textrm{def}}{\impliedby}} % Implied by definition
+\newcommand\nimpliedby{\not\impliedby} % Not implied by
+\newcommand\qimpliedby{\quad\impliedby\quad} % Implied by, but with extra space
+\renewcommand\iff{\Longleftrightarrow} % If and only if / Equivalent
+\newcommand\iffdef{\overset{\textrm{def}}{\iff}} % Equivalent by definition
+\renewcommand\land{\wedge} % Logical AND
+\renewcommand\lor{\vee} % Logical OR
 
-\newcommand{\mop}[1]{\mathrm{#1}\xspace} % Operation
+% ----- Discrete math
+\newcommand\N{\ensuremath{\mathbb{N}}\xspace} % Naturals
+\newcommand\Z{\ensuremath{\mathbb{Z}}\xspace} % Integers
+\newcommand\Q{\ensuremath{\mathbb{Q}}\xspace} % Rationals
+\newcommand\R{\ensuremath{\mathbb{R}}\xspace} % Reals
+\newcommand\C{\ensuremath{\mathbb{C}}\xspace} % Complex
+\renewcommand\O{\ensuremath{\varnothing}\xspace} % Empty set
 
-% Define number sets
-\newcommand{\N}{\ensuremath{\mathbb{N}}\xspace}
-\newcommand{\Z}{\ensuremath{\mathbb{Z}}\xspace}
-\newcommand{\Q}{\ensuremath{\mathbb{Q}}\xspace}
-\newcommand{\R}{\ensuremath{\mathbb{R}}\xspace}
-\newcommand{\C}{\ensuremath{\mathbb{C}}\xspace}
-\renewcommand{\O}{\ensuremath{\emptyset}\xspace}
+\newcommand\set[1]{\{ #1 \}} % Set
+\newcommand\appl[3]{#1 : #2\longrightarrow #3} % Application
+\newcommand\stdf{\ensuremath{\appl{f}{X}{Y}}\xspace} % Standard function
+\newcommand\dom[1]{\mathcal{D}\argp{#1}} % Cooler domain
+\newcommand\image[1]{\mathcal{R}\argp{#1}} % Range / Image 
 
-\newcommand{\st}{\; | \;}
-\newcommand{\wtf}{(?)}
+\newcommand\parts[1]{\mathcal{P}\left( #1 \right)} % Partitions of a set / Power set
+\newcommand\uset{\mathcal{U}} % Universal set
+\newcommand\SP{\ensuremath{\mathcal{P}}} % Super set
+\newcommand\minuszero{\setminus\set{0}} % Set minus 0
+\newcommand\cset[1]{\overline{#1}} % Complementary set
+\newcommand\ccset[1]{{#1}^C} % Complementary set
+\newcommand\comb[2]{\left( \begin{matrix} #1 \\ #2 \end{matrix} \right)} % Binomial coefficient
 
-% Special characters
-\newcommand{\qeq}{\overset{?}{=}}
+\newcommand{\Rtn}{\R^n} % n-dimensional Euclidean space
+\newcommand{\field}{\ensuremath{\mathbb{F}}\xspace} % Field
 
-% Operators
-\newcommand{\comb}[2]{\left( \begin{matrix} #1 \\ #2 \end{matrix} \right)}
-\renewcommand{\abs}[1]{\left\vert #1 \right\vert}
-\newcommand{\conj}[1]{\overline{#1}}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\gea}[1]{\underset{\longrightarrow}{#1}}
+% ----- Vectors and vector analysis macros
+\renewcommand\vec[1]{\mathbf{#1}}
+\newcommand{\cvec}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+%\newcommand{\rvec}[1]{[#1]}^T}
+\newcommand{\tvec}[1]{\left( #1 \right)^T}
+\newcommand\stdvf{\appl{f}{\R^n}{\R^m}} % Standard vector-valued function
+\newcommand\gmvf{f\left(x_1, \ldots, x_n\right)} % f(x_1, ..., x_n)
+\newcommand\fgraph[1]{\mathcal{G}\argopen(#1\argclose)} % Graph of a function
+\newcommand\levelset[2]{L_{#1}\argopen(#2\argclose)} % Level set of value #1 for the function #2
 
-\DeclareMathOperator{\rg}{Rg}
-\DeclareMathOperator{\rankm}{Rank}
-
-% Mathematical analysis
-%\newcommand{\grad}{\nabla}
-\newcommand{\bigzero}{\text{\Large O}}
-\newcommand{\invers}[1]{#1 ^{-1}}
-
-\newcommand{\deriv}[2]{\frac{\dif #1}{\dif #2}} % 1: f; 2: var
+% Calculus / Analysis
+% \newcommand{\deriv}[2]{\frac{\dif #1}{\dif #2}} % 1: f; 2: var
 \newcommand{\liminft}[1]{\lim_{{#1}\rightarrow\infty}}
 \newcommand{\mylim}[3]{\lim_{#1 \rightarrow #2} #3} % 1: vec; 2: to; 3: var;
-
 \DeclareMathOperator{\rot}{rot}
 \DeclareMathOperator{\diver}{div}
 
-\renewcommand{\vec}[1]{\mathbf{#1}}
-\newcommand{\vect}[1]{\begin{bmatrix} #1 \end{bmatrix}}
-\newcommand{\vectt}[1]{\left( #1 \right)^t}
+% ----- Topology
+\newcommand\oball[2]{B_{#1}\argp{#2}} % Open ball of radius #1 centered at #2
+\newcommand\interior[1]{\mop{int}{#1}} % Interior of a set
+\newcommand\exterior[1]{\mop{ext}{#1}} % Exterior of a set
+\newcommand\frontier[1]{\partial #1} % Frontier / boundary of a set
+\newcommand\closure[1]{\overline{#1}} % Closure of a set
 
-% Set theory and relations
-\newcommand{\set}[1]{\{ #1 \}}
-\newcommand{\x}{\times} % Cool x
-\newcommand{\appl}[3]{#1 : #2\longrightarrow #3} % Application
-\newcommand{\stdf}{\ensuremath{\appl{f}{X}{Y}}} % Casual function
-\newcommand{\uexists}{\exists\, !\;} % Exists and it's unique
-\newcommand{\rela}{\mathcal{R}} % Relation
-\newcommand{\parts}[1]{\mathcal{P}\left( #1 \right)} % Partitions of a set / Power set
-\newcommand{\uset}{\mathcal{U}} % Universal set
-\newcommand{\SP}{\ensuremath{\mathcal{P}}}
+% ----- Linear algebra macros
+\let\kernel\ker\renewcommand\ker[1]{\mop{ker}{#1}} % Kernel
+\newcommand\nullity[1]{\mop{nullity}{#1}} % Nullity
+\newcommand\nullsp[1]{\mop{Null}{#1}} % Null space
+\renewcommand\rank[1]{\mop{rank}{#1}} % Rank
+\newcommand\rg[1]{\mop{rg}{#1}} % Range
+\newcommand\range[1]{\mop{range}{#1}} % Range
+\newcommand\ensp[1]{\mop{End}{#1}} % Space of endomorphisms
+\let\dimension\dim\renewcommand\dim[1]{\mop{dim}{#1}} % Dimension
+\newcommand\gen[1]{\langle #1 \rangle} % Generated by
+\newcommand\stdlt{\ensuremath{\appl{T}{V}{W}}\xspace} % Standard linear transformation
+\newcommand\gea[1]{\underset{\longrightarrow}{\scriptsize #1}} % Gaussian elimination arrow
+\newcommand\mtrans[1]{{#1}^{T}} % Transposed matrix
 
-\newcommand{\Rtn}{\R^n}
-\newcommand{\field}{\ensuremath{\mathbb{F}}\xspace}
 
-\newcommand{\mtrans}[1]{{#1}^{T}}
+% BACKUP DEFINITIONS FOR TESTING
+%\newcommand\gen[1]{\langle #1 \rangle} % Generated by
+%\newcommand\stdlt{\ensuremath{\appl{T}{V}{W}}\xspace} % Standard linear transformation
+%\let\kernel\ker % Redefine old kernel macro
+%\renewcommand\ker[1]{\operatorname{ker}\left( #1 \right)} % Kernel
+%\newcommand\nullity[1]{\operatorname{nullity}\left( #1 \right)} % Nullity
+%\newcommand\nullsp[1]{\operatorname{null}\left( #1 \right)} % Null space
+%\renewcommand\rank[1]{\operatorname{rank}\left( #1 \right)} % Rank
+%\newcommand\rg[1]{\operatorname{rg}\left( #1 \right)} % Range
+%\newcommand\range[1]{\operatorname{range}\left( #1 \right)} % Range
+%\renewcommand\endosp[1]{\operatorname{End}\left( #1 \right)} % Space of endomorphisms
+%\newcommand\gea[1]{\underset{\longrightarrow}{\scriptsize #1}} % Gaussian elimination arrow
+%\newcommand{\mtrans}[1]{{#1}^{T}}
+%\let\dimension\dim % Refine old dimension macro
+%\renewcommand{\dim}[1]{\operatorname{dim}\left( #1 \right)} % Dimension
 
-\newcommand{\eqreason}[2][=]{\underset{%
-	\substack{
-		\vspace{6pt} \uparrow  \\
-		\mathrlap{\wrapreasontext{#2}}
-	}
-}{#1}}
+%\DeclareMathOperator{\rg}{Rg}
+%\DeclareMathOperator{\kernel}{Ker}
+%\DeclareMathOperator{\rankm}{Rank}
+%\DeclareMathOperator{\image}{Im}
+%\newcommand{\nullity}[1]{\mop{nullity}\left( #1 \right)}
+%\renewcommand{\rank}[1]{\mop{rank}\left( #1 \right)}
+\newcommand\bigzero{\text{\Large O}}
+\newcommand\innerp[1]{\langle #1 \rangle} % Inner product
+\newcommand\vnorm[1]{\left\Vert #1 \right\Vert} % Norm
 
-\newcommand{\eqreasonup}[2][=]{\overset{%
-	\substack{
-		\mathrlap{\wrapreasontext{#2}} \\
-		\vspace{4pt} \downarrow
-	}
-}{#1}}
+% ----- Miscellanea
+\newcommand\wtf{(\textrm{wtf}?)}
+\newcommand\brackets[1]{\left[ #1 \right]}
 
-% VECTORS AND GEOMETRY
-% Dot product
-\newcommand{\dotp}[1]{\langle #1 \rangle}
-\newcommand{\dotpm}[2]{\dotp{#1, #2}}
-\newcommand{\gen}[1]{\mathopen{<} #1 \mathclose{>}} % Generated by
-% Norm of a vector
-\newcommand{\vnorm}[1]{||#1||}
+% ----- Other
+\newcommand{\eqreason}[2][=]{\underset{\substack{\vspace{6pt} \uparrow  \\ \mathrlap{\wrapreasontext{#2}}}}{#1}}
+\newcommand{\eqreasonup}[2][=]{\overset{\substack{\mathrlap{\wrapreasontext{#2}} \\ \vspace{4pt} \downarrow}}{#1}}
 
-% Real analysis
-\newcommand{\minuszero}{\setminus\set{0}}
-\newcommand{\bydef}{\overset{\mathrm{def}}{=}}
-\newcommand{\iffdef}{\overset{\mathrm{def}}{\iff}}
+% ----- Theorem-like environments
+\newcommand{\IS}{}
+\def\toggle@IS@print{\renewcommand{\IS}{ }}
+\def\toggle@IS@index{\renewcommand{\IS}{!}}
 
-\newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
-\newenvironment{lcases}{\left\lbrace\begin{aligned}}{\end{aligned}\right.}
-\newenvironment{lrcases}{\left\lbrace\begin{aligned}}{\end{aligned}\right\rbrace}
-
-% Theorem, lemmas, etc. environment definitions.
-
-\if@removechapters
-    \newcounter{thm}[section] \setcounter{thm}{0}
-    \newcounter{def}[section] \setcounter{def}{0}
+\ifthenelse{\equal{\@usechapters}{false}}{%
+    \newcounter{thm}[section]\setcounter{thm}{0}
+    \newcounter{def}[section]\setcounter{def}{0}
     \renewcommand{\thethm}{\thesection.\arabic{thm}}
     \renewcommand{\thedef}{\thesection.\arabic{def}}
     \numberwithin{thm}{section}
+    \numberwithin{def}{section}
+    \numberwithin{equation}{section}
     \message{Using section numbering for theorems and definitions}
-\else
+}{%
     \newcounter{thm}[chapter] \setcounter{thm}{0}
     \newcounter{def}[chapter] \setcounter{def}{0}
     \renewcommand{\thethm}{\thechapter.\arabic{thm}}
     \renewcommand{\thedef}{\thechapter.\arabic{def}}
     \numberwithin{thm}{chapter}
+    \numberwithin{def}{chapter}
+    \numberwithin{equation}{chapter}
     \message{Using chapter numbering for theorems and definitions}
-\fi
+}
 
 % https://tex.stackexchange.com/a/17551
-\newtheoremstyle{highlight}
-  {\topsep}   % ABOVESPACE
-  {\topsep}   % BELOWSPACE
-  {\itshape}  % BODYFONT
-  {0pt}       % INDENT (empty value is the same as 0pt)
-  {\bfseries} % HEADFONT
-  {.}         % HEADPUNCT
-  {5pt plus 1pt minus 1pt} % HEADSPACE
-  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}} % CUSTOM-HEAD-SPEC
-
-\newtheoremstyle{defi}
-  {15pt}   % ABOVESPACE
-  {2pt}   % BELOWSPACE
-  {\itshape}  % BODYFONT
-  {0pt}       % INDENT (empty value is the same as 0pt
-  {\bfseries} % HEADFONT
-  {.}         % HEADPUNCT
-  {5pt plus 1pt minus 1pt} % HEADSPACE
-  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}} % CUSTOM-HEAD-SPEC
+\newtheoremstyle{defi}{\topsep}{\topsep}{}{0pt}{}{}{5pt plus 1pt minus 1pt} {\textbf{\thmname{#1}\thmnumber{ #2}}\thmnote{ (\textbf{#3})}}
+\newtheoremstyle{thm}{\topsep}{\topsep}{\itshape}{0pt}{\bfseries}{}{5pt plus 1pt minus 1pt} {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
 
 \theoremstyle{remark}
-
-\newtheorem*{note}{\@note@mark}
+%\newtheorem*{note}{\@note@mark}
 \newtheorem*{notation}{\@notation@mark}
 \newtheorem*{claim}{\@claim@mark}
 
@@ -235,55 +250,78 @@
 % is incremented when a new item is added to this list, that
 % is saved in the master.ithmc file. To this list is only added
 % the theorems, lemmas and propositions that have a special name.
-\newcommand{\listtheoremname}{List of Theorems}
-\newlistof[chapter]{ithm}{ithmc}{\listtheoremname}
-\newcommand{\listoftheorems}{\listofithm}
+%\newcommand{\listtheoremname}{List of Theorems}
+%\newlistof[\ifthenelse{\equal{\@usechapters}{false}}{section}{chapter}]{ithm}{ithmc}{\listtheoremname}
+%\newcommand{\listoftheorems}{\listofithm}
 
 % Helper macro to increment the ithm counter and add the entry to the list.
-\newcommand{\ithm}[1]{%
-	\refstepcounter{ithm}
-	\addcontentsline{ithmc}{ithm}{\protect\numberline{\theithm}#1}\par
+%\newcommand{\ithm}[1]{%
+%	\refstepcounter{ithm}
+%	\addcontentsline{ithmc}{ithm}{\protect\numberline{\theithm}#1}\par
+%}
+
+% This macro let us use references with names in commands such as
+% \nref{ref}, which will write in the document something like
+% "Theorem name of the theorem (1.15)".
+\newcommand{\set@labelname}[1]{%
+    \ifthenelse{\equal{#1}{}}{}{%
+        \toggle@IS@print\protected@edef\@currentlabelname{#1}%
+        \renewcommand{\label@hook}{}
+    }
 }
 
-% Define a List of Definitions. idef is a special counter which
-% is incremented when a new item is added to this list, that
-% is saved in the master.idefc file. To this list is only added
-% the definitions that have a special name.
-\newcommand{\listdefinitionname}{List of Definitions}
-\newlistof[chapter]{idef}{idefc}{\listdefinitionname}
-\newcommand{\listofdefinitions}{\listofidef}
-
-% Helper macro to increment the idef counter and add the entry to the list.
-\newcommand{\idef}[1]{%
-	\refstepcounter{idef}
-	\addcontentsline{idefc}{idef}{\protect\numberline{\theidef}#1}\par
+\def\@restore@itemlabels{%
+    \renewcommand{\labelenumi}{\alph{enumi}. }
+    \renewcommand{\theenumi}{\alph{enumi}}
 }
 
-\theoremstyle{defi}
+\def\@set@theorem@itemlabels{%
+    \renewcommand{\labelenumi}{\alph{enumi}. }
+    \renewcommand{\theenumi}{\thethm\ - (\alph{enumi})}
+}
 
-% {defi} environment definition.
-\newtheorem{idefi}[def]{\@definition@mark}
-\newenvironment{defi}[1][]{%
-    \vspace{2pt}
-    \ifthenelse{\equal{#1}{}}{}{\idef{#1}}
-    \begin{idefi}[#1]
-}{\end{idefi}}
-
-\theoremstyle{defi}
+\theoremstyle{thm}
 
 % {theorem} environment definition.
 \newtheorem{itheorem}[thm]{\@theorem@mark}
 \newenvironment{theorem}[1][]{%
     \vspace{2pt}
-    \ifthenelse{\equal{#1}{}}{}{\ithm{#1}}
+    \set@labelname{#1}
+    %\ifthenelse{\equal{#1}{}}{}{\ithm{#1}}
+    \@set@theorem@itemlabels
     \begin{itheorem}[#1]
-}{\end{itheorem}}
+}{\end{itheorem}\@restore@itemlabels}
+
+\theoremstyle{defi}
+
+% {defn} environment definition.
+\mdfsetup{skipabove=1em, skipbelow=0em}
+
+% mdframed styles for the different frames
+\mdfdefinestyle{framed}{nobreak=true}
+\mdfdefinestyle{highlight}{nobreak=true, linewidth=2pt, topline=false, rightline=false, bottomline=false}
+\mdfdefinestyle{noframe}{%
+    nobreak=true, hidealllines=true, innertopmargin=0pt, innerleftmargin=0pt, innerrightmargin=0pt, innerbottommargin=0pt
+}
+
+\newmdtheoremenv[style=\@theoremstyle]{definition}[def]{\@definition@mark}
+\newenvironment{defn}[1][]{%
+    \set@labelname{#1}
+    \begin{definition}[#1]}
+{\end{definition}\@restore@itemlabels}
+
+%\newtheorem{idefi}[def]{\@definition@mark}
+%\newenvironment{defi}[1][]{%
+%    \vspace{2pt}
+%    \set@labelname{#1}
+%    \begin{idefi}[#1]
+%}{\end{idefi}\@restore@itemlabels}
 
 % {lemma} environment definition.
 \newtheorem{ilemma}[def]{\@lemma@mark}
 \newenvironment{lemma}[1][]{%
     \vspace{2pt}
-    \ifthenelse{\equal{#1}{}}{}{\ithm{#1}}
+    \set@labelname{#1}
     \begin{ilemma}[#1]
 }{\end{ilemma}}
 
@@ -291,7 +329,7 @@
 \newtheorem{iprop}[def]{\@proposition@mark}
 \newenvironment{prop}[1][]{%
     \vspace{2pt}
-    \ifthenelse{\equal{#1}{}}{}{\ithm{#1}}
+    \set@labelname{#1}
     \begin{iprop}[#1]
 }{\end{iprop}}
 
@@ -305,23 +343,93 @@
 % macro won't work unless the chngctr package is used.
 %
 % https://tex.stackexchange.com/questions/207532/reset-equation-numbering-after-each-section
-\counterwithin{equation}{chapter}
-
-\renewcommand{\(}[1][]{\begin{equation}\ifthenelse{\equal{#1}{}}{}{\label{#1}}}
-\renewcommand{\)}{\end{equation}}
-
-\newenvironment{leftbar}{\begin{mdframed}[topline=false, rightline=false, bottomline=false,%
-    linewidth=2pt, skipabove=1em, skipbelow=0pt]}{\end{mdframed}}
+% \counterwithin{equation}{chapter}
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
-\renewenvironment{proof}{\begin{leftbar}\noindent\textit{\underline{\@proof@mark}}.\itshape }{\qed\end{leftbar}} % Proofs
 
-\newenvironment{example}{\vspace{10pt}\par\noindent\textbf{\@example@mark}.\itshape~}{} % Examples
-\newenvironment{remark}{\vspace{10pt}\par\noindent\textit{\@remark@mark}.~}{}  % Remarks
+\newenvironment{example}{\vspace{\topsep}\par\noindent\textbf{\@example@mark}~}{} % Examples
+\newenvironment{remark}{\vspace{\topsep}\par\noindent\textbf{\@remark@mark}~}{}  % Remarks
+\newenvironment{note}{\vspace{\topsep}\par\noindent\textbf{\@note@mark}~}{}  % Notes
+\renewenvironment{proof}{\vspace{\topsep}\par\noindent\textbf{\@proof@mark}~}{\qed}  % Remarks
+
+\newcounter{problem} \setcounter{problem}{0}
+\renewcommand{\theproblem}{\arabic{problem}}
+
+% Default link color: blue!60!black
+\newenvironment{problem}[1]{%
+\refstepcounter{problem}\vspace{5pt}\par\noindent\textrm{\textcolor{blue!60!black}{H2-P\theproblem.} \textbf{#1}}}{}
 
 % Fix some weird spacing on boxes created by the mdframed package
-% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+% http://tex.stackexchange.com/a/22119
 \makeatletter
 \def\thm@space@setup{%
     \thm@preskip=\parskip \thm@postskip=0pt
+}
+
+% ----- Fancy references
+\def\ref@prefix@definition{def:}
+\def\ref@name@definition{Definition}
+\def\ref@lname@definition{\MakeLowercase{\ref@name@definition}}
+\newcommand\exrefdefname[1]{\def\ref@name@definition{#1}}
+\newcommand\exrefdefprefix[1]{\def\ref@prefix@definition{#1}}
+
+\def\ref@prefix@theorem{thm:}
+\def\ref@name@theorem{Theorem}
+\def\ref@lname@theorem{\MakeLowercase{\ref@name@theorem}}
+\newcommand\exrefthmname[1]{\def\ref@name@theorem{#1}}
+\newcommand\exrefthmprefix[1]{\def\ref@prefix@theorem{#1}}
+
+\def\ref@prefix@proposition{prop:}
+\def\ref@name@proposition{Proposition}
+\def\ref@lname@proposition{\MakeLowercase{\ref@name@proposition}}
+\newcommand\exrefpropname[1]{\def\ref@name@proposition{#1}}
+\newcommand\exrefpropprefix[1]{\def\ref@prefix@proposition{#1}}
+
+\def\ref@prefix@lemma{lem:}
+\def\ref@name@lemma{Lemma}
+\def\ref@lname@lemma{\MakeLowercase{\ref@name@lemma}}
+\newcommand\exreflemname[1]{\def\ref@name@lemma{#1}}
+\newcommand\exreflemprefix[1]{\def\ref@prefix@proposition{#1}}
+
+\def\ref@prefix@corollary{coro:}
+\def\ref@name@corollary{Corollary}
+\def\ref@lname@corollary{\MakeLowercase{\ref@name@corollary}}
+\newcommand\exrefcoroname[1]{\def\ref@name@corollary{#1}}
+\newcommand\exrefcoroprefix[1]{\def\ref@prefix@corollary{#1}}
+
+\newcommand\getrefname[1]{\getrefbykeydefault{#1}{name}{??}}
+\newcommand\nref[1]{\refused{#1}\hyperref[#1]{\getrefname{#1}}~(\ref{#1})}
+\newcommand\reflink[2]{\hyperref[#2]{#1}~\ref{#2}}
+\newcommand\fullreflink[2]{\hyperref[#2]{#1}~\ref{#2}~\hyperref[#2]{(\getrefname{#2})}~}
+
+\newcommand\eref[1]{%
+    \IfSubStr{#1}{\ref@prefix@definition}{\reflink{\ref@lname@definition}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@theorem}{\reflink{\ref@lname@theorem}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@proposition}{\reflink{\ref@lname@proposition}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@lemma}{\reflink{\ref@lname@lemma}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@corollary}{\reflink{\ref@lname@corollary}{#1}}{}%
+}
+
+\newcommand\Eref[1]{%
+    \IfSubStr{#1}{\ref@prefix@definition}{\reflink{\ref@name@definition}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@theorem}{\reflink{\ref@name@theorem}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@proposition}{\reflink{\ref@name@proposition}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@lemma}{\reflink{\ref@name@lemma}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@corollary}{\reflink{\ref@name@corollary}{#1}}{}%
+}
+
+\newcommand\fulleref[1]{%
+    \IfSubStr{#1}{\ref@prefix@definition}{\fullreflink{\ref@lname@definition}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@theorem}{\fullreflink{\ref@lname@theorem}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@proposition}{\fullreflink{\ref@lname@proposition}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@lemma}{\fullreflink{\ref@lname@lemma}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@corollary}{\fullreflink{\ref@lname@corollary}{#1}}{}%
+}
+
+\newcommand\Fulleref[1]{%
+    \IfSubStr{#1}{\ref@prefix@definition}{\fullreflink{\ref@name@definition}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@theorem}{\fullreflink{\ref@name@theorem}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@proposition}{\fullreflink{\ref@name@proposition}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@lemma}{\fullreflink{\ref@name@lemma}{#1}}{}%
+    \IfSubStr{#1}{\ref@prefix@corollary}{\fullreflink{\ref@name@corollary}{#1}}{}%
 }

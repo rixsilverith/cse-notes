@@ -48,6 +48,13 @@
 \DeclareOption{sourcerepolink}{\def\notes@sourcerepo{true}}
 \DeclareOption{nosourcerepolink}{\def\notes@sourcerepo{false}}
 
+% Theorem-like environments style [theoremnoframe, theoremframed, theoremlbframed,
+% theoremleftbar]
+\DeclareOption{theoremnoframe}{\PassOptionsToPackage{\CurrentOption}{exmath}}
+\DeclareOption{theoremframed}{\PassOptionsToPackage{\CurrentOption}{exmath}}
+\DeclareOption{theoremlbframed}{\PassOptionsToPackage{\CurrentOption}{exmath}}
+\DeclareOption{theoremleftbar}{\PassOptionsToPackage{\CurrentOption}{exmath}}
+
 % Font typefaces [palatino, fourier]
 %     palatino (default): use the Palatino font typeface.
 %     fourier: use the Utopia/Fourier font typeface.
@@ -102,16 +109,17 @@
 \RequirePackage{etoolbox}
 \RequirePackage{ifthen} % If-then-else conditions
 
-\def\notes@refcolor{blue!60!black}\newcommand\refcolor[1]{\def\notes@refcolor{#1}}
+% blue!60!black
+\def\notes@refcolor{blue!30!black}\newcommand\refcolor[1]{\def\notes@refcolor{#1}}
 \def\notes@urlcolor{\notes@refcolor}\newcommand\urlcolor[1]{\def\notes@urlcolor{#1}}
 
 \hypersetup{colorlinks=true, allcolors=\notes@refcolor, urlcolor=\notes@urlcolor}
 \urlstyle{same}
 
 % http://www.texfaq.org/FAQ-overfull
-\pretolerance=7000
-\tolerance=500
-\emergencystretch=3pt
+% \pretolerance=7000
+% \tolerance=500
+% \emergencystretch=3pt
 
 \frenchspacing
 
