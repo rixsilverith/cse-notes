@@ -1,0 +1,284 @@
+\chapter[Introduction to the space of several real variables]{Introduction to the space of \\ several real variables}
+\thispagestyle{noheaders}
+
+In this introductory chapter to the course we are extending elemental concepts of analysis such as the concept of function or 
+convergence to the space of several real variables, namely $\Rtn$, which is defined as the $n$ times cartesian product of $\R$ 
+by itself,
+\begin{equation}
+\Rtn\bydef\underbrace{\R\times\ldots\times\R}_{n\textrm{ times}} = \{\left(x_1, \ldots, x_n\right)\st x_i\in\R,\ \forall i\st
+1 \leq i \leq n\}.
+\end{equation}
+
+%\section{Vectors in the real plane and space}
+%\section{Parametrization in $\R^2$}
+
+\section{Functions of the form $\Rtn\longrightarrow\R^m$}
+So, depending on the values of $n$ and $m$ we can distinguise between two kinds of functions.
+
+\begin{defn}[Scalar-valued function]\label{def:scalar-function}
+	A scalar-valued function over (a subset of) $\Rtn$ is a mapping $\appl{f}{S\subseteq\Rtn}{\R}$, $\left(x_1, \ldots, x_n\right)
+	\longmapsto f\left(x_1, \ldots, x_n\right)$.
+\end{defn}
+
+This is a reference to the definition of \nref{def:scalar-function}.
+
+\begin{defn}[Vector-valued function]
+	A vector-valued function over $\Rtn$ is a mapping $\appl{f}{S\subseteq\Rtn}{\R^m}$, $\vec{x}\longmapsto\vec{y} = f(\vec{x})$, where
+	if $f$ goes from $\Rtn$ to $\R^{m>1}$ then
+	\begin{equation}
+		\vec{y} = f(\vec{x})\bydef\begin{bmatrix}y_1 \\ \vdots \\ y_m \end{bmatrix} = \begin{bmatrix}f_1(x_1, \ldots, x_n) \\
+		\vdots \\ f_m(x_1, \ldots, x_n)\end{bmatrix}.
+	\end{equation}
+\end{defn}
+
+\begin{remark}
+	A vector function $\appl{f}{S\subseteq\Rtn}{\R^m}$ is given by $m$ scalar functions $\appl{f_i}{\Rtn}{\R}$ with $i = 1, \ldots,
+	m$, where $f_i(x_1, \ldots, x_n)$ gives us the $i$-th component of $f$.
+\end{remark}
+
+\begin{example}
+    The following function of several variables $f(x, y, z) = x + y + 2z$ is a scalar function.
+\end{example}
+
+% These are just the classical domain, image, etc., but extended to functions of several variables in $\Rtn$.
+
+\begin{defn}[Domain]
+Given a function $\stdvf$, the \textit{domain} of that function is the set of points in $\Rtn$ for which the function $f$ is 
+defined, in other words, the set
+\begin{equation}
+\dom{f} \bydef \{\vec{x}\in\Rtn\st\exists f(\vec{x})\}\subseteq\Rtn.
+\end{equation}
+\end{defn}
+
+\noindent For vector-valued functions; i.e. functions of the form $\stdvf$ with $m > 1$, the overall domain is the intersection of the
+domains of each function defining $f$,
+\begin{equation}
+\dom{f}\bydef\bigcap_{i=1}^m\altdom{f_i}.
+\end{equation}
+
+\begin{defn}[Image]
+Given a function $\stdvf$, the \textit{image} or \textit{range} of $f$ is the set
+\begin{equation}
+\image{f}\bydef\{\vec{y}\in\R^m\st \vec{y} = f\left(\vec{x}\right),\ \forall\vec{x}\in\altdom{f}\}\subseteq\R^m.
+\end{equation}
+\end{defn}
+
+\begin{defn}[Graph]
+Given a vector-valued function $\stdvf$, the graph of $f$ is the set
+\begin{equation}
+\fgraph{f}\bydef\{\left(\vec{x}, f\left(\vec{x}\right)\right)\st\vec{x}\in\altdom{f}\}\subset\R^{n + m}.
+\end{equation}
+\end{defn}
+
+\begin{defn}[Level sets]
+Given a function $\gmvf$ and a scalar $c\in\R$, the level set of value $c$ for the function $f$ is a subset of the initial space
+defined as
+\begin{equation}
+\levelset{c}{f} \bydef \{\vec{x}\in\altdom{f}\st f\left(\vec{x}\right) = c\}\subset\Rtn.
+\end{equation}
+\end{defn}
+
+
+\section{$\Rtn$ as a metric space}
+\begin{defn}[Metric space]
+A metric space is an ordered pair $\left(X, d\right)$ where $X$ is a set together with a metric $d$ on $X$. The metric is an 
+application $\appl{d}{X\times X}{\R}$ such that for any $x, y, z\in X$ satisfies the properties
+\begin{itemize}[itemsep = -2pt]
+	\item $d(x, y) = 0\iff x = y$.
+	\item $d(x, y) = d(y, x)$.
+	\item $d(x, z) \leq d(x, y) + d(y, z)\quad$ (Triangle inequality).
+\end{itemize}
+By the taking $z = x$ in the triangle inequality, together with the second and first properties, it is deduced that $d(x, y)\geq 0$
+	for any $x, y\in X$. The application $d$ is sometimes referred as \textit{distance function} or simply \textit{distance}.
+\end{defn}
+
+\begin{example}
+	$\R$ is a complete metric space with the distance function $d(x, y) = \abs{y - x}$, known as the \textit{euclidean distance}.
+\end{example}
+
+\begin{defn}[Normed vector space]
+A normed vector space is a vector space $V$ together with an application $\appl{\vnorm{\cdot}}{V}{\R}$ that satisfies the 
+properties
+\begin{itemize}[itemsep = -2pt]
+\item $\forall\vec{v}\in V\implies \vnorm{\vec{v}} \leq 0$; $\vnorm{\vec{v}} = 0\iff \vec{v} = \vec{0}$.
+\item $\forall\vec{v}\in V, \forall\lambda\in\R\implies \vnorm{\lambda\vec{v}}\leq\abs{\lambda}\vnorm{\vec{v}}$.
+\item $\forall\vec{v}, \vec{w}\in V \implies \vnorm{\vec{v} + \vec{w}} \leq \vnorm{\vec{v}} + \vnorm{\vec{w}}$.
+\end{itemize}
+\end{defn}
+
+\begin{prop}
+Every normed vector space is a metric space by defining the metric as $d(x, y) = \vnorm{y - x}$. Then, it's easy to check that
+\begin{itemize}[itemsep = -2pt]
+\item $\forall\vec{v}\in V\implies \vnorm{-\vec{v}} = \vnorm{\vec{v}}$.
+\item $\forall\vec{v}, \vec{w}\in V\implies \abs{\vnorm{\vec{w}} - \vnorm{\vec{v}}} \leq \vnorm{\vec{w}} - \vnorm{\vec{v}}$.
+\end{itemize}
+If such space is complete, then it's said to be a Banach space.
+\end{prop}
+
+\section{$\Rtn$ as a normed vector space}
+
+Since normed vector spaces are a special case of metric spaces, $\Rtn$ is a normed vector space when defining a norm on it. In 
+order to do this we use the inner product. Let
+\begin{equation}\label{eq:inner-product}
+\begin{rcases}
+\vec{x} = \left(x_1, \ldots, x_n\right)\in\Rtn \\
+\vec{y} = \left(y_1, \ldots, y_n\right)\in\Rtn
+\end{rcases}
+\implies\innerp{\vec{x}, \vec{y}} \bydef \sum_{i=1}^n x_i y_i.
+\end{equation}
+
+\begin{defn}[Euclidean norm]\label{def:euclidean-norm}
+	Given $\vec{x}\in\Rtn$, the euclidean norm of the vector $\vec{x}$ is defined as
+	\begin{equation}
+		\vnorm{x}\bydef\sqrt{\innerp{\vec{x}, \vec{x}}}\bydef\sqrt{\sum_{i=1}^n x_i^2}.
+	\end{equation}
+\end{defn}
+
+%Then, the so called \textbf{euclidian norm} is defined as $\vnorm{\vec{x}} \bydef \sqrt{\innerp{\vec{x}, \vec{x}}} \bydef 
+%\sqrt{\displaystyle\sum_{i=1}^n x_i^2}$.
+
+Also, given the geometrical expression of the inner product \eqref{eq:inner-product}, $\innerp{\vec{x}, \vec{y}} = \vnorm{\vec{x}}
+\vnorm{\vec{y}}\cos(\theta)$, since $\abs{\cos(\theta)}\leq 1$, we deduce the following important result.
+\begin{lemma}[Cauchy-Schwartz inequality]
+$\forall\vec{x}, \vec{y}\in\Rtn \implies \abs{\innerp{\vec{x}, \vec{y}}}\leq \vnorm{\vec{x}}\vnorm{\vec{y}}$.
+\end{lemma}
+
+%\begin{proof}
+%TODO.
+%\end{proof}
+
+By making use of \ref{eq:inner-product} and \ref{def:euclidean-norm} we can now define the notion of angle between vectors.
+
+\begin{defn}[Angle between vectors]
+Given $\vec{v}$, $\vec{w}\in\Rtn$, the angle between the vectors $\vec{v}$ and $\vec{w}$ is the number $\theta\in[0, \pi]$ 
+determined by the inner product as
+\begin{equation}
+\cos(\theta)_{\left(\vec{x}, \vec{y}\right)} = \frac{\innerp{\vec{x}, \vec{y}}}{\vnorm{\vec{x}}\vnorm{\vec{y}}}
+\end{equation}
+\end{defn}
+
+
+% Orthogonal projection definition goes here
+
+\section{Set topology in $\Rtn$}
+
+Topology is in charge of describing the different subsets of $\Rtn$ depending on the place that its points occupy. The
+following are basic concepts of set topology and can be generalize to any metric space without defining explicitly the metric.
+
+\begin{defn}[Open ball]
+Given $\vec{x_0}\in\Rtn$ and a real number $\epsilon > 0$, an open ball with centered in $\vec{x_0}$ with radius $\epsilon$ is the set
+\begin{equation}
+B_\epsilon\argopen(\vec{x_0}\argclose)\bydef\{\vec{x}\in\Rtn\st\vnorm{\vec{x} - \vec{x_0}} < \epsilon\}.
+\end{equation}
+\end{defn}
+
+\begin{note}
+	In 2-dimensional space, balls are often called \textit{disks}.
+\end{note}
+
+\begin{defn}[Pierced open ball]
+Given $\vec{x_0}\in\Rtn$ and a real number $\epsilon > 0$, a pierced open ball centered in $\vec{x_0}$ with radius $\epsilon$ is the
+set $B'_\epsilon\argopen(\vec{x_0}\argclose)\bydef B_\epsilon\argopen(\vec{x_0}\argclose) - \{\vec{x_0}\}$. In other words, it's an 
+open ball excluding its centre.
+\end{defn}
+
+\begin{defn}[Open set]
+	A subset $S\subset\Rtn$ is called \textit{open} $\iff\forall\vec{x_0}\in S$ there exists $\epsilon > 0$ depending on $\vec{x_0}$ such that $B_\epsilon\argopen(\vec{x_0}\argclose)\subset S$. In other words, if $\forall\vec{x_0}\in S$ there exists $\epsilon > 0$
+	such that a point in $\Rtn$ belongs to $S$ as soon as its Euclidean distance from $\vec{x_0}$ is smaller than $\epsilon$. 
+\end{defn}
+
+\begin{note}
+An open set can be seen as a set that contains a ball around each of its points or, equivalently, a set which doesn't contain any of
+its boundary points.
+\end{note}
+
+\begin{prop}
+The union of infinitely many open sets and the intersection of a finite number of open sets are open.
+\end{prop}
+
+\begin{defn}[Closed set]
+	A subset $S\subset\Rtn$ is called \textit{closed}, denoted by $\conj{S}$, if its complementary (relative to the space that it is defined on) $S^C \bydef \Rtn - S$ is open. 
+\end{defn}
+
+\begin{prop}
+The union of a finite number of closed sets and the intersection of infinitely many closed sets are closed.
+\end{prop}
+
+\begin{prop}
+	The full space $\Rtn$ and null set $\O$ are both open and closed sets, known as \textit{clopen sets}.
+\end{prop}
+
+Open and closed sets generalize the idea of an open and closed interval in the real line to higher dimensions.
+
+\begin{defn}[Interior]
+	The interior of a subset $S\subset\Rtn$, denoted by $\interior{S}$, is the largest open subset of $\Rtn$ contained in $S$. 
+	A point that is in the interior of $S$ is an \textbf{interior point}.
+	\begin{equation}
+		\interior{S}\bydef\{\vec{x_0}\in S\st\exists\epsilon > 0\implies B_\epsilon\argopen(\vec{x_0}\argclose)\subset S\}.
+	\end{equation}
+\end{defn}
+
+\begin{defn}[Exterior]
+	The exterior of a subset $S\subset\Rtn$, denoted by $\exterior{S}$, is the complementary set of the closure of $S$, defined as
+	\begin{equation}
+		\exterior{S}\bydef\{\vec{x_0}\in\Rtn\st\exists\epsilon > 0\implies B_\epsilon\argopen(\vec{x_0}\argclose)\subset
+		\left(\Rtn\setminus S\right)\}.
+	\end{equation}
+	The points in this set are called \textbf{exterior points}.
+\end{defn}
+
+\begin{defn}[Closure]
+	The closure of a subset $S\subset\Rtn$, denoted by $\closure{S}$, consists of all points in $S$ together with its boundary.
+	Mathematically, 
+	\begin{equation}
+		\closure{S}\bydef\interior{S}\cup\frontier{S}.
+	\end{equation}
+	It is the smallest closed subset of $\Rtn$ contained in $S$, and its points are called \textbf{points of closure} of $S$.
+\end{defn}
+
+\begin{defn}[Boundary]
+	The boundary, or frontier, of a subset $S\subset\Rtn$, denoted by $\frontier{S}$, is the set of points in the border of the
+	set that can be approached both from $S$ and from the outside of $S$. More precisely, 
+	\begin{equation}
+		\frontier{S}\bydef\{\vec{x_0}\in\Rtn\st\exists\epsilon > 0\implies B_\epsilon
+		\argopen(\vec{x_0}\argclose)\cap S\neq\O\land B_\epsilon\argopen(\vec{x_0}\argclose)\cap\left(\Rtn\setminus S\right)
+		\neq\O\}.
+	\end{equation}
+	Equivalently, the boundary can be defined as $\frontier{S}\bydef\closure{S}\setminus\interior{S}$, and its points are called
+	\textbf{boundary points}.
+\end{defn}
+
+\begin{prop}
+	Let $S\subset\Rtn$, then the following properties hold:
+	\begin{itemize}[itemsep = -2pt]
+		\item $\interior{S}\cup\exterior{S}\cup\frontier{S} = \Rtn$.
+		\item $\interior{S}\cap\exterior{S} = \interior{S}\cap\frontier{S} = \exterior{S}\cap\frontier{S} = \O$.
+	\end{itemize}
+\end{prop}
+
+\begin{defn}[Isolated point]
+A point $\vec{x_0}$ of a subset $S\subset\Rtn$ is said to be isolated $\iff\forall\epsilon > 0, \exists B_\epsilon\argopen(\vec{x_0}
+	\argclose)\st B_\epsilon\argopen(\vec{x_0}\argclose)\cap S = \{\vec{x_0}\}$.
+\end{defn}
+
+\begin{defn}[Limit point]
+Given $S\subset\Rtn$, a point $\vec{x_0}\in S$ is said to be a limit point, or accumulation point, of $S\iff\forall\epsilon > 0, 
+	\exists B'_\epsilon\argopen(\vec{x_0}\argclose)\st B'_\epsilon\argopen(\vec{x_0}\argclose)\cap S\neq\O$. In other words, 
+	if we can find points of $S$ as much close as we want to the point $\vec{x_0}$.
+\end{defn}
+
+\begin{defn}[Bounded set]
+A set $S\subset\Rtn$ is said to be \textit{bounded} $\iff\exists M > 0\st\forall\vec{x}\in S\implies \vnorm{\vec{x}}\leq M$.
+\end{defn}
+
+\begin{defn}[Compact set]
+A set $S\subset\Rtn$ is said to be \textit{compact} if it's closed and bounded.
+\end{defn}
+
+\begin{defn}[Convex set]
+A set is said to be \textit{convex} if when tracing a segment between any two points we don't get out of the set.
+\end{defn}
+
+
+\section{Limits and continuity}
+\section{Topological properties of continuous functions}
