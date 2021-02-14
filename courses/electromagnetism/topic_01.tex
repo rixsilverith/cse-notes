@@ -1,0 +1,55 @@
+\chapter{Review of vector calculus}
+\thispagestyle{noheaders}
+
+This chapter includes a brief review of the different mathematical tools that we will be using during the 
+following chapters. These mainly include linear algebra and vector calculus stuff such as inner and cross
+products, partial derivatives, multiple integrals and vector fields.
+
+\section{Vectors and reference systems}
+
+\begin{defn}[Unitary vector]
+    Given a vector $\vec{v}$, its unitary vector (vector whose norm is 1), denoted by $\uvec{v}$, is given by
+    \begin{equation}
+        \uvec{v}\bydef\frac{\vec{v}}{\vnorm{\vec{v}}}.
+    \end{equation}
+\end{defn}
+
+\begin{defn}[Inner product]\label{def:inner-product}
+    Given two vectors $\vec{x}$, $\vec{y}\in\Rtn$, their inner product, denoted by $\innerp{\vec{x}, \vec{y}}$, is
+    defined as
+    \begin{equation}
+        \innerp{\vec{x}, \vec{y}}\bydef\sum_{i=1}^n x_iy_i \bydef \vnorm{\vec{x}}\vnorm{\vec{y}}\cos(\theta).
+    \end{equation}
+\end{defn}
+
+From the geometrical expression of the \nref{def:inner-product}, the one with the cosine, the following results can
+be derived.
+
+\begin{prop}[Orthogonality]
+    Let $\vec{x}$, $\vec{y}\in\Rtn$, then $\vec{x}\perp\vec{y}\iff\innerp{\vec{x}, \vec{y}} = 0$.
+\end{prop}
+
+\begin{prop}
+    The angle $\theta$ between two vectors $\vec{x}$, $\vec{y}\in\Rtn$ is given by
+    \begin{equation}
+        \theta = \arccos(\frac{\innerp{\vec{x}, \vec{y}}}{\vnorm{\vec{x}}\vnorm{\vec{y}}}).
+    \end{equation}
+\end{prop}
+
+\begin{defn}[Cross product]
+    Let $\vec{x}$, $\vec{y}\in\R^3$. The cross product of both vectors is defined as
+    \begin{equation}
+        \vec{x}\times\vec{y}\bydef\begin{vmatrix}
+            \ihat & \jhat & \khat \\
+            x_x & x_y & x_z \\
+            y_x & y_y & y_z
+        \end{vmatrix} \bydef\vnorm{\vec{x}}\vnorm{\vec{y}}\sin(\theta).
+    \end{equation}
+\end{defn}
+
+\begin{remark}
+    The vector $\vec{x}\times\vec{y}$ is orthogonal to the plane given by vectors $\vec{x}$ and $\vec{y}$.
+\end{remark}
+
+\section{Gradient, flux and conservative fields}
+
