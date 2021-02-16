@@ -9,88 +9,22 @@ by itself,
 1 \leq i \leq n\}.
 \end{equation}
 
-%\section{Vectors in the real plane and space}
-%\section{Parametrization in $\R^2$}
-
-\section{Functions of the form $\Rtn\longrightarrow\R^m$}
-So, depending on the values of $n$ and $m$ we can distinguise between two kinds of functions.
-
-\begin{defn}[Scalar-valued function]\label{def:scalar-function}
-	A scalar-valued function over (a subset of) $\Rtn$ is a mapping $\appl{f}{S\subseteq\Rtn}{\R}$, $\left(x_1, \ldots, x_n\right)
-	\longmapsto f\left(x_1, \ldots, x_n\right)$.
-\end{defn}
-
-This is a reference to the definition of \nref{def:scalar-function}.
-
-\begin{defn}[Vector-valued function]
-	A vector-valued function over $\Rtn$ is a mapping $\appl{f}{S\subseteq\Rtn}{\R^m}$, $\vec{x}\longmapsto\vec{y} = f(\vec{x})$, where
-	if $f$ goes from $\Rtn$ to $\R^{m>1}$ then
-	\begin{equation}
-		\vec{y} = f(\vec{x})\bydef\begin{bmatrix}y_1 \\ \vdots \\ y_m \end{bmatrix} = \begin{bmatrix}f_1(x_1, \ldots, x_n) \\
-		\vdots \\ f_m(x_1, \ldots, x_n)\end{bmatrix}.
-	\end{equation}
-\end{defn}
-
-\begin{remark}
-	A vector function $\appl{f}{S\subseteq\Rtn}{\R^m}$ is given by $m$ scalar functions $\appl{f_i}{\Rtn}{\R}$ with $i = 1, \ldots,
-	m$, where $f_i(x_1, \ldots, x_n)$ gives us the $i$-th component of $f$.
-\end{remark}
-
-\begin{example}
-    The following function of several variables $f(x, y, z) = x + y + 2z$ is a scalar function.
-\end{example}
-
-% These are just the classical domain, image, etc., but extended to functions of several variables in $\Rtn$.
-
-\begin{defn}[Domain]
-Given a function $\stdvf$, the \textit{domain} of that function is the set of points in $\Rtn$ for which the function $f$ is 
-defined, in other words, the set
-\begin{equation}
-\dom{f} \bydef \{\vec{x}\in\Rtn\st\exists f(\vec{x})\}\subseteq\Rtn.
-\end{equation}
-\end{defn}
-
-\noindent For vector-valued functions; i.e. functions of the form $\stdvf$ with $m > 1$, the overall domain is the intersection of the
-domains of each function defining $f$,
-\begin{equation}
-\dom{f}\bydef\bigcap_{i=1}^m\altdom{f_i}.
-\end{equation}
-
-\begin{defn}[Image]
-Given a function $\stdvf$, the \textit{image} or \textit{range} of $f$ is the set
-\begin{equation}
-\image{f}\bydef\{\vec{y}\in\R^m\st \vec{y} = f\left(\vec{x}\right),\ \forall\vec{x}\in\altdom{f}\}\subseteq\R^m.
-\end{equation}
-\end{defn}
-
-\begin{defn}[Graph]
-Given a vector-valued function $\stdvf$, the graph of $f$ is the set
-\begin{equation}
-\fgraph{f}\bydef\{\left(\vec{x}, f\left(\vec{x}\right)\right)\st\vec{x}\in\altdom{f}\}\subset\R^{n + m}.
-\end{equation}
-\end{defn}
-
-\begin{defn}[Level sets]
-Given a function $\gmvf$ and a scalar $c\in\R$, the level set of value $c$ for the function $f$ is a subset of the initial space
-defined as
-\begin{equation}
-\levelset{c}{f} \bydef \{\vec{x}\in\altdom{f}\st f\left(\vec{x}\right) = c\}\subset\Rtn.
-\end{equation}
-\end{defn}
-
-
 \section{$\Rtn$ as a metric space}
+
+
+
 \begin{defn}[Metric space]
-A metric space is an ordered pair $\left(X, d\right)$ where $X$ is a set together with a metric $d$ on $X$. The metric is an 
-application $\appl{d}{X\times X}{\R}$ such that for any $x, y, z\in X$ satisfies the properties
+A metric space is an ordered pair $\left(X, d\right)$ where $X$ is a set together with an application 
+$\appl{d}{X\times X}{\R}$ known as \textit{metric}, such that for any $x, y, z\in X$ satisfies the properties
 \begin{itemize}[itemsep = -2pt]
 	\item $d(x, y) = 0\iff x = y$.
 	\item $d(x, y) = d(y, x)$.
 	\item $d(x, z) \leq d(x, y) + d(y, z)\quad$ (Triangle inequality).
 \end{itemize}
-By the taking $z = x$ in the triangle inequality, together with the second and first properties, it is deduced that $d(x, y)\geq 0$
-	for any $x, y\in X$. The application $d$ is sometimes referred as \textit{distance function} or simply \textit{distance}.
 \end{defn}
+
+By the taking $z = x$ in the triangle inequality, together with the second and first properties, it is deduced that $d(x, y)\geq 0$
+for any $x, y\in X$. The application $d$ is sometimes referred as \textit{distance function} or simply \textit{distance}.
 
 \begin{example}
 	$\R$ is a complete metric space with the distance function $d(x, y) = \abs{y - x}$, known as the \textit{euclidean distance}.
@@ -118,14 +52,16 @@ If such space is complete, then it's said to be a Banach space.
 \section{$\Rtn$ as a normed vector space}
 
 Since normed vector spaces are a special case of metric spaces, $\Rtn$ is a normed vector space when defining a norm on it. In 
-order to do this we use the inner product. Let
+order to do this we use the inner product. 
+
+\begin{defn}[Inner product]\label{def:inner-product}
+Let $\vec{x} = \left(x_1, \ldots, x_n\right)$, $\vec{y} = \left(y_1, \ldots, y_n\right)\in\Rtn$, the inner product in $\Rtn$
+is defined as
 \begin{equation}\label{eq:inner-product}
-\begin{rcases}
-\vec{x} = \left(x_1, \ldots, x_n\right)\in\Rtn \\
-\vec{y} = \left(y_1, \ldots, y_n\right)\in\Rtn
-\end{rcases}
-\implies\innerp{\vec{x}, \vec{y}} \bydef \sum_{i=1}^n x_i y_i.
+\innerp{\vec{x}, \vec{y}} \bydef \sum_{i=1}^n x_i y_i. \bydef\vnorm{\vec{x}}\vnorm{\vec{y}}\cos(\theta),
 \end{equation}
+where $\theta$ is the angle between vectors $\vec{x}$ and $\vec{y}$.
+\end{defn}
 
 \begin{defn}[Euclidean norm]\label{def:euclidean-norm}
 	Given $\vec{x}\in\Rtn$, the euclidean norm of the vector $\vec{x}$ is defined as
@@ -197,7 +133,7 @@ The union of infinitely many open sets and the intersection of a finite number o
 \end{prop}
 
 \begin{defn}[Closed set]
-	A subset $S\subset\Rtn$ is called \textit{closed}, denoted by $\conj{S}$, if its complementary (relative to the space that it is defined on) $S^C \bydef \Rtn - S$ is open. 
+	A subset $S\subset\Rtn$ is called \textit{closed}, denoted by $\conj{S}$, if its complementary (relative to the space that it is defined on) $S^C \bydef\Rtn\setminus S$ is open. 
 \end{defn}
 
 \begin{prop}
@@ -279,6 +215,112 @@ A set $S\subset\Rtn$ is said to be \textit{compact} if it's closed and bounded.
 A set is said to be \textit{convex} if when tracing a segment between any two points we don't get out of the set.
 \end{defn}
 
+\section{Analytic geometry of lines and planes. Parametrization}
+We'll now study some objects in the Euclidean plane and space. In particular, lines in $\R^2$ and planes in $\R^3$.
 
-\section{Limits and continuity}
+\section{Functions of the form $\Rtn\longrightarrow\R^m$}
+So, depending on the values of $n$ and $m$ we can distinguise between two kinds of functions.
+
+\begin{defn}[Scalar-valued function]\label{def:scalar-function}
+	A scalar-valued function over (a subset of) $\Rtn$ is a mapping $\appl{f}{S\subseteq\Rtn}{\R}$, $\left(x_1, \ldots, x_n\right)
+	\longmapsto f\left(x_1, \ldots, x_n\right)$.
+\end{defn}
+
+\begin{defn}[Vector-valued function]
+	A vector-valued function over $\Rtn$ is a mapping $\appl{f}{S\subseteq\Rtn}{\R^m}$, $\vec{x}\longmapsto\vec{y} = f(\vec{x})$, where
+	if $f$ goes from $\Rtn$ to $\R^{m>1}$ then
+	\begin{equation}
+		\vec{y} = f(\vec{x})\bydef\begin{bmatrix}y_1 \\ \vdots \\ y_m \end{bmatrix} = \begin{bmatrix}f_1(x_1, \ldots, x_n) \\
+		\vdots \\ f_m(x_1, \ldots, x_n)\end{bmatrix}.
+	\end{equation}
+\end{defn}
+
+\begin{remark}
+	A vector function $\appl{f}{S\subseteq\Rtn}{\R^m}$ is given by $m$ scalar functions $\appl{f_i}{\Rtn}{\R}$ with $i = 1, \ldots,
+	m$, where $f_i(x_1, \ldots, x_n)$ gives us the $i$-th component of $f$.
+\end{remark}
+
+\begin{example}
+    The following function of several variables $f(x, y, z) = x + y + 2z$ is a scalar function.
+\end{example}
+
+% These are just the classical domain, image, etc., but extended to functions of several variables in $\Rtn$.
+
+\begin{defn}[Domain]
+Given a function $\stdvf$, the \textit{domain} of that function is the set of points in $\Rtn$ for which the function $f$ is 
+defined, in other words, the set
+\begin{equation}
+\dom{f} \bydef \{\vec{x}\in\Rtn\st\exists f(\vec{x})\}\subseteq\Rtn.
+\end{equation}
+\end{defn}
+
+\noindent For vector-valued functions; i.e. functions of the form $\stdvf$ with $m > 1$, the overall domain is the intersection of the
+domains of each function defining $f$,
+\begin{equation}
+\dom{f}\bydef\bigcap_{i=1}^m\altdom{f_i}.
+\end{equation}
+
+\begin{defn}[Image]
+Given a function $\stdvf$, the \textit{image} or \textit{range} of $f$ is the set
+\begin{equation}
+\image{f}\bydef\{\vec{y}\in\R^m\st \vec{y} = f\left(\vec{x}\right),\ \forall\vec{x}\in\altdom{f}\}\subseteq\R^m.
+\end{equation}
+\end{defn}
+
+\begin{defn}[Graph]
+Given a vector-valued function $\stdvf$, the graph of $f$ is the set
+\begin{equation}
+\fgraph{f}\bydef\{\left(\vec{x}, f\left(\vec{x}\right)\right)\st\vec{x}\in\altdom{f}\}\subset\R^{n + m}.
+\end{equation}
+\end{defn}
+
+For $n\geq 3$ it's pretty difficult (actually, we can't) to draw graphs of functions. Nevertheless, this graphs
+can be drawn using the concept of level sets.
+
+\begin{defn}[Level sets]
+Given a function $\gmvf$ and a scalar $c\in\R$, the level set of value $c$ for the function $f$ is a subset of the initial space
+defined as
+\begin{equation}
+\levelset{c}{f} \bydef \{\vec{x}\in\altdom{f}\st f\left(\vec{x}\right) = c\}\subset\Rtn.
+\end{equation}
+\end{defn}
+
+\begin{note}
+    For $n=2$, this sets are called \textbf{level curves}, and for $n=3$, \textbf{level surfaces}.
+\end{note}
+
+Let us consider the graph of $\appl{f}{\R^2}{\R}$. Take its intersection with the plane $z = c$. This intersection gives 
+us a curve in the initial space. This curve of level $c$ of $f$ is obtained by projecting the space curve onto the $XY$
+plane.
+
+\begin{example}
+    Let $\appl{f}{\R^2}{\R}, (x, y)\longmapsto x^2 + y^2$. The level curve of level $c\geq 0$ of $f$ is a circle of radius
+    $\sqrt{c}$ centered at the origin. The graph of $f$ is a surface called \textit{circular paraboloid}, which is obtained
+    by rotating a parabola about its symmetry axis.
+\end{example}
+
+\begin{example}
+    Let $\appl{f}{\R^2}{\R}, (x, y)\longmapsto x^2 - y^2$. When $c\neq 0$ we have a curve with equation $y = \pm\sqrt{x^2 - c}$.
+    For $c > 0$, its level curve is a hyperbola in the region $\{(x, y)\st \abs{y} < x\}$. For $c < 0$, it is a hyperbola in
+    $\{(x, y)\st\abs{y} > x\}$. Finally, when $c = 0$, we have the curve $y = \pm x$. In this case, the graph of $f$ is a 
+    surface called \textit{hyperbolic paraboloid}.
+\end{example}
+
+\begin{example}
+    Let $\appl{f}{\R^2}{\R}, (x, y)\longmapsto x^2 + 4y^2$. For each $c\geq 0$, the curve of level $c$ is an ellipse with
+    equation $x^2 + 4y^2 = c$. Since $f > 0, \forall x, y\in\R$, for $c < 0$ the curve is the empty set. The graph of $f$ is
+    a surface called \textit{elliptic paraboloid}.
+\end{example}
+
+\begin{remark}
+    In functions of the form $f(x, y) = a_1x^2 + a_2y^2 + a_3$ with fixed coefficients $a_i\in\R$ and $a_1, a_2$ nonzero, the
+    graphs can be classified as follows.
+    \begin{itemize}[itemsep = -2pt]
+        \item If $a_1, a_2$ have the same sign the graph of $f$ is an elliptic paraboloid. If $a_1 = a_2$, the graph is a 
+            circular paraboloid.
+        \item If $a_1, a_2$ have different sign the graph of $f$ is a hyperboloid paraboloid.
+    \end{itemize}
+\end{remark}
+
+\section{$\epsilon-\delta$ definition of limit. Continuous functions}
 \section{Topological properties of continuous functions}
