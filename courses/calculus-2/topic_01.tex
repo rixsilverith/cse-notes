@@ -11,9 +11,11 @@ by itself,
 
 \section{$\Rtn$ as a metric space}
 
+There are several definitions of $\Rtn$, the most common one defines it as an $n$-dimensional Euclidean space. In this 
+and the following section we give an alternative, more general definition of what $\Rtn$ is using the concepts of metric 
+spaces and normed vector spaces.
 
-
-\begin{defn}[Metric space]
+\begin{defn}[Metric space]\label{def:metric-space}
 A metric space is an ordered pair $\left(X, d\right)$ where $X$ is a set together with an application 
 $\appl{d}{X\times X}{\R}$ known as \textit{metric}, such that for any $x, y, z\in X$ satisfies the properties
 \begin{itemize}[itemsep = -2pt]
@@ -30,13 +32,13 @@ for any $x, y\in X$. The application $d$ is sometimes referred as \textit{distan
 	$\R$ is a complete metric space with the distance function $d(x, y) = \abs{y - x}$, known as the \textit{euclidean distance}.
 \end{example}
 
-\begin{defn}[Normed vector space]
-A normed vector space is a vector space $V$ together with an application $\appl{\vnorm{\cdot}}{V}{\R}$ that satisfies the 
-properties
+\begin{defn}[Normed vector space]\label{def:normed-vector-space}
+A normed vector space is a vector space $V$ together with an application $\appl{\vnorm{\cdot}}{V}{\R}$, known as norm, 
+that for all $\vec{v}, \vec{w}\in V$ satisfies the properties
 \begin{itemize}[itemsep = -2pt]
-\item $\forall\vec{v}\in V\implies \vnorm{\vec{v}} \leq 0$; $\vnorm{\vec{v}} = 0\iff \vec{v} = \vec{0}$.
-\item $\forall\vec{v}\in V, \forall\lambda\in\R\implies \vnorm{\lambda\vec{v}}\leq\abs{\lambda}\vnorm{\vec{v}}$.
-\item $\forall\vec{v}, \vec{w}\in V \implies \vnorm{\vec{v} + \vec{w}} \leq \vnorm{\vec{v}} + \vnorm{\vec{w}}$.
+\item $\vnorm{\vec{v}} \geq 0$; $\vnorm{\vec{v}} = 0\iff \vec{v} = \vec{0}$.
+\item $\vnorm{\lambda\vec{v}}\leq\abs{\lambda}\vnorm{\vec{v}},\quad\forall\lambda\in\R$.
+\item $\vnorm{\vec{v} + \vec{w}} \leq \vnorm{\vec{v}} + \vnorm{\vec{w}}.\quad$(Triangle inequality).
 \end{itemize}
 \end{defn}
 
@@ -49,6 +51,11 @@ Every normed vector space is a metric space by defining the metric as $d(x, y) =
 If such space is complete, then it's said to be a Banach space.
 \end{prop}
 
+\begin{prop}[Law of the parallelogram]
+    Let $\vec{v}, \vec{w}\in\Rtn$. Then $\vnorm{\vec{v} + \vec{w}}^2 + \vnorm{\vec{v} - \vec{w}}^2 = 2\vnorm{\vec{v}}^2 +
+    2\vnorm{\vec{w}}^2$.
+\end{prop}
+
 \section{$\Rtn$ as a normed vector space}
 
 Since normed vector spaces are a special case of metric spaces, $\Rtn$ is a normed vector space when defining a norm on it. In 
@@ -58,22 +65,78 @@ order to do this we use the inner product.
 Let $\vec{x} = \left(x_1, \ldots, x_n\right)$, $\vec{y} = \left(y_1, \ldots, y_n\right)\in\Rtn$, the inner product in $\Rtn$
 is defined as
 \begin{equation}\label{eq:inner-product}
-\innerp{\vec{x}, \vec{y}} \bydef \sum_{i=1}^n x_i y_i. \bydef\vnorm{\vec{x}}\vnorm{\vec{y}}\cos(\theta),
+\innerp{\vec{x}, \vec{y}} \bydef \sum_{i=1}^n x_i y_i \bydef\vnorm{\vec{x}}\vnorm{\vec{y}}\cos(\theta).
 \end{equation}
-where $\theta$ is the angle between vectors $\vec{x}$ and $\vec{y}$.
 \end{defn}
 
+\begin{remark}
+    In \eqref{eq:inner-product}, $\theta$ is the angle between vectors $\vec{x}$ and $\vec{y}$, which can be easily 
+    computed just by solving \eqref{eq:inner-product} for $\theta$.
+\end{remark}
+
+Using the \nref{def:inner-product} we can give the following definition for the Euclidean norm.
+
 \begin{defn}[Euclidean norm]\label{def:euclidean-norm}
-	Given $\vec{x}\in\Rtn$, the euclidean norm of the vector $\vec{x}$ is defined as
-	\begin{equation}
-		\vnorm{x}\bydef\sqrt{\innerp{\vec{x}, \vec{x}}}\bydef\sqrt{\sum_{i=1}^n x_i^2}.
-	\end{equation}
+    Given $\vec{x}\in\Rtn$, the euclidean norm of the vector $\vec{x}$ is defined as $\vnorm{\vec{x}}\bydef
+    \sqrt{\innerp{\vec{x}, \vec{x}}}$. 
+	%\begin{equation}
+		%$\vnorm{x}\bydef\sqrt{\innerp{\vec{x}, \vec{x}}}\bydef\displaystyle\sqrt{\sum_{i=1}^n x_i^2}$.
+	%\end{equation}
 \end{defn}
+
+Therefore, $\Rtn$ can be defined as a \nref{def:metric-space} whose metric is the \nref{def:euclidean-norm}, making it
+a \nref{def:normed-vector-space}, usually called the $n$-dimensional Euclidean space. We now define some concepts related
+to this kind of spaces.
+
+\begin{defn}[Unit vector]
+    A vector $\vec{v}\in\Rtn$ is a unit vector $\iff\vnorm{\vec{v}} = 1$.
+\end{defn}
+
+\begin{remark}
+    Note that for any vector $\vec{v}\neq\vec{0}$, the vector $\vec{v} / \vnorm{\vec{v}}$ is a unit vector.
+\end{remark}
+
+\begin{defn}[Orthogonality]
+    A set of nonzero vectors $\{\vec{v_1}, \ldots, \vec{v_n}\}$ is an orthogonal set $\iff\forall i\neq j\implies
+    \innerp{\vec{v_i}, \vec{v_j}} = 0$.
+\end{defn}
+
+\begin{defn}[Orthonormal set]
+    A set of vectors $\set{\vec{v_1}, \ldots, \vec{v_n}}$ is an orthonormal set if it is an orthogonal set and for all 
+    $\vec{v_i}\implies\vnorm{\vec{v_i}} = 1$.
+\end{defn}
+
+\begin{example}
+    The set $\set{\ihat = (1, 0, 0),\ \jhat = (0, 1, 0),\ \khat = (0, 0, 1)}$ is an orthonormal set, known as the canonical 
+    basis of $\R^3$.
+\end{example}
 
 %Then, the so called \textbf{euclidian norm} is defined as $\vnorm{\vec{x}} \bydef \sqrt{\innerp{\vec{x}, \vec{x}}} \bydef 
 %\sqrt{\displaystyle\sum_{i=1}^n x_i^2}$.
 
-Also, given the geometrical expression of the inner product \eqref{eq:inner-product}, $\innerp{\vec{x}, \vec{y}} = \vnorm{\vec{x}}
+Using the notion of angle between vectors we can define projections between them.
+
+\begin{defn}[Orthogonal projection]\label{def:orthogonal-projection}
+    The projection of some $\vec{v}$ over another vector $\vec{w}$ is the vector $\left(\vnorm{\vec{v}}\cos(\theta)\right)
+    \uvec{w}$, where $\theta$ is the angle between $\vec{v}$ and $\vec{w}$.
+\end{defn}
+
+\begin{remark}
+    Note that this projection is the product of $\vec{w}$ by a scalar. In other words, the projection of $\vec{v}$ over
+    $\vec{w}$ and $\vec{w}$ are on the same line.
+\end{remark}
+
+Using the relation between the angle and the inner product we can write the projection in terms of the inner product.
+\begin{equation}
+    \left(\vnorm{\vec{v}}\cos(\theta)\right)\uvec{w} = \left(\frac{\vnorm{\vec{v}}}{\vnorm{\vec{w}}}\frac{\innerp{\vec{v}, 
+    \vec{w}}}{\vnorm{\vec{v}}\vnorm{\vec{w}}}\right)\vec{w} = \left(\frac{\innerp{\vec{v}, \vec{w}}}{\vnorm{\vec{w}}^2}
+\right)\vec{w}.
+\end{equation}
+
+Figure: Geometrically, on the plane the projection of $\vec{v}$ over $\vec{w}$ is the vector whose final point is the intersection
+between the line containing $\vec{w}$ and the line which is perpendicular to $\vec{w}$ containing the end point of $\vec{v}$.
+
+Also, given the geometrical expression of the \nref{def:inner-product}, $\innerp{\vec{x}, \vec{y}} = \vnorm{\vec{x}}
 \vnorm{\vec{y}}\cos(\theta)$, since $\abs{\cos(\theta)}\leq 1$, we deduce the following important result.
 \begin{lemma}[Cauchy-Schwartz inequality]
 $\forall\vec{x}, \vec{y}\in\Rtn \implies \abs{\innerp{\vec{x}, \vec{y}}}\leq \vnorm{\vec{x}}\vnorm{\vec{y}}$.
@@ -83,6 +146,7 @@ $\forall\vec{x}, \vec{y}\in\Rtn \implies \abs{\innerp{\vec{x}, \vec{y}}}\leq \vn
 %TODO.
 %\end{proof}
 
+\hide{
 By making use of \ref{eq:inner-product} and \ref{def:euclidean-norm} we can now define the notion of angle between vectors.
 
 \begin{defn}[Angle between vectors]
@@ -92,6 +156,7 @@ determined by the inner product as
 \cos(\theta)_{\left(\vec{x}, \vec{y}\right)} = \frac{\innerp{\vec{x}, \vec{y}}}{\vnorm{\vec{x}}\vnorm{\vec{y}}}
 \end{equation}
 \end{defn}
+}
 
 
 % Orthogonal projection definition goes here
