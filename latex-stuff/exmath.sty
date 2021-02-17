@@ -284,21 +284,6 @@
     \renewcommand{\theenumi}{\thethm\ - (\alph{enumi})}
 }
 
-\theoremstyle{thm}
-
-% {theorem} environment definition.
-\newtheorem{itheorem}[thm]{\@theorem@mark}
-\newenvironment{theorem}[1][]{%
-    \vspace{2pt}
-    \set@labelname{#1}
-    %\ifthenelse{\equal{#1}{}}{}{\ithm{#1}}
-    \@set@theorem@itemlabels
-    \begin{itheorem}[#1]
-}{\end{itheorem}\@restore@itemlabels}
-
-\theoremstyle{defi}
-
-% {defn} environment definition.
 \mdfsetup{skipabove=1em, skipbelow=0em}
 
 % mdframed styles for the different frames
@@ -308,37 +293,33 @@
     nobreak=true, hidealllines=true, innertopmargin=0pt, innerleftmargin=0pt, innerrightmargin=0pt, innerbottommargin=0pt
 }
 
-\newmdtheoremenv[style=\@theoremstyle]{definition}[def]{\@definition@mark}
-\newenvironment{defn}[1][]{%
-    \set@labelname{#1}
-    \begin{definition}[#1]}
-{\end{definition}\@restore@itemlabels}
+\theoremstyle{thm}
 
-%\newtheorem{idefi}[def]{\@definition@mark}
-%\newenvironment{defi}[1][]{%
-%    \vspace{2pt}
-%    \set@labelname{#1}
-%    \begin{idefi}[#1]
-%}{\end{idefi}\@restore@itemlabels}
-
-% {lemma} environment definition.
-\newtheorem{ilemma}[def]{\@lemma@mark}
-\newenvironment{lemma}[1][]{%
+% {theorem} environment definition.
+\newmdtheoremenv[stlye=\@theoremstyle]{itheorem}[thm]{\@theorem@mark}
+\newenvironment{theorem}[1][]{%
     \vspace{2pt}
     \set@labelname{#1}
-    \begin{ilemma}[#1]
-}{\end{ilemma}}
+    \@set@theorem@itemlabels
+    \begin{itheorem}[#1]
+}{\end{itheorem}\@restore@itemlabels}
+
+\theoremstyle{defi}
+
+% {defn} environment definition
+\newmdtheoremenv[style=\@theoremstyle]{definition}[def]{\@definition@mark}
+\newenvironment{defn}[1][]{\set@labelname{#1}\begin{definition}[#1]}{\end{definition}\@restore@itemlabels}
 
 % {prop} environment definition.
-\newtheorem{iprop}[def]{\@proposition@mark}
-\newenvironment{prop}[1][]{%
-    \vspace{2pt}
-    \set@labelname{#1}
-    \begin{iprop}[#1]
-}{\end{iprop}}
+\newmdtheoremenv[style=\@theoremstyle]{iprop}[def]{\@proposition@mark}
+\newenvironment{prop}[1][]{\set@labelname{#1}\begin{iprop}[#1]}{\end{iprop}\@restore@itemlabels}
+
+% {lemma} environment definition.
+\newmdtheoremenv[style=\@theoremstyle]{ilemma}[def]{\@lemma@mark}
+\newenvironment{lemma}[1][]{\set@labelname{#1}\begin{ilemma}[#1]}{\end{ilemma}\@restore@itemlabels}
 
 % {coro} environment definition.
-\newtheorem{coro}[def]{\@corollary@mark}
+\newmdtheoremenv[style=\@theoremstyle]{coro}[def]{\@corollary@mark}
 
 % This macro changes the equation numbering from (\theequation)
 % to (\thesection.\theequation). The equation counter is reseted
@@ -351,15 +332,14 @@
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
-\newenvironment{example}{\vspace{\topsep}\par\noindent\textbf{\@example@mark}~}{} % Examples
-\newenvironment{remark}{\vspace{\topsep}\par\noindent\textbf{\@remark@mark}~}{}  % Remarks
-\newenvironment{note}{\vspace{\topsep}\par\noindent\textbf{\@note@mark}~}{}  % Notes
-\renewenvironment{proof}{\vspace{\topsep}\par\noindent\textbf{\@proof@mark}~}{\qed}  % Remarks
+\newenvironment{example}{\par\noindent\textbf{\@example@mark}~}{}    % Examples
+\newenvironment{remark}{\par\noindent\textbf{\@remark@mark}~}{}      % Remarks
+\newenvironment{note}{\par\noindent\textbf{\@note@mark}~}{}          % Notes
+\renewenvironment{proof}{\par\noindent\textbf{\@proof@mark}~}{\qed}  % Proofs
 
-\newcounter{problem} \setcounter{problem}{0}
+\newcounter{problem}\setcounter{problem}{0}
 \renewcommand{\theproblem}{\arabic{problem}}
 
-% Default link color: blue!60!black
 \newenvironment{problem}[1]{%
 \refstepcounter{problem}\vspace{5pt}\par\noindent\textrm{\textcolor{blue!60!black}{H2-P\theproblem.} \textbf{#1}}}{}
 
