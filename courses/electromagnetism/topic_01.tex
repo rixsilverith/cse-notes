@@ -53,3 +53,49 @@ be derived.
 
 \section{Gradient, flux and conservative fields}
 
+In a region of space we have a vector field (respectively scalar) when there is defined a vectorial magnitude (respectively
+scalar) for each point in that region as a function of the position.
+
+\begin{defn}[Gradient]
+    The gradient of a scalar function $f$ indicates the rate of changes of some magnitude in a given direction. In 
+    cartesian coordinates is defined as
+    \begin{equation}
+        \vec{\nabla} f\bydef \frac{\partial f}{\partial x}\ihat + \frac{\partial f}{\partial y}\jhat + 
+        \frac{\partial f}{\partial z}\khat.
+    \end{equation}
+\end{defn}
+
+\begin{note}
+    The gradient of a function is a vector whose direction is the one of maximum growth of the function in that point, and
+    its magnitude is the slope of the function at that point.
+\end{note}
+
+\begin{defn}[Flux of a vector field through a surface]
+    \begin{equation}
+        \int\vec{F}\dd{\vec{a}} = \int\vec{F}\cdot\uvec{n}\dd{a}.
+    \end{equation}
+\end{defn}
+
+Intuitively, the flux of a vector field through a surface is defined as the number of force lines that goes through the 
+surface. In vector calculus, surfaces are defined by the value of its area and they are assigned a unit vector $\uvec{n}$
+perpendicular to it.
+
+\begin{remark}
+    Note that the flux of a vector field is a scalar magnitude.
+\end{remark}
+
+\begin{defn}[Conservative field]
+    A vector field is said to be conservative if its vector function $\vec{E}(x, y, z)$ can be obtained as the gradient
+    of an scalar magnitude. 
+    \begin{equation}
+        \vec{E}(x, y, z) = \grad V(x, y, z).
+    \end{equation}
+\end{defn}
+
+If a particle moves from one position to another by the effect of a conservative force $\vec{F}$, the work done is 
+independent of the followed path, depending uniquely in the initial and final points. Therefore, we can express the work
+as the difference between the points of a physical magnitude which is a function of the position, known as \textbf{potential
+energy} of the particle.
+\begin{equation}
+    \grad\vec{F} = -\Delta U = W\quad\quad\quad \grad\vec{E} = -\Delta V.
+\end{equation}
