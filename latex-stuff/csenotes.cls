@@ -52,8 +52,7 @@
 % theoremleftbar]
 \DeclareOption{theoremnoframe}{\PassOptionsToPackage{\CurrentOption}{exmath}}
 \DeclareOption{theoremframed}{\PassOptionsToPackage{\CurrentOption}{exmath}}
-\DeclareOption{theoremlbframed}{\PassOptionsToPackage{\CurrentOption}{exmath}}
-\DeclareOption{theoremleftbar}{\PassOptionsToPackage{\CurrentOption}{exmath}}
+\DeclareOption{theoremhighlight}{\PassOptionsToPackage{\CurrentOption}{exmath}}
 
 % Font typefaces [palatino, fourier]
 %     palatino (default): use the Palatino font typeface.
@@ -95,6 +94,8 @@
 \RequirePackage{graphicx} % Insert images
 \RequirePackage{wrapfig} % Floating images
 \RequirePackage{pdfpages} % Insert PDF documents
+\RequirePackage{import} % SVG images
+\RequirePackage{transparent}
 \RequirePackage{longtable} % Multipage tables
 \RequirePackage{multirow} % Multiple rows in tables
 \RequirePackage{multicol} % Multiple columns in tables
@@ -109,7 +110,6 @@
 \RequirePackage{etoolbox}
 \RequirePackage{ifthen} % If-then-else conditions
 
-% blue!60!black
 \def\notes@refcolor{blue!30!black}\newcommand\refcolor[1]{\def\notes@refcolor{#1}}
 \def\notes@urlcolor{\notes@refcolor}\newcommand\urlcolor[1]{\def\notes@urlcolor{#1}}
 
@@ -140,6 +140,11 @@
 \newcommand{\hide}[1]{}
 \newcommand{\hr}{\noindent\rule[0.5ex]{\linewidth}{0.5pt}}
 \newcommand{\smiley}{\ensuremath{\ddot\smile}}
+
+\newcommand\incfig[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
 
 \titleformat{\chapter}[display]{\Huge\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\Huge}
 % In the \titlespacing macro the first argument is the left margin of the
