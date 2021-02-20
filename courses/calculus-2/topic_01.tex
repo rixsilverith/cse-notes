@@ -1,23 +1,26 @@
 \chapter[Introduction to the space of several real variables]{Introduction to the space of \\ several real variables}
 \thispagestyle{noheaders}
 
-In this introductory chapter to the course we are extending elemental concepts of analysis such as the concept of function or 
-convergence to the space of several real variables, namely $\Rtn$, which is defined as the $n$ times cartesian product of $\R$ 
-by itself,
+In this introductory chapter we are extending elemental concepts of analysis such as the concept of function or 
+convergence to the space of several real variables, namely the $n$-dimensional Euclidean space $\Rtn$, which may be defined 
+as the $n$ times cartesian product of $\R$ by itself, or equivalently, the set of $n$-tuples with real components,
 \begin{equation}
-\Rtn\bydef\underbrace{\R\times\ldots\times\R}_{n\textrm{ times}} = \{\left(x_1, \ldots, x_n\right)\st x_i\in\R,\ \forall i\st
+\Rtn\bydef\underbrace{\R\times\ldots\times\R}_{n\textrm{ times}} \bydef \{\left(x_1, \ldots, x_n\right)\st x_i\in\R,\ \forall i\st
 1 \leq i \leq n\}.
 \end{equation}
 
-\section{$\Rtn$ as a metric space}
+\section{$\Rtn$ as an Euclidean normed vector space}
 
-There are several definitions of $\Rtn$, the most common one defines it as an $n$-dimensional Euclidean space. In this 
-and the following section we give an alternative, more general definition of what $\Rtn$ is using the concepts of metric 
-spaces and normed vector spaces.
+There are several ways of defining $\Rtn$, the most common one defines it as an $n$-dimensional Euclidean space. In these 
+sections we'll give an equivalent, more general definition by using the concepts of metric space and normed vector space.
+
+%definitions of $\Rtn$, the most common one defines it as an $n$-dimensional Euclidean space. In this 
+%and the following section we give an alternative, more general definition of what $\Rtn$ is using the concepts of metric 
+%spaces and normed vector spaces.
 
 \begin{defn}[Metric space]\label{def:metric-space}
 A metric space is an ordered pair $\left(X, d\right)$ where $X$ is a set together with an application 
-$\appl{d}{X\times X}{\R}$ known as \textit{metric}, such that for any $x, y, z\in X$ satisfies the properties
+$\appl{d}{X\times X}{\R}$, known as \textit{metric}, such that for any $x, y, z\in X$ satisfies the properties
 \begin{itemize}[itemsep = -2pt]
 	\item $d(x, y) = 0\iff x = y$.
 	\item $d(x, y) = d(y, x)$.
@@ -25,75 +28,112 @@ $\appl{d}{X\times X}{\R}$ known as \textit{metric}, such that for any $x, y, z\i
 \end{itemize}
 \end{defn}
 
+\begin{remark}
 By the taking $z = x$ in the triangle inequality, together with the second and first properties, it is deduced that $d(x, y)\geq 0$
-for any $x, y\in X$. The application $d$ is sometimes referred as \textit{distance function} or simply \textit{distance}.
+for any $x, y\in X$. The application $d$ is sometimes referred to as \textit{distance function} or simply \textit{distance}.
+\end{remark}
+
+So, a metric space is just a set in which we can determine how close two elements belonging to it are.
+
+\begin{defn}[Complete metric space]
+    A metric space is said to be \textit{complete} $\iff$ all Cauchy sequences in it converge.
+\end{defn}
 
 \begin{example}
-	$\R$ is a complete metric space with the distance function $d(x, y) = \abs{y - x}$, known as the \textit{euclidean distance}.
+    $\R$ is a complete metric space by defining the distance function as $d(x, y) = \abs{y - x}$, known as 
+    \textit{euclidean distance}. $\Q$ is also a metric space, but it's not a complete one.
 \end{example}
+\newpage
+We know (and it can be easily but tediously proved) that the set of $n$-tuples $\Rtn$ conforms a vector space. Now, we need
+to generalize the well known Euclidean distance in the real line to an $n$-dimensional Euclidean space, $E$. In order to do 
+this we'll make use of the inner product.
+
+\begin{defn}[Inner product]\label{def:inner-product}
+    Let $E$ be an $n$-dimensional inner product space, and let $\vec{x} = (x_1, \ldots, x_n)$, $\vec{y} = (y_1, \ldots, y_n)
+    \in V$. Then, the inner product between vectors $\vec{x}$ and $\vec{y}$ is defined as 
+    $\innerp{\vec{x}, \vec{y}}\bydef\displaystyle\sum_{i=1}^n x_iy_i.$
+\end{defn}
+
+\noindent And using the \nref{def:inner-product} we can now define an application $\appl{\vnorm{\cdot}}{V}{F}$, which
+we'll call \textit{Euclidean norm}, on our Euclidean vector space $E$ over the field $F$. 
+
+\begin{defn}[Euclidean norm]\label{def:euclidean-norm}
+    Let $E$ be an $n$-dimensional Euclidean vector space, and let $\vec{x}\in E$. The Euclidean norm of the vector $\vec{x}$
+    is defined as $\vnorm{\vec{x}}\bydef\sqrt{\innerp{\vec{x}, \vec{x}}}$.
+\end{defn}
+
+\noindent Then, the \nref{def:euclidean-norm} will give us the magnitude of the vector $\vec{x}$. In other words, it'll
+give us the distance between the initial and final points of the vector. Vector spaces with this application are known
+as \textit{normed vector spaces}.
 
 \begin{defn}[Normed vector space]\label{def:normed-vector-space}
-A normed vector space is a vector space $V$ together with an application $\appl{\vnorm{\cdot}}{V}{\R}$, known as norm, 
-that for all $\vec{v}, \vec{w}\in V$ satisfies the properties
+    A normed vector space is a vector space $V$ over a field together with an application $\appl{\vnorm{\cdot}}{V}{\R}$, 
+    known as norm, that for all $\vec{v}, \vec{w}\in V$ satisfies the properties
 \begin{itemize}[itemsep = -2pt]
 \item $\vnorm{\vec{v}} \geq 0$; $\vnorm{\vec{v}} = 0\iff \vec{v} = \vec{0}$.
-\item $\vnorm{\lambda\vec{v}}\leq\abs{\lambda}\vnorm{\vec{v}},\quad\forall\lambda\in\R$.
+\item $\vnorm{\lambda\vec{v}}\leq\abs{\lambda}\vnorm{\vec{v}},\quad\forall\lambda\in F$.
 \item $\vnorm{\vec{v} + \vec{w}} \leq \vnorm{\vec{v}} + \vnorm{\vec{w}}.\quad$(Triangle inequality).
 \end{itemize}
 \end{defn}
 
 \begin{prop}
-Every normed vector space is a metric space by defining the metric as $d(x, y) = \vnorm{y - x}$. Then, it's easy to check that
-\begin{itemize}[itemsep = -2pt]
-\item $\forall\vec{v}\in V\implies \vnorm{-\vec{v}} = \vnorm{\vec{v}}$.
-\item $\forall\vec{v}, \vec{w}\in V\implies \abs{\vnorm{\vec{w}} - \vnorm{\vec{v}}} \leq \vnorm{\vec{w}} - \vnorm{\vec{v}}$.
-\end{itemize}
-If such space is complete, then it's said to be a Banach space.
+Every normed vector space is a metric space by defining the metric as $d(x, y) = \vnorm{y - x}$. 
+\end{prop}
+
+\begin{note}
+    If a \nref{def:normed-vector-space} is complete, it's said to be a Banach space.
+\end{note}
+
+Since normed vector spaces are just a special case of metric spaces, $\Rtn$ can be defined as a \nref{def:metric-space}
+whose metric is the \nref{def:euclidean-norm}, making it a \nref{def:normed-vector-space}.
+
+\begin{note}
+    Euclidean vector spaces are in fact normed vector spaces, which at the same time are inner product spaces.
+\end{note}
+
+\begin{prop}[Norm's properties]
+    Let $V$ be a normed vector space. The following properties are true for all $\vec{v}, \vec{w}\in V$.
+    \begin{align}
+        \vnorm{-\vec{v}} &= \vnorm{\vec{v}}, \\
+        \abs{\vnorm{\vec{w}} - \vnorm{\vec{v}}} &\leq \vnorm{\vec{w}} - \vnorm{\vec{v}}.
+    \end{align}
 \end{prop}
 
 \begin{prop}[Law of the parallelogram]
-    Let $\vec{v}, \vec{w}\in\Rtn$. Then $\vnorm{\vec{v} + \vec{w}}^2 + \vnorm{\vec{v} - \vec{w}}^2 = 2\vnorm{\vec{v}}^2 +
-    2\vnorm{\vec{w}}^2$.
+    Let $V$ be a normed vector space, and let $\vec{v}, \vec{w}\in V$. Then $\vnorm{\vec{v} + \vec{w}}^2 + \vnorm{\vec{v} 
+    - \vec{w}}^2 = 2\vnorm{\vec{v}}^2 + 2\vnorm{\vec{w}}^2$.
 \end{prop}
 
-\section{$\Rtn$ as a normed vector space}
+\hide{
+\begin{proof}
+    We have, by definition, that 
+    \begin{equation}
+        \vnorm{\vec{v} + \vec{w}}^2 + \vnorm{\vec{v} - \vec{w}}^2 = \left(\vec{v} + \vec{w}\right)\left(
+    \vec{v} + \vec{w}\right) + \left(\vec{v} - \vec{w}\right)\left(\vec{v} - \vec{w}\right).
+    \end{equation}
+    Developing these inner products using the distributive property we obtain 
+    \begin{equation}
+        \vnorm{\vec{v}}^2 + \vnorm{\vec{w}}^2 + 2\vec{v}\vec{w} + 
+    \vnorm{\vec{v}}^2 + \vnorm{\vec{w}}^2 - 2\vec{v}\vec{w} = 2\vnorm{\vec{v}}^2 + 2\vnorm{\vec{w}}^2.
+    \end{equation}
+\end{proof}
+}
+\hide{
+\begin{proof}
+    We have, by definition, that $\vnorm{\vec{v} + \vec{w}}^2 + \vnorm{\vec{v} - \vec{w}}^2 = \left(\vec{v} + \vec{w}\right)\left(
+    \vec{v} + \vec{w}\right) + \left(\vec{v} - \vec{w}\right)\left(\vec{v} - \vec{w}\right)$. Developing these inner 
+    products using the distributive property we obtain $\vnorm{\vec{v}}^2 + \vnorm{\vec{w}}^2 + 2\vec{v}\vec{w} + 
+    \vnorm{\vec{v}}^2 + \vnorm{\vec{w}}^2 - 2\vec{v}\vec{w} = 2\vnorm{\vec{v}}^2 + 2\vnorm{\vec{w}}^2$.
+\end{proof}}
 
-Since normed vector spaces are a special case of metric spaces, $\Rtn$ is a normed vector space when defining a norm on it. In 
-order to do this we use the inner product. 
-
-\begin{defn}[Inner product]\label{def:inner-product}
-Let $\vec{x} = \left(x_1, \ldots, x_n\right)$, $\vec{y} = \left(y_1, \ldots, y_n\right)\in\Rtn$, the inner product in $\Rtn$
-is defined as
-\begin{equation}\label{eq:inner-product}
-\innerp{\vec{x}, \vec{y}} \bydef \sum_{i=1}^n x_i y_i \bydef\vnorm{\vec{x}}\vnorm{\vec{y}}\cos(\theta).
-\end{equation}
-\end{defn}
-
-\begin{remark}
-    In \eqref{eq:inner-product}, $\theta$ is the angle between vectors $\vec{x}$ and $\vec{y}$, which can be easily 
-    computed just by solving \eqref{eq:inner-product} for $\theta$.
-\end{remark}
-
-Using the \nref{def:inner-product} we can give the following definition for the Euclidean norm.
-
-\begin{defn}[Euclidean norm]\label{def:euclidean-norm}
-    Given $\vec{x}\in\Rtn$, the euclidean norm of the vector $\vec{x}$ is defined as $\vnorm{\vec{x}}\bydef
-    \sqrt{\innerp{\vec{x}, \vec{x}}}$. 
-	%\begin{equation}
-		%$\vnorm{x}\bydef\sqrt{\innerp{\vec{x}, \vec{x}}}\bydef\displaystyle\sqrt{\sum_{i=1}^n x_i^2}$.
-	%\end{equation}
-\end{defn}
-
-Therefore, $\Rtn$ can be defined as a \nref{def:metric-space} whose metric is the \nref{def:euclidean-norm}, making it
-a \nref{def:normed-vector-space}, usually called the $n$-dimensional Euclidean space. We now define some concepts related
-to this kind of spaces.
+We now define some concepts related to this kind of spaces.
 
 \begin{defn}[Unit vector]
-    A vector $\vec{v}\in\Rtn$ is a unit vector $\iff\vnorm{\vec{v}} = 1$.
+    A vector $\vec{v}\in\Rtn$ is said to be a unit vector $\iff\vnorm{\vec{v}} = 1$.
 \end{defn}
 
 \begin{remark}
-    Note that for any vector $\vec{v}\neq\vec{0}$, the vector $\vec{v} / \vnorm{\vec{v}}$ is a unit vector.
+    Note that for any nonzero vector $\vec{v}$, $\uvec{v}\bydef\vec{v} / \vnorm{\vec{v}}$ is a unit vector.
 \end{remark}
 
 \begin{defn}[Orthogonality]
@@ -114,10 +154,23 @@ to this kind of spaces.
 %Then, the so called \textbf{euclidian norm} is defined as $\vnorm{\vec{x}} \bydef \sqrt{\innerp{\vec{x}, \vec{x}}} \bydef 
 %\sqrt{\displaystyle\sum_{i=1}^n x_i^2}$.
 
-Using the notion of angle between vectors we can define projections between them.
+Geometrically, using the \nref{def:euclidean-norm}, the \nref{def:inner-product} between two vectors $\vec{x}$, $\vec{y}\in
+\Rtn$ can be defined as $\innerp{\vec{x}, \vec{y}}\bydef\vnorm{\vec{x}}\vnorm{\vec{y}}\cos(\theta)$, where $\theta$ is the 
+angle between both vectors. This angle can be easily computed by solving for $\theta$.
+
+\begin{defn}[Angle between vectors]\label{def:angle-vectors}
+    Let $\vec{x}$, $\vec{y}\in\Rtn$. The angle $\theta$ between both vectors is defined as $\theta_{(\vec{x}, \vec{y})}
+    \bydef\arccos(\frac{\innerp{\vec{x}, \vec{y}}}{\vnorm{\vec{x}}\vnorm{\vec{y}}}).$
+    %\begin{equation}
+     %   \theta_{(\vec{x}, \vec{y})}\bydef\arccos(\frac{\innerp{\vec{x}, \vec{y}}}{\vnorm{\vec{x}}\vnorm{\vec{y}}}).
+    %\end{equation}
+\end{defn}
+
+Using the notion of \nref{def:angle-vectors} we can define projections between them.
 
 \begin{defn}[Orthogonal projection]\label{def:orthogonal-projection}
-    The projection of some $\vec{v}$ over another vector $\vec{w}$ is the vector $\left(\vnorm{\vec{v}}\cos(\theta)\right)
+    The projection of some $\vec{v}$ over another vector $\vec{w}$ is the vector $\ovproj{\vec{w}}{\vec{v}}\bydef\left(
+    \vnorm{\vec{v}}\cos(\theta)\right)
     \uvec{w}$, where $\theta$ is the angle between $\vec{v}$ and $\vec{w}$.
 \end{defn}
 
@@ -126,15 +179,20 @@ Using the notion of angle between vectors we can define projections between them
     $\vec{w}$ and $\vec{w}$ are on the same line.
 \end{remark}
 
-Using the relation between the angle and the inner product we can write the projection in terms of the inner product.
+Using the relation between the angle and the inner product we can write the \nref{def:orthogonal-projection} of $\vec{v}$ 
+over $\vec{w} $in terms of the \nref{def:inner-product}.
 \begin{equation}
-    \left(\vnorm{\vec{v}}\cos(\theta)\right)\uvec{w} = \left(\frac{\vnorm{\vec{v}}}{\vnorm{\vec{w}}}\frac{\innerp{\vec{v}, 
-    \vec{w}}}{\vnorm{\vec{v}}\vnorm{\vec{w}}}\right)\vec{w} = \left(\frac{\innerp{\vec{v}, \vec{w}}}{\vnorm{\vec{w}}^2}
+    \ovproj{\vec{w}}{\vec{v}}\bydef\left(\vnorm{\vec{v}}\cos(\theta)\right)\uvec{w} = \left(\frac{\vnorm{\vec{v}}}{\vnorm{\vec{w}}}
+    \frac{\innerp{\vec{v}, \vec{w}}}{\vnorm{\vec{v}}\vnorm{\vec{w}}}\right)\vec{w} = \left(\frac{\innerp{\vec{v}, 
+    \vec{w}}}{\vnorm{\vec{w}}^2}
 \right)\vec{w}.
 \end{equation}
-
-Figure: Geometrically, on the plane the projection of $\vec{v}$ over $\vec{w}$ is the vector whose final point is the intersection
-between the line containing $\vec{w}$ and the line which is perpendicular to $\vec{w}$ containing the end point of $\vec{v}$.
+\newpage
+\begin{figure}[htbp]\label{fig:ortho-proj}
+    \centerline{\includegraphics[width=.4\textwidth]{orthogonal-projection.png}}
+    \caption{Geometrically, on the plane the projection of $\vec{v}$ over $\vec{w}$ is the vector whose final point is the intersection
+between the line containing $\vec{w}$ and the line which is perpendicular to $\vec{w}$ containing the end point of $\vec{v}$.}
+\end{figure}
 
 Also, given the geometrical expression of the \nref{def:inner-product}, $\innerp{\vec{x}, \vec{y}} = \vnorm{\vec{x}}
 \vnorm{\vec{y}}\cos(\theta)$, since $\abs{\cos(\theta)}\leq 1$, we deduce the following important result.
@@ -157,9 +215,6 @@ determined by the inner product as
 \end{equation}
 \end{defn}
 }
-
-
-% Orthogonal projection definition goes here
 
 \section{Set topology in $\Rtn$}
 
@@ -257,6 +312,14 @@ Open and closed sets generalize the idea of an open and closed interval in the r
 	\end{itemize}
 \end{prop}
 
+\begin{figure}[ht]
+    \centering
+    \incfig{open-ball}
+    \caption{The black circle represents the set of points $(x, y)$ satisfying $x^2 + y^2 = \epsilon^2$, while the grey
+    disk represents the set of points $(x, y)$ satisfying $x^2 + y^2 < \epsilon^2$. The grey set is an open set, the black
+set is its boundary set and the union of both sets is a closed set, the closure.}
+\end{figure}
+
 \begin{defn}[Isolated point]
 A point $\vec{x_0}$ of a subset $S\subset\Rtn$ is said to be isolated $\iff\forall\epsilon > 0, \exists B_\epsilon\argopen(\vec{x_0}
 	\argclose)\st B_\epsilon\argopen(\vec{x_0}\argclose)\cap S = \{\vec{x_0}\}$.
@@ -280,11 +343,12 @@ A set $S\subset\Rtn$ is said to be \textit{compact} if it's closed and bounded.
 A set is said to be \textit{convex} if when tracing a segment between any two points we don't get out of the set.
 \end{defn}
 
-\section{Analytic geometry of lines and planes. Parametrization}
-We'll now study some objects in the Euclidean plane and space. In particular, lines in $\R^2$ and planes in $\R^3$.
+%\section{Analytic geometry of lines and planes. Parametrization}
+%We'll now study some objects in the Euclidean plane and space. In particular, lines in $\R^2$ and planes in $\R^3$.
 
 \section{Functions of the form $\Rtn\longrightarrow\R^m$}
-So, depending on the values of $n$ and $m$ we can distinguise between two kinds of functions.
+Now that we have defined $\Rtn$, we are interested in studying functions of the form $\stdvf$. Depending on the values of 
+$n$ and $m$ we can distinguise between two kinds of functions.
 
 \begin{defn}[Scalar-valued function]\label{def:scalar-function}
 	A scalar-valued function over (a subset of) $\Rtn$ is a mapping $\appl{f}{S\subseteq\Rtn}{\R}$, $\left(x_1, \ldots, x_n\right)
@@ -387,5 +451,6 @@ plane.
     \end{itemize}
 \end{remark}
 
-\section{$\epsilon-\delta$ definition of limit. Continuous functions}
+\section{Limits in $\Rtn$. Convergence of sequences and continuous functions}
+
 \section{Topological properties of continuous functions}
