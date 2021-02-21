@@ -141,9 +141,9 @@
 \newcommand{\hr}{\noindent\rule[0.5ex]{\linewidth}{0.5pt}}
 \newcommand{\smiley}{\ensuremath{\ddot\smile}}
 
-\newcommand\incfig[1]{%
-    \def\svgwidth{\columnwidth}
-    \import{./figures/}{#1.pdf_tex}
+\newcommand\incfig[2][\columnwidth]{%
+    \def\svgwidth{#1}
+    \import{./figures/}{#2.pdf_tex}
 }
 
 \titleformat{\chapter}[display]{\Huge\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\Huge}
