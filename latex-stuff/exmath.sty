@@ -62,6 +62,7 @@
 \RequirePackage{xspace} % Fix space after some commands
 \RequirePackage{etoolbox} % Fix stuff
 \RequirePackage{xstring} % Macros to work with strings
+%\RequirePackage{fdsymbol} % Better QED symbol. This breaks the code.
 
 % ----- General corrections and redefinitions
 \DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
@@ -162,6 +163,7 @@
 
 % ----- Topology
 \newcommand\oball[2]{B_{#1}\argp{#2}} % Open ball of radius #1 centered at #2
+\newcommand\cball[2]{\overline{B_{#1}}\argp{#2}} % Closed ball of radius #1 centered at #2
 \newcommand\interior[1]{\mop{int}{#1}} % Interior of a set
 \newcommand\exterior[1]{\mop{ext}{#1}} % Exterior of a set
 \newcommand\frontier[1]{\partial #1} % Frontier / boundary of a set
@@ -331,9 +333,9 @@
 % https://tex.stackexchange.com/questions/207532/reset-equation-numbering-after-each-section
 % \counterwithin{equation}{chapter}
 
-\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\qedsymbol}{$\blacksquare$} % \medblacksquare with fdsymbol
 
-\newenvironment{example}{\par\noindent\textbf{\@example@mark}~}{}    % Examples
+\newenvironment{example}{\par\noindent\textbf{\@example@mark}~}{\null\hfill$\diamond$}    % Examples
 \newenvironment{remark}{\par\noindent\textbf{\@remark@mark}~}{}      % Remarks
 \newenvironment{note}{\par\noindent\textbf{\@note@mark}~}{}          % Notes
 \renewenvironment{proof}{\par\noindent\textbf{\@proof@mark}~}{\qed}  % Proofs
