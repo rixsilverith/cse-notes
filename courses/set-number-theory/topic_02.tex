@@ -1,0 +1,194 @@
+\chapter{Introduction to set theory}
+\thispagestyle{noheaders}
+
+Sets are one of the building blocks of math and they are a useful way of putting together different objects. Using 
+functions we can relate objects between different or the same set.
+
+\section{Sets and subsets}
+To begin with, let's consider the intuitive idea of what a set is.
+
+\begin{defn}[Set]
+    A set is a collection of objects about which is possible to determine whether or not a particular one is a member of it.
+\end{defn}
+
+\begin{note}
+    Sets are usually denoted by capital letters and the objects within them are referred to as \textbf{elements}, which are
+    denoted by lowercase letters.
+\end{note}
+
+\begin{note}
+    It's worth considering the set with no elements, the \textbf{empty set}, which is denoted by $\O$.
+\end{note}
+
+A set can be described in two similar ways. On one hand, the explicit way, by giving a list of their elements. On the other,
+the implicit way, by using the so called \textbf{set-builder notation}, which uses braces to enclose a property that is the
+qualification for membership in the set.
+
+\begin{example}
+    $A\bydef\set{1, 2, 3, 4, 5} = \set{x\st x\in\Z,\ 1\leq x\leq 5}$.
+\end{example}
+
+\begin{note}
+    Let $X$ be a set. We write $x\in X$ if $x$ is an element in the set $X$. Otherwise, we write $x\not\in X$ to mean that
+    $x$ doesn't belong to the set $X$. 
+\end{note}
+
+\begin{defn}[Subset]
+    Let $X$ and $Y$ be two sets. It's said that $Y$ is a \textit{subset} of $X$, denoted by $Y\subset X$, if every element in 
+    $Y$ is an element in $X$ ($a\in X\implies a\in Y$). Otherwise, $Y\not\subset X$.
+\end{defn}
+
+\begin{note}
+    Usually the expression $Y\subset X$ is read as \textit{$Y$ is contained in $X$}, or simply \textit{$X$ contains $Y$}.
+\end{note}
+
+\begin{prop}
+    Let $X$ be any set. Then, the empty set $\O$ is a subset of $X$.
+\end{prop}
+
+\begin{defn}[Equal sets]
+    Two sets $X$ and $Y$ are equal $\iff Y\subseteq X\land X\subseteq Y$. In other words, if they have the same elements.
+\end{defn}
+
+\begin{defn}[Properly contained sets]
+The set $Y$ is properly contained in the set $X$ if $Y\subset X$ but $X\neq Y$.
+\end{defn}
+
+\begin{example}
+    \N is properly contained in $\Z$ since $\N\subset\Z$ but $\N\neq\Z$.
+\end{example}
+
+\begin{prop}
+    Let $X$ and $Y$ be sets. Then, $Y\subset X\land X\subset Y\implies X = Y$.
+\end{prop}
+
+\begin{proof}
+    Definitions of $Y\subset X$ and $X\subset Y$ respectively indicate that $y\in Y\implies y\in X$ and that $x\in X\implies
+    x\in Y$, thus $x\in X\iff x\in Y$ and therefore $X = Y$.
+\end{proof}
+
+\begin{defn}[Power set]
+    Let $X$ be a set. The power set of $X$, denoted by $\SP{X}$ is a set whose elements are all the subsets of $X$.
+\end{defn}
+
+\begin{example}
+    Let $X = \set{a, b}$, then the power set of $X$ is $\SP{X} = \set{\O, \set{a}, \set{b}, \set{a, b}}$.
+\end{example}
+
+\section{Elemental operations with sets}
+We now define some basic operations we can do with sets. Through this section let $X$ and $Y$ be two sets.
+
+\begin{defn}[Union]
+    The union of $X$ and $Y$, denoted by $X\cup Y$, is another set whose elements are the ones 
+    in both $X$ and $Y$.
+    \begin{equation}
+        X\cup Y\bydef\set{a\st a\in X\lor a\in Y}.
+    \end{equation}
+\end{defn}
+
+\begin{defn}[Intersection]
+    The intersection of $X$ and $Y$, denoted by $X\cap Y$, is another set whose elements are 
+    the ones belonging to both $X$ and $Y$ at the same time.
+    \begin{equation}
+        X\cap Y\bydef\set{a\st a\in X\land a\in Y}.
+    \end{equation}
+\end{defn}
+
+\begin{defn}[Disjoint sets]
+    $X$ and $Y$ are \textit{disjoint} if $X\cap Y = \O$.
+\end{defn}
+
+\begin{prop}
+    Let $X$, $Y$ and $Z$ be three non empty sets. The following properties hold related to the union and intersection 
+    between sets.
+    \begin{itemize}[itemsep = -2pt]
+        \item \textbf{Commutativity} $\quad X\cap Y = Y\cap X$.
+        \item \textbf{Idempotency} $\quad X\cap X = X$.
+        \item \textbf{Associativity} $\quad\left(X\cap Y\right)\cap Z = X\cap\left(Y\cap Z\right)$.
+        \item \textbf{Distributivity} $\quad X\cap\left(Y\cup Z\right) = \left(X\cap Y\right)\cup\left(X\cap Z\right)$.
+        \item \textbf{Cancelation} $\quad X\cap\left(Y\cup X\right) = X$.
+    \end{itemize}
+\end{prop}
+
+\begin{remark}
+    These properties hold when exchanging $\cap$ for $\cup$.
+\end{remark}
+
+\begin{defn}[Difference]
+The difference of $X$ and $Y$ is another set, $X\setminus Y$, whose elements are the ones in $X$ which are not contained in
+$Y$.
+\begin{equation}
+    X\setminus Y\bydef\set{a\in X\st a\not\in Y}.
+\end{equation}
+\end{defn}
+
+\begin{defn}[Symmetric difference]
+    The symmetric difference of $X$ and $Y$ is another set, $X\triangle Y$, whose elements are the ones in $X$ that are not
+    contained in $Y$ and the elements in $Y$ that are not contained in $X$.
+    \begin{equation}
+        X\triangle Y\bydef\set{x\in X\st x\not\in Y}\cup\set{y\in Y\st y\not\in X}.
+    \end{equation}
+\end{defn}
+
+\begin{remark}
+    $X\triangle Y = \left(X\cup Y\right)\setminus\left(X\cap Y\right)$.
+\end{remark}
+
+\begin{defn}[Cartesian product]
+    The cartesian product of $X$ and $Y$ is the set of ordered pairs of the form $\left(x, y\right)$ where $x\in X$ and 
+    $y\in Y$.
+    \begin{equation}
+        X\times Y\bydef\set{\left(x, y\right)\st x\in X\land y\in Y}.
+    \end{equation}
+\end{defn}
+
+\begin{remark}
+    In general, $Y\times X\neq X\times Y$.
+\end{remark}
+
+\begin{defn}[Cardinality]
+    The cardinality of a set $X$, $\abs{X}$, is the number of elements in $X$.
+\end{defn}
+
+\begin{remark}
+    If $\abs{X} < \infty\land \abs{Y} < \infty\implies\abs{X\times Y} = \abs{X}\abs{Y}$.
+\end{remark}
+
+\section{Partitions of a set}
+
+\begin{defn}[Partition]
+    A partition of a non-empty set $X$ is a separation of $X$ into $n$ mutually disjoint non-empty subsets, $X_\alpha$, such
+    that $X_\alpha\neq X_\beta$ and $\displaystyle\bigcup_{\alpha = 1}^n X_\alpha = X$ with $\alpha$, $\beta\in\N$.
+\end{defn}
+
+\begin{remark}
+    If $X$ is a finite set then its partitions are disjoint two by two.
+\end{remark}
+
+\section{Boolean Algebra}
+
+\section{Universal set and paradoxes}
+
+Sometimes it's convenient to assume that the sets that we are considering are subsets of a larger one, $\uset$, denominated
+the \textbf{universal set}.
+
+\begin{remark}
+    Note that for any set $X$ we have that $X\cap\uset = X$ and $X\cup\uset = \uset$.
+\end{remark}
+
+\begin{defn}[Complementary set]
+    Let $X$ be a set. The complementary set of $X$ is another set such that $\cset{X} = \ccset{X}\bydef\set{x\in\uset\st
+    x\not\in X}$.
+\end{defn}
+
+%\section{Zermelo-Fraenkel axioms (ZFC)}
+
+%\section{Functions and cartesian product of two sets}
+
+%\section{Injective, surjective and bijective functions}
+
+%\section{Finite sets}
+
+%\subsection{Principio del Palomar}
+
+%\section{Composition of functions. Inverse function}
