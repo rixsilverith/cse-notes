@@ -225,7 +225,7 @@ determined by the inner product as
 Topology is in charge of describing the different subsets of $\Rtn$ depending on the place that its points occupy. The
 following are basic concepts of set topology and can be generalize to any metric space without defining explicitly the metric.
 
-\begin{defn}[Open ball]
+\begin{defn}[Open ball]\label{def:open-ball}
 Given $\vec{x_0}\in\Rtn$ and a real number $\epsilon > 0$, an open ball centered in $\vec{x_0}$ with radius $\epsilon$ is the set
 \begin{equation}
 B_\epsilon\argopen(\vec{x_0}\argclose)\bydef\{\vec{x}\in\Rtn\st\vnorm{\vec{x} - \vec{x_0}} < \epsilon\}.
@@ -247,9 +247,11 @@ set $B'_\epsilon\argopen(\vec{x_0}\argclose)\bydef B_\epsilon\argopen(\vec{x_0}\
 open ball excluding its centre.
 \end{defn}
 
-\begin{defn}[Open set]
-	A subset $S\subset\Rtn$ is called \textit{open} $\iff\forall\vec{x_0}\in S$ there exists $\epsilon > 0$ depending on $\vec{x_0}$ such that $B_\epsilon\argopen(\vec{x_0}\argclose)\subset S$. In other words, if $\forall\vec{x_0}\in S$ there exists $\epsilon > 0$
-	such that a point in $\Rtn$ belongs to $S$ as soon as its Euclidean distance from $\vec{x_0}$ is smaller than $\epsilon$. 
+\begin{defn}[Open set]\label{def:open-set}
+    A subset $S\subset\Rtn$ is an open set $\iff\forall\vec{x_0}\in S$ there exists $\epsilon > 0$ depending on $\vec{x_0}$ 
+    such that $B_\epsilon\argopen(\vec{x_0}\argclose)\subset S$. In other words, if $\forall\vec{x_0}\in S$ there exists 
+    $\epsilon > 0$ such that a point in $\Rtn$ belongs to $S$ as soon as its Euclidean distance from $\vec{x_0}$ is smaller 
+    than $\epsilon$. 
 \end{defn}
 
 \begin{note}
@@ -261,8 +263,22 @@ its boundary points.
 The union of infinitely many open sets and the intersection of a finite number of open sets are open.
 \end{prop}
 
-\begin{defn}[Closed set]
-	A subset $S\subset\Rtn$ is called \textit{closed}, denoted by $\conj{S}$, if its complementary (relative to the space that it is defined on) $S^C \bydef\Rtn\setminus S$ is open. 
+\begin{prop}
+    Let $\vec{x_0}\in\Rtn$ and $\epsilon\in\R$. Then, $\forall\epsilon > 0$, $\oball{\epsilon}{\vec{x_0}}$ is open.
+\end{prop}
+
+\begin{proof}
+    Let $\vec{x_1}\in\oball{\epsilon}{\vec{x_0}}$ and let $d = \vnorm{\vec{x_1} - \vec{x_0}}$. We need to find $\ell > 0$
+    such that $\oball{\ell}{\vec{x_1}}\subset\oball{\epsilon}{\vec{x_0}}$ with $\ell = \epsilon - d$. Then, we have to
+    prove that $\oball{\ell}{\vec{x_1}}\subset\oball{\epsilon}{\vec{x_0}}$. Let $\vec{y}\in\oball{\ell}{\vec{x_1}}$, we have,
+    using the triangle inequality,
+    that $\vnorm{\vec{y} - \vec{x_0}} = \vnorm{(\vec{y} - \vec{x_1}) + (\vec{x_1} - \vec{x_0})}\leq\vnorm{\vec{y} - 
+    \vec{x_1}} + \vnorm{\vec{x_1} - \vec{x_0}} < \ell + d = \epsilon\iff\vec{y}\in\oball{\epsilon}{\vec{x_0}}$. 
+\end{proof}
+
+\begin{defn}[Closed set]\label{def:closed-set}
+    A subset $S\subset\Rtn$ is a closed set, denoted by $\conj{S}$, if its complementary (relative to the space that 
+    it is defined on) $S^C \bydef\Rtn\setminus S$ is open. 
 \end{defn}
 
 \begin{prop}
@@ -277,11 +293,16 @@ Open and closed sets generalize the idea of an open and closed interval in the r
 
 \begin{defn}[Interior]
 	The interior of a subset $S\subset\Rtn$, denoted by $\interior{S}$, is the largest open subset of $\Rtn$ contained in $S$. 
-	A point that is in the interior of $S$ is an \textbf{interior point}.
 	\begin{equation}
 		\interior{S}\bydef\{\vec{x_0}\in S\st\exists\epsilon > 0\implies B_\epsilon\argopen(\vec{x_0}\argclose)\subset S\}.
 	\end{equation}
+        A point that is in the interior of $S$ is an \textbf{interior point}.
 \end{defn}
+
+\begin{note}
+    The interior of a set can be defined by the following property of maximality: if $U$ is open and $U\subset S$, then
+    $U\subset\interior{S}$. In particular, if $S$ is open, then $\interior{S} = S$.
+\end{note}
 
 \begin{defn}[Exterior]
 	The exterior of a subset $S\subset\Rtn$, denoted by $\exterior{S}$, is the complementary set of the closure of $S$, defined as
@@ -293,17 +314,22 @@ Open and closed sets generalize the idea of an open and closed interval in the r
 \end{defn}
 
 \begin{defn}[Closure]
-	The closure of a subset $S\subset\Rtn$, denoted by $\closure{S}$, consists of all points in $S$ together with its boundary.
-	Mathematically, 
-	\begin{equation}
-		\closure{S}\bydef\interior{S}\cup\frontier{S}.
-	\end{equation}
-	It is the smallest closed subset of $\Rtn$ contained in $S$, and its points are called \textbf{points of closure} of $S$.
+    The closure, or adherence, of a subset $S\subset\Rtn$, denoted by $\closure{S}$, consists of all points in $S$ 
+    together with its boundary. Mathematically, 
+    \begin{equation}
+        \closure{S}\bydef\interior{S}\cup\frontier{S}.
+    \end{equation}
+    It is the smallest closed subset of $\Rtn$ contained in $S$, and its points are called \textbf{points of closure} of $S$.
 \end{defn}
 
+\begin{note}
+    The closure of a set $S\subset\Rtn$, $\closure{S}$, can be defined by the following property of minimality: if $U$ is
+    closed and $U\supset S$, then $U\supset\closure{S}$. In particular, if $S$ is closed then $\closure{S} = S$.
+\end{note}
+
 \begin{defn}[Boundary]
-	The boundary, or frontier, of a subset $S\subset\Rtn$, denoted by $\frontier{S}$, is the set of points in the border of the
-	set that can be approached both from $S$ and from the outside of $S$. More precisely, 
+	The boundary, or frontier, of a subset $S\subset\Rtn$, denoted by $\frontier{S}$, is the set of points in the border 
+        of the set that can be approached both from $S$ and from the outside of $S$. More precisely, 
 	\begin{equation}
 		\frontier{S}\bydef\{\vec{x_0}\in\Rtn\st\exists\epsilon > 0\implies B_\epsilon
 		\argopen(\vec{x_0}\argclose)\cap S\neq\O\land B_\epsilon\argopen(\vec{x_0}\argclose)\cap\left(\Rtn\setminus S\right)
@@ -312,6 +338,10 @@ Open and closed sets generalize the idea of an open and closed interval in the r
 	Equivalently, the boundary can be defined as $\frontier{S}\bydef\closure{S}\setminus\interior{S}$, and its points are called
 	\textbf{boundary points}.
 \end{defn}
+
+\begin{note}
+    The boundary of a set $S\subset\Rtn$ can be also denoted by $\delta S$.
+\end{note}
 
 \begin{figure}[ht]
     \vskip.5cm
@@ -340,13 +370,21 @@ Given $S\subset\Rtn$, a point $\vec{x_0}\in S$ is said to be a limit point, or a
 	if we can find points of $S$ as much close as we want to the point $\vec{x_0}$.
 \end{defn}
 
-\begin{defn}[Bounded set]
+\begin{defn}[Bounded set]\label{def:bounded-set}
 A set $S\subset\Rtn$ is said to be \textit{bounded} $\iff\exists M > 0\st\forall\vec{x}\in S\implies \vnorm{\vec{x}}\leq M$.
 \end{defn}
 
-\begin{defn}[Compact set]
+We can now define the important notion of \textit{compactness} in $\Rtn$.
+
+\begin{defn}[Compact set]\label{def:compact-set}
 A set $S\subset\Rtn$ is said to be \textit{compact} if it's closed and bounded.
 \end{defn}
+
+\begin{note}
+    There's a more general definition of the notion of compacity which states that a set $S$ is compact if, for every
+    collection of open sets whose union contains $S$, there exists a finite subcollection which also contains $S$.
+    In $\Rtn$ the two definitions are equivalent (Heine-Borel theorem).
+\end{note}
 
 \begin{defn}[Connected set]
 A set is said to be \textit{connected} if when tracing a segment between any two points we don't get out of the set.
@@ -461,5 +499,87 @@ plane.
 \end{remark}
 
 \section{Limits in $\Rtn$. Convergence of sequences and continuous functions}
+
+The notions of \nref{def:open-ball}, \nref{def:compact-set} and \nref{def:closed-set} previously seen are important 
+to extend the concept of \textit{limit} of a sequence and of a function to $n$ dimensions.
+
+\begin{defn}[Sequence in $\Rtn$]
+    A sequence in $\Rtn$ is an ordered set of points $\set{\vec{x_i}\st i\in\N}\subset\Rtn$, usually denoted by 
+    $\set{\vec{x_i}}_{i\in\N}$.
+\end{defn}
+
+\begin{defn}[Convergent sequence]
+    A sequence $\set{\vec{x_i}}\subset\Rtn$ is convergent to $\vec{L}\in\Rtn$ if $\forall\delta > 0$ there exists $n_0\in\N$
+    such that if $i > n_0$ then $\vec{x_i}\in\oball{\delta}{\vec{L}}$, where $\vec{L}$ is the limit of the sequence.
+\end{defn}
+
+\begin{note}
+    This definition generalizes the notion of convergence seen for sequences in $\R$ by substituting the absolute value 
+    over $\R$ by the Euclidean norm over $\Rtn$.
+\end{note}
+
+We now describe to important theorems.
+
+\begin{theorem}[Characterization of closed sets by sequences]
+    A set $S\subset\Rtn$ is closed $\iff$ for every sequence $\set{\vec{x_i}}$ contained in $S$ which converges, its limit
+    is also in $S$.
+\end{theorem}
+
+\begin{defn}[Subsequence in $\Rtn$]\label{def:subsequence-rn}
+    A subsequence $\set{\vec{y_m}}$ of a sequence $\set{\vec{x_i}}$ is one such that for every $m\in\N$ we have $\vec{y_m} =
+    \vec{x_{i_m}}$, where the sequence of positive integers $i_m$ is increasing. 
+\end{defn}
+
+Using the notion of \nref{def:subsequence-rn} we extend the Bolzano-Weierstrass theorem in $\R$ to $n$ dimensions.
+
+\begin{theorem}[Bolzano-Weierstrass theorem in $\Rtn$]
+    Let $\set{\vec{x_i}}\subset\Rtn$ be a sequence contained in a \nref{def:bounded-set}. Then, there exists a subsequence
+    of $\set{\vec{x_i}}$ which converges. In particular, if $\set{\vec{x_i}}$ is contained in a \nref{def:compact-set} $K$,
+    then it has a convergent subsequence $\set{\vec{y_m}}$ to a limit $\vec{L}\in K$.
+\end{theorem}
+
+\begin{remark}
+    Using the definition of convergence, we can see that a sequence $\set{\vec{x_i}}\subset\Rtn$ converges to $\vec{L}\iff$
+    the sequence of positive real numbers $d(\vec{x_i}, \vec{L})$ converges to 0. \wtf
+\end{remark}
+
+\begin{defn}[Domain]\label{def:domain-set}
+    A set $S\subset\Rtn$ is a domain if it's open and connected.
+\end{defn}
+
+To extend the notion of limit of a function $\appl{f}{S\subset\Rtn}{\R^m}$ to $n$ dimensions when the variable of the 
+function converges to a point let's recall the case of $\R$. In this case, 
+\begin{equation}
+    \lim_{x\to x_0} f(x) = L\iff \forall\epsilon > 0,\ \exists\delta(\epsilon, x_0) = \delta > 0 \st 0 < \abs{x - x_0} < \delta
+        \implies\abs{f(x) - L} < \epsilon.
+\end{equation}
+The generalization of this concept of limit of a function from $\R$ to $\Rtn$ is done by replacing the absolute value
+by the Euclidean norm.
+
+\begin{defn}[Limit of a function]
+    Let $S$ be an \nref{def:open-set} in $\Rtn$, let $\appl{f}{S}{\R^m}$ be a function and let $\vec{x_0}\in S$. Then, the
+    function $f$ has limit $\vec{L}$ in $\vec{x_0}\iff\forall\epsilon > 0,\ \exists \delta(\epsilon) = \delta > 0 \st
+    \forall\vec{x}\in S,\ 0 < \vnorm{\vec{x} - \vec{x_0}} < \delta\implies\vnorm{f(\vec{x}) - \vec{L}} < \epsilon$.
+\end{defn}
+
+\begin{note}
+    Why do we want $S$ to be open? This makes that, for $\delta > 0$, the condition $0 < \vnorm{\vec{x} - \vec{x_0}} < \delta$
+    is satisfied for at least a point $\vec{x}\in S\setminus\set{\vec{x_0}}$, that is, that there exists points of $S$
+    arbitrarily close to $\vec{x_0}$ but different from it. For instance, this allows that it can happen the case 
+    $\lim_{\vec{x}\to\vec{x_0}}f(\vec{x}) = \vec{L}$ even when $f(\vec{x_0})\neq \vec{L}$.
+\end{note}
+
+\begin{note}
+The concept of limit of functions over $\Rtn$, as in $\R$, can be defined similarly by using sequences. We have 
+$\lim_{\vec{x}\to\vec{x_0}} f(\vec{x}) = \vec{L}\iff$ for every sequence $\set{\vec{x_i}}$ converging to $\vec{x_0}$, the
+    sequence $f(\vec{x_i})$ converges to $\vec{L}$.
+
+    In particular, this definition implies the following: Suppose that there exists the limit $\lim_{\vec{x}\to\vec{\x_0}}
+    = \vec{L}$ and let $\set{\vec{x_i}}$, $\set{\vec{y_i}}$ be any two sequences converging to $\vec{x_0}$. If 
+    $f(\vec{x_i})\longrightarrow\vec{c}$ and $f(\vec{y_i})\longrightarrow\vec{c'}$ when $i\longrightarrow\infty$, then
+    $\vec{c} = \vec{c'} = \vec{L}$.
+
+    This gives us a criteria to determine whether a certain function has a limit at a point. 
+\end{note}
 
 \section{Topological properties of continuous functions}
