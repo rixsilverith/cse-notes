@@ -260,7 +260,12 @@ its boundary points.
 \end{note}
 
 \begin{prop}
-The union of infinitely many open sets and the intersection of a finite number of open sets are open.
+    Open sets have the following properties.
+    \begin{itemize}[itemsep = -2pt, topsep = -1pt]
+        \item Given a collection of open sets $\set{S_\alpha}_{\alpha\in I}\implies\displaystyle\bigcup_{\alpha\in I} S_\alpha$ is open.
+        \item Let $S$ and $U$ be open sets $\implies S\cap U$ is open.
+    \end{itemize}
+%The union of infinitely many open sets and the intersection of a finite number of open sets are open.
 \end{prop}
 
 \begin{prop}
@@ -282,7 +287,13 @@ The union of infinitely many open sets and the intersection of a finite number o
 \end{defn}
 
 \begin{prop}
-The union of a finite number of closed sets and the intersection of infinitely many closed sets are closed.
+    Closed sets have the following properties.
+    \begin{itemize}[itemsep = -2pt, topsep = -1pt]
+        \item Given a collection of closed sets $\set{S_\alpha}_{\alpha\in I}\implies\displaystyle\bigcap_{\alpha\in I} 
+            S_\alpha$ is closed.
+        \item Let $S$ and $U$ be closed sets $\implies S\cup U$ is closed.
+    \end{itemize}
+%The union of a finite number of closed sets and the intersection of infinitely many closed sets are closed.
 \end{prop}
 
 \begin{prop}
@@ -359,12 +370,12 @@ Open and closed sets generalize the idea of an open and closed interval in the r
         \end{gather}
 \end{prop}
 
-\begin{defn}[Isolated point]
+\begin{defn}[Isolated point]\label{def:isolated-point}
 A point $\vec{x_0}$ of a subset $S\subset\Rtn$ is said to be isolated $\iff\forall\epsilon > 0, \exists B_\epsilon\argopen(\vec{x_0}
 	\argclose)\st B_\epsilon\argopen(\vec{x_0}\argclose)\cap S = \{\vec{x_0}\}$.
 \end{defn}
 
-\begin{defn}[Limit point]
+\begin{defn}[Limit point]\label{def:limit-point}
 Given $S\subset\Rtn$, a point $\vec{x_0}\in S$ is said to be a limit point, or accumulation point, of $S\iff\forall\epsilon > 0, 
 	\exists B'_\epsilon\argopen(\vec{x_0}\argclose)\st B'_\epsilon\argopen(\vec{x_0}\argclose)\cap S\neq\O$. In other words, 
 	if we can find points of $S$ as much close as we want to the point $\vec{x_0}$.
@@ -386,9 +397,7 @@ A set $S\subset\Rtn$ is said to be \textit{compact} if it's closed and bounded.
     In $\Rtn$ the two definitions are equivalent (Heine-Borel theorem).
 \end{note}
 
-\begin{defn}[Connected set]
-A set is said to be \textit{connected} if when tracing a segment between any two points we don't get out of the set.
-\end{defn}
+
 
 %\section{Analytic geometry of lines and planes. Parametrization}
 %We'll now study some objects in the Euclidean plane and space. In particular, lines in $\R^2$ and planes in $\R^3$.
@@ -518,7 +527,7 @@ to extend the concept of \textit{limit} of a sequence and of a function to $n$ d
     over $\R$ by the Euclidean norm over $\Rtn$.
 \end{note}
 
-We now describe to important theorems.
+We now describe two important theorems.
 
 \begin{theorem}[Characterization of closed sets by sequences]
     A set $S\subset\Rtn$ is closed $\iff$ for every sequence $\set{\vec{x_i}}$ contained in $S$ which converges, its limit
@@ -547,6 +556,10 @@ Using the notion of \nref{def:subsequence-rn} we extend the Bolzano-Weierstrass 
     A set $S\subset\Rtn$ is a domain if it's open and connected.
 \end{defn}
 
+To extend the notion of limit of a function from $\R$ to $n$ dimensions it's enough to replace the absolute value
+by the \nref{def:euclidean-norm}.
+
+\hide{
 To extend the notion of limit of a function $\appl{f}{S\subset\Rtn}{\R^m}$ to $n$ dimensions when the variable of the 
 function converges to a point let's recall the case of $\R$. In this case, 
 \begin{equation}
@@ -555,12 +568,22 @@ function converges to a point let's recall the case of $\R$. In this case,
 \end{equation}
 The generalization of this concept of limit of a function from $\R$ to $\Rtn$ is done by replacing the absolute value
 by the Euclidean norm.
+}
 
-\begin{defn}[Limit of a function]
-    Let $S$ be an \nref{def:open-set} in $\Rtn$, let $\appl{f}{S}{\R^m}$ be a function and let $\vec{x_0}\in S$. Then, the
-    function $f$ has limit $\vec{L}$ in $\vec{x_0}\iff\forall\epsilon > 0,\ \exists \delta(\epsilon) = \delta > 0 \st
+\begin{defn}[Functional limit]\label{def:functional-limit}
+    Let $S$ be an \nref{def:open-set} in $\Rtn$, let $\appl{f}{S}{\R^m}$ be a function and let $\vec{x_0}\in\dom{f}$ be
+    a \nref{def:limit-point}. Then, $f$ has limit $\vec{L}$ in $\vec{x_0}$ when $\vec{x}\longrightarrow\vec{x_0}
+    \iff\forall\epsilon > 0,\ \exists \delta(\epsilon) = \delta > 0 \st
     \forall\vec{x}\in S,\ 0 < \vnorm{\vec{x} - \vec{x_0}} < \delta\implies\vnorm{f(\vec{x}) - \vec{L}} < \epsilon$.
 \end{defn}
+
+\begin{remark}
+    \Eref{def:functional-limit} can also be written in terms of open balls.
+    \begin{equation}
+        \lim_{\vec{x}\to\vec{x_0}}f(\vec{x})\iff\forall\oball{\epsilon}{\vec{L}},\ \exists\oball{\delta(\epsilon)}{\vec{x_0}}
+            \st f\left(\oball{\delta(\epsilon)}{\vec{x_0}}\right)\subset\oball{\epsilon}{f(\vec{x_0})}.
+    \end{equation}
+\end{remark}
 
 \begin{note}
     Why do we want $S$ to be open? This makes that, for $\delta > 0$, the condition $0 < \vnorm{\vec{x} - \vec{x_0}} < \delta$
@@ -582,4 +605,221 @@ $\lim_{\vec{x}\to\vec{x_0}} f(\vec{x}) = \vec{L}\iff$ for every sequence $\set{\
     This gives us a criteria to determine whether a certain function has a limit at a point. 
 \end{note}
 
+\begin{prop}[Uniqueness of the limit]
+    The limit, if exists, is unique.
+\end{prop}
+
+The following properties about limits can be proved using the $\epsilon-\delta$ definition of limit.
+
+\begin{prop}[Lineality of the limit]
+    Given two functions $\appl{f, g}{\Rtn}{\R^m}$ with limits $\vec{L}$ and $\vec{M}$ respectively at 
+    $\vec{x} = \vec{x_0}$, we have
+    \begin{equation}
+        \lim_{\vec{x}\to\vec{x_0}} \left(\lambda f(\vec{x})\pm \mu g(\vec{x})\right) = \lambda\vec{L}\pm \mu\vec{M},\quad
+            \lambda, \mu\in\R
+    \end{equation}
+\end{prop}
+
+\begin{remark}
+    It can occur that the sum of two discontinuous functions at a certain $\vec{x_0}$ is continuous for that value.
+    However, the sum of two continuous functions will be always continuous and the sum of a continuous function with a 
+    non-continuous one will be always discontinuous.
+\end{remark}
+
+\begin{prop}
+    Let $\appl{f, g}{\Rtn}{\R}$ with limits $\vec{L}$ and $\vec{M}$ respectively at $\vec{x} = \vec{x_0}$, then
+    %\begin{equation}
+        $\lim_{\vec{x}\to\vec{x_0}}\left(f(\vec{x})g(\vec{x})\right) = \vec{L}\cdot\vec{M}$.
+    %\end{equation}
+\end{prop}
+
+\begin{remark}
+    The produt of continuous functions is always continuous. Somehow, it can occur that the product of a continuous 
+    function with a discontinuous one as well as the product of two discontinuous functions can be continuous.
+\end{remark}
+
+\begin{prop}
+    Given $\appl{f}{\Rtn}{\R}$ such that $f(\vec{x}) = \vec{y}\neq\vec{0}$, we have that
+    \begin{equation}
+        \exists\lim_{\vec{x}\to\vec{x_0}}\frac{1}{f(\vec{x})} = \frac{1}{\vec{y}}.
+    \end{equation}
+    On the other hand, given $f, g$ continuous at $\vec{x_0}$ such that $g(\vec{x_0})\neq\vec{0}$ we have
+    \begin{equation}
+        \exists\lim_{\vec{x}\to\vec{x_0}}\left(h(\vec{x}) = \frac{f(\vec{x})}{g(\vec{x})}\right),
+    \end{equation}
+    therefore $h(\vec{x})$ is continuous at $\vec{x} = \vec{x_0}$.
+\end{prop}
+
+\begin{prop}
+    Given a vector-valued function with $m$ scalar components $\appl{f}{\Rtn}{\R^m}$ we have that
+    \begin{equation}
+        \lim_{\vec{x}\to\vec{x_0}}f(\vec{x}) = \vec{L}\iff\lim_{\vec{x}\to\vec{x_0}} f_i(\vec{x}) = \vec{L_i},\quad\forall
+            1 \leq i \leq m.
+    \end{equation}
+    In other words, a vector function is continuous $\iff$ each of its component functions $f_i$ is continuous.
+\end{prop}
+
+\begin{prop}
+    Given $\appl{f}{\Rtn}{\R}$, if $f$ is continuous at $\vec{x} = \vec{x_0}$, $f(\vec{x}) > 0$ $(< 0)$ and $\vec{x_0}$ is
+    a \nref{def:limit-point} of $\dom{f}$, then
+    \begin{equation}
+        \exists\epsilon > 0\st f(\vec{x}) > 0\ (< 0),\ \forall\vec{x}\in\oball{\epsilon}{\vec{x_0}}\cap\dom{f}.
+    \end{equation}
+\end{prop}
+
+\begin{lemma}[Sandwich lemma]
+    Given three functions $\appl{f, g, h}{\Rtn}{\R}$, if $\exists\epsilon > 0$ such that $f(\vec{x})\leq h(\vec{x})\leq 
+    g(\vec{}x)$ for all $\vec{x}\in\oball{\epsilon}{\vec{x_0}}$, and moreover 
+    \begin{equation}
+        \lim_{\vec{x}\to\vec{x_0}}f(\vec{x}) = \lim_{\vec{x}\to\vec{x_0}}g(\vec{x}) = \vec{L}\implies
+        \lim_{\vec{x}\to\vec{x_0}}h(\vec{x}) = \vec{L}. 
+    \end{equation}
+\end{lemma}
+
+\begin{prop}
+    Given $\appl{f, g}{\Rtn}{\R}$, if $f(\vec{x})\longrightarrow\vec{0}$ as $\vec{x}\longrightarrow\vec{x_0}$ and there
+    exist two real numbers $M, \epsilon > 0$ such that $\abs{g(\vec{x})}\leq M,\ \forall\vec{x}\in
+    \oball{\epsilon}{\vec{x_0}}\cap\dom{f}$, then
+    \begin{equation}
+        \exists\lim_{\vec{x}\to\vec{x_0}}\left(f(\vec{x})g(\vec{x})\right) = 0.
+    \end{equation}
+    In other words, the limit of a zero function at $\vec{x} = \vec{x_0}$ by a bounded function is zero.
+\end{prop}
+
+\begin{prop}
+    Given $\appl{f}{\Rtn}{\R^p}$ and $\appl{g}{\R^p}{\R^m}$, $g\circ f$ is defined as $g\left(f(\vec{x})\right)$. Suppose
+    that
+    \begin{itemize}[itemsep = -2pt, topsep = -2pt]
+        \item $\vec{x_0}$ is a \nref{def:limit-point} of $\dom{f}$ and $f(\vec{x})$ is continuous at $\vec{x_0}$,
+        \item $f(\vec{x_0})$ is a \nref{def:limit-point} of $\dom{g}$ and $g(\vec{x})$ is continuous at $\vec{x_0}$,
+        \item $\vec{x_0}$ is a \nref{def:limit-point} of $\dom{g\circ f}$ and $g\circ f$ is continuous at $\vec{x} = \vec{x_0}$,
+    \end{itemize}
+    then we have that
+    \begin{equation}
+        \lim_{\vec{x}\to\vec{x_0}}g\left(f(\vec{x})\right) = g\left(f(\vec{x_0})\right).
+    \end{equation}
+    The resulting function of the composition of two continuous functions is continuous in general.
+\end{prop}
+
+\hide{
+\begin{prop}
+    Let $\appl{f, g}{S\subset\Rtn}{\R^m}$ and let $\lim_{\vec{x}\to\vec{x_0}} f(\vec{x}) = \vec{L}$, 
+    $\lim_{\vec{x}\to\vec{x_0}} g(\vec{x}) = \vec{M}$. Then, the following properties regarding the limit of a function hold.
+
+    \begin{itemize}[itemsep = -2pt, topsep = -2pt]
+        \item $\lim_{\vec{x}\to\vec{x_0}} \left(\lambda f(\vec{x})\pm \mu g(\vec{x})\right) = \lambda\vec{L}\pm \mu\vec{M},\
+            \lambda, \mu\in\R$.
+        \item $\lim_{\vec{x}\to\vec{x_0}}\left(fg\right)(\vec{x}) = \vec{LM},\quad\textrm{when }m = 1$.
+        \item $\lim_{\vec{x}\to\vec{x_0}}\frac{1}{f(\vec{x})} = \frac{1}{\vec{L}},\quad m = 1, \vec{L}\neq\vec{0}$.
+    \end{itemize}
+\end{prop}
+
+\begin{prop}[Composition of limits]
+    Let $\appl{f}{S\subset\Rtn}{\R^m}$ and $\appl{g}{f(S)\subset\R^m}{\R^s}$ be two functions. Then,
+    \begin{equation}
+        \lim_{\vec{x}\to\vec{x_0}} f(\vec{x}) = \vec{L}\land\lim_{\vec{y}\to\vec{L}} g(\vec{y}) = \vec{M}\implies
+        \lim_{\vec{x}\to\vec{x_0}} g\left(f(\vec{x})\right) = \vec{M}.
+    \end{equation}
+\end{prop}
+}
+
+From the concept of \nref{def:functional-limit} in $\Rtn$ we can now define the concept of continuity of a function
+at a point $\vec{x_0}$ of its domain.
+
+\begin{defn}[Continuity in $\Rtn$]
+    Let $S$ be an \nref{def:open-set} in $\Rtn$, let $\appl{f}{S}{\R^m}$ be a function and let $\vec{x_0}\in\dom{f}$. Then, 
+    $f$ is continuous at $\vec{x_0}\iff f(\vec{x})\longrightarrow f(\vec{x_0})$ as $\vec{x}\longrightarrow\vec{x_0}$.
+    %$\vec{x_0}\iff\lim_{\vec{x}\to\vec{x_0}} f(\vec{x}) = f(\vec{x_0})$. 
+\end{defn}
+
+\begin{remark}
+    $f$ is continuous in $S\iff f$ is continuous at every point $\vec{x_0}\in S$.
+\end{remark}
+
+\begin{note}
+    If $f$ is continuous at $\vec{x_0}$ then two scenarios can be going on. On one hand is that $\vec{x_0}$ is an 
+    \nref{def:isolated-point} of $\dom{f}$ or it's a \nref{def:limit-point}, and in that case $f(\vec{x})\longrightarrow
+    f(\vec{x_0})$ as $\vec{x}\longrightarrow\vec{x_0}$. On the other hand, if $f(\vec{x})\nlongrightarrow
+    f(\vec{x_0})$ as $\vec{x}\longrightarrow\vec{x_0}$, $f$ is said to have an evitable discontinuity at $\vec{x} = \vec{x_0}$,
+    which can be avoided by defining a new function given by
+    \begin{equation}
+        \tilde{f}(\vec{x})\bydef\begin{cases}
+            f(\vec{x}),\quad\forall\vec{x}\neq\vec{x_0}, \\
+            \lim_{\vec{x}\to\vec{x_0}} f(\vec{x}),\quad\forall\vec{x} = \vec{x_0}.
+        \end{cases}
+    \end{equation}
+\end{note}
+
+\begin{note}
+    The properties of limits are inherited by continuous functions.
+\end{note}
+
+\begin{defn}[Limit along a curve]
+    Let $f(\vec{x})$ be a scalar function of $n$ variables and let $\vec{x_0}\in\dom{f}$. Let $\Phi(t)$ be a continuous
+    curve in $\Rtn$ of the form $\appl{\Phi}{\R}{\Rtn}$ such that $\Phi(0) = \vec{x_0}$ and $\exists\epsilon > 0$ such that
+    $f(B'_{\epsilon}\argp{0} = (-\epsilon, 0)\cup(0, \epsilon))\subset\dom{f}$. Then, the limit of $f(\vec{x})$ along the 
+    curve $\Phi(t)$ is
+    \begin{equation}
+        \lim_{t\to 0} f(\Phi(t)).
+    \end{equation}
+\end{defn}
+
+\begin{note}
+    For all $\vec{x_0}$ belonging to the boundary of the domain of $f$, $\boundary{\dom{f}}$, we have that the limit is only
+    defined in a single direction of the curve. If along several curves the limit is not equal, then the limit doesn't exists.
+\end{note}
+
 \section{Topological properties of continuous functions}
+
+\begin{defn}[Connected set]\label{def:connected-set}
+    An \nref{def:open-set} $S\subset\Rtn$ is said to be connected $\iff\forall\vec{x}, \vec{y}\in S$ there exists a 
+        continuous arc $\appl{\varphi}{[\vec{a}, \vec{b}]}{S\subset\Rtn}\st\varphi(\vec{a}) = \vec{x}\land\varphi(\vec{b})
+        = \vec{y}$ and $\forall\vec{c}\in [\vec{a}, \vec{b}]\implies\varphi(\vec{c})\in S$. In other words, if we can trace
+        a curve $\varphi$ from $\vec{x}$ to $\vec{y}$ without getting out of $S$.
+\end{defn}
+
+\begin{theorem}[Intermediate values theorem]
+    Given a continuous function $\appl{f}{\Rtn}{\R}$ consider an open \nref{def:connected-set} $S\subset\dom{f}$ and a
+    pair of points $\vec{x}, \vec{y}\in S$ such that
+    \begin{equation}
+        \begin{rcases}
+            f(\vec{x}) = \vec{\alpha} \\
+            f(\vec{y}) = \vec{\beta}
+        \end{rcases}\forall\vec{\alpha} < \vec{\beta}\implies\forall\vec{\gamma}\st\vec{\alpha}\leq\vec{\gamma}\leq\vec{\beta},\ \exists\vec{z}\in S\st 
+    f(\vec{z}) = \vec{\gamma}.
+    \end{equation}
+    %then we have that $$.
+\end{theorem}
+
+\begin{theorem}
+    The image of an open \nref{def:connected-set} by a continuous function is an interval in $\R$.
+\end{theorem}
+
+\begin{theorem}
+    Given a continuous function $\appl{f}{\Rtn}{\R^m}$ and a \nref{def:compact-set} $S\subset\dom{f}\implies f(S)\subset\R^m$
+    is compact.
+\end{theorem}
+
+\begin{theorem}
+    If $S\subset\Rtn$ is compact and the function $\appl{f}{S\subset\Rtn}{\R}$ is continuous in $S$, then $f$ is bounded
+    in $S$ and $M = \sup_{\vec{x}\in S} f(S)$, $m = \inf_{\vec{x}\in S} f(S)$ with $M, m\in S$.
+\end{theorem}
+
+\begin{theorem}
+    If $\appl{f}{\Rtn}{\R^m}$ is continuous and bijective from $S$ to $f(S)$ and $S$ is compact, then 
+    $\appl{\invers{f}}{f(S)}{S}$ is also continuous.
+\end{theorem}
+
+\begin{note}
+    Continuous and bijective functions such that its inverse is also continuous are called \textbf{homeomorphisms} and they
+    preserve the topological properties of a set.
+\end{note}
+
+\begin{theorem}[Topological characterization of continuity]
+    A function $\appl{f}{S\subset\Rtn}{\R^m}$ is continuous $\iff$ the following conditions are satisfied.
+        \begin{itemize}[itemsep = -2pt, topsep = -2pt]
+            \item If $U\subset f(S)$ is an open set $\implies$ the preimage $\invers{f}(U)$ is open.
+            \item If $U\subset f(S)$ is a closed set $\implies$ the preimage $\invers{f}(U)$ is closed.        
+        \end{itemize}
+\end{theorem}
+
