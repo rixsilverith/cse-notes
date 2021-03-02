@@ -411,7 +411,7 @@ $n$ and $m$ we can distinguise between two kinds of functions.
 	\longmapsto f\left(x_1, \ldots, x_n\right)$.
 \end{defn}
 
-\begin{defn}[Vector-valued function]
+\begin{defn}[Vector-valued function]\label{def:vector-function}
 	A vector-valued function over $\Rtn$ is a mapping $\appl{f}{S\subseteq\Rtn}{\R^m}$, $\vec{x}\longmapsto\vec{y} = f(\vec{x})$, where
 	if $f$ goes from $\Rtn$ to $\R^{m>1}$ then
 	\begin{equation}
@@ -605,6 +605,54 @@ $\lim_{\vec{x}\to\vec{x_0}} f(\vec{x}) = \vec{L}\iff$ for every sequence $\set{\
     This gives us a criteria to determine whether a certain function has a limit at a point. 
 \end{note}
 
+From the concept of \nref{def:functional-limit} in $\Rtn$ we can now define the concept of continuity of a function
+at a point $\vec{x_0}$ of its domain.
+
+\begin{defn}[Continuity in $\Rtn$]
+    Let $S$ be an \nref{def:open-set} in $\Rtn$, let $\appl{f}{S}{\R^m}$ be a function and let $\vec{x_0}\in\dom{f}$. Then, 
+    $f$ is continuous at $\vec{x_0}\iff f(\vec{x})\longrightarrow f(\vec{x_0})$ as $\vec{x}\longrightarrow\vec{x_0}$.
+    %$\vec{x_0}\iff\lim_{\vec{x}\to\vec{x_0}} f(\vec{x}) = f(\vec{x_0})$. 
+\end{defn}
+
+\begin{remark}
+    $f$ is continuous in $S\iff f$ is continuous at every point $\vec{x_0}\in S$.
+\end{remark}
+
+\begin{note}
+    If $f$ is continuous at $\vec{x_0}$ then two scenarios can be going on. On one hand is that $\vec{x_0}$ is an 
+    \nref{def:isolated-point} of $\dom{f}$ or it's a \nref{def:limit-point}, and in that case $f(\vec{x})\longrightarrow
+    f(\vec{x_0})$ as $\vec{x}\longrightarrow\vec{x_0}$. On the other hand, if $f(\vec{x})\nlongrightarrow
+    f(\vec{x_0})$ as $\vec{x}\longrightarrow\vec{x_0}$, $f$ is said to have an evitable discontinuity at $\vec{x} = \vec{x_0}$,
+    which can be avoided by defining a new function given by
+    \begin{equation}
+        \tilde{f}(\vec{x})\bydef\begin{cases}
+            f(\vec{x}),\quad\forall\vec{x}\neq\vec{x_0}, \\
+            \lim_{\vec{x}\to\vec{x_0}} f(\vec{x}),\quad\forall\vec{x} = \vec{x_0}.
+        \end{cases}
+    \end{equation}
+\end{note}
+
+\begin{note}
+    The properties of limits are inherited by continuous functions.
+\end{note}
+
+\begin{defn}[Limit along a curve]
+    Let $f(\vec{x})$ be a scalar function of $n$ variables and let $\vec{x_0}\in\dom{f}$. Let $\Phi(t)$ be a continuous
+    curve in $\Rtn$ of the form $\appl{\Phi}{\R}{\Rtn}$ such that $\Phi(0) = \vec{x_0}$ and $\exists\epsilon > 0$ such that
+    $f(B'_{\epsilon}\argp{0} = (-\epsilon, 0)\cup(0, \epsilon))\subset\dom{f}$. Then, the limit of $f(\vec{x})$ along the 
+    curve $\Phi(t)$ is
+    \begin{equation}
+        \lim_{t\to 0} f(\Phi(t)).
+    \end{equation}
+\end{defn}
+
+\begin{note}
+    For all $\vec{x_0}$ belonging to the boundary of the domain of $f$, $\boundary{\dom{f}}$, we have that the limit is only
+    defined in a single direction of the curve. If along several curves the limit is not equal, then the limit doesn't exists.
+\end{note}
+
+\section{Properties of limits and continuous functions}
+
 \begin{prop}[Uniqueness of the limit]
     The limit, if exists, is unique.
 \end{prop}
@@ -723,52 +771,6 @@ The following properties about limits can be proved using the $\epsilon-\delta$ 
 \end{prop}
 }
 
-From the concept of \nref{def:functional-limit} in $\Rtn$ we can now define the concept of continuity of a function
-at a point $\vec{x_0}$ of its domain.
-
-\begin{defn}[Continuity in $\Rtn$]
-    Let $S$ be an \nref{def:open-set} in $\Rtn$, let $\appl{f}{S}{\R^m}$ be a function and let $\vec{x_0}\in\dom{f}$. Then, 
-    $f$ is continuous at $\vec{x_0}\iff f(\vec{x})\longrightarrow f(\vec{x_0})$ as $\vec{x}\longrightarrow\vec{x_0}$.
-    %$\vec{x_0}\iff\lim_{\vec{x}\to\vec{x_0}} f(\vec{x}) = f(\vec{x_0})$. 
-\end{defn}
-
-\begin{remark}
-    $f$ is continuous in $S\iff f$ is continuous at every point $\vec{x_0}\in S$.
-\end{remark}
-
-\begin{note}
-    If $f$ is continuous at $\vec{x_0}$ then two scenarios can be going on. On one hand is that $\vec{x_0}$ is an 
-    \nref{def:isolated-point} of $\dom{f}$ or it's a \nref{def:limit-point}, and in that case $f(\vec{x})\longrightarrow
-    f(\vec{x_0})$ as $\vec{x}\longrightarrow\vec{x_0}$. On the other hand, if $f(\vec{x})\nlongrightarrow
-    f(\vec{x_0})$ as $\vec{x}\longrightarrow\vec{x_0}$, $f$ is said to have an evitable discontinuity at $\vec{x} = \vec{x_0}$,
-    which can be avoided by defining a new function given by
-    \begin{equation}
-        \tilde{f}(\vec{x})\bydef\begin{cases}
-            f(\vec{x}),\quad\forall\vec{x}\neq\vec{x_0}, \\
-            \lim_{\vec{x}\to\vec{x_0}} f(\vec{x}),\quad\forall\vec{x} = \vec{x_0}.
-        \end{cases}
-    \end{equation}
-\end{note}
-
-\begin{note}
-    The properties of limits are inherited by continuous functions.
-\end{note}
-
-\begin{defn}[Limit along a curve]
-    Let $f(\vec{x})$ be a scalar function of $n$ variables and let $\vec{x_0}\in\dom{f}$. Let $\Phi(t)$ be a continuous
-    curve in $\Rtn$ of the form $\appl{\Phi}{\R}{\Rtn}$ such that $\Phi(0) = \vec{x_0}$ and $\exists\epsilon > 0$ such that
-    $f(B'_{\epsilon}\argp{0} = (-\epsilon, 0)\cup(0, \epsilon))\subset\dom{f}$. Then, the limit of $f(\vec{x})$ along the 
-    curve $\Phi(t)$ is
-    \begin{equation}
-        \lim_{t\to 0} f(\Phi(t)).
-    \end{equation}
-\end{defn}
-
-\begin{note}
-    For all $\vec{x_0}$ belonging to the boundary of the domain of $f$, $\boundary{\dom{f}}$, we have that the limit is only
-    defined in a single direction of the curve. If along several curves the limit is not equal, then the limit doesn't exists.
-\end{note}
-
 \section{Topological properties of continuous functions}
 
 \begin{defn}[Connected set]\label{def:connected-set}
@@ -777,6 +779,15 @@ at a point $\vec{x_0}$ of its domain.
         = \vec{y}$ and $\forall\vec{c}\in [\vec{a}, \vec{b}]\implies\varphi(\vec{c})\in S$. In other words, if we can trace
         a curve $\varphi$ from $\vec{x}$ to $\vec{y}$ without getting out of $S$.
 \end{defn}
+
+\begin{defn}[Homeomorphism]
+    A function $\appl{\vec{f}}{\Rtn}{\R^m}$ is a homeomorphism if it is a continuous bijection and if 
+    $\appl{\vec{\invers{f}}}{\R^m}{\Rtn}$ is also continuous.
+\end{defn}
+
+\begin{remark}
+    Homeomorphisms preserve the topological properties of a set and they are sometimes called \textit{bicontinuous functions}.
+\end{remark}
 
 \begin{theorem}[Intermediate values theorem]
     Given a continuous function $\appl{f}{\Rtn}{\R}$ consider an open \nref{def:connected-set} $S\subset\dom{f}$ and a
@@ -788,7 +799,6 @@ at a point $\vec{x_0}$ of its domain.
         \end{rcases}\forall\vec{\alpha} < \vec{\beta}\implies\forall\vec{\gamma}\st\vec{\alpha}\leq\vec{\gamma}\leq\vec{\beta},\ \exists\vec{z}\in S\st 
     f(\vec{z}) = \vec{\gamma}.
     \end{equation}
-    %then we have that $$.
 \end{theorem}
 
 \begin{theorem}
