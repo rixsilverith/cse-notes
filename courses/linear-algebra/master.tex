@@ -1,50 +1,24 @@
-\documentclass{lecturenotes}
+\documentclass{csenotes}
 \graphicspath{{./figures/}}
 
-\course{Linear Algebra, Set theory and Numbers}
+\course{Linear Algebra}
 \short{LALG}
 \group{119}
 \date{20/21 B1 S1}
+\authorinfo[rixsilverith(at)outlook(dot)com]{Rix Silverith}
+\degree{Bachelor in Computer Science and Engineering}
+\repo{https://github.com/rixsilverith/cse-notes/tree/master/courses/linear-algebra}
 
 \bibliographystyle{alpha}
 
 \begin{document}
-    %\pagestyle{plain}
-    %\lntitlepage
-    %\clearpage
-    %\thispagestyle{noheaders}
-    %\tableofcontents
-    %\newpage
-
     % topics start here
     \input{topic_01.tex}
     \input{topic_02.tex}
     \input{topic_03.tex}
-    \input{topic_04.tex}
     \input{topic_05.tex}
     \input{topic_06.tex}
+    \input{topic_04.tex}
     % topics end here
-
-    \appendix
-    \chapter{Problem Sets}
-    \thispagestyle{noheaders}
-        \section{Problem Set 1: Set theory and functions}
-        \section{Problem Set 2: Equivalence relations}
-        \section{Problem Set 3: The $\Z$ and $\Z_n$ rings}
-        \section{Problem Set 4: Congruences}
-        \section{Problem Set 5: Polynomial rings}
-        \section{Problem Set 6: Elemental group theory}
-        \section{Problem Set 7: Matrices, vectors and linear systems of equations}
-        \section{Problem Set 8: Vector spaces and linear transformations}
-
-    %\addcontentsline{toc}{chapter}{List of Theorems}
-    %\addcontentsline{toc}{chapter}{List of Definitions}
-    %\clearpage
-    %\listoftheorems
-    %\clearpage
-    %\listofdefinitions
-
-    \nocite{*}
-    \bibliography{bibliography}
-    \thispagestyle{noheaders}
+    \biblio{bibliography}
 \end{document}

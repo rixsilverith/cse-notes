@@ -1,514 +1,344 @@
-\chapter{Vector spaces}
-\thispagestyle{noheaders}
+\bchapter{Linear transformations}
 
-\begin{defi}[Vector space]
-    A vector space over a field $F$ is a set $V$ together with two operations, $\appl{+}{V\times V}{V}$
-    and $\appl{\cdot}{F\times V}{V}$, such that $\left( V, + \right) $ is an abelian group, and that for any
-    $\vec{v_1}$, $\vec{v_2}\in V$, $\alpha_1$, $\alpha_2\in F$ the following properties are verified:
-    \begin{align*}
-        & 1\cdot \vec{v_1} = \vec{v_1}, \quad\quad\quad\quad & \left( \alpha_1 + \alpha_2 \right) \cdot \vec{v_1} = \alpha_1\vec{v_1} + \alpha_2\vec{v_1}, \\
-        & \alpha_1\cdot\left( \alpha_2\cdot \vec{v_1} \right) = \left( \alpha_1\alpha_2 \right) \cdot
-        \vec{v_1}, \quad\quad\quad\quad &  \alpha_1\cdot\left( \vec{v_1 + v_2} \right) = \alpha_1\vec{v_1} + \alpha_1\vec{v_2}.
-    \end{align*}
+One of the main goals of linear algebra is the characterization of the solutions to the set of $m$
+linear equations in $n$ unknowns $x_1$, $\ldots$, $x_n$. Linear transformations, also called linear maps,
+and their properties give us a lot of insight into the characteristics of the solutions to a system of
+linear equations.
 
-\end{defi}
+\section{Linear maps between vector spaces}
 
-\begin{notation}
-Elements in $F$ are usually called \textit{scalars} to differentiate them from the ones in $V$, that are
-\textit{vectors}.
-\end{notation}
+%Let $V$ and $W$ be vector spaces over a field $F$.
 
-\begin{example}
-    $\Rtn$, with $n\in\Z^+$, is a vector space over $\R$ defined by
-    \begin{equation}
-        \Rtn\bydef \underbrace{\R\times\ldots\times\R}_{n \textrm{ times}} = \{\left( \alpha_1, \ldots,
-    \alpha_n \right)\st \alpha_i\in\R\}
-    \end{equation}
-    with addition and scalar multiplication
-    \begin{align}
-        &\left( \alpha_1, \ldots, \alpha_n \right) + \left( \beta_1, \ldots, \beta_n \right) = \left( \alpha_1          + \beta_1, \ldots, \alpha_n + \beta_n\right) \\
-        &\lambda\left( \alpha_1, \ldots, \alpha_n \right) = \left( \lambda\alpha_1, \ldots, \lambda\alpha_n
-        \right).
+\begin{defn}[Linear transformation]
+    Let $V$ and $W$ be two vector spaces over the same field $F$. A function $\appl{T}{V}{W}$ is a
+    \textit{linear transformation}, or \textit{linear map}, if it preserves addition and scalar multiplication
+    between the two vector spaces; in other words, if
+    \begin{align}\label{def:linear-trans:eq1}
+        T\left( \vec{v} + \vec{u} \right) &= T\left( \vec{v} \right) + T\left( \vec{u} \right) \quad
+                                          &\forall\ \vec{v}, \vec{u}\in V, \\
+        T\left( \lambda\vec{v} \right) &= \lambda T\left( \vec{v} \right) \quad &\forall \lambda\in
+        F,\ \vec{v}\in V. \label{def:linear-trans:eq2}
     \end{align}
-    This is the main vector space in which we will work in this topic.
-\end{example}
+\end{defn}
 
-From any field $F$, a new vector space can be defined over $F$ in the same manner as the previous example.
-
-\begin{example}
-    $m\times n$ matrices with coefficients in a field $F$, form the vector space
-    \begin{equation}
-        \mathcal{M}_{m\times n}\left( F \right) = \left\{
-            \begin{bmatrix}
-                a_{11} & a_{12} & \cdots & a_{1n} \\
-                a_{21} & a_{22} & \cdots & a_{2n} \\
-                \vdots & \vdots & \ddots & \vdots \\
-                a_{m1} & a_{m2} & \cdots & a_{mn}
-            \end{bmatrix} \st a_{ij}\in F,\ 1 \leq i \leq m,\ 1\leq j\leq n
-        \right\}.
-    \end{equation}
-\end{example}
-%In this topic we will work in $\R^n = \underbrace{\R\times\ldots\times\R}_{n \textrm{ times}}$, which a vector space over \R.
-
-\begin{example}
-    The solutions $\vec{x} = \left( x_1, \ldots, x_n \right) $ of the homogeneous system $A\vec{x} = B$
-    with $A = \left( a_{ij} \right) \in F$ form a vector space over $F$.
-\end{example}
-
-\section{Vector subspaces}
-\begin{defi}[Vector subspace] \label{def:vector-subspace}
-    Let $V$ be a vector space over a field $F$. A nonempty subset $W\subset V$ defines a subspace of $V
-    \iff \forall \lambda, \mu\in F$ and $\vec{w_1}, \vec{w_2}\in W\implies \lambda\vec{w_1} +
-        \mu\vec{w_2}\in W$.
-\end{defi}
-
-To check if some subset $W$ of a vector space $V$ is a subspace of $V$ it's enough to see if $W$ accomplish
-definition \ref{def:vector-subspace}. However, in many cases is easier to check that the following properties
-are verified:
-\begin{align} \label{prop:vector-subspace-2}
-    \vec{w_1}, \vec{w_2}\in W &\quad\implies\quad \vec{w_1} + \vec{w_2}\in W, \\
-    \vec{w}\in W,\ \lambda\in F&\quad\implies\quad \lambda\vec{w}\in W.
-\end{align}
-
-\begin{example}
-    $W = \{\left( x, y, 0 \right)\in \R^3\st x, y\in\R\} $ is a vector subspace of $\R^3$, while $U = \{\left( x, y, 1 \right) \in\R^3\st x, y\in\R\} $ is not. Note that, for instance, $\left( 1, 1, 1 \right)\in U$ but
-    $2\cdot\left( 1, 1, 1 \right) \not\in U$, which contradicts property \ref{prop:vector-subspace-2}.
-\end{example}
-
-\begin{example}
-    $W = \{\left( x, y, z \right) \in\R^3\st x + y + z = 0, 2x - 3y - z = 0\} $ is a vector subspace of $\R^3$,
-    but also of $V = \{\left( x, y, z \right) \in\R^3\st x + y + z = 0\} $.
-\end{example}
-
-In conclusion, whenever we set linear and homogeneous conditions in $\Rtn$, a subspace is obtained. This is
-closely related to the description of a vector space as the solutions of an homogeneous system.
-
-\begin{defi}[Linear combination]
-    Let $\vec{v_1}$, $\ldots$, $\vec{v_n}\in V$ be vectors within a vector space $V$ over some field $F$.
-    A linear combination of $\vec{v_1}$, $\ldots$, $\vec{v_n}$ is an expression of the form $\alpha_1
-    \vec{v_1} + \ldots + \alpha_n\vec{v_n}$, where  $\alpha_1$, $\ldots$, $\alpha_n\in F$.
-\end{defi}
-
-\begin{example}
-    In $\R^2$ every vector $\vec{v} = \left(x, y\right)$ is a linear combination of $\vec{v_1} =
-    \left( 1, 0 \right) $ and $\vec{v_2} = \left( 0, 1 \right) $ since $\vec{v} = x\vec{v_1} + y\vec{v_2}$.
-\end{example}
-
-\begin{prop}
-    In a vector space, the identity element for vector addition, $\vec{0} = \left( 0, \ldots, 0 \right) $, is
-    a linear combination of any vector $\vec{v}$, since $\vec{0} = 0\cdot\vec{v}$.
-\end{prop}
-
-\begin{defi}[Subspace generated by a set]
-    Let $C$ be a subset of a vector space. The vector subspace generated by $C$, denoted by $\gen{C}$ or
-    $\mathcal{L}\left( C \right) $, is the set of all the possible vector linear combinations of $C$.
-\end{defi}
-
-\begin{prop}
-    If $C\subseteq V$, $\gen{C}$ is a vector subspace of $V$.
-\end{prop}
-
-\begin{example}
-    In $\R^2$, $\gen{\left( 1, 0 \right) , \left( 0, 1 \right) } = \{\alpha_1\left( 1, 0 \right) +
-    \alpha_2\left( 0, 1 \right) \} = \R^2 $, since we have already seen in a previous example that every
-    vector of $\R^2$ is a linear combination of $\left( 1, 0 \right) $ and $\left( 0, 1 \right) $.
-\end{example}
-
-\begin{example}
-    Let $C = \{\left( 1, 1, 2 \right), \left( 0, 2, -1 \right), \left( 1, 3, 1 \right) \subset\R^3\} $, then
-    \begin{align}
-        \gen{C} &= \{\lambda\left( 1, 1, 2 \right) + \mu\left( 0, 2, -1 \right) + \nu\left( 1, 3, 1 \right)\}
-             \\ &= \{\left( \lambda + \nu, \lambda + 2\mu + 3\nu, 2\lambda - \mu + \nu \right) \st\lambda,
-              \mu, \nu\in\R\},
-    \end{align}
-    since $\left( 1, 3, 1 \right) $ is a linear combination of $\left( 1, 1, 2 \right) $ and $\left( 0, 2, -1
-    \right) $, more concisely
-    \begin{equation}
-        \left( 1, 3, 1 \right) = \left( 1, 1, 2 \right) + \left( 0, 2, -1 \right),
-    \end{equation}
-    the vector $\left( 1, 3, 1 \right) $ can be omitted; i.e., $\gen{C} = \gen{\left( 1, 1, 2 \right), \left(
-    0, 2, -1\right) }$.
-\end{example}
-
-The previous example suggest defining the concept of some dependence between vectors in a set.
-
-\begin{defi}[Linear independence] \label{defi:linear-independence}
-    A set of vectors $\{\vec{v_1}, \ldots, \vec{v_n}\} $ from a vector space $V$ is \textbf{linearly
-    independent} $\iff$ the equation $\alpha_1\vec{v_1} + \ldots + \alpha_n\vec{v_n} = \vec{0}$ can only
-    be satisfied by $\alpha_i = 0$ for $i = 1, \ldots, n$. Otherwise, the set of vectors is
-    \textbf{linearly dependent}.
-\end{defi}
-
-\begin{remark}
-    Definition \ref{defi:linear-independence} implies that no vector in a set of linear independent vectors can be written as a linear combination of the remaining vectors in the set. In other words, even more concisely, a set of vectors is linear independent $\iff\vec{0}$ can be represented as a linear combination of its vectors in a unique way.
-\end{remark}
-
-\begin{note}
-    Many times it's said that several vectors are linearly independent (or dependent), meaning that they
-    form a linearly independent (or dependent) set, in this case we take as finite subset the one formed by
-    themselves.
-\end{note}
-
-\begin{example}
-    Vectors $\left( 1, 1, 0 \right)$, $\left( 2, 1, 1 \right)$, $\left( 5, 3, 2 \right)\in\R^3$ are not
-    linearly independent. Writing the linear combination
-    \begin{equation}
-        \alpha_1\left( 1, 1, 0 \right) + \alpha_2\left( 2, 1, 1 \right) + \alpha_3\left( 5, 3, 2 \right) =
-        \left( 0, 0, 0 \right)
-    \end{equation}
-    we reach the system
-    \begin{equation}
-    \sysdelim.\}\systeme{\alpha_1 + 2\alpha_2 + 5\alpha_3 = 0,\alpha_1 + \alpha_2 + 3\alpha_3 = 0,\alpha_2 + 2\alpha_3 = 0}
-        \quad\implies\quad
-            \alpha_2 &= -2\alpha_3,\
-            \alpha_1 &= -\alpha_3
-    \end{equation}
-    and since solutions to this system depends on a parameter there are infinite solutions. Therefore, the
-    vectors are linearly dependent.
-\end{example}
-
-\begin{prop}
-    Any set of vectors containing the null vector, $\vec{0} = \left( 0, \ldots, 0 \right) $ is always
-    linearly dependent.
-\end{prop}
-
-\begin{prop}
-    In general, a non null vector $\vec{v}\in\R^n$ is linearly independent.
-\end{prop}
-
-\begin{proof}
-The only solution to the equation $\alpha\vec{v} = \vec{0}$, $\alpha\in\R$ is $\alpha = 0$.
-Suppose there is another solution with $\alpha\neq 0$. This implies $\exists \invers{\alpha}\in\R$, which
-multiplied in both sides of the equation yields
+\noindent Equations (\ref{def:linear-trans:eq1}) and (\ref{def:linear-trans:eq2}) can be summarized into
 \begin{equation}
-    \alpha\vec{v} = \vec{0}\quad \iff\quad \invers{\alpha}\alpha\vec{v} = \invers{\alpha}\vec{0} \quad
-        \iff\quad \vec{v} = \vec{0},
+    T\left( \lambda\vec{v} + \mu\vec{u} \right) = \lambda T\left( \vec{v} \right) + \mu T\left( \vec{u}\right)
+    \quad\quad \forall\ \lambda, \mu\in F,\ \vec{v}, \vec{u}\in V,
 \end{equation}
-and this is a contradiction. Then, if $\vec{v}\neq \vec{0}$, vector $\vec{v}$ is always linearly independent.
-\end{proof}
+which, for any vectors $\vec{v_1}$, $\ldots$, $\vec{v_n}\in V$ and scalars $\lambda_1$, $\ldots$, $\lambda_n$, can be written in a more general way as
+\begin{equation}
+    T\left( \sum_{i=1}^n \lambda_i\vec{v_i}\right) = \sum_{i=1}^n \lambda_i T\left( \vec{v_i} \right).
+\end{equation}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% start another hide
+\noindent Thus, a linear transformation is said to be \textit{operation preserving}. That is, it doesn't matter
+whether the linear transformation is applied before or after the operations of addition and scalar
+multiplication, and therefore, linear combinations are preserved between the two vector spaces.
 
 \hide{
-\begin{example}
-To check if some vectors, let's say $\vec{v_1} = \left( 1, 2, -1 \right)$,
-$\vec{v_2} = \left( 1, 0, 1\right) $ and $\vec{v_3} = \left( 2, 3, 2 \right)\in\R^3$, are linearly independent means finding non-trivial solutions to the equation
-\begin{equation}
-    \alpha_1\vec{v_1} + \alpha_2\vec{v_2} + \alpha_3\vec{v_3} = \vec{0},
-\end{equation}
-\begin{equation}
-    \alpha_1\left( 1, 2, -1 \right) + \alpha_2\left( 1, 0, 1 \right) + \alpha_3\left( 2, 3, 2 \right) =
-    \left( 0, 0, 0 \right).
-\end{equation}
-One can get these non-trivial solutions by solving the following homogeneous linear system of equations using
-Gaussian elimination.
-\begin{equation}
-    \begin{cases}
-        \alpha_1 + \alpha_2 + 2\alpha_3 = 0 \\
-        2\alpha_2 + 0\alpha_2 + 3\alpha_3 = 0 \\
-        -\alpha_1 + \alpha_2 + 2\alpha_3 = 0
-    \end{cases}
-    \quad\quad\quad
-    A =
-    \begin{bmatrix}
-        1 & 1 & 2 \\
-        -2 & 0 & 3  \\
-        -1 & 1 & 2
-    \end{bmatrix}
-\end{equation}
-\begin{equation}
-    A^{*} =
-    \begin{bmatrix}
-        1 & 1 & 2 & 0 \\
-        -2 & 0 & 3 & 0 \\
-        -1 & 1 & 2 & 0
-    \end{bmatrix}
-    \sim
-    \begin{bmatrix}
-        1 & 1 & 2 & 0 \\
-        0 & -2 & -3 & 0 \\
-        0 & 0 & 0 & 0
-    \end{bmatrix}
-\end{equation}
-
-\noindent Since $\rank{A} = \rank{A^*} = 2 < \textrm{ number of variables}$, by Rouché-Fröbenius theorem, there are
-infinitely many solutions $\implies$ vectors $\vec{v_1}$, $\vec{v_2}$ and $\vec{v_3}$ are linearly dependent.
-}
+Linear transformations are useful because they preserve the structure of a vector space. So, many qualitative
+assessments of a vector space that is the domain of a linear transformation may, under certain conditions,
+automatically hold in the image of the linear transformation.
 }
 
 \hide{
-\begin{prop}
-    If a set of vectors $\vec{v_1}$, $\ldots$, $\vec{v_i}\in\R^n$ is linearly dependent then one of the
-    vectors can be written as a linear combination of the others.
-\end{prop}
-
-\begin{proof}
-Since $\vec{v_1}$, $\ldots$, $\vec{v_i}$ are linearly dependent there are scalars $\alpha_1$,
-\ldots, $\alpha_i\in\R$ such that $\alpha_1\vec{v_1} + \ldots + \alpha_i\vec{v_i} = \vec{0}$ and at least one
-of the $\alpha_i$-s is non zero. Suppose just to ease the notation that $\alpha_1\neq 0\implies \vec{v_1} =
-\invers{\alpha_1}\left( -\alpha_2\vec{v_2} + \ldots + \left( -\alpha_i \right) \vec{v_i} \right) $.
-\end{proof}
-}
-
-\hide{
-\begin{coro}
-    All vector spaces are equipped with at least two subspaces: the singleton set with the zero vector and
-    the vector space itself. These are called \textbf{trivial subspaces} of the vector space.
-\end{coro}
-
-\noindent\textbf{Example.} Let $W = \{\left( x, y \right) \in\R^2 \st x + y = 0\}\subseteq \R^2 $. Is $W$ a
-vector subspace of $\R^2$?
-\begin{itemize}
-    \item We first check if $W\neq \O$. $\left( 1, -1 \right) \in W\implies W\neq \O$.
-    \item If $\vec{w_1} = \left( x, y \right) ^t$, $\vec{w_2} = \left( x', y' \right) ^t\in W\implies
-        \vec{w_1} + \vec{w_2}\in W$? Suppose $\left( x + x' \right) + \left( y + y' \right) = \left( x + y \right) +
-        \left( x' + y' \right) \underbrace{=}_{\vec{w_1}, \vec{w_2}\in W} 0 \implies \vec{w_1} + \vec{w_2}\in W$.
-    \item If $\vec{w} = \left( x, y \right) ^t\in W$ and $\alpha\in\R\implies \alpha\vec{w}\in W$? Suppose $\alpha\vec{w} = \left(
-        \alpha x, \alpha y\right) ^t \in W$. $\alpha x + \alpha y = \alpha\left( x + y \right) \underbrace{=}_{\vec{w}\in W} \alpha 0 = 0\implies \alpha\vec{w} \in W \implies W$ is a vector subspace of $\R^2$.
+If $T$ and $R$ are two linear transformations from $V$ to $W$, and $\lambda$, $\mu$ two scalars, the
+following properties hold:
+\begin{itemize}[itemsep = -2pt]
+    \item $T\left( \lambda\vec{v} + \mu\vec{u} \right) = \lambda T\left( \vec{v} \right) + \mu T\left( \vec{u}
+        \right) $; which can be generalized as
+        \begin{equation}
+            T\left( \lambda_1\vec{v_1} + \ldots + \lambda_n\vec{v_n} \right) = T\left( \sum_{i=1}^n \lambda_i
+                \vec{v_i}\right) = \sum_{i=1}^n \lambda_i T\left( \vec{v_i} \right) = \lambda_1 T\left(
+            \vec{v_1} \right) + \ldots + \lambda_n T\left( \vec{v_n} \right).
+        \end{equation}.
+    \item $T\left( \vec{0} \right) = \vec{0}$ (note that $\vec{0} = 0\vec{v}$ for any $\vec{v}$).
+    \item $T\left( -\vec{v} \right) = -T\left( \vec{v} \right) $.
+    \item The transformation $\appl{\lambda T}{V}{W}$, defined by $\left( \lambda T \right)\left( \vec{v}
+        \right) = \lambdaT\left( \vec{v} \right)$, is linear.
+    \item The transformation $\appl{T + R}{V}{W}$, defined by $\left( T + R \right)\left( \vec{v} \right) =
+        T\left( \vec{v} \right) + R\left( \vec{v} \right) $, is linear.
+    \item If $\appl{T}{V}{W}$ and $\appl{R}{W}{Z}$ are linear, then $\appl{R\circ T}{V}{Z}$ is linear.
 \end{itemize}
 }
 
+\begin{notation}
+    A linear transformation is sometimes referred to as a \textit{vector space homomorphism}.
+\end{notation}
+
+\begin{defn}
+    A linear transformation $\stdlt$ is
+    \begin{itemize}[itemsep = -2pt]
+        \item a \textit{monomorphism} if it is injective; i.e. $T\left( \vec{v} \right) = T\left(
+            \vec{u}\right) \iff \vec{v} = \vec{u}$.
+        \item an \textit{epimorphism} if it is surjective; i.e. $\forall\ \vec{w}\in W $, $\exists\
+            \vec{v}\in V\st T\left( \vec{v} \right) = \vec{u}$.
+        \item an \textit{isomorphism} if it is bijective; i.e. $\forall\ \vec{w}\in W$, $\uexists\vec{v}\in V
+            \st T\left( \vec{v} \right) = \vec{u}$.
+    \end{itemize}
+\end{defn}
+
+\begin{example}
+    For all vector space $V$ the indentity transformation
+    \begin{equation}
+        \appl{\mop{Id}_{V}}{V}{V},\quad\quad \mop{Id}_V\left( \vec{v} \right) = \vec{v},\quad \forall\vec{v}
+        \in V
+    \end{equation}
+    is linear. More generally, if $V$ is a vector space over a field $F$ and we take a fixed scalar
+    $\lambda\in F$, the transformation
+    \begin{align}
+        \appl{T_\lambda}{V}{V}\quad\quad \vec{v}\longmapsto T_\lambda\left( \vec{v} \right) = \lambda\vec{v}
+    \end{align}
+    is linear. In particular, the transformation that maps any vector of $V$ to the vector $\vec{0}\in W$ is
+    linear, and is called \textit{zero map}. We call \textit{homothety} in $V$ any linear transformation from
+    $V$ to $V$ of the form $T_\lambda\left( \vec{v} \right) = \lambda\vec{v}$, where $\lambda$ is the
+    \textit{ratio} of the homothety.
+\end{example}
+
+\begin{example}
+    If $A$ is a real $m\times n$ matrix, then $A$ defines a linear transformation from $\R^n$ to $\R^m$ by
+    sending the column vector $\vec{x}\in\R^n$ to the column vector $A\vec{x}\in\R^m$.
+\end{example}
+
+\begin{example}
+    Differentiation defines a linear map from the space of all differentiable functions to the space of all
+    functions.
+    \begin{equation}
+        \dv{x}\left( \sum_{i=1}^n c_i f_i\left( x \right)  \right) = \sum_{i=1}^n c_i\dv{f_i\left( x
+        \right) }{x}.
+    \end{equation}
+\end{example}
+
+\section{Representation in terms of matrices}
+Linear transformations are mostly commonly written in terms of matrix multiplication. If $V$ and $W$ are two
+finite-dimensional vector spaces and a basis is defined for each of them, then every linear transformation
+from $V$ to $W$ can be represented by a matrix. This fact is useful to perform concrete computations.
+
 \hide{
-\noindent\textbf{Example.} Is $W = \{\left( x, y \right) \in\R^2\st xy = 0\} $ a vector subspace of $\R^2$?
-\begin{enumerate}
-    \item Is $W\neq \O$? $\left( 1, 0 \right) \in W\implies W\neq \O$.
-    \item If $\vec{w_1}$, $\vec{w_2}\in W\overset{?}{\implies} \vec{w_1} + \vec{w_2}\in W$.
-        \begin{equation}
-            \begin{cases}
-                \textrm{let } \vec{w_1} = \left( 0, 1 \right)\in W \\
-                \textrm{let } \vec{w_2} = \left( 1, 0 \right)\in W
-            \end{cases}
-            \quad\implies\quad \vec{w_1} + \vec{w_2} = \left( 1, 1 \right) \not\in W\quad\implies
-        \end{equation}
-        $\implies\quad W$ is not a vector subspace of $\R^2$.
-    \item If 2 had been held, we would have checked if $\vec{w}\in W$ and $\alpha \in\R\overset{?}{\implies}
-        \alpha\vec{w}\in W$. This can be done by supposing $\vec{w} = \left( x, y \right) \in W\implies
-        \alpha\vec{w} = \left( \alpha x, \alpha y \right) \in W$.
-\end{enumerate}
+\begin{defi}
+    The matrix representing the linear transformation $\appl{T}{V}{W}$ relative to the bases $B_V = \{
+    \vec{v_1}, \ldots, \vec{v_n}\} $ for $V$ and $B_W = \{\vec{w_1}, \ldots, \vec{w_m}\} $ for $W$ is a
+    matrix $A\in\mathcal{M}$
+\end{defi}
+
+Let $B_V = \{\vec{v_1}, \ldots, \vec{v_n}\} $ and $B_W = \{\vec{w_1}, \ldots, \vec{w_m}\} $ be a basis for
+$V$ and $W$ respectively. Then, every vector $\vec{v}\in V$ is uniquely determined by a linear combination
+of vectors in $B_V$,
+\begin{equation}
+    \left[\vec{v}\right]_{B_V} = \hvect{\lambda_1, \ldots, \lambda_n} = \sum_{i=1}^n\lambda_i\vec{v_i}.
+\end{equation}
+Likewise, $\forall\vec{w}\in W$,
+\begin{equation}
+    \left[\vec{w}\right]_{B_W} = \hvect{\mu_1, \ldots, \mu_n} = \sum_{i=1}^m\mu_i\vec{w_i}.
+\end{equation}
+
+
+Let $\appl{T}{V}{W}$. If
+\begin{equation}
+T\left( \vec{v_i} \right) = \sum_{j=1}^n a_{ji}\vec{w_i}
+\end{equation}
 }
 
-%%%%%%%%%%%%%%%%%%%%%% end another hide
 
+\begin{prop}
+    Fixed basis $B_V$ and $B_W$ for two finite-dimension vector spaces $V$ and $W$, respectively, over a field
+    $F$, any linear transformation $\appl{T}{V}{W}$ can be written as $T\left( \vec{v} \right) = A\vec{v}$, where $A\in\mathcal{M}_{m\times n}\left( F\right)$
+    with $m = \dim W$ and $n = \dim V$. Columns of $A$ are vectors $T\left( \vec{v_i} \right)$ where
+    vectors $\vec{v_i}\in B_V$.
+\end{prop}
 
+\begin{proof}
+    Let $\{\vec{v_1}, \ldots, \vec{v_n}\} $ be a basis for $V$. Then every vector $\vec{v}\in V$ is uniquely
+    determined by the coefficients $\lambda_1, \ldots, \lambda_n$ in the field $F$. If $\appl{T}{V}{W}$ is
+    a linear transformation,
+    \begin{equation}
+        T\left( \sum_{i=1}^n\lambda_i \vec{v_i} \right) = \sum_{i=1}^n\lambda_i T\left( \vec{v_i} \right),
+    \end{equation}
+    which implies that the transformation $T$ is entirely determined by vectors $T\left( \vec{v_1} \right)$,
+    $\ldots$, $T\left( \vec{v_i} \right) $. Now let $\{\vec{w_1}, \ldots, \vec{w_m}\} $ be a basis for $W$.
+    Then we can represent each vector $T\left( \vec{v_j} \right) $ as
+    \begin{equation}
+        T\left( \vec{v_j} \right) = \sum_{i=1}^m a_{ij}\vec{w_i}.
+    \end{equation}
+    Thus, the transformation $T$ is entirely determined by the values of $a_{ij}$. If we put these values
+    into an $m\times n$ matrix $A$, then we can conveniently use it to compute the vector output of $T$ for
+    any vector in $V$. To get $A$, every column $j$ of $A$ is a vector $T\left( \vec{v_j} \right) $
+\end{proof}
 
-\section{Basis and dimension}
-Taking about vector spaces it's covenient considering subsets that generate all the space and that have
-the minimum possible number of vectors as, in some way, the \textit{size} of these sets determines the size
-of the vector space.
+%A transformation $\appl{T}{V}{W}$ from a $m$-dimensional vector space $V$ to a $n$-dimensional vector space $W$ is given
+%by an $n\times m$ matrix $A$. However, this requires choosing a basis for $V$ and a basis for $W$, while
+%the linear transformation exists independent of basis.
+In other words, fixed basis
+    $B_V$ and $B_W$ of $V$ and $W$ respectively, coordinates of a vector $\vec{v}$ in basis $B_V$ and the ones
+    of $T\left( \vec{v} \right) $ in $B_W$ are related by the multiplication of a certain matrix, whose columns
+    are the coordinates in $B_W$ of the images of the elements in $B_V$.
 
-\begin{defi}[Basis]
-    A set $B$ of vectors is a basis of a vector space $V\iff B$ is both linearly independent and a system of
-    generators, this is, the set $B$ generates the vector space; i.e. $\gen{B} = V$.
-\end{defi}
+\hide{
+\begin{prop}
+    Any linear transformation $\appl{T}{V}{W}$ between two vector spaces $V$ and $W$ over a field $F$ is of
+    the form $T\left( \vec{v} \right) = A\vec{v}$ with $A\in\mathcal{M\left( F \right) }$. Columns of $A$ are
+    vectors $T\left( \vec{e_i} \right) $ with $\{\vec{e_1}, \ldots, \vec{e_n}\} $ being the canonical basis
+    of $V$.
+\end{prop}
 
-\begin{remark}
-    For a given vector space there are multiple choices of basis, but all of them have the same cardinality.
-\end{remark}
+\begin{proof}
+    Suppose $V = \R^m$, $W = \R^n$ are two vector spaces. If $\{\vec{e_1}, \ldots, \vec{e_n}\} $ is a
+    standard basis of $V$, every $\vec{v}\in V$ is of the form
+    \begin{equation}
+        \vec{v} = \left( v_1, \ldots, v_n \right) ^T = \sum_{j = 1}^n v_j\vec{e_j}\quad\implies\quad
+        T\left( \vec{v} \right) = \sum_{j = 1}^n v_j T\left( \vec{e_j} \right).
+    \end{equation}
+    Given $T$, vectors $T\left( \vec{e_j} \right) \in W$ are constants $T\left( \vec{e_j} \right) = \left(
+    a_{1j}, a_{2j}, \ldots, a_{mj}\right) ^T$. Therefore, the $i$-th coordinate of $T\left( \vec{v} \right)$
+    is given by
+    \begin{equation}
+        \sum_{j=1}^n a_{ij}v_j.
+    \end{equation}
+\end{proof}
+}
 
 \begin{example}
-    \textbf{Prove that $B = \{\left( 1, 1 \right), \left( 1, -1 \right) \} $ is a basis of $\R^2$.}
-    \begin{enumerate}
-        \item To see if $B$ is system of generators one should study if
+    The linear transformation from $\R^3$ to $\R^2$ defined by $T\left( x, y, z \right) = \left( x - y,
+    y - z\right) $ is given by the matrix
     \begin{equation}
-        \left( x, y \right) = \lambda\left( 1, 1 \right) + \mu\left( 1, -1 \right)
+        M = \begin{bmatrix}
+            1 & -1 & 0 \\
+            0 & 1 & -1
+        \end{bmatrix} .
     \end{equation}
-    always has solutions $\lambda$, $\mu$, for any $\left( x, y \right) \in\R^2$. This lead us to
-
+    So $T$ can also be defined for vectors $\vec{v} = \left( x, y, z \right)^T $ by the matrix product
     \begin{equation}
-        \sysdelim.\}\systeme{\lambda + \mu = x,\lambda - \mu = y} \quad\iff\quad \lambda = \frac{x + y}{2},\ \mu =
-            \frac{x - y}{2}.
+        T\left( \vec{v} \right) = \begin{bmatrix}
+            1 & -1 & 0 \\
+            0 & 1 & -1
+        \end{bmatrix}\begin{bmatrix}
+            x \\ y \\ z
+        \end{bmatrix}.
     \end{equation}
-
-    Since there is always a solution, $B$ is a system of generators; i.e. $B$ generates $\R^2$.
-
-    \item For checking if $B$ is linearly independent we consider
-    \begin{equation}
-        \left( 0, 0 \right) = \lambda\left( 1, 1 \right) + \mu\left( 1, -1 \right),
-    \end{equation}
-    that can only be solved with $\lambda = \mu = 0$.
-    \end{enumerate}
+    Here, the dimension of the initial vector space corresponds to the number of columns in the matrix, while
+    the dimension of the target vector space is the number of rows in the matrix.
 \end{example}
 
-\begin{example}
-    Is $B = \{1, \sin x, x\}\subset \{\appl{f}{\R}{\R}\}$ a basis of $\gen{B}$? Note that, by definition,
-    $B$ is a system of generators, therefore it's only necessary to prove that it is linearly independent.
-    This is equivalent to prove that if $\lambda$, $\mu$, $\nu$ verifies
-    \begin{equation}
-        \lambda + \mu\sin x + \nu x = 0
-    \end{equation}
-    for all $x$, then $\lambda = \mu = \nu = 0$. Differentiating several times we obtain
+
+
+\section{Kernel and image. Rank-nullity theorem}
+Related to a linear transformation $\appl{T}{V}{W}$ from a vector space $V$ to a vector space $W$, two
+subspaces of $V$ and $W$, the \textit{kernel} and the \textit{image} of $T$ respectively, are defined.
+
+\begin{defn}
+    Let $\appl{T}{V}{W}$ be a linear transformation, then the \textit{kernel} and the \textit{image} of $T$
+    are defined as
     \begin{align}
-        \lambda + \mu\sin x + \nu x &= 0, \\
-        \mu\cos x + \mu &= 0, \\
-        -\mu\sin x &= 0.
+        \kernel \left( T\right) &\bydef \{\vec{v}\in V\st T\left( \vec{v} \right) = \vec{0}\}, \\
+        \image \left( T\right) &\bydef \{\vec{y}\in W\st T\left( \vec{x} \right) = \vec{y},\ \vec{x}\in V\}.
     \end{align}
-    The last equation implies $\mu = 0$ and from the others we get $\lambda = \nu = 0$.
-\end{example}
+\end{defn}
 
-\begin{defi}[Dimension]
-    A vector space has a \textbf{finite dimension} if it has a basis with a finite number of elements, and
-    it corresponds to the cardinality of any of its basis.
-    Otherwise, it has \textbf{infinite dimension}.
-\end{defi}
+\begin{notation}
+    The kernel of a linear transformation is also known as \textit{null space}, denoted by $\mop{Null}
+    \left( T \right) = \kernel\left( T \right) $.
+\end{notation}
 
-\begin{remark}
-    If $S$ is finite, then $V = \gen{S}\implies V$ has finite dimension.
-\end{remark}
+\begin{prop}
+    Let $\appl{T}{V}{W}$ be a linear transformation. Then the image of $T$ is a subspace of $W$ and the
+    kernel of $T$ is a subspace of $V$.
+\end{prop}
 
-\begin{example}
-    $B = \{\left( 1, 0, 0, \ldots, 0 \right) , \left( 0, 1, 0, \ldots, 0 \right) , \left( 0, 0, 1, \ldots, 0
-    \right), \ldots, \left( 0, 0, 0, \ldots, 1 \right) \} $ is a basis of $\Rtn$, usually called the
-    canonical basis.
-\end{example}
+\begin{proof}
+    We have to show that both the kernel and the image are closed under addition and scalar multiplication.
 
-\begin{example}
-    The space of all real functions, $\mathcal{F} = \{\appl{f}{\R}{\R}\}$ has infinite dimension.
-\end{example}
-
-Let's see now how to compute the basis of a vector space.
-
-\begin{example}
-    \textbf{Find a basis for $V = \{\left( x, y, z \right) \in\R^3\st x + y + z = 0\} $.}
-
-    In this kind of problems it is better to express the conditions that define the subspace in terms of
-    some variable that can take arbitrary values. In this case, note that
-    \begin{equation}
-        \vec{v}\in V\quad\iff\quad \vec{v} = \left( -y - z, y, z \right)
-    \end{equation}
-    where $y$ and $z$ can take any real value. Therefore,
+    \noindent For the kernel, if $\vec{v}$, $\vec{u}\in\kernel T$; i.e. $T\left( \vec{v} \right) = T\left( \vec{u}
+    \right) = \vec{0}$, since $T$ is linear,
     \begin{align}
-        \vec{v}\in V &\quad\implies\quad \vec{v} = y\left( -1, 1, 0 \right) + z\left( -1, 0, 1 \right) \\
-                     &\quad\implies\quad \vec{v}\in\gen{\left( -1, 1, 0 \right), \left( -1, 0, 1 \right) }
+        T\left( \vec{v} + \vec{u} \right) &= T\left( \vec{v} \right) + T\left( \vec{u} \right) = \vec{0} +
+        \vec{0} = \vec{0}\in\kernel T, \\
+        T\left( \lambda\vec{v} \right) &= \lambda T\left( \vec{v} \right) = \lambda\vec{0} = \vec{0}\in\kernel
+        T, \quad \forall\lambda\in F.
     \end{align}
-    which proves that $B = \{\left( -1, 1, 0 \right) , \left( -1, 0, 1 \right) \} $ is a system of generators.
-    It is easy to see that $B$ is also linearly independent, then, $B$ is a basis of $V$.
-\end{example}
+    Therefore, $\kernel T\subset V$ is a vector subspace.
 
-\begin{theorem}[Steinitz's theorem] \label{thm:steinitz}
-    Let $B = \{\vec{u_1}, \ldots, \vec{u_n}\} $ a basis of a vector space $V$, and let $\vec{v_1}, \ldots,
-    \vec{v_m}$ be $m$ linearly independent vectors with $m \leq n$, then there exists $m$ vectors of $B$
-    that can be replaced by $\vec{v_1}, \ldots, \vec{v_m}$, obtaining a new basis.
+    \noindent For the image, let $\vec{w_1}$, $\vec{w_2}\in\image T$ and $\lambda\in F$. By definition, there exist
+    $\vec{u_1}$, $\vec{u_2}\in V$ such that $\vec{w_1} = T\left( u_1 \right) $ and $\vec{w_2} = T\left(
+    \vec{u_2} \right) $. Since $T$ is linear,
+    \begin{align}
+        T\left( \vec{u_1} + \vec{u_2} \right) &= T\left( \vec{u_1} \right) + T\left( \vec{u_2} \right) =
+        \vec{w_1} + \vec{w_2}, \\
+        T\left( \lambda\vec{u_1} \right) &= \lambda T\left( \vec{u_1} \right) = \lambda\vec{w_1}.
+    \end{align}
+    Therefore, $\image T$ is a vector subspace of $W$.
+\end{proof}
+
+\begin{prop}
+    Let $\stdlt$ be a linear transformation. Then, the following properties hold.
+    \begin{itemize}[itemsep = -2pt]
+        \item $T$ is a monomorphism $\iff\kernel T = \{\vec{0}\}$.
+        \item $T$ is an epimorphism $\iff\image T = W$.
+        \item $T$ is an isomorphism $\iff\image T = W$ and $\kernel T = \{\vec{0}\}$.
+    \end{itemize}
+\end{prop}
+
+\begin{proof}
+    To prove the first point is enough to note that $T\left( \vec{v_1} \right) = T\left( \vec{v_2} \right)$
+    with different $\vec{v_1}$, $\vec{v_2}\in V$ implies $T\left( \vec{v} \right) = \vec{0}$ with $\vec{v} =
+    \vec{v_1} - \vec{v_2}\neq \vec{0}$. The other way around, if $\vec{v} \neq\vec{0}\in\kernel T$ we could
+    take $\vec{v_1} = \vec{v}$, $\vec{v_2} = \vec{0}$.
+
+    The last two points are obvious.
+\end{proof}
+
+\begin{defn}
+    Let the \textit{rank} of $T$ be $\rank{T} = \dim \left( \image T \right)$ and the
+    \textit{nullity} of $T$ be $\nullity{T} = \dim\left( \kernel T \right) $.
+\end{defn}
+
+\begin{theorem}[Rank-Nullity Theorem]
+    Let $\appl{T}{V}{W}$ be a linear transformation. Then $\rank{T} + \nullity{T} = \dim V$.
 \end{theorem}
 
-\begin{example}
-    Consider the canonical basis of $\R^3$ $B = \{\left( 1, 0, 0 \right), \left( 0, 1, 0 \right), \left(
-    0, 0, 1\right) \} $ and the set of linearly independent vectors $S = \{\left( 0, 1, 0 \right), \left(
-    1, 2, 1\right) \} $. Following theorem \ref{thm:steinitz} we have $n = 3$, $m = 2$ and vectors
-    \begin{equation}
-        \vec{u_1} = \left( 1, 0, 0 \right), \quad\quad \vec{u_2} = \left( 0, 1, 0 \right),\quad\quad\vec{u_3}
-        = \left( 0, 0, 1 \right)
-    \end{equation}
-    \begin{equation}
-        \vec{v_1} = \left( 0, 1, 0 \right),\quad\quad \vec{v_2} = \left( 1, 2, 1 \right).
-    \end{equation}
-    Note that $\vec{u_2}$ and $\vec{u_3}$ can be replaced by $\vec{v_1}$ and $\vec{v_2}$ obtaining the basis
-    of $\R^3$ given by $\hat{B} = \{\left( 1, 0, 0 \right), \left( 0, 1, 0 \right), \left( 1, 2, 1 \right)\}$,
-    but if we replace $\vec{u_1}$ and $\vec{u_3}$ by $\vec{v_1}$ and $\vec{v_2}$ we don't get a new basis.
-\end{example}
-
-\begin{coro}
-    In a vector space of finite dimension all basis have the same number of vectors.
-\end{coro}
-
-\begin{proof}
-    If $B$ and $B'$ are basis with $m = \abs{B} < \abs{B'} = n$, then, following Steinitz's theorem
-    \ref{thm:steinitz} we could get a new basis $B''$ such that $B''\superset B$ with $B''\neq B$, but
-    since $\gen{B}$ is the whole space, this would imply that vectors in $B'' - B$ linearly dependent on
-    the ones in $B$ and therefore $B''$ is not linearly independent.
-\end{proof}
-
-\begin{defi}[Dimension]
-    The dimension of a given vector space with finite dimension corresponds to the cardinality of any of
-    its basis.
-\end{defi}
-
-\begin{note}
-    Usually, this definition for dimension is completed by stating that the trivial vector space $V = \{\vec{0}\} $ has dimension zero.
-\end{note}
-
-The following corollary prevents us from checking if a possible basis is a system of generators if we know
-beforehand the dimension of the vector space.
-
-\begin{coro}
-    In a vector space of dimension $n$, whatever $n$ linearly independent vectors form a basis.
-\end{coro}
-
-\begin{example}
-    \textbf{Prove that $B = \{\left( 1, 2, 1 \right) , \left( 1, 2, 0 \right), \left( 0, 1, 1 \right)\} $ is
-    a basis of $\R^3$.}
-
-    Using the previous corollary is enough to see that the vectors in $B$ are linearly independent, since
-    $\dim \R^3 = 3$.
-\end{example}
-
-Knowing that any vector can be written as a linear combination of the elements of a basis, it is worth
-defining the numbers that appear as coefficients, which characterises the vector.
-
-\begin{defi}[Coordinates]
-    Let $V$ be a vector space of finite dimension and $B = \{\vec{u_1}, \ldots, \vec{u_n}\} $ one of its
-    basis. Then, the coordinates of certain vector $\vec{v}\in V$ in basis $B$ are $\left( \lambda_1, \ldots,
-    \lambda_n\right) $, if $\vec{v} = \lambda_1\vec{u_1} + \ldots + \lambda_n\vec{u_n}$.
-\end{defi}
-
-\begin{note}
-    Many times it is written $\vec{v} = \left( \lambda_1, \ldots, \lambda_n \right) $. When using this
-    notation it must be clear which is the basis we are considering. Also, it is worth noting that coordinates
-    depend on the order of the elements which form the basis. Therefore, more consisely, coordinates are not
-    only associated to the basis, but also to the way its elements are ordered.
-\end{note}
-
-\section{Operations with vector subspaces}
 \begin{prop}
-    If $W$, $Z\subsetV$ are two vector subspaces of a vector space $V$, the sum of $W$ and $Z$, denoted by
-    $W + Z$, is the smallest vector subspace of $V$ that contains both $W$ and $Z$. In other words,
-    \begin{equation}
-        W + Z \bydef \{\vec{x}\st \vec{x} = \vec{w} + \vec{z},\ \vec{w}\in W,\ \vec{z}\in Z\}.
-    \end{equation}
+    If $V$ and $W$ are finite-dimensional vector spaces, $\appl{T}{V}{W}$ is a linear transformation,
+    $\mathcal{B}_V = \{\vec{v_1}, \ldots, \vec{v_n}\}\subset V $ a basis of $V$, $\mathcal{B}_W = \{\vec{w_1},
+    \ldots, \vec{w_m}\}\subset W $ a basis of $W$ and $A\in\mathcal{M}_{m\times n}\left( F \right)$ the matrix
+    of the transformation $T$ in bases $\mathcal{B}_V$ and $\mathcal{B}_W$, then $\dim\left( \image T \right)
+    = \rank{A}$.
 \end{prop}
+
+\hide{
+In order to compute the dimension of these vector subspaces we need first to know the range of the matrix
+of $T$ independent of basis.
 
 \begin{prop}
-    If $W$, $Z\subseteq V$ are vector subspaces of a vector space $V$, the intersection of both subspaces,
-    denoted by $W\cap Z$, is
+    Let $A$ be the matrix of a linear transformation \stdlt for a finite number of basis of $V$ and $W$,
+    then
     \begin{equation}
-        W\cap Z \bydef \{x\in \R\st x\in W\land x\in Z\}.
+        \dim \kernel T = \dim V - \rg A \quad\quad\quad \dim\image T = \rg A.
     \end{equation}
 \end{prop}
+}
 
-\begin{remark}
-    Note that the two subspace are never disjoint since the zero vector $\vec{0}$ is within every subspace.
-\end{remark}
+\begin{coro}
+    Suppose $\dim V = \dim W = n < \infty$. A linear transformation $\stdlt$ is bijective $\iff$ its
+    matrix $A$ verifies $\rank{A} = n$.
+\end{coro}
 
-\begin{lemma}
-    If $W$ and $Z$ are subspaces of a vector space $V$, then $W + Z$ and $W\cap Z$ are also vector spaces.
-\end{lemma}
+\hide{
+\begin{theorem}
+    If $\appl{T}{V}{W}$ is a linear transformation from a vector space $V$ to a vector space $W$, then
+    $\ker T$ is a vector subspace of $V$.
+\end{theorem}
 
 \begin{proof}
-    To prove that the intersection $W\cap Z$ is a vector subspace of $\Rtn$, we check the following subspace
-    criteria:
-
-    \begin{enumerate}
-        \item The subspace $W\cap Z\neq \O$; i.e. the zero vector $\vec{0}$ of $\Rtn$ is in $W\cap Z$.
-
-            As $W$ and $Z$ are subspaces of $\Rtn$, the zero vector $\vec{0}$ is in both $W$ and $Z$.
-            Therefore, $\vec{0}\in W\cap Z\implies W\cap Z\neq\O$.
-
-        \item For all $\vec{x}$, $\vec{y}\in W\cap Z\implies \vec{x} + \vec{y}\in W\cap Z$.
-
-            Suppose $\vec{x}$, $\vec{y}\in W\cap Z$. Since $\vec{x}$, $\vec{y}\in W\cap Z\implies \vec{x}$,
-            $\vec{y}\in W$ and $\vec{x}$, $\vec{y}\in Z$. Hence both $Z$ and $W$ are vector subspaces it
-            follows that $\vec{x} + \vec{y}\in W$ and $\vec{x} + \vec{y}\in Z\implies \vec{x} + \vec{y}\in
-            W\cap Z$.
-
-        \item For all $\vec{x}\in W\cap Z, \alpha\in\R\implies \alpha\vec{x} W\cap Z$.
-
-            Since $\vec{x}\in W\cap Z\implies \vec{x}\in W$ and $\vec{x}\in Z$, and since $W$ and $Z$ are
-            vector subspaces, $\alpha\vec{x}\in W$ and $\alpha\vec{x}\in Z\implies \alpha\vec{x}\in W\cap Z$.
-    \end{enumerate}
+    \begin{itemize}
+        \item Since $T$ is a linear transformation, $T\left( \vec{0} \right) = \vec{0}\implies \vec{0}\in
+            \ker T\implies \ker T\neq \O$.
+        \item If $\vec{v}, \vec{u}\in \ker T\implies \vec{v} + \vec{u}\in \ker T$? $T\left( \vec{v} + \vec{u}
+            \right) = T\left( \vec{v} \right) + T\left( \vec{u} \right) =
+            \vec{0} + \vec{0} = \vec{0}\in \ker T$.
+        \item If $\vec{v}\in\ker T$ and if $\lambda\in F\implies \lambda\vec{v}\in\ker T$? $T\left( \lambda
+            \vec{v}\right) = \lambda T\left( \vec{v} \right) = \lambda\vec{0} = \vec{0}$.
+    \end{itemize}
+    Since $\ker T$ holds the three properties, $\ker T$ is a vector subspace of $V$.
 \end{proof}
+}
 
-\begin{prop}[Grassman's formula]
-    If $W$ and $Z$ are two subspaces of a vector space with finite dimension, then
-    \begin{equation}
-        \dim\left( W + Z \right) = \dim W + \dim Z - \dim\left( W\cap Z \right).
-    \end{equation}
-\end{prop}
+\section{Change of basis}
