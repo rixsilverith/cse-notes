@@ -51,8 +51,7 @@
 \RequirePackage{siunitx} % Units
 \RequirePackage{bm} % Bold math
 \RequirePackage{bbm} % More bold math
-%\RequirePackage{mathpazo} % Fixes stuff
-%\RequirePackage[osf, sc]{mathpazo} % Fixes stuff
+\RequirePackage[osf, sc]{mathpazo} % Fixes stuff
 \RequirePackage{mathtools} % Fixes more stuff
 \RequirePackage[framemethod=TikZ]{mdframed} % Frames for theorems, proofs, etc.
 \RequirePackage{xargs}
@@ -95,6 +94,7 @@
 \newcommand{\rela}{\mathcal{R}} % Relation
 %\renewcommand{\abs}[1]{\left\vert #1 \right\vert} % Absolute value
 \newcommand{\invers}[1]{#1 ^{-1}} % Inverse
+\renewcommand\neg{\lnot} % Logic negation
 % Cooler greater (lower) or equal to symbols
 \let\leq\leqslant
 \let\nleq\nleqslant
@@ -126,12 +126,13 @@
 \newcommand\set[1]{\{ #1 \}} % Set
 \newcommand\appl[3]{#1 : #2\longrightarrow #3} % Application
 \newcommand\stdf{\ensuremath{\appl{f}{X}{Y}}\xspace} % Standard function
+\newcommand\vappl[3]{\vec{#1} : #2\longrightarrow #3} % Vector-valued function
 \newcommand\dom[1]{\mathcal{D}\argp{#1}} % Cooler domain
 \newcommand\image[1]{\mathcal{R}\argp{#1}} % Range / Image 
 
 \newcommand\parts[1]{\mathcal{P}\left( #1 \right)} % Partitions of a set / Power set
 \newcommand\uset{\mathcal{U}} % Universal set
-\newcommand\SP{\ensuremath{\mathcal{P}}} % Super set
+\newcommand\SP[1]{\ensuremath{\mathcal{P}}\argp{#1}} % Super set
 \newcommand\minuszero{\setminus\set{0}} % Set minus 0
 \newcommand\cset[1]{\overline{#1}} % Complementary set
 \newcommand\ccset[1]{{#1}^C} % Complementary set
@@ -143,7 +144,7 @@
 % ----- Vectors and vector analysis macros
 \renewcommand\vec[1]{\mathbf{#1}}
 \newcommand{\cvec}[1]{\begin{bmatrix} #1 \end{bmatrix}}
-%\newcommand{\rvec}[1]{[#1]}^T}
+\newcommand{\rvec}[1]{\begin{bmatrix} #1 \end{bmatrix}^T}
 \newcommand{\tvec}[1]{\left( #1 \right)^T}
 \newcommand\uvec[1]{\vec{\hat{#1}}}
 \newcommand\stdvf{\appl{f}{\R^n}{\R^m}} % Standard vector-valued function
@@ -156,6 +157,7 @@
 
 % Calculus / Analysis
 % \newcommand{\deriv}[2]{\frac{\dif #1}{\dif #2}} % 1: f; 2: var
+\newcommand\partialdv[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\liminft}[1]{\lim_{{#1}\rightarrow\infty}}
 \newcommand{\mylim}[3]{\lim_{#1 \rightarrow #2} #3} % 1: vec; 2: to; 3: var;
 \DeclareMathOperator{\rot}{rot}
@@ -245,8 +247,8 @@
 }
 
 % https://tex.stackexchange.com/a/17551
-\newtheoremstyle{defi}{\topsep}{\topsep}{}{0pt}{}{}{5pt plus 1pt minus 1pt} {\textbf{\thmname{#1}\thmnumber{ #2}}\thmnote{ (\textbf{#3})}}
-\newtheoremstyle{thm}{\topsep}{\topsep}{\itshape}{0pt}{\bfseries}{}{5pt plus 1pt minus 1pt} {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\newtheoremstyle{defi}{\topsep}{\topsep}{}{0pt}{}{}{5pt plus 1pt minus 1pt}{\fontfamily{cmss}\selectfont\textbf{\thmname{#1}\thmnumber{ #2}}\thmnote{ (\textbf{#3})}}
+\newtheoremstyle{thm}{\topsep}{\topsep}{\itshape}{0pt}{}{}{5pt plus 1pt minus 1pt}{\fontfamily{cmss}\selectfont\textbf{\thmname{#1}\thmnumber{ #2}}\thmnote{ (\textbf{#3})}}}
 
 \theoremstyle{remark}
 %\newtheorem*{note}{\@note@mark}
@@ -335,10 +337,10 @@
 
 \renewcommand{\qedsymbol}{$\blacksquare$} % \medblacksquare with fdsymbol
 
-\newenvironment{example}{\par\noindent\textbf{\@example@mark}~}{\null\hfill$\diamond$}    % Examples
-\newenvironment{remark}{\par\noindent\textbf{\@remark@mark}~}{}      % Remarks
-\newenvironment{note}{\par\noindent\textbf{\@note@mark}~}{}          % Notes
-\renewenvironment{proof}{\par\noindent\textbf{\@proof@mark}~}{\qed}  % Proofs
+\newenvironment{example}{{\fontfamily{cmss}\selectfont\par\noindent\textbf{\@example@mark}}~}{\null\hfill$\diamond$}    % Examples
+\newenvironment{remark}{{\fontfamily{cmss}\selectfont\par\noindent\textbf{\@remark@mark}}~}{}      % Remarks
+\newenvironment{note}{{\fontfamily{cmss}\selectfont\par\noindent\textbf{\@note@mark}}~}{}          % Notes
+\renewenvironment{proof}{{\fontfamily{cmss}\selectfont\par\noindent\textbf{\@proof@mark}}~}{\qed}  % Proofs
 
 \newcounter{problem}\setcounter{problem}{0}
 \renewcommand{\theproblem}{\arabic{problem}}

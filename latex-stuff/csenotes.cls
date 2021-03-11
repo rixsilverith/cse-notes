@@ -54,12 +54,6 @@
 \DeclareOption{theoremframed}{\PassOptionsToPackage{\CurrentOption}{exmath}}
 \DeclareOption{theoremhighlight}{\PassOptionsToPackage{\CurrentOption}{exmath}}
 
-% Font typefaces [palatino, fourier]
-%     palatino (default): use the Palatino font typeface.
-%     fourier: use the Utopia/Fourier font typeface.
-\DeclareOption{fontpalatino}{\def\notes@fonttypeface{ppl}}
-\DeclareOption{fontfourier}{\def\notes@fonttypeface{put}}
-
 % Number styles [oldnums, stdnums]
 %     oldnums: use old number styles.
 %     stdnums (default): use standard number styles.
@@ -76,13 +70,6 @@
 \ProcessOptions\relax
 
 \LoadClass[a4paper, 10pt]{report}
-
-% Using the \notes@fonttypeface macro here seems to break the
-% code. Cool alternatives to Palatino are qtm and put (Fourier).
-\renewcommand{\rmdefault}{ppl}
-\renewcommand{\sfdefault}{lmss}
-\renewcommand{\ttdefault}{lmtt}
-\renewcommand*{\familydefault}{\rmdefault}
 
 \RequirePackage[utf8]{inputenc} % Document enconding
 \RequirePackage[T1]{fontenc} % Font encoding
@@ -109,6 +96,10 @@
 \RequirePackage[nottoc]{tocbibind} % Append bibliography to table of contents
 \RequirePackage{etoolbox}
 \RequirePackage{ifthen} % If-then-else conditions
+
+\RequirePackage{domitian}
+\renewcommand{\sfdefault}{cmss}
+\renewcommand{\ttdefault}{lmtt}
 
 \def\notes@refcolor{blue!30!black}\newcommand\refcolor[1]{\def\notes@refcolor{#1}}
 \def\notes@urlcolor{\notes@refcolor}\newcommand\urlcolor[1]{\def\notes@urlcolor{#1}}
@@ -146,12 +137,12 @@
     \import{./figures/}{#2.pdf_tex}
 }
 
-\titleformat{\chapter}[display]{\Huge\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\Huge}
+\titleformat{\chapter}[display]{\LARGE\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\Huge}
 % In the \titlespacing macro the first argument is the left margin of the
 % overall chapter title; the second is the spacing between the top margin
 % and the title and the third is the spacing between the title and the
 % following paragraph.
-\titlespacing*{\chapter}{0pt}{-20pt}{5pt}
+\titlespacing*{\chapter}{0pt}{-10pt}{5pt}
 
 \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
 \titlespacing*{\section}{0pt}{*3}{*0.5}
