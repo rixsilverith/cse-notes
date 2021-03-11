@@ -388,6 +388,7 @@
 
 \newcommand\getrefname[1]{\getrefbykeydefault{#1}{name}{??}}
 \newcommand\nref[1]{\refused{#1}\hyperref[#1]{\getrefname{#1}}~(\ref{#1})}
+\newcommand\nlref[1]{\MakeLowercase{\nref{#1}}}
 \newcommand\reflink[2]{\hyperref[#2]{#1}~\ref{#2}}
 \newcommand\fullreflink[2]{\hyperref[#2]{#1}~\ref{#2}~\hyperref[#2]{(\getrefname{#2})}~}
 
