@@ -1,8 +1,0 @@
-pdf_viewer: zathura
-theme: light
-latex:
-  compiler: latexmk
-  compiler_arguments: -shell-escape -f -synctex=1 -pdf -silent -interaction=nonstopmode
-g_drive:
-  api_key:
-  username:
